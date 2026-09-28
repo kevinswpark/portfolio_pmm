@@ -497,6 +497,7 @@ def head_static(ctx):
         '<link rel="stylesheet" href="/assets/fonts/fonts.css">',
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
+        '<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>',
     ]
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
