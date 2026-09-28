@@ -14,7 +14,7 @@ async def main():
         errs = []; pg.on("pageerror", lambda e: errs.append(str(e)))
         st = lambda: pg.evaluate("[[...document.querySelectorAll('[data-view]')].filter(v=>!v.hidden).map(v=>v.dataset.view), document.title]")
         await pg.goto(URL); s = await st(); ok("default is home", s[0] == ["home"], s)
-        for h, v in [("#money-layer", "money-layer"), ("#money-lifecycle", "money-lifecycle"), ("#money-layer.layer", "money-layer"), ("#nope", "404"), ("#ko", "404")]:
+        for h, v in [("#money-layer", "money-layer"), ("#money-lifecycle", "money-lifecycle"), ("#money-layer.layer", "money-layer"), ("#money-lifecycle.use", "money-lifecycle"), ("#nope", "404"), ("#ko", "404")]:
             await pg.goto(URL + h); await pg.wait_for_timeout(150); s = await st(); ok(f"route {h}", s[0] == [v], s)
         await pg.goto(URL + "#money-layer"); await pg.wait_for_timeout(100)
         await pg.click('[data-view="money-layer"] .nav__links a[href="#home.work"]'); await pg.wait_for_timeout(300)

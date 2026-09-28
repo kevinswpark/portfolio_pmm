@@ -1,0 +1,23 @@
+== Notion: The Money Lifecycle, fetched 2026-09-27 via Chrome, full text ==
+The Money Lifecycle
+TL;DR
+Challenge: STEP grouped ZBD's products as Shop, Transfer, Earn, and Pay, but those categories overlapped as the platform grew.
+Approach: Follow how value enters a game, moves within it, and leaves it. Use that flow to explain the products together.
+Output: “Money In / Money Through / Money Out,” a lifecycle model now used in ZBD's platform messaging, decks, and public website.
+Where STEP started to blur
+After developing “The Money Layer for Games” to describe ZBD's role, I needed a way to explain how the products beneath it worked together.
+The existing framework was STEP: Shop, Transfer, Earn, and Pay. Its four categories were easy to remember, but a player's experience rarely stayed inside one of them. Earn, now Embedded Rewards, made the overlap clear. A player could receive a reward, hold the value, spend it back in the game, send it to someone else, or cash out. Explaining that journey meant moving across several STEP categories.
+As ZBD's portfolio expanded, I found myself spending more time explaining the boundaries than the products. I began looking for a model that followed the player's experience instead.
+Following the money
+I started with two terms I knew from fintech: pay-in and payout. They described where money entered and left a system, but left out much of what ZBD could enable inside a game. Between those endpoints, players could earn, hold, spend, trade, and transfer value.
+I tried calling the middle Pay Through. It completed the sequence, although the repeated use of “pay” made every action sound like a payment. For a game studio thinking about rewards, player economies, and loyalty, I wanted language that made room for all three.
+Money In, Money Through, Money Out was simpler. “Money Through” gave a name to the activity STEP had spread across several product categories, while the three phases made sense without a fintech glossary.
+Drawing the lifecycle
+Once I drew the flow, a straight line felt incomplete. Value could enter a game, become a reward or a balance, move between players, and be spent within the game again. Some journeys ended in cash-out; others continued inside the economy.
+I drew the three phases as a lifecycle to make that circulation visible. The visual helped connect ZBD's infrastructure to the reason a studio might care about it: money movement could become part of the game experience, with the potential to support engagement, retention, and player lifetime value.
+The model in use
+I brought the lifecycle into ZBD's platform messaging framework and the decks used to explain the product suite. Leadership began using the same language. It gave us a way to describe the platform as a whole while allowing products to support more than one stage of a player's journey.
+The public work shows how far the model traveled. ZBD's homepage explains Money In, Money Through, and Money Out as one connected flow. The Embedded Accounts page uses the same language in its opening description, and the platform launch uses it to introduce the wider product suite. I also created the platform and product videos used across the site, giving individual products a more concrete expression within that story.
+Product names have since changed and the suite has grown. The lifecycle still works because it describes how money moves, leaving room for different products to serve each part of that movement.
+What I learned
+I began by trying to make a product framework easier to explain. Tracing a player's money through the game gave me a clearer way to see the relationships between products, and the words followed from there.

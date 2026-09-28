@@ -27,10 +27,15 @@ UI = {
     "in_progress": "Case study in progress",   # BRIEF: "honest coming-soon state"
     "concept": "Concept diagram",               # BRIEF label vocabulary
     "final": "Final work",
-    "set": "Set in type for this site.",
+    "view_zbd": "View on zbdpay.com",
     "proof": "External proof",
     "drawn": "Drawn for this site.",
     "next": "Next case study",
+    "previous": "Previous case study",
+    "follows": "Follows",
+    "first_try": "First try",
+    "final_row": "Final",
+    "quoted": "Quoted from zbdpay.com.",
     "finished": "Finished case study",
     "education": "Education",                   # RESUME heading
     "skills": "Skills",                         # RESUME heading
@@ -42,7 +47,7 @@ META = {
     "home_desc": "There’s a story inside your complex product. I find the change your product makes and explain its value in a way people remember.",
     "ml_title": "Using a visual metaphor to explain ZBD’s role | Kevin Park",
     "ml_desc": "A communication problem solved through a visual metaphor.",
-    "lc_title": "Money Lifecycle | Kevin Park",
+    "lc_title": "The Money Lifecycle | Kevin Park",
     "lc_desc": "The later organizing model for how ZBD’s products move value.",
     "nf_title": "Page not found | Kevin Park",
 }
@@ -74,8 +79,10 @@ WORK = {
         "impact": "The phrase moved from an internal idea into ZBD’s public brand and appears on its website.",  # BRIEF inventory
     },
     "lc": {
-        "title": "Money Lifecycle",  # BRIEF
+        "title": "The Money Lifecycle",  # NOTION page title
         "desc": "The later organizing model for how ZBD’s products move value.",  # BRIEF
+        "result": ["Money In", "Money Through", "Money Out"],  # NOTION
+        "impact": "ZBD’s homepage explains Money In, Money Through, and Money Out as one connected flow.",  # NOTION
     },
 }
 
@@ -133,7 +140,7 @@ EXPERIENCE = {  # RESUME
             ],
         },
     ],
-    "education": ["Bachelor of Commerce, UBC Sauder School of Business, Vancouver, BC", "Specialization: Marketing | Concentration: Business Analytics"],
+    "education": ["Bachelor of Commerce, UBC Sauder School of Business, Vancouver, BC"],
     "skills": ["Product Marketing", "Go-to-Market Strategy", "Product Positioning", "Messaging Frameworks", "ICP Segmentation", "Sales Enablement", "Competitive Intelligence", "Product Launch", "Fintech and Payments", "Cross-Functional Leadership", "Tableau", "Excel", "R", "Notion", "Bilingual (English / Korean)"],
 }
 
@@ -184,17 +191,105 @@ ML = {  # NOTION, verbatim; deck from BRIEF
         ("Page title", "ZBD - The Money Layer for Games"),
         ("Meta description", "ZBD is the money layer for games, the licensed financial infrastructure that turns money movement into a driver of engagement, revenue, and loyalty."),
     ],
-    "proof_checked": "Checked September 27, 2026",
 }
 
-LC = {  # BRIEF
-    "h1": "Money Lifecycle",
-    "body": [
-        "The later organizing model for how ZBD’s products move value.",
-        "The Money Layer is the earlier story about defining ZBD’s role. The Money Lifecycle came later and explains how its products fit together.",
+LC = {  # NOTION "The Money Lifecycle"; deck from BRIEF. Edited lines are listed in EDITS.
+    "h1": "The Money Lifecycle",
+    "deck": "The later organizing model for how ZBD’s products move value.",
+    "facts": [("Company", "ZBD"), ("Role", "Senior Product Marketing Manager")],
+    "follows": "The Money Layer for Games",  # links back to the earlier case study
+    "tldr_h": "TL;DR",
+    "tldr": [
+        ("Challenge", "STEP grouped ZBD’s products as Shop, Transfer, Earn, and Pay, but those categories overlapped as the platform grew."),
+        ("Approach", "Follow how value enters a game, moves within it, and leaves it. Use that flow to explain the products together."),
+        ("Output", "“Money In, Money Through, Money Out,” a lifecycle model now used in the ZBD Platform messaging framework, decks, and ZBD’s public website."),
+    ],
+    "sections": [
+        {"id": "step", "h2": "Where STEP started to blur", "blocks": [
+            ("p", "After developing {ML_LINK} to describe ZBD’s role, I needed a way to explain how the products beneath it worked together."),
+            ("p", "The existing framework was STEP: Shop, Transfer, Earn, and Pay. Its four categories were easy to remember, but a player’s experience rarely stayed inside one of them. Earn, now Embedded Rewards, made the overlap clear. A player could receive a reward, hold the value, spend it back in the game, send it to someone else, or cash out. Explaining that path meant moving across several STEP categories."),
+            ("fig", "step"),
+            ("p", "As ZBD’s portfolio expanded, I found myself spending more time explaining the boundaries than the products. I began looking for a model that followed the player’s experience instead."),
+        ]},
+        {"id": "money", "h2": "Following the money", "blocks": [
+            ("p", "I started with two terms I knew from fintech: pay-in and payout. They described where money entered and left a system, but missed much of what ZBD could enable inside a game. Between those endpoints, players could earn, hold, spend, trade, and transfer value."),
+            ("p", "I tried calling the middle Pay Through. It completed the sequence, although the repeated use of “pay” made every action sound like a payment. For a game studio thinking about rewards, player economies, and loyalty, I wanted language that made room for all three."),
+            ("p", "Money In, Money Through, Money Out was simpler. “Money Through” gave a name to the activity STEP had spread across several product categories, while the three phases made sense without a fintech glossary."),
+            ("fig", "naming"),
+        ]},
+        {"id": "loop", "h2": "Drawing the lifecycle", "blocks": [
+            ("p", "Once I drew the flow, a straight line felt incomplete. Value could enter a game, become a reward or a balance, move between players, and be spent within the game again. Some journeys ended in cash-out; others continued inside the economy."),
+            ("fig", "loop"),
+            ("p", "I drew the three phases as a lifecycle to make that circulation visible. The visual helped connect ZBD’s infrastructure to the reason a studio might care about it: money movement could become part of the game experience, with the potential to support engagement, retention, and player lifetime value."),
+        ]},
+        {"id": "use", "h2": "The model in use", "blocks": [
+            ("p", "I brought the lifecycle into the ZBD Platform messaging framework and the decks used to explain the product suite. Leadership began using the same language. It gave us a way to describe the platform as a whole while allowing products to support more than one stage of a player’s journey."),
+            ("p", "The model also appears on ZBD’s public site. The homepage explains Money In, Money Through, and Money Out as one connected flow. The Embedded Accounts page uses the same language in its opening description, and the August 2026 platform launch post uses it to introduce the wider product suite. I also created the platform and product videos used across the site, giving each product a concrete picture inside that story."),
+            ("fig", "proof"),
+            ("p", "Product names have since changed and the suite has grown. The lifecycle still works because it describes how money moves, leaving room for different products to serve each part of that movement."),
+        ]},
+        {"id": "learned", "h2": "What I learned", "blocks": [
+            ("quote", "I began by trying to make a product framework easier to explain. Tracing a player’s money through the game gave me a clearer way to see the relationships between products, and the words followed from there."),
+        ]},
+    ],
+    "naming": {  # the terms named in "Following the money"
+        "tried": ["Pay-in", "Pay Through", "Payout"],
+        "final": ["Money In", "Money Through", "Money Out"],
+    },
+    "proof_rows": [  # ZBD, quoted verbatim; checked 2026-09-27
+        ("Homepage", "https://zbdpay.com/", "Power the full lifecycle of money in games"),
+        ("Embedded Accounts page", "https://zbdpay.com/embedded-accounts", "Programmable financial infrastructure inside your game to power the full money lifecycle: money in, money through, and money out."),
+        ("Platform launch post, Aug 24, 2026", "https://zbdpay.com/blog/introducing-zbds-embedded-financial-infrastructure-for-games", "We’re introducing our embedded financial infrastructure for games, giving studios a single platform to power the full money lifecycle."),
     ],
     "fig_source": "Stage names as published on zbdpay.com.",
 }
+
+# Every Money Lifecycle line that differs from the Notion page, with its original.
+# verify.py checks each original against the saved Notion copy.
+EDITS = [
+    {
+        "where": "TL;DR, Output",
+        "why": "Matches the framework name used in the Money Layer case study and the stage names used in the body and diagrams.",
+        "from": "“Money In / Money Through / Money Out,” a lifecycle model now used in ZBD's platform messaging, decks, and public website.",
+        "to": "“Money In, Money Through, Money Out,” a lifecycle model now used in the ZBD Platform messaging framework, decks, and ZBD’s public website.",
+    },
+    {
+        "where": "Where STEP started to blur, paragraph 2",
+        "why": "“Journey” appeared three times on the page; this one was the least needed.",
+        "from": "Explaining that journey meant moving across several STEP categories.",
+        "to": "Explaining that path meant moving across several STEP categories.",
+    },
+    {
+        "where": "Following the money, paragraph 1",
+        "why": "Removes the repeated “left” in “entered and left a system, but left out”.",
+        "from": "They described where money entered and left a system, but left out much of what ZBD could enable inside a game.",
+        "to": "They described where money entered and left a system, but missed much of what ZBD could enable inside a game.",
+    },
+    {
+        "where": "The model in use, paragraph 1",
+        "why": "Same framework name as the Money Layer case study.",
+        "from": "I brought the lifecycle into ZBD's platform messaging framework and the decks used to explain the product suite.",
+        "to": "I brought the lifecycle into the ZBD Platform messaging framework and the decks used to explain the product suite.",
+    },
+    {
+        "where": "The model in use, paragraph 2",
+        "why": "The original opener judged the work (“how far the model traveled”). The new one states the fact and lets the three examples carry it.",
+        "from": "The public work shows how far the model traveled. ZBD's homepage explains",
+        "to": "The model also appears on ZBD’s public site. The homepage explains",
+    },
+    {
+        "where": "The model in use, paragraph 2",
+        "why": "Names the launch post and its date, checked on zbdpay.com.",
+        "from": "and the platform launch uses it to introduce the wider product suite.",
+        "to": "and the August 2026 platform launch post uses it to introduce the wider product suite.",
+    },
+    {
+        "where": "The model in use, paragraph 2",
+        "why": "Replaces the abstract “a more concrete expression” with a plain phrase.",
+        "from": "giving individual products a more concrete expression within that story.",
+        "to": "giving each product a concrete picture inside that story.",
+    },
+]
 
 NF = {"h1": "Page not found", "home": "Go to the homepage"}  # UI
 
@@ -206,4 +301,9 @@ DIAGRAM = {  # UI labels inside original diagrams
     "state_b": "A layer that lets value cross",
     "pair_alt": "Two states of one diagram. First, a wall stops value moving from a game economy to financial systems. Second, the wall opens into a layer marked ZBD that value can cross.",
     "lc_alt": "A loop with three stages, Money In, Money Through, and Money Out, connected by arrows.",
+    "step": ["Shop", "Transfer", "Earn", "Pay"],
+    "step_alt": "STEP’s four categories, Shop, Transfer, Earn, and Pay, as side-by-side columns. One path starts in Earn and crosses into the other three.",
+    "line_cap": "A straight line ends at cash-out",
+    "loop_cap": "A lifecycle keeps value moving in the game",
+    "loop_alt": "Two versions of the model. First, Money In, Money Through, and Money Out on a straight line that stops after Money Out. Second, the same three stages on a loop, so value can return to the game.",
 }

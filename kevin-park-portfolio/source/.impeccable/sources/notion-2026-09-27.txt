@@ -1,0 +1,42 @@
+== Notion: Kevin Park Website (brief), fetched 2026-09-27 via Chrome, sections quoted by the site ==
+My Product Marketing Philosophy
+Product marketing connects what a company builds with a reason someone would care.
+The work starts with understanding the product, the people it serves, and the change it makes possible. The story should be simple enough to remember and specific enough to be useful.
+My recurring strengths
+Finding a clear direction when the product or market story is still ambiguous
+Understanding complicated technology and explaining its value in everyday language
+Connecting product thinking with a memorable story and a strong visual expression
+Building a useful first version of a system, then improving it with feedback
+Using new tools, including AI, to explore ideas and make the work tangible
+The Money Layer is the earlier story about defining ZBD's role. The Money Lifecycle came later and explains how its products fit together. Make that sequence and distinction clear in both languages.
+Working hero: “There’s a story inside your complex product.”
+Supporting line: “I find the change your product makes and explain its value in a way people remember.”
+Primary CTA: “Explore the work” → selected work section. Secondary CTA: “Connect on LinkedIn” → linkedin.com/in/kevinswpark. The LinkedIn destination must work in both languages and in the footer. Do not add a placeholder contact link.
+Selected work and routes
+Money Layer: A communication problem solved through a visual metaphor. English display title candidate: “Using a visual metaphor to explain ZBD's role”; retain “The Money Layer for Games” as the resulting idea and within the case study.
+Money Lifecycle: The later organizing model for how ZBD's products move value. Prepare a distinct card and page route.
+ZBD was described in several ways, including as infrastructure and as a way to make money work for games. There was no consistent answer to what the company was.
+The phrase moved from an internal idea into ZBD’s public brand and appears on its website.
+My experience in fintech, payments, cross-border money movement, and gaming gives this point of view credibility.
+
+== Notion: The Money Layer for Games (EN), fetched 2026-09-27 via Chrome, full text ==
+TL;DR
+Challenge: Explain ZBD's role between game economies and financial systems.
+Approach: Use a visual metaphor to understand the gap before naming it.
+Output: “The Money Layer for Games” and the ZBD Platform messaging framework.
+Where money gets stuck
+Financial services move money from A to B. In games, items and currencies can hold value for players, yet moving that value to another player or outside the game can be difficult. Some trades happen through barter or off-platform arrangements. Those examples pointed to a broader challenge: connecting game economies to financial systems.
+For a studio, building a bridge to the financial world raises three issues:
+Regulation: Handling player funds can trigger different requirements across markets, including licenses.
+Game economy: Transfers and cash-out could change how an existing economy works.
+Priorities: A new title or feature may offer a faster return than building financial infrastructure.
+ZBD saw an opportunity to focus on infrastructure that individual studios would find costly to build on their own. My challenge was to explain that role in one line.
+From a barrier to a layer
+Every draft that tried to carry both the problem and ZBD's ambition picked up another clause. I stepped away from the copy and pictured an Eva pushing against an AT Field in Evangelion.
+AT Field in Evangelion
+The AT Field was a layer that blocked passage between two spaces. Pushing harder would not get the Eva through, which made me think about the boundary itself. I pictured ZBD in a similar position between a game's economy and the financial world, with infrastructure that could let value move across it.
+The line and the framework
+That image gave me “The Money Layer for Games.” The phrase made ZBD's role easier to picture without tying the company to any one product.
+I shared the concept with leadership and the marketing team, who responded positively. I then developed the ZBD Platform messaging framework to carry the idea into product messaging.
+What I learned
+I had been trying to find the right words before I could see the relationship. Once I pictured the barrier and the layer that could bridge it, the line followed.

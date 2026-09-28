@@ -1,0 +1,15 @@
+{
+  "source": "https://zbdpay.com/",
+  "checked": "2026-09-27",
+  "method": "Live DOM read in the user's Chrome via Claude in Chrome (javascript_tool), cross-checked with a WebFetch summary the same day",
+  "document_title": "ZBD - The Money Layer for Games",
+  "meta_description": "ZBD is the money layer for games, the licensed financial infrastructure that turns money movement into a driver of engagement, revenue, and loyalty.",
+  "og_description": "ZBD is the money layer for games, the licensed financial infrastructure that turns money movement into a driver of engagement, revenue, and loyalty.",
+  "h1": "The Money Layer for Games.",
+  "stage_labels": ["Money In:", "Money Through:", "Money Out:"],
+  "money_out_copy": "Players and creators cash out instantly, straight to their bank, digital wallet, or debit card, closing the loop and setting up the next Money In movement.",
+  "used_for": [
+    "Money Layer case study: external proof card (homepage headline, page title, meta description) and 'Headline of zbdpay.com' status",
+    "Money Lifecycle page: 'Stage names as published on zbdpay.com' and the cycle framing"
+  ]
+}

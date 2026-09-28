@@ -25,31 +25,53 @@ def norm(s):
 
 
 # ---------- 1. copy is verbatim from its sources ----------
-SRC = norm(Path(".impeccable/sources/notion-2026-09-27.txt").read_text() + " " + Path(".impeccable/sources/resume-excerpt-2026-09-27.txt").read_text()
-           + " " + Path(".impeccable/sources/zbdpay-2026-09-27.json").read_text())
+SOURCES = ["notion-2026-09-27.txt", "notion-lifecycle-2026-09-27.txt", "resume-excerpt-2026-09-27.txt",
+           "zbdpay-2026-09-27.json", "zbdpay-lifecycle-2026-09-27.json"]
+SRC = norm(" ".join(Path(".impeccable/sources", f).read_text() for f in SOURCES))
 sourced = [C.HERO["sub"], C.HERO["h1_before"] + C.HERO["h1_em"] + C.HERO["h1_after"], C.HERO["cta_work"], C.HERO["cta_linkedin"],
            C.PHILOSOPHY["lead"], C.PHILOSOPHY["body"], C.PHILOSOPHY["context"], C.WORK["h2"].lower(),
            C.WORK["ml"]["title"], C.WORK["ml"]["problem"], C.WORK["ml"]["impact"], C.WORK["ml"]["result"],
            C.WORK["lc"]["desc"], C.ML["deck"], C.EXPERIENCE["profile"], C.LINKEDIN_DISPLAY]
-sourced += [t for _, t in C.STRENGTHS["items"]] + C.LC["body"] + C.EXPERIENCE["education"] + C.EXPERIENCE["skills"]
+sourced += [t for _, t in C.STRENGTHS["items"]] + C.EXPERIENCE["education"] + C.EXPERIENCE["skills"]
+sourced += [C.WORK["lc"]["title"], C.WORK["lc"]["impact"], C.LC["h1"], C.LC["deck"], C.LC["follows"]] + C.WORK["lc"]["result"]
+sourced += C.LC["naming"]["tried"] + C.LC["naming"]["final"] + C.DIAGRAM["step"]
 for r in C.EXPERIENCE["roles"]:
     sourced += [r["title"], r["company"], r["place"], r["start"], r["end"]] + r["focus"] + [b for b, _ in r["bullets"]]
-for k, v in C.ML["tldr"]:
-    sourced.append(f"{k}: {v}")
-for s in C.ML["sections"]:
-    sourced.append(s["h2"])
-    for kind, val in s["blocks"]:
-        if kind in ("p", "quote"):
-            sourced.append(val)
-        if kind == "issues":
-            sourced += [f"{k}: {v}" for k, v in val]
+for A in (C.ML, C.LC):
+    for k, v in A["tldr"]:
+        sourced.append(f"{k}: {v}")
+    for s in A["sections"]:
+        sourced.append(s["h2"])
+        for kind, val in s["blocks"]:
+            if kind in ("p", "quote"):
+                sourced.append(val.replace("{ML_LINK}", "“The Money Layer for Games”"))
+            if kind == "issues":
+                sourced += [f"{k}: {v}" for k, v in val]
 for _, v in C.ML["evidence"]:
     sourced.append(v)
 for _, v in C.ML["proof_rows"]:
     sourced.append(v)
+for _, _, v in C.LC["proof_rows"]:
+    sourced.append(v)
 src_low = SRC.lower()
-missing = [s for s in sourced if norm(s).lower() not in src_low]
-check(f"{len(sourced)} sourced strings are verbatim in Notion, resume, or zbdpay.com", not missing, missing[:4])
+LC_SRC = norm(Path(".impeccable/sources/notion-lifecycle-2026-09-27.txt").read_text()).lower()
+
+
+def undo_edits(text):
+    t = norm(text)
+    for e in C.EDITS:
+        t = t.replace(norm(e["to"]), norm(e["from"]))
+    return t.lower()
+
+
+missing = [s for s in sourced if norm(s).lower() not in src_low and undo_edits(s) not in src_low]
+edited = [s for s in sourced if norm(s).lower() not in src_low and undo_edits(s) in src_low]
+check(f"{len(sourced)} sourced strings are verbatim in Notion, resume, or zbdpay.com ({len(edited)} carry a logged edit)", not missing, missing[:4])
+bad_from = [e["from"] for e in C.EDITS if norm(e["from"]).lower() not in LC_SRC]
+check(f"all {len(C.EDITS)} logged edits trace to the Money Lifecycle Notion page", not bad_from, bad_from[:3])
+all_copy = norm(" ".join(sourced)).lower()
+unused = [e["to"] for e in C.EDITS if norm(e["to"]).lower() not in all_copy]
+check("every logged edit is live in the copy", not unused, unused[:3])
 ALL_HTML = "".join(p.read_text() for p in Path("dist").rglob("*.html"))
 TEXT_HTML = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", ALL_HTML, flags=re.S)
 PRIVATE = {"email address": r"[\w.+-]+@[\w-]+\.[a-z]{2,}", "phone number": r"\b\d{3}[-. ]\d{3}[-. ]\d{4}\b",
@@ -59,6 +81,13 @@ leaked = [k for k, pat in PRIVATE.items() if re.search(pat, TEXT_HTML)]
 check("no ZBD pipeline or retention figures and no personal contact data", not leaked, leaked)
 hangul = [str(p) for p in Path("dist").rglob("*") if p.is_file() and p.suffix in (".html", ".css", ".js") and re.search(r"[가-힣]", p.read_text())]
 check("no Korean text anywhere in the build", not hangul, hangul)
+stale = [x for x in ("Checked ", "Set in type", "Specialization", "Concentration") if x in TEXT_HTML]
+check("no checked dates, no set-in-type captions, no specialization line", not stale, stale)
+for page in ("money-layer", "money-lifecycle"):
+    html = Path(f"dist/site/work/{page}/index.html").read_text()
+    host = re.search(r'<a class="proof__host" href="https://zbdpay.com/"', html)
+    cta = re.search(r'<span class="pill">Final work</span><a class="fig__cta" href="https://zbdpay.com/" target="_blank"', html)
+    check(f"{page}: zbdpay.com pill is a link and Final work ends with a zbdpay.com CTA", host and cta, [bool(host), bool(cta)])
 
 
 async def main():
@@ -148,6 +177,21 @@ async def main():
         await pg.wait_for_timeout(900)
         top = await pg.evaluate("document.getElementById('work').getBoundingClientRect().top")
         check("Explore the work lands on Selected work", -5 < top < 200, round(top))
+        await ctx.close()
+
+        # Money Lifecycle is a finished case study
+        ctx = await b.new_context(viewport={"width": 1440, "height": 900})
+        pg = await ctx.new_page()
+        await pg.goto(BASE + "/work/money-lifecycle/", wait_until="networkidle")
+        lc = await pg.evaluate("""() => ({
+          rail: document.querySelectorAll('.rail a[data-target]').length,
+          status: !!document.querySelector('.status'),
+          back: !!document.querySelector('.facts a[href="/work/money-layer/"]'),
+          proof: [...document.querySelectorAll('.proof--links a')].map(a => a.href),
+          prev: !!document.querySelector('.next .tile--ml'),
+        })""")
+        check("Lifecycle page has 5 sections, no in-progress label, links back to Money Layer", lc["rail"] == 5 and not lc["status"] and lc["back"] and lc["prev"], lc)
+        check("Lifecycle proof links point at zbdpay.com", len(lc["proof"]) == 3 and all(u.startswith("https://zbdpay.com/") for u in lc["proof"]), lc["proof"])
         await ctx.close()
 
         # motion: ambient off under reduced motion, tilt responds to pointer

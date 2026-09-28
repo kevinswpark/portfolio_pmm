@@ -170,13 +170,15 @@ def tile_ml(ctx, compact=False):
 def tile_lc(ctx, compact=False):
     W = C.WORK["lc"]
     hid = ctx.id("tile-lc")
+    chips = "".join(f'<span class="result__chip">{r}</span>' for r in W["result"])
     return (
         f'<article class="tile tile--lc{" tile--compact" if compact else ""}" aria-labelledby="{hid}">'
         '<div class="tile__text">'
         f'<h3 id="{hid}"><a href="{ctx.url("lc")}">{W["title"]}</a></h3>'
         f'<p class="tile__desc">{W["desc"]}</p>'
-        f'<p class="status">{U["in_progress"]}</p>'
-        f'<span class="tile__go" aria-hidden="true">{icon("arrow-right")}</span>'
+        f'<p class="result result--row">{chips}</p>'
+        f'<p class="tile__impact">{W["impact"]}</p>'
+        f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
         "</div>"
         f'<div class="tile__art">{diagrams.lifecycle_svg(C.DIAGRAM["lc_alt"])}</div>'
         "</article>"
@@ -265,6 +267,20 @@ def home_main(ctx):
     return f'<main id="{ctx.id("main")}" tabindex="-1">{hero}{statement}{work}{experience}{strengths}{closing(ctx)}</main>'
 
 
+def zbd_cta():
+    return (
+        f'<a class="fig__cta" href="https://zbdpay.com/" target="_blank" rel="noopener noreferrer">{U["view_zbd"]}'
+        f'{icon("arrow-up-right")}<span class="sr-only"> {U["new_tab"]}</span></a>'
+    )
+
+
+def zbd_host():
+    return (
+        '<a class="proof__host" href="https://zbdpay.com/" target="_blank" rel="noopener noreferrer"><span class="proof__dot"></span>'
+        f'zbdpay.com{icon("arrow-up-right")}<span class="sr-only"> {U["new_tab"]}</span></a>'
+    )
+
+
 def zoom_btn():
     return (
         f'<button class="zoom-btn" type="button" data-zoom aria-label="{escape(U["enlarge"])}">'
@@ -272,8 +288,8 @@ def zoom_btn():
     )
 
 
-def figure(kind):
-    M = C.ML
+def figure(kind, ctx):
+    M, L = C.ML, C.LC
     if kind == "pair":
         return (
             f'<figure class="fig" data-title="{escape(U["concept"])}">'
@@ -284,80 +300,112 @@ def figure(kind):
         return (
             '<figure class="fig">'
             f'<div class="fig__panel fig__panel--grad"><p class="specimen">{C.WORK["ml"]["result"]}</p></div>'
-            f'<figcaption><span class="pill">{U["final"]}</span>{U["set"]}</figcaption></figure>'
+            f'<figcaption><span class="pill">{U["final"]}</span>{zbd_cta()}</figcaption></figure>'
+        )
+    if kind == "step":
+        return (
+            f'<figure class="fig" data-title="{escape(U["concept"])}">'
+            f'<div class="panel fig__panel fig__panel--step">{diagrams.step_svg(C.DIAGRAM["step"], C.DIAGRAM["step_alt"])}{zoom_btn()}</div>'
+            f'<figcaption><span class="pill">{U["concept"]}</span>{U["drawn"]}</figcaption></figure>'
+        )
+    if kind == "naming":
+        sep = '<span class="terms__sep" aria-hidden="true">/</span>'
+        def row(cls, label, terms, joiner):
+            return (
+                f'<div class="terms terms--{cls}"><p class="terms__k">{label}</p>'
+                f'<p class="terms__v">{joiner.join(f"<span>{t}</span>" for t in terms)}</p></div>'
+            )
+        return (
+            '<figure class="fig">'
+            '<div class="fig__panel fig__panel--grad fig__panel--terms">'
+            + row("tried", U["first_try"], L["naming"]["tried"], sep)
+            + row("final", U["final_row"], L["naming"]["final"], '<span class="sr-only">, </span>')
+            + "</div>"
+            f'<figcaption><span class="pill">{U["final"]}</span>{zbd_cta()}</figcaption></figure>'
+        )
+    if kind == "loop":
+        return (
+            f'<figure class="fig" data-title="{escape(U["concept"])}">'
+            f'<div class="panel fig__panel">{diagrams.loop_pair(C.DIAGRAM)}{zoom_btn()}</div>'
+            f'<figcaption><span class="pill">{U["concept"]}</span>{U["drawn"]} {L["fig_source"]}</figcaption></figure>'
+        )
+    if kind == "proof" and ctx.page == "lc":
+        out = icon("arrow-up-right")
+        rows = "".join(
+            f'<div><dt><a href="{url}" target="_blank" rel="noopener noreferrer">{k}{out}<span class="sr-only"> {U["new_tab"]}</span></a></dt><dd>{v}</dd></div>'
+            for k, url, v in L["proof_rows"]
+        )
+        return (
+            '<figure class="fig">'
+            '<div class="panel fig__panel fig__panel--proof">'
+            f'{zbd_host()}'
+            f'<dl class="proof proof--links">{rows}</dl></div>'
+            f'<figcaption><span class="pill">{U["proof"]}</span>{U["quoted"]}</figcaption></figure>'
         )
     rows = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in M["proof_rows"])
     return (
         '<figure class="fig">'
         '<div class="panel fig__panel fig__panel--proof">'
-        f'<a class="proof__host" href="https://zbdpay.com" target="_blank" rel="noopener noreferrer"><span class="proof__dot"></span>zbdpay.com{icon("arrow-up-right")}<span class="sr-only"> {U["new_tab"]}</span></a>'
+        f'{zbd_host()}'
         f'<dl class="proof">{rows}</dl></div>'
-        f'<figcaption><span class="pill">{U["proof"]}</span>{C.WORK["ml"]["impact"]} {M["proof_checked"]}.</figcaption></figure>'
+        f'<figcaption><span class="pill">{U["proof"]}</span>{C.WORK["ml"]["impact"]}</figcaption></figure>'
     )
 
 
-def ml_main(ctx):
-    M = C.ML
+def article_main(ctx, A, next_label, next_tile):
     rail = (
         f'<aside class="rail" aria-label="{escape(U["on_this_page"])}"><div class="rail__inner">'
         f'<p class="rail__h">{U["on_this_page"]}</p><ol>'
-        + "".join(f'<li><a href="{ctx.url("ml", s["id"])}" data-target="{ctx.id(s["id"])}">{s["h2"]}</a></li>' for s in M["sections"])
+        + "".join(f'<li><a href="{ctx.url(section=s["id"])}" data-target="{ctx.id(s["id"])}">{s["h2"]}</a></li>' for s in A["sections"])
         + "</ol></div></aside>"
     )
     th = ctx.id("tldr-h")
     flow = [
-        f'<section class="tldr" aria-labelledby="{th}"><h2 id="{th}">{M["tldr_h"]}</h2><dl>'
-        + "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in M["tldr"])
+        f'<section class="tldr" aria-labelledby="{th}"><h2 id="{th}">{A["tldr_h"]}</h2><dl>'
+        + "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in A["tldr"])
         + "</dl></section>"
     ]
-    for s in M["sections"]:
+    ml_link = f'<a class="inline" href="{ctx.url("ml")}">“{C.WORK["ml"]["result"]}”</a>'
+    for s in A["sections"]:
         flow.append(f'<h2 id="{ctx.id(s["id"])}">{s["h2"]}</h2>')
         for kind, val in s["blocks"]:
             if kind == "p":
-                flow.append(f'<p class="prose">{val}</p>')
+                flow.append(f'<p class="prose">{val.replace("{ML_LINK}", ml_link)}</p>')
             elif kind == "issues":
                 flow.append('<ul class="issues">' + "".join(
                     f'<li><span class="issues__k">{k}:</span> {v}</li>' for k, v in val) + "</ul>")
             elif kind == "fig":
-                flow.append(figure(val))
+                flow.append(figure(val, ctx))
             elif kind == "quote":
                 flow.append(f'<p class="pull">{val}</p>')
     facts = "".join(
         f'<li><span class="facts__k">{k}</span><span class="facts__v">{v}</span></li>'
-        for k, v in M["facts"]
+        for k, v in A["facts"]
     )
+    if A.get("follows"):
+        facts += (
+            f'<li><span class="facts__k">{U["follows"]}</span>'
+            f'<a class="facts__v facts__v--grad" href="{ctx.url("ml")}">{A["follows"]}</a></li>'
+        )
     nh = ctx.id("next-h")
     return (
         f'<main id="{ctx.id("main")}" tabindex="-1"><div class="progress" aria-hidden="true"></div>'
         '<header class="art-head"><div class="band band--article" aria-hidden="true"></div><div class="wrap art-head__in">'
         f'<a class="crumb" href="{ctx.url("home", "work")}">{icon("arrow-left")}{U["all_work"]}</a>'
-        f'<h1 id="{ctx.id("title")}" tabindex="-1">{M["h1"]}</h1>'
-        f'<p class="deck">{M["deck"]}</p><ul class="facts">{facts}</ul></div></header>'
+        f'<h1 id="{ctx.id("title")}" tabindex="-1">{A["h1"]}</h1>'
+        f'<p class="deck">{A["deck"]}</p><ul class="facts">{facts}</ul></div></header>'
         f'<div class="art wrap">{rail}<div class="flow">{"".join(flow)}</div></div>'
-        f'<section class="next wrap" aria-labelledby="{nh}"><h2 class="h2 h2--sm" id="{nh}">{U["next"]}</h2>{tile_lc(ctx, True)}</section>'
+        f'<section class="next wrap" aria-labelledby="{nh}"><h2 class="h2 h2--sm" id="{nh}">{next_label}</h2>{next_tile}</section>'
         + closing(ctx) + "</main>"
     )
+
+
+def ml_main(ctx):
+    return article_main(ctx, C.ML, U["next"], tile_lc(ctx, True))
 
 
 def lc_main(ctx):
-    L = C.LC
-    nh = ctx.id("next-h")
-    return (
-        f'<main id="{ctx.id("main")}" tabindex="-1">'
-        '<header class="art-head wrap">'
-        f'<a class="crumb" href="{ctx.url("home", "work")}">{icon("arrow-left")}{U["all_work"]}</a>'
-        f'<h1 id="{ctx.id("title")}" tabindex="-1">{L["h1"]}</h1>'
-        f'<p class="deck">{L["body"][0]}</p>'
-        f'<p class="status">{U["in_progress"]}</p></header>'
-        '<div class="art art--single wrap"><div class="flow">'
-        f'<p class="prose">{L["body"][1]}</p>'
-        '<figure class="fig">'
-        f'<div class="panel fig__panel fig__panel--lc">{diagrams.lifecycle_svg(C.DIAGRAM["lc_alt"])}</div>'
-        f'<figcaption><span class="pill">{U["concept"]}</span>{U["drawn"]} {L["fig_source"]}</figcaption></figure>'
-        "</div></div>"
-        f'<section class="next wrap" aria-labelledby="{nh}"><h2 class="h2 h2--sm" id="{nh}">{U["finished"]}</h2>{tile_ml(ctx, True)}</section>'
-        + closing(ctx) + "</main>"
-    )
+    return article_main(ctx, C.LC, U["previous"], tile_ml(ctx, True))
 
 
 def nf_main(ctx):

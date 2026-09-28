@@ -30,11 +30,12 @@ Visitors arrive from LinkedIn, applications, and referrals, often skimming on a 
 
 ## Capabilities and Constraints
 
-- Routes: homepage, Money Layer case study, a distinct Money Lifecycle route in an honest in-progress state, 404. No additional empty project pages.
+- Routes: homepage, Money Layer case study, Money Lifecycle case study (added 2026-09-27 from the Notion page "The Money Lifecycle"), 404. No additional empty project pages.
 - Copy rule (user, 2026-09-27): brief and Notion copy is finalized and used word for word. Labels, buttons, and navigation are added only where the brief has none.
 - Resume use (user, 2026-09-27): Finfare and WireBarley outcomes appear verbatim; ZBD shows its role line and the positioning bullet only, without pipeline or retention figures.
 - The Evangelion AT Field reference stays in words only. Visuals are original diagrams.
-- Money Layer defines ZBD's role. Money Lifecycle (Money In, Money Through, Money Out) came later and organizes the products. Keep them distinct.
+- Money Layer defines ZBD's role. Money Lifecycle (Money In, Money Through, Money Out) came later and organizes the products. Keep them distinct; the Lifecycle page links back to the Money Layer as the earlier story.
+- Lifecycle copy follows the Notion page with seven logged edits (src/content.py EDITS): framework name matched to the Money Layer case study, one repeated word, one repeated "journey", a judging opener replaced with a plain statement, the launch post named and dated, one abstract phrase made plain.
 
 ## Brand Commitments
 

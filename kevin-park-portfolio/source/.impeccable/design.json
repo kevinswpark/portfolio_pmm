@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-27T23:21:07+00:00",
+  "title": "Design System: Kevin Park, product marketing portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ink-0": {
+        "role": "neutral",
+        "displayName": "Ink 0, page ground",
+        "canonical": "#08080C",
+        "oklch": "oklch(13.7% 0.009 285.1)",
+        "tonalRamp": [
+          "#0B0B0F",
+          "#232328",
+          "#3F3F44",
+          "#5D5D63",
+          "#7C7D83",
+          "#9E9EA4",
+          "#C3C3CA",
+          "#EEEEF4"
+        ]
+      },
+      "ink-1": {
+        "role": "neutral",
+        "displayName": "Ink 1, raised card",
+        "canonical": "#111117",
+        "oklch": "oklch(18.1% 0.012 285.1)",
+        "tonalRamp": [
+          "#0A0A10",
+          "#23232A",
+          "#3F3F46",
+          "#5D5D64",
+          "#7C7C84",
+          "#9D9DA6",
+          "#C3C3CC",
+          "#EDEDF7"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2, nested fill",
+        "canonical": "#191922",
+        "oklch": "oklch(21.8% 0.018 284.8)",
+        "tonalRamp": [
+          "#0A0A12",
+          "#23232C",
+          "#3E3F49",
+          "#5C5C67",
+          "#7C7C88",
+          "#9D9DA9",
+          "#C2C3CF",
+          "#EDEDFA"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3, nested hover",
+        "canonical": "#22222E",
+        "oklch": "oklch(25.7% 0.022 284.7)",
+        "tonalRamp": [
+          "#0A0A14",
+          "#23232F",
+          "#3E3E4B",
+          "#5C5C6A",
+          "#7B7C8B",
+          "#9C9DAC",
+          "#C2C2D3",
+          "#ECEDFE"
+        ]
+      },
+      "panel-ink": {
+        "role": "neutral",
+        "displayName": "Panel ink, diagram ground",
+        "canonical": "#0C0C12",
+        "oklch": "oklch(15.7% 0.013 284.9)",
+        "tonalRamp": [
+          "#0A0A10",
+          "#23232A",
+          "#3F3F46",
+          "#5D5D65",
+          "#7C7C85",
+          "#9D9DA6",
+          "#C3C3CC",
+          "#EDEDF7"
+        ]
+      },
+      "fg": {
+        "role": "neutral",
+        "displayName": "Primary text",
+        "canonical": "#F4F4F7",
+        "oklch": "oklch(96.8% 0.004 286.3)",
+        "tonalRamp": [
+          "#0B0B0D",
+          "#242426",
+          "#3F3F42",
+          "#5D5D60",
+          "#7D7D7F",
+          "#9E9EA1",
+          "#C4C4C7",
+          "#EEEEF1"
+        ]
+      },
+      "fg-2": {
+        "role": "neutral",
+        "displayName": "Secondary text",
+        "canonical": "#B6B6C8",
+        "oklch": "oklch(78.2% 0.025 285.8)",
+        "tonalRamp": [
+          "#0A0915",
+          "#232230",
+          "#3E3E4D",
+          "#5C5C6C",
+          "#7B7B8C",
+          "#9D9CAE",
+          "#C2C2D4",
+          "#EDEDFE"
+        ]
+      },
+      "fg-3": {
+        "role": "neutral",
+        "displayName": "Tertiary text",
+        "canonical": "#8C8CA2",
+        "oklch": "oklch(64.8% 0.033 285.5)",
+        "tonalRamp": [
+          "#0A0918",
+          "#222233",
+          "#3E3D51",
+          "#5B5B70",
+          "#7B7B90",
+          "#9C9CB2",
+          "#C1C2D9",
+          "#ECEDFE"
+        ]
+      },
+      "prose": {
+        "role": "neutral",
+        "displayName": "Reading text",
+        "canonical": "#DADAE4",
+        "oklch": "oklch(89.1% 0.014 286.1)",
+        "tonalRamp": [
+          "#0B0A11",
+          "#23232A",
+          "#3F3F47",
+          "#5D5D65",
+          "#7C7C85",
+          "#9D9DA7",
+          "#C3C3CD",
+          "#EDEDF7"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "white-hover": {
+        "role": "neutral",
+        "displayName": "White hover",
+        "canonical": "#E9E9F2",
+        "oklch": "oklch(93.7% 0.012 286.2)",
+        "tonalRamp": [
+          "#0B0A10",
+          "#23232A",
+          "#3F3F46",
+          "#5D5D64",
+          "#7C7C84",
+          "#9D9DA6",
+          "#C3C3CC",
+          "#EDEDF6"
+        ]
+      },
+      "blue": {
+        "role": "primary",
+        "displayName": "Coinbase Blue",
+        "canonical": "#0052FF",
+        "oklch": "oklch(52.8% 0.263 262.9)",
+        "tonalRamp": [
+          "#00062A",
+          "#011B5E",
+          "#043299",
+          "#0B4BD8",
+          "#2F70FF",
+          "#6D9CF9",
+          "#A6C4FF",
+          "#E6EFFF"
+        ]
+      },
+      "blue-hover": {
+        "role": "primary",
+        "displayName": "Bright Blue",
+        "canonical": "#1F66FF",
+        "oklch": "oklch(56.7% 0.238 262.7)",
+        "tonalRamp": [
+          "#000729",
+          "#011B5D",
+          "#053397",
+          "#0C4CD6",
+          "#2F71FC",
+          "#699BFF",
+          "#A6C5FE",
+          "#E6EFFF"
+        ]
+      },
+      "blue-ink": {
+        "role": "primary",
+        "displayName": "Pale Blue, focus and caret",
+        "canonical": "#8FB0FF",
+        "oklch": "oklch(76.4% 0.120 266.3)",
+        "tonalRamp": [
+          "#010035",
+          "#091A5D",
+          "#223A7E",
+          "#3E59A1",
+          "#5C7AC4",
+          "#7C9CE9",
+          "#AAC3FD",
+          "#E7EFFE"
+        ]
+      },
+      "grad-blue": {
+        "role": "secondary",
+        "displayName": "Gradient blue stop",
+        "canonical": "#2F6BFF",
+        "oklch": "oklch(58.1% 0.229 263.9)",
+        "tonalRamp": [
+          "#000134",
+          "#011665",
+          "#042CA3",
+          "#1249DB",
+          "#3971F8",
+          "#6D9BFC",
+          "#A8C4FC",
+          "#E7EFFE"
+        ]
+      },
+      "grad-violet": {
+        "role": "secondary",
+        "displayName": "Gradient violet stop",
+        "canonical": "#7B3FF2",
+        "oklch": "oklch(55.0% 0.247 291.3)",
+        "tonalRamp": [
+          "#0E002A",
+          "#29055F",
+          "#48129A",
+          "#6820D9",
+          "#8455F6",
+          "#A189FA",
+          "#C4BAFB",
+          "#EEECFE"
+        ]
+      },
+      "tile-violet": {
+        "role": "primary",
+        "displayName": "Finished tile end stop",
+        "canonical": "#5B45F5",
+        "oklch": "oklch(53.2% 0.247 279.5)",
+        "tonalRamp": [
+          "#080030",
+          "#1E0569",
+          "#3613A9",
+          "#4F30E2",
+          "#6960FF",
+          "#8C92F9",
+          "#B7BEFF",
+          "#EBEDFF"
+        ]
+      },
+      "violet": {
+        "role": "tertiary",
+        "displayName": "Violet, pull rule and 404",
+        "canonical": "#8B5CF6",
+        "oklch": "oklch(60.6% 0.219 292.7)",
+        "tonalRamp": [
+          "#0F0129",
+          "#2B0061",
+          "#4B069D",
+          "#6830CA",
+          "#8757F1",
+          "#A486FE",
+          "#C6B9FD",
+          "#EFECFE"
+        ]
+      },
+      "violet-soft": {
+        "role": "tertiary",
+        "displayName": "Soft Violet, diagram accounts",
+        "canonical": "#A78BFA",
+        "oklch": "oklch(70.9% 0.159 293.5)",
+        "tonalRamp": [
+          "#0F0029",
+          "#2B065D",
+          "#482289",
+          "#6545AD",
+          "#8466D1",
+          "#A488F7",
+          "#C7B9FD",
+          "#EFECFF"
+        ]
+      },
+      "pink": {
+        "role": "secondary",
+        "displayName": "Signal Pink, gradient stop and blockage",
+        "canonical": "#FF3D8B",
+        "oklch": "oklch(67.3% 0.233 1.9)",
+        "tonalRamp": [
+          "#1E0009",
+          "#470220",
+          "#760A3A",
+          "#A81556",
+          "#E00F73",
+          "#FB5D95",
+          "#FCA8BF",
+          "#FEE8ED"
+        ]
+      },
+      "amber": {
+        "role": "tertiary",
+        "displayName": "Amber, gradient end and status dot",
+        "canonical": "#FFB84D",
+        "oklch": "oklch(83.1% 0.145 74.2)",
+        "tonalRamp": [
+          "#130900",
+          "#331F01",
+          "#573906",
+          "#7D540E",
+          "#A87007",
+          "#D38F0F",
+          "#FBB549",
+          "#FEEBD3"
+        ]
+      },
+      "lime": {
+        "role": "tertiary",
+        "displayName": "Signal Lime",
+        "canonical": "#C8FF3D",
+        "oklch": "oklch(93.0% 0.215 124.8)",
+        "tonalRamp": [
+          "#080E00",
+          "#1D2902",
+          "#364709",
+          "#4F6801",
+          "#6B8B13",
+          "#87AF1C",
+          "#A8D921",
+          "#DBFE9B"
+        ]
+      },
+      "lime-text": {
+        "role": "tertiary",
+        "displayName": "Lime Text, lit figures",
+        "canonical": "#DFFF8A",
+        "oklch": "oklch(95.2% 0.148 121.8)",
+        "tonalRamp": [
+          "#090D00",
+          "#1F2803",
+          "#384600",
+          "#536703",
+          "#708915",
+          "#90AC33",
+          "#B5D35E",
+          "#DEFE89"
+        ]
+      },
+      "lime-ink": {
+        "role": "tertiary",
+        "displayName": "Lime Ink, text on lime",
+        "canonical": "#0B0D05",
+        "oklch": "oklch(15.4% 0.018 118.8)",
+        "tonalRamp": [
+          "#0A0C05",
+          "#23251B",
+          "#3F4136",
+          "#5C5F54",
+          "#7C7F73",
+          "#9DA094",
+          "#C3C6B9",
+          "#EDF0E3"
+        ]
+      },
+      "cyan": {
+        "role": "tertiary",
+        "displayName": "Diagram Cyan",
+        "canonical": "#2DE2E6",
+        "oklch": "oklch(83.1% 0.135 197.3)",
+        "tonalRamp": [
+          "#000E0F",
+          "#032A2B",
+          "#0B494A",
+          "#006B6E",
+          "#158F91",
+          "#20B4B7",
+          "#25DEE2",
+          "#B8FEFF"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(255 255 255 / .08)"
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Control hairline",
+        "canonical": "rgb(255 255 255 / .14)"
+      }
+    },
+    "typographyMeta": {
+      "hero": {
+        "displayName": "Hero",
+        "purpose": "Homepage headline only; font-stretch 116%, max 16ch.",
+        "fontStretch": "116%"
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Philosophy statement (stretch 112%) and article titles (weight 720, stretch 114%, line-height 1.02, -0.038em).",
+        "fontStretch": "112% to 114%"
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Homepage section headings; stretch 114%.",
+        "fontStretch": "114%"
+      },
+      "article-heading": {
+        "displayName": "Article heading",
+        "purpose": "Section heads in the case-study flow; stretch 110%, max 36rem.",
+        "fontStretch": "110%"
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Tile headings (stretch 108%) and role titles (stretch 106%).",
+        "fontStretch": "106% to 108%"
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Hero sub, deck, profile, statement body; secondary text color.",
+        "fontStretch": "100%"
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text, normal width.",
+        "fontStretch": "100%"
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Long-form case-study reading at a 38rem measure, color prose.",
+        "fontStretch": "100%"
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Status lines, captions, dates.",
+        "fontStretch": "100%"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Pills, fact keys, rail heading. Sentence case.",
+        "fontStretch": "100%"
+      },
+      "brand-mark": {
+        "displayName": "Brand mark",
+        "purpose": "ZBD mark on the hero card (800, stretch 120%, 0.02em) and 404 numeral (800, stretch 125%, violet).",
+        "fontStretch": "120% to 125%"
+      },
+      "strength": {
+        "displayName": "Strength line",
+        "purpose": "Bento cells: 650, clamp(1.25rem, 1rem + .7vw, 1.625rem), 1.25, -0.02em, stretch 106%.",
+        "fontStretch": "106%"
+      },
+      "fontSource": {
+        "displayName": "Mona Sans variable",
+        "purpose": "Self-hosted @font-face, weight 200 to 900, font-stretch 75% to 125%, normal and italic."
+      }
+    },
+    "gradients": [
+      {
+        "name": "grad",
+        "value": "linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 38%, #FF3D8B 72%, #FFB84D 100%)",
+        "purpose": "Brand gradient. Only on surfaces without text: TL;DR border, reading-progress bar."
+      },
+      {
+        "name": "grad-cool",
+        "value": "linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 55%, #FF3D8B 100%)",
+        "purpose": "Cool variant, no amber. Required for every text-bearing gradient surface: story pill, closing card, gradient bento cell, specimen panel, gradient fact value; also the gradient hairline on the current role card, and bullet markers."
+      },
+      {
+        "name": "band",
+        "value": "linear-gradient(100deg, transparent 0 18%, rgb(255 255 255 / .10) 18% 19%, transparent 19% 100%), linear-gradient(100deg, #2F6BFF 0%, #7B3FF2 24%, #FF3D8B 48%, #FFB84D 62%, #2F6BFF 80%, #7B3FF2 100%)",
+        "purpose": "Skewed Stripe band: skewY(-11deg), background-size 100% 100%, 220% 100%, mask linear-gradient(90deg, transparent 0%, rgb(0 0 0 / .12) 34%, #000 64%). Hard diagonal edges, fades toward the left only."
+      },
+      {
+        "name": "tile-finished",
+        "value": "linear-gradient(150deg, #0052FF 0%, #2F6BFF 55%, #5B45F5 100%)",
+        "purpose": "Blue field of the finished-work tile."
+      },
+      {
+        "name": "hero-card-face",
+        "value": "radial-gradient(120% 90% at 0% 0%, rgb(255 255 255 / .22), transparent 45%), radial-gradient(90% 80% at 100% 100%, #FF3D8B 0%, transparent 55%), radial-gradient(80% 90% at 90% 0%, #FFB84D 0%, transparent 45%), linear-gradient(135deg, #2F6BFF 0%, #6C3BF0 55%, #B03AD8 100%)",
+        "purpose": "Hero card face only; amber confined to the top-right corner away from the line."
+      }
+    ],
+    "shadows": [
+      {
+        "name": "floating-glass",
+        "value": "inset 0 1px 0 rgb(255 255 255 / .06), 0 16px 40px -20px rgb(0 0 0 / .8)",
+        "purpose": "Nav pill, with backdrop-filter blur(20px) saturate(160%) over rgb(17 17 23 / .72)."
+      },
+      {
+        "name": "card-glow",
+        "value": "0 50px 90px -40px rgb(47 107 255 / .6), 0 30px 60px -30px rgb(255 61 139 / .45)",
+        "purpose": "Hero card only."
+      },
+      {
+        "name": "story-glow",
+        "value": "0 10px 40px -12px rgb(123 63 242 / .7)",
+        "purpose": "Story pill in the hero headline."
+      },
+      {
+        "name": "figure-glow",
+        "value": "0 2px 14px -4px rgb(200 255 61 / .35)",
+        "purpose": "Lit figure chip."
+      },
+      {
+        "name": "dot-halo",
+        "value": "0 0 0 4px rgb(255 184 77 / .16)",
+        "purpose": "Status dot; same 4px halo at 18% for go (lime), stop (pink), proof (lime) dots."
+      },
+      {
+        "name": "dialog",
+        "value": "0 40px 100px -30px rgb(0 0 0 / .9)",
+        "purpose": "Zoom dialog; backdrop rgb(8 8 12 / .72) with blur(6px)."
+      },
+      {
+        "name": "diagram-glow",
+        "value": "drop-shadow(0 0 16px rgb(123 63 242 / .6))",
+        "purpose": "Money Layer bar in diagrams; wall uses drop-shadow(0 0 14px rgb(255 61 139 / .55))."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Default curve for transforms, reveals, dialog, view transitions."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Closing card gradient drift."
+      },
+      {
+        "name": "state",
+        "value": "160ms",
+        "purpose": "Color, background, border transitions; button press scale 0.97."
+      },
+      {
+        "name": "icon-nudge",
+        "value": "220ms to 240ms ease-out",
+        "purpose": "Arrow nudges on buttons, crumb, tiles."
+      },
+      {
+        "name": "tile-lift",
+        "value": "300ms ease-out, translateY(-4px)",
+        "purpose": "Tile hover."
+      },
+      {
+        "name": "card-settle",
+        "value": "700ms ease-out",
+        "purpose": "Hero card returns to rest; pointer tracking is lerped at 0.14 per frame, up to 11deg Y and 8deg X."
+      },
+      {
+        "name": "band-flow",
+        "value": "26s linear infinite",
+        "purpose": "Band gradient drift."
+      },
+      {
+        "name": "closing-shift",
+        "value": "16s ease-in-out infinite alternate",
+        "purpose": "Closing card gradient drift."
+      },
+      {
+        "name": "zoom-in",
+        "value": "240ms ease-out, scale .96 to 1 from the trigger",
+        "purpose": "Zoom dialog open; 120ms fade under reduced motion."
+      },
+      {
+        "name": "view-transition",
+        "value": "220ms ease-out",
+        "purpose": "Cross-page navigation."
+      },
+      {
+        "name": "reveal",
+        "value": "scroll-driven, animation-range entry 10% cover 42%",
+        "purpose": "Statement words brighten from fg-3 to fg; only with prefers-reduced-motion: no-preference."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Band and closing card static; no tilt or card transition; transitions 0.01ms; smooth scroll and view transitions off; statement fully lit; dialog fades 120ms."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "nav-compact",
+        "value": "620px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "900px"
+      },
+      {
+        "name": "lg",
+        "value": "1080px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Coinbase-blue pill for the main action.",
+      "html": "<button class=\"ds-btn ds-btn-blue\">Explore the work <svg width=\"18\" height=\"18\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72a8,8,0,0,1,11.32-11.32L120,196.69V40a8,8,0,0,1,16,0V196.69l58.34-58.35a8,8,0,0,1,11.32,11.32Z\"/></svg></button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;border:1px solid transparent;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;font-size:1rem;font-weight:600;line-height:1;cursor:pointer;transition:background-color 160ms ease,border-color 160ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-btn svg{transition:transform 220ms cubic-bezier(0.23,1,0.32,1)}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid #8FB0FF;outline-offset:3px}.ds-btn-blue{background:#0052FF;color:#fff}.ds-btn-blue:hover{background:#1F66FF}.ds-btn-blue:hover svg{transform:translateY(2px)}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary pill on the dark ground.",
+      "html": "<button class=\"ds-btn-ghost\">Connect on LinkedIn</button>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;border-radius:999px;border:1px solid rgb(255 255 255 / .14);background:rgb(255 255 255 / .02);color:#F4F4F7;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:background-color 160ms ease,border-color 160ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-btn-ghost:hover{background:rgb(255 255 255 / .07);border-color:rgb(255 255 255 / .24)}.ds-btn-ghost:active{transform:scale(0.97)}.ds-btn-ghost:focus-visible{outline:2px solid #8FB0FF;outline-offset:3px}"
+    },
+    {
+      "name": "Floating Nav",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Dark glass pill nav with a compact blue action.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-brand\">Kevin Park</span><a href=\"#\">Work</a><a href=\"#\">Experience</a><a class=\"ds-nav-cta\" href=\"#\">Connect on LinkedIn</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:6px;height:60px;padding:0 8px 0 18px;border-radius:999px;background:rgb(17 17 23 / .72);border:1px solid rgb(255 255 255 / .08);box-shadow:inset 0 1px 0 rgb(255 255 255 / .06),0 16px 40px -20px rgb(0 0 0 / .8);backdrop-filter:blur(20px) saturate(160%);font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;color:#F4F4F7}.ds-nav-brand{margin-right:auto;font-weight:650;font-stretch:108%}.ds-nav a{display:inline-flex;align-items:center;height:40px;padding:0 14px;border-radius:999px;color:#B6B6C8;text-decoration:none;font-size:.9375rem;transition:color 160ms ease,background-color 160ms ease}.ds-nav a:hover{color:#F4F4F7;background:rgb(255 255 255 / .06)}.ds-nav a:focus-visible{outline:2px solid #8FB0FF;outline-offset:3px}.ds-nav a.ds-nav-cta{height:44px;padding:0 16px;background:#0052FF;color:#fff;font-weight:600}.ds-nav a.ds-nav-cta:hover{background:#1F66FF}"
+    },
+    {
+      "name": "Status Line and Caption Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "State as a dotted line of text; pills label figure captions.",
+      "html": "<div class=\"ds-stack\"><p class=\"ds-status\">Case study in progress</p><p class=\"ds-cap\"><span class=\"ds-pill\">Concept diagram</span>Drawn for this site.</p></div>",
+      "css": ".ds-stack{display:grid;gap:16px;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;background:#08080C;padding:20px;border-radius:20px}.ds-status{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:.875rem;font-weight:600;color:#B6B6C8}.ds-status::before{content:\"\";width:7px;height:7px;border-radius:50%;background:#FFB84D;box-shadow:0 0 0 4px rgb(255 184 77 / .16)}.ds-cap{display:flex;align-items:center;gap:10px;margin:0;font-size:.875rem;color:#B6B6C8}.ds-pill{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;font-size:.8125rem;font-weight:600;background:rgb(255 255 255 / .07);border:1px solid rgb(255 255 255 / .14);color:#F4F4F7}"
+    },
+    {
+      "name": "Lit Figure Chip",
+      "kind": "chip",
+      "refersTo": "figure-chip",
+      "description": "Lime-lit quantified outcome inside role bullets.",
+      "html": "<p class=\"ds-bullet\">Delivered a package that secured <mark class=\"ds-fig\">3,000-plus</mark> merchant partners.</p>",
+      "css": ".ds-bullet{margin:0;padding:20px;background:#111117;border-radius:28px;color:#B6B6C8;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;line-height:1.6}.ds-fig{color:#DFFF8A;font-weight:650;background:rgb(200 255 61 / .12);padding:1px 7px;border-radius:7px;box-shadow:0 2px 14px -4px rgb(200 255 61 / .35);white-space:nowrap}"
+    },
+    {
+      "name": "Finished Work Tile",
+      "kind": "card",
+      "refersTo": "tile-finished",
+      "description": "Blue-field tile for finished case studies with a white result chip.",
+      "html": "<article class=\"ds-tile-ml\"><h3>Using a visual metaphor to explain ZBD's role</h3><p class=\"ds-desc\">There was no consistent answer to what the company was.</p><span class=\"ds-result\">The Money Layer for Games</span><a class=\"ds-go\" href=\"#\">Read the case study <svg width=\"18\" height=\"18\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></a></article>",
+      "css": ".ds-tile-ml{display:grid;gap:1rem;justify-items:start;padding:36px;border-radius:28px;color:#fff;background:linear-gradient(150deg,#0052FF 0%,#2F6BFF 55%,#5B45F5 100%);font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;transition:transform 300ms cubic-bezier(0.23,1,0.32,1)}.ds-tile-ml:hover{transform:translateY(-4px)}.ds-tile-ml h3{margin:0;font-size:1.75rem;line-height:1.12;letter-spacing:-0.025em;font-weight:700;font-stretch:108%;max-width:20ch}.ds-desc{margin:0;color:rgb(255 255 255 / .86);line-height:1.6}.ds-result{display:inline-flex;align-items:center;min-height:40px;padding:6px 16px;border-radius:999px;background:#fff;color:#08080C;font-weight:700;font-stretch:108%}.ds-go{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:.9375rem;text-decoration:none}.ds-go svg{transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-tile-ml:hover .ds-go svg{transform:translateX(4px)}.ds-go:focus-visible{outline:2px solid #8FB0FF;outline-offset:4px}"
+    },
+    {
+      "name": "Lifecycle Tile",
+      "kind": "card",
+      "refersTo": "tile-finished-violet",
+      "description": "Violet-field tile for the second finished case study, with three white stage chips in a row.",
+      "html": "<article class=\"ds-tile-lc\"><h3>The Money Lifecycle</h3><p class=\"ds-desc\">The later organizing model for how ZBD's products move value.</p><p class=\"ds-chips\"><span class=\"ds-result\">Money In</span><span class=\"ds-result\">Money Through</span><span class=\"ds-result\">Money Out</span></p><a class=\"ds-go\" href=\"#\">Read the case study <svg width=\"18\" height=\"18\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></a></article>",
+      "css": ".ds-tile-lc{display:grid;gap:1rem;justify-items:start;padding:36px;border-radius:28px;color:#fff;background:linear-gradient(150deg,#5B45F5 0%,#7B3FF2 50%,#A8329E 100%);font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;transition:transform 300ms cubic-bezier(0.23,1,0.32,1)}.ds-tile-lc:hover{transform:translateY(-4px)}.ds-tile-lc h3{margin:0;font-size:1.75rem;line-height:1.12;letter-spacing:-0.025em;font-weight:700;font-stretch:108%;max-width:20ch}.ds-tile-lc .ds-desc{margin:0;color:rgb(255 255 255 / .86);line-height:1.6}.ds-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0}.ds-tile-lc .ds-result{display:inline-flex;align-items:center;min-height:40px;padding:6px 16px;border-radius:999px;background:#fff;color:#08080C;font-weight:700;font-stretch:108%}.ds-tile-lc .ds-go{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:.9375rem;text-decoration:none}.ds-tile-lc .ds-go svg{transition:transform 240ms cubic-bezier(0.23,1,0.32,1)}.ds-tile-lc:hover .ds-go svg{transform:translateX(4px)}.ds-tile-lc .ds-go:focus-visible{outline:2px solid #8FB0FF;outline-offset:4px}"
+    },
+    {
+      "name": "Hero Card",
+      "kind": "custom",
+      "refersTo": "hero-card",
+      "description": "Tilted 1.586 card: brand row, drawing, line, then the Case study label.",
+      "html": "<a class=\"ds-card3d\" href=\"#\"><span class=\"ds-c-top\"><b>ZBD</b><span>&#8599;</span></span><svg class=\"ds-c-art\" viewBox=\"0 0 480 300\" aria-hidden=\"true\"><g fill=\"none\" stroke=\"rgb(255 255 255 / .55)\" stroke-width=\"1.2\"><path d=\"M0 40C120 40 220 130 300 150\"/><path d=\"M0 95C120 95 220 140 300 150\"/><path d=\"M0 150C120 150 220 150 300 150\"/><path d=\"M0 205C120 205 220 160 300 150\"/><path d=\"M0 260C120 260 220 170 300 150\"/></g><path d=\"M300 150H480\" stroke=\"#fff\" stroke-width=\"7\" stroke-linecap=\"round\"/><circle cx=\"300\" cy=\"150\" r=\"8\" fill=\"#fff\"/></svg><span class=\"ds-c-line\">The Money Layer for Games</span><span class=\"ds-c-label\">Case study</span></a>",
+      "css": ".ds-card3d{display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:6px;width:420px;aspect-ratio:1.586;padding:24px;border-radius:24px;color:#fff;text-decoration:none;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif;border:1px solid rgb(255 255 255 / .28);background:radial-gradient(120% 90% at 0% 0%,rgb(255 255 255 / .22),transparent 45%),radial-gradient(90% 80% at 100% 100%,#FF3D8B 0%,transparent 55%),radial-gradient(80% 90% at 90% 0%,#FFB84D 0%,transparent 45%),linear-gradient(135deg,#2F6BFF 0%,#6C3BF0 55%,#B03AD8 100%);box-shadow:0 50px 90px -40px rgb(47 107 255 / .6),0 30px 60px -30px rgb(255 61 139 / .45);transform:perspective(1100px) rotateZ(-7deg) rotateX(8deg) rotateY(-14deg);transition:transform 700ms cubic-bezier(0.23,1,0.32,1)}.ds-card3d:hover{transform:perspective(1100px) rotateZ(-7deg) rotateX(4deg) rotateY(-4deg)}.ds-card3d:focus-visible{outline:2px solid #8FB0FF;outline-offset:10px}.ds-c-top{display:flex;justify-content:space-between}.ds-c-top b{font-weight:800;font-stretch:120%;letter-spacing:.02em}.ds-c-art{height:100%;max-height:110px;width:auto;max-width:72%;opacity:.9}.ds-c-line{font-size:1.625rem;font-weight:700;font-stretch:110%;letter-spacing:-0.02em;line-height:1.08;max-width:12ch}.ds-c-label{font-size:.8125rem;font-weight:600;margin-top:6px}@media (prefers-reduced-motion:reduce){.ds-card3d{transition:none}.ds-card3d:hover{transform:perspective(1100px) rotateZ(-7deg) rotateX(8deg) rotateY(-14deg)}}"
+    },
+    {
+      "name": "Closing Card",
+      "kind": "card",
+      "refersTo": "closing-card",
+      "description": "36px cool-gradient card with the LinkedIn URL and a white button.",
+      "html": "<div class=\"ds-closing\"><h2>linkedin.com/in/kevinswpark</h2><button class=\"ds-btn-white\">Connect on LinkedIn</button></div>",
+      "css": ".ds-closing{display:grid;justify-items:start;gap:2rem;padding:56px 40px;border-radius:36px;background:linear-gradient(115deg,#2F6BFF 0%,#7B3FF2 55%,#FF3D8B 100%);background-size:180% 180%;animation:ds-shift 16s cubic-bezier(0.77,0,0.175,1) infinite alternate;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif}.ds-closing h2{margin:0;color:#fff;font-size:2.5rem;line-height:1;letter-spacing:-0.04em;font-weight:750;font-stretch:112%}.ds-btn-white{min-height:52px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#08080C;font:inherit;font-weight:600;cursor:pointer;transition:background-color 160ms ease,transform 160ms cubic-bezier(0.23,1,0.32,1)}.ds-btn-white:hover{background:#E9E9F2}.ds-btn-white:active{transform:scale(0.97)}.ds-btn-white:focus-visible{outline:2px solid #8FB0FF;outline-offset:3px}@keyframes ds-shift{from{background-position:0% 30%}to{background-position:100% 70%}}@media (prefers-reduced-motion:reduce){.ds-closing{animation:none}}"
+    },
+    {
+      "name": "Bento",
+      "kind": "custom",
+      "refersTo": "bento-cell",
+      "description": "Five icon-free strength cells: ink 1, ink 2, cool gradient, blue, lime.",
+      "html": "<ul class=\"ds-bento\"><li>Finding a clear direction</li><li>Explaining complicated technology</li><li class=\"g\">Connecting product thinking with a story</li><li class=\"b\">Building a useful first version</li><li class=\"l\">Using new tools, including AI</li></ul>",
+      "css": ".ds-bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:0;padding:0;list-style:none;font-family:\"Mona Sans\",ui-sans-serif,system-ui,sans-serif}.ds-bento li{grid-column:span 2;display:grid;align-content:end;min-height:150px;padding:24px;border-radius:28px;background:#111117;border:1px solid rgb(255 255 255 / .08);color:#F4F4F7;font-size:1.25rem;line-height:1.25;letter-spacing:-0.02em;font-weight:650;font-stretch:106%}.ds-bento li:nth-child(-n+2){grid-column:span 3}.ds-bento li:nth-child(2){background:#191922}.ds-bento li.g{background:linear-gradient(115deg,#2F6BFF 0%,#7B3FF2 55%,#FF3D8B 100%);border-color:transparent;color:#fff}.ds-bento li.b{background:#0052FF;border-color:transparent;color:#fff}.ds-bento li.l{background:#C8FF3D;border-color:transparent;color:#0B0D05}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Card You Want to Pick Up",
+    "overview": "The work is presented the way a modern money app presents a product: one vivid card, figures that glow, and a calm near-black ground that lets color do the selling. The vocabulary is fintech app hardware (card, chip, pill, glowing figure) with two borrowed signatures: a Stripe-style skewed gradient band and Coinbase-blue actions. It refuses the light editorial portfolio with thumbnails and an about blurb.\n\nDensity is generous. Sections breathe on a large vertical rhythm, cards are big and rounded, and color arrives in a few saturated fields rather than scattered accents. Motion is slow and physical: a band that drifts, a card that tilts toward the pointer and settles back, a statement that brightens as it scrolls in.\n\nThe site ships one theme, dark, on purpose. There is no light mode and no theme toggle; `color-scheme: dark` is declared at the root.",
+    "keyCharacteristics": [
+      "Single deliberate dark theme on a four-step ink ladder.",
+      "One brand gradient, with a cool variant for every text-bearing surface.",
+      "Coinbase blue for actions and for finished work.",
+      "Signal lime only where value is moving or a figure is lit.",
+      "Pills for controls, 28px cards, 20px panels, one 36px closing card.",
+      "Mona Sans throughout: expanded bold display, normal-width body."
+    ],
+    "rules": [
+      {
+        "name": "The One Dark Theme Rule",
+        "body": "There is one theme and it is dark. Do not add a light mode, a toggle, or light-ground sections.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cool Text Rule",
+        "body": "Any gradient surface that carries text uses the cool gradient. The full gradient, with amber, is reserved for surfaces with no text on them (borders, the progress bar, the band).",
+        "section": "colors"
+      },
+      {
+        "name": "The Blue Means Done Rule",
+        "body": "Coinbase blue is the action color and the field of the first finished case study. The second finished case study sits on a violet field that ends at #A8329E, so white text holds at least 5.8:1. Unfinished work, if any returns, never sits on a gradient field.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lime Moves Rule",
+        "body": "Lime marks value that moves or a figure worth lighting. It never becomes a general accent, a link color, or a heading color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Wide Display Rule",
+        "body": "Headings are expanded (width 106 or more) and bold (650 or more). Body text is never expanded.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "No uppercase labels. Headings, labels, and pills are sentence case; letter-spacing on labels stays at or below 0.04em.",
+        "section": "typography"
+      },
+      {
+        "name": "The Glow Not Drop Rule",
+        "body": "Shadows are colored light, large and negative-spread. No hard edges, no offset drops.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Shape Rule",
+        "body": "Controls are pills (999px): buttons, nav, nav links, pills, tags, chips, facts, the result chip. Cards are 28px: tiles, role cards, extras cards, bento cells, TL;DR, the gradient specimen panel. Panels are 20px: diagram panels and evidence cards. The closing card alone is 36px. Circular 44 to 48px buttons carry icon-only actions (zoom, close, tile arrow). Smaller radii are for small nested things: 24px hero card and dialog, 16px issue cards, 12px rail links, 7px figure chips.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Hard Band Rule",
+        "body": "The skewed band is the one shape with hard edges: a strip skewed -11deg with crisp diagonal top and bottom, a thin 10 percent white stripe near its left end, and a mask that fades it only toward the left edge. It never gets rounded corners or soft top and bottom edges.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Reduced Motion Rule",
+        "body": "Under reduced motion the band and closing card stop, the hero card does not tilt or transition, all transitions drop to 0.01ms, smooth scrolling and view transitions are off, the statement renders fully lit, and the zoom dialog fades in over 120ms instead of scaling.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do keep the page on ink 0 with raised surfaces on ink 1 and ink 2 and hairlines at 8 or 14 percent white.",
+      "Do use the cool gradient for every gradient surface that carries text.",
+      "Do use Coinbase blue for actions and for the field of finished work.",
+      "Do keep lime for moving value and lit figures, with lime ink text on a lime field.",
+      "Do follow the shape rule: pills for controls, 28px cards, 20px panels, 36px for the closing card only.",
+      "Do set headings in expanded bold Mona Sans and body at normal width.",
+      "Do mark state with a status line after the description.",
+      "Do caption figures with a pill label and a plain sentence.",
+      "Do gate hover effects to hover-capable fine pointers and honor reduced motion as specified."
+    ],
+    "donts": [
+      "Don't add a light theme or light-ground sections.",
+      "Don't put text on the full gradient with amber.",
+      "Don't place pills, kickers, or eyebrow labels above headings.",
+      "Don't add icons or numbers to bento cells.",
+      "Don't nest a dark panel inside the blue finished tile.",
+      "Don't put unfinished work on a blue or violet field.",
+      "Don't round or soften the band's diagonal edges.",
+      "Don't use hard offset shadows or uppercase tracked labels."
+    ]
+  }
+}

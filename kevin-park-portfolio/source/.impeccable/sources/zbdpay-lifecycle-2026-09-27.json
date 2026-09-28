@@ -1,0 +1,30 @@
+{
+  "checked": "2026-09-27",
+  "method": "Live DOM read in the user's Chrome via Claude in Chrome (javascript_tool)",
+  "pages": [
+    {
+      "url": "https://zbdpay.com/",
+      "section_heading": "Power the full lifecycle of money in games",
+      "section_lead": "From real-money rewards and player payouts to peer-to-peer economies, ZBD runs the money lifecycle natively inside your game",
+      "stage_labels": ["Money In:", "Money Through:", "Money Out:"]
+    },
+    {
+      "url": "https://zbdpay.com/embedded-accounts",
+      "title": "ZBD Embedded Accounts - Native, licensed financial infrastructure for your game",
+      "h1": "An Embedded Financial Layer in Your Game.",
+      "opening": "Programmable financial infrastructure inside your game to power the full money lifecycle: money in, money through, and money out."
+    },
+    {
+      "url": "https://zbdpay.com/blog/introducing-zbds-embedded-financial-infrastructure-for-games",
+      "title": "Introducing ZBD’s Embedded Financial Infrastructure for Games - ZBD Blog",
+      "date": "Aug 24, 2026",
+      "first_sentence": "We’re introducing our embedded financial infrastructure for games, giving studios a single platform to power the full money lifecycle.",
+      "subhead": "A new suite of embedded products gives studios the infrastructure to move money in, through and out of their games, creating a two-way value exchange with players that can drive engagement, revenue and loyalty.",
+      "stages": [
+        "Money in: players fund their in-game balance directly, without leaving the game.",
+        "Money through: value moves between players, marketplaces and creator economies.",
+        "Money out: players and creators cash out through supported payout methods."
+      ]
+    }
+  ]
+}

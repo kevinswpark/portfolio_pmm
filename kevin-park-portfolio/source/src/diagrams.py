@@ -21,6 +21,9 @@ def defs_svg():
         '<linearGradient id="kp-grad-v" x1="0" y1="0" x2="0" y2="1">'
         '<stop offset="0" stop-color="#3D7BFF"/><stop offset=".5" stop-color="#8B5CF6"/>'
         '<stop offset="1" stop-color="#FF3D8B"/></linearGradient>'
+        '<linearGradient id="kp-grad-line" gradientUnits="userSpaceOnUse" x1="70" y1="0" x2="470" y2="0">'
+        '<stop offset="0" stop-color="#3D7BFF"/><stop offset=".55" stop-color="#8B5CF6"/>'
+        '<stop offset="1" stop-color="#FF3D8B"/></linearGradient>'
         "</defs></svg>"
     )
 
@@ -122,6 +125,10 @@ def money_layer_pair(labels):
 # Money Lifecycle: three stages on a loop.
 # ---------------------------------------------------------------------------
 def lifecycle_svg(aria):
+    return f'<svg class="dg-lc" viewBox="-30 0 580 360" role="img" aria-label="{escape(aria)}">' + _lifecycle_parts() + "</svg>"
+
+
+def _lifecycle_parts():
     cx, cy, r = 260, 176, 118
     stages = [(-90, "Money In"), (30, "Money Through"), (150, "Money Out")]
     gap = 16
@@ -154,7 +161,66 @@ def lifecycle_svg(aria):
         else:
             ly -= 4
         parts.append(f'<text class="dg-label dg-label--stage" x="{_f(lx)}" y="{_f(ly)}" text-anchor="{anchor}">{name}</text>')
-    return f'<svg class="dg-lc" viewBox="-30 0 580 360" role="img" aria-label="{escape(aria)}">' + "".join(parts) + "</svg>"
+    return "".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Money Lifecycle: STEP columns crossed by one reward's path.
+# ---------------------------------------------------------------------------
+def step_svg(names, aria):
+    parts = []
+    xs = (20, 150, 280, 410)
+    for x, name in zip(xs, names):
+        hot = name == "Earn"
+        parts.append(f'<rect class="dg-col{" dg-col--hot" if hot else ""}" x="{x}" y="40" width="120" height="270" rx="18"/>')
+        parts.append(f'<text class="dg-label dg-label--col" x="{x + 60}" y="80" text-anchor="middle">{escape(name)}</text>')
+    path = "M340 196C312 128 150 112 92 168S150 272 214 252S372 286 470 214"
+    parts.append(f'<path class="dg-flow dg-flow--open dg-flow--path" d="{path}"/>')
+    parts.append(_arrowhead_at(470, 214, -36))
+    for x, y in ((92, 168), (214, 252)):
+        parts.append(f'<circle class="dg-stopdot" cx="{x}" cy="{y}" r="6"/>')
+    parts.append('<circle class="dg-origin" cx="340" cy="196" r="10"/>')
+    return (
+        f'<svg class="dg-step" viewBox="0 0 550 330" role="img" aria-label="{escape(aria)}">'
+        + "".join(parts) + "</svg>"
+    )
+
+
+def _arrowhead_at(x, y, deg, size=11):
+    a = math.radians(deg)
+    tx, ty = math.cos(a), math.sin(a)
+    nx, ny = -ty, tx
+    p1 = (x + tx * 3, y + ty * 3)
+    p2 = (x - tx * size + nx * size * 0.62, y - ty * size + ny * size * 0.62)
+    p3 = (x - tx * size - nx * size * 0.62, y - ty * size - ny * size * 0.62)
+    return f'<path class="dg-head" d="M{_f(p1[0])} {_f(p1[1])}L{_f(p2[0])} {_f(p2[1])}L{_f(p3[0])} {_f(p3[1])}z"/>'
+
+
+# ---------------------------------------------------------------------------
+# Money Lifecycle: a straight line that ends, then the loop.
+# ---------------------------------------------------------------------------
+def _line_parts():
+    stages = ((70, "Money In"), (280, "Money Through"), (470, "Money Out"))
+    parts = ['<path class="dg-arc dg-arc--line" d="M70 176H448"/>']
+    for (x0, _), (x1, _) in zip(stages, stages[1:]):
+        parts.append(_arrowhead_at(x1 - 16, 176, 0, 10).replace('class="dg-head"', 'class="dg-head dg-head--arc"'))
+    parts.append('<path class="dg-stop" d="M520 150v52"/>')
+    parts.append('<path class="dg-flow dg-flow--blocked" d="M478 176H508"/>')
+    for x, name in stages:
+        parts.append(f'<circle class="dg-node" cx="{x}" cy="176" r="8"/>')
+        parts.append(f'<text class="dg-label dg-label--stage" x="{x}" y="226" text-anchor="middle">{name}</text>')
+    return "".join(parts)
+
+
+def loop_pair(labels):
+    return (
+        f'<div class="dg-pair" role="img" aria-label="{escape(labels["loop_alt"])}">'
+        f'<div class="dg-state"><svg viewBox="-30 0 580 360" aria-hidden="true" focusable="false">{_line_parts()}</svg>'
+        f'<p class="dg-state__cap"><span class="dot dot--stop"></span>{escape(labels["line_cap"])}</p></div>'
+        f'<div class="dg-state"><svg viewBox="-30 0 580 360" aria-hidden="true" focusable="false">{_lifecycle_parts()}</svg>'
+        f'<p class="dg-state__cap"><span class="dot dot--go"></span>{escape(labels["loop_cap"])}</p></div>'
+        "</div>"
+    )
 
 
 FAVICON = (
