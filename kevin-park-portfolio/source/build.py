@@ -497,6 +497,8 @@ def head_static(ctx):
         '<link rel="stylesheet" href="/assets/fonts/fonts.css">',
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
+        '<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>',
+        '<script defer src="/_vercel/insights/script.js"></script>',
     ]
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
@@ -556,6 +558,8 @@ def build_artifact():
         + diagrams.defs_svg()
         + '<div id="app">' + "".join(views) + "</div>"
         + zoom_dialog()
+        + '<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>'
+        + '<script defer src="/_vercel/insights/script.js"></script>'
         + '<script>document.documentElement.setAttribute("data-mode","spa");document.documentElement.setAttribute("lang","en");</script>'
         + f"<script>{js}</script>\n"
     )
