@@ -497,6 +497,7 @@ def head_static(ctx):
         '<link rel="stylesheet" href="/assets/fonts/fonts.css">',
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
+        '<script defer src="/_vercel/insights/script.js"></script>',
     ]
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
@@ -558,6 +559,7 @@ def build_artifact():
         + zoom_dialog()
         + '<script>document.documentElement.setAttribute("data-mode","spa");document.documentElement.setAttribute("lang","en");</script>'
         + f"<script>{js}</script>\n"
+        + '<script defer src="/_vercel/insights/script.js"></script>\n'
     )
     (out / "index.html").write_text(html)
     return out
