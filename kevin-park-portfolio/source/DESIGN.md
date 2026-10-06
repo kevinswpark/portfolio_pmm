@@ -223,14 +223,14 @@ The site ships one theme, dark, on purpose. There is no light mode and no theme 
 A near-black ink ladder carries saturated fields of blue, gradient, and lime; everything else is hairline white.
 
 ### Primary
-- **Coinbase Blue** (`blue`): The action color. Primary buttons, the nav "Connect on LinkedIn" pill, the skip link, text selection, and the field of finished work (the Money Layer tile and one bento cell). Hover lifts to **Bright Blue** (`blue-hover`). **Pale Blue** (`blue-ink`) is the focus ring and caret.
+- **Coinbase Blue** (`blue`): The action color. Primary buttons, the nav "Connect on LinkedIn" pill, the skip link, text selection, and the field of finished work (the Money Layer tile). Hover lifts to **Bright Blue** (`blue-hover`). **Pale Blue** (`blue-ink`) is the focus ring and caret.
 
 ### Secondary
 - **The Brand Gradient** (`linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 38%, #FF3D8B 72%, #FFB84D 100%)`): blue to violet to pink to amber. Used where no text sits on it: the TL;DR border, the article reading-progress bar, and (as a flowing multi-stop variant) the skewed band.
 - **The Cool Gradient** (`linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 55%, #FF3D8B 100%)`): the same sweep without amber. Used on every gradient surface that carries text: the "story" pill in the hero headline, the closing card, the gradient bento cell, the "Final work" specimen panel, the gradient fact value, and the gradient hairline borders on the in-progress tile and the current role card.
 
 ### Tertiary
-- **Signal Lime** (`lime`): value in motion. Open flows and arrowheads in diagrams, the "go" legend dot, the proof status dot, and one bento cell. On a dark ground it appears as the lit figure chip: **Lime Text** (`lime-text`) on lime at 12 percent. On a lime field, text is **Lime Ink** (`lime-ink`).
+- **Signal Lime** (`lime`): value in motion. Open flows and arrowheads in diagrams, the "go" legend dot, the proof status dot, and one How I work cell. On a dark ground it appears as the lit figure chip: **Lime Text** (`lime-text`) on lime at 12 percent. On a lime field, text is **Lime Ink** (`lime-ink`).
 - **Amber** (`amber`): the status dot only, with a 16 percent amber halo.
 - **Signal Pink** (`pink`): blockage in diagrams (the wall, stop marks, "stop" dot).
 - **Diagram Cyan** (`cyan`) and **Soft Violet** (`violet-soft`): token and account shapes inside diagrams only.
@@ -267,7 +267,7 @@ A near-black ink ladder carries saturated fields of blue, gradient, and lime; ev
 - **Headline** (700, `headline` clamp, 1.02, width 114): section headings on the homepage; 404 heading at width 112.
 - **Article heading** (700, 1.12, width 110): section heads inside the case study flow, max 36rem.
 - **Title** (700, `title` clamp, 1.12 to 1.15, width 106 to 108): tile headings and role titles.
-- **Strength line** (650, clamp(1.25rem, 1rem + .7vw, 1.625rem), 1.25, width 106): bento cells.
+- **Strength line** (600, clamp(1.125rem, 1rem + .4vw, 1.375rem), 1.3, width 104): How I work cells.
 - **Lead** (400, `lead` clamp, 1.45 to 1.5): hero sub, deck, profile, statement body, in secondary text color.
 - **Body** (400, 1.0625rem, 1.6) and **Prose** (400, 1.125rem, 1.72, 38rem measure).
 - **Small** (0.875rem) and **Label** (600, 0.8125rem): status lines, captions, pills, facts keys.
@@ -284,7 +284,7 @@ A 1280px container with a fluid gutter (`gutter`) and a 12-column grid with a fl
 
 The hero spans the headline across all 12 columns, with the supporting text in columns 1 to 6 and the tilted card in columns 8 to 12. Below 900px the card moves under the text, centered at up to 400px. The selected work grid puts the finished tile in 7 columns and the in-progress tile in 5; both go full width below 1080px. The bento is a 6-column grid (two cells of 3 over three cells of 2), then 2 columns below 900px with the lime cell spanning, then 1 column below 640px.
 
-The article is a two-column grid: a 15rem sticky section rail and a flow column capped at 54rem. Prose, issue lists, and the pull quote hold a 38rem measure; figures break out to the full 54rem flow width. The rail hides below 1080px. Both case studies use this article.
+The article is a two-column grid: a 15rem sticky section rail and a flow column capped at 54rem. Prose, issue lists, and the pull quote hold a 38rem measure; figures break out to the full 54rem flow width. The rail hides below 1080px. All three case studies use this article.
 
 The nav is a floating pill 12px below the safe area, 60px tall, max 1180px wide. Scroll padding accounts for it.
 
@@ -332,12 +332,13 @@ Resume figures are marked, not bolded: lime text on lime at 12 percent, weight 6
 ### Tiles
 - **Finished tile:** a blue field (`linear-gradient(150deg, #0052FF 0%, #2F6BFF 55%, #5B45F5 100%)`), white text, descriptions at 86 percent white, a white result chip, and an impact line with a 40 percent white left rule. Its diagram sits directly on the blue field on a 16 percent white dot grid; it is never nested inside a dark panel.
 - **Second finished tile:** The Money Lifecycle sits on a violet field (`linear-gradient(150deg, #5B45F5 0%, #7B3FF2 50%, #A8329E 100%)`) with the same anatomy as the blue tile. Its result is three white chips in a row (Money In, Money Through, Money Out), and its loop diagram is drawn in white on the same dot grid. The magenta end stops at #A8329E so white text holds 5.8:1.
+- **WireBarley tile:** full width below the two ZBD tiles, text left and art right (stacking below 900px). A warm field (`linear-gradient(150deg, #FFB84D 0%, #FF7A6B 48%, #FF3D8B 100%)`) carries ink text, an ink result chip with white text, and an ink impact rule. Ink on the pink end holds 6:1; white text is never used on this field. The art is a vertical four-step list on 34 percent white rows, the last step inverted to ink. Warm marks the earlier company; blue and violet mark ZBD.
 - **In-progress tile (reserved):** ink 1 fill with a cool-gradient hairline border, a status line, and a 48px round arrow button in the top right. Not in use.
 - **Shared:** 28px radius, whole tile clickable through the heading link, focus ring on the tile, hover lifts 4px (300ms) and slides the arrow 4px.
 - **Compact:** on "Next case study" and "Previous case study" rows the tile spans full width in two columns, stacking below 900px.
 
 ### Bento
-Five strength statements as cells, no icons, no numbering. Cells are ink 1, ink 2, the cool gradient, Coinbase blue, and signal lime (lime ink text), in that order. Text is bottom-aligned at strength-line size, minimum height 190px.
+The How I work section: three statements as equal cells, no icons, no numbering, one column below 900px. Cells are ink 1, the cool gradient, and signal lime (lime ink text), in that order. Text is bottom-aligned at strength-line size, minimum height 190px.
 
 ### Role cards
 28px ink 1 cards with a 13rem date column and a main column; the current role gets a cool-gradient hairline. The company sits in a small pill beside the title. Bullets use an 8px cool-gradient square marker (3px radius). Skill and area tags are pills.
@@ -361,9 +362,13 @@ Floating glass pill: logo and name (weight 650, width 108), text links in second
 - **Header:** crumb link with a back arrow that nudges left on hover, display title, deck in lead type, and a row of fact pills (key in tertiary label type, value in an ink 2 inner pill). The Lifecycle header ends with a "Follows" pill whose value is a blue-to-violet link back to the Money Layer case study.
 - **Rail:** "On this page" label and links in tertiary text on 12px rounded rows; the current section gets ink 2 and primary text.
 - **TL;DR:** 28px card with a full brand-gradient hairline border, a small label heading, and a key and value list split by hairlines.
-- **Figures:** break out to the flow width, sit in 20px dot-grid panels, and carry a 44px round glass zoom button. Captions are a pill ("Concept diagram", "Final work", "External proof") followed by a plain sentence. After "Final work" the sentence is replaced by a small outlined link pill, "View on zbdpay.com", with an out-arrow. Captions carry no checked-on dates.
+- **Figures:** break out to the flow width, sit in 20px dot-grid panels, and carry a 44px round glass zoom button. Captions are a pill ("Concept diagram", "Final work", "Published on zbdpay.com") followed by a plain sentence. After "Final work" the sentence is replaced by a small outlined link pill, "View on zbdpay.com", with an out-arrow. Captions carry no checked-on dates.
 - **Proof panel:** ink 1 panel with a host pill led by a lime dot, then key and value rows split by hairlines. On the Lifecycle page each key links to the page it quotes, with a small out-arrow.
 - **Naming lockup:** a cool-gradient panel. The rejected terms sit on top, struck through at 62 percent white and separated by slashes; the final stage names stack below in display type. Caption: "Final work" and the zbdpay.com link pill.
+- **Storyboard cards:** four numbered ink 1 cards (16px radius) in a dot-grid panel, warm-gradient number discs, arrows between cards. Four across when the panel is at least 720px wide (container query), stacked with down arrows below that. The final card gets the warm gradient hairline.
+- **Video:** a 16:9 panel with the YouTube embed (youtube-nocookie, no autoplay) on the static site. The Artifact cannot embed other sites, so it shows a warm-field card with an ink play disc that links to YouTube. Both carry a caption link to the video.
+- **Results:** the headline result spans the full row in larger type with lit figures; the other results sit two across as ink 1 cards with a tertiary label above the value, one column on phones. Results from the wider role follow under a small heading as the same gradient-square bullets used in Experience, with the same wording.
+- **Photo:** a 20px-radius panel with a hairline border; the image fills it edge to edge.
 - **Lifecycle diagrams:** STEP drawn as four columns with Earn outlined in the vertical gradient and one lime path of value crossing the others; and a pair showing a straight line that stops at a pink bar beside the loop. Lime means value moving, pink means a stop, same as the Money Layer pair.
 - **Pull quote:** 650 weight, width 106, with a 1px violet left rule.
 - **Progress:** a 3px full-gradient bar scaled by scroll position, where scroll timelines are supported.

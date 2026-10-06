@@ -1,13 +1,14 @@
 # Kevin Park portfolio
 
-English-only product marketing portfolio built from the Notion brief "Kevin Park Website", the Notion case studies "The Money Layer for Games (EN)" and "The Money Lifecycle", and Kevin's resume. Version 2 uses the dark neon card direction.
+English-only product marketing portfolio built from the Notion brief "Kevin Park Website", the Notion case studies "The Money Layer for Games (EN)" and "The Money Lifecycle", Kevin's WireBarley case study file, and his resume. Version 2 uses the dark neon card direction.
 
 ## What's here
 
 - `site/` is the deployable static site. Upload the folder to any static host at the domain root (Netlify, Vercel, Cloudflare Pages, GitHub Pages user site).
-  - `/` home: hero, philosophy, selected work, experience, strengths, LinkedIn.
+  - `/` home: hero, philosophy, selected work, experience, How I work, LinkedIn.
   - `/work/money-layer/` the first case study.
-  - `/work/money-lifecycle/` the second case study, the later organizing model for how ZBD's products move value.
+  - `/work/money-lifecycle/` the second case study, on how ZBD's products work together.
+  - `/work/wirebarley/` the WireBarley case study on first-transfer conversion among customers aged 50+.
   - `/404.html` for every missing path. The old `/en/` and `/ko/` routes from version 1 no longer exist.
 - `source/` rebuilds everything.
   - `src/content.py` holds all copy. Every string is tagged with its source (BRIEF, NOTION, RESUME, ZBD, or UI for added labels and buttons).
@@ -22,7 +23,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
 ## Before you deploy
 
 1. Set your domain so canonical, Open Graph, and sitemap URLs become absolute:
-   `KP_SITE_URL=https://your-domain.com python3 build.py`
+   `KP_SITE_URL=https://kevinpark.xyz python3 build.py` (the bundled site/ was built this way)
 2. Rebuild the social card if copy changed: `python3 serve.py dist/site 8765 &` then `python3 og.py`.
 
 ## Rebuild and check

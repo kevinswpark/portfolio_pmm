@@ -32,11 +32,13 @@ FONT_DIR = next(p for p in VENDOR.glob("fontsource-variable-mona-sans-*") if p.i
 LATIN = "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
 LATIN_EXT = "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
 
-PAGES = ("home", "ml", "lc", "nf")
-VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "nf": "404"}
-PATH = {"home": "/", "ml": "/work/money-layer/", "lc": "/work/money-lifecycle/", "nf": "/404.html"}
-TITLE = {"home": C.META["home_title"], "ml": C.META["ml_title"], "lc": C.META["lc_title"], "nf": C.META["nf_title"]}
-DESC = {"home": C.META["home_desc"], "ml": C.META["ml_desc"], "lc": C.META["lc_desc"], "nf": C.META["home_desc"]}
+PAGES = ("home", "ml", "lc", "wb", "nf")
+VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "wb": "wirebarley", "nf": "404"}
+PATH = {"home": "/", "ml": "/work/money-layer/", "lc": "/work/money-lifecycle/", "wb": "/work/wirebarley/", "nf": "/404.html"}
+TITLE = {"home": C.META["home_title"], "ml": C.META["ml_title"], "lc": C.META["lc_title"], "wb": C.META["wb_title"], "nf": C.META["nf_title"]}
+DESC = {"home": C.META["home_desc"], "ml": C.META["ml_desc"], "lc": C.META["lc_desc"], "wb": C.META["wb_desc"], "nf": C.META["home_desc"]}
+SBS_IMG = ROOT / "assets-src" / "sbs-evening-news.jpg"
+YT = "https://www.youtube.com/watch?v=" + C.WB["video_id"]
 U = C.UI
 
 
@@ -49,7 +51,7 @@ def _icon_path(name):
 
 
 ICON_NAMES = ["arrow-down", "arrow-right", "arrow-left", "arrow-up-right", "linkedin-logo",
-              "magnifying-glass-plus", "x"] + [i for i, _ in C.STRENGTHS["items"]]
+              "magnifying-glass-plus", "x"]
 ICONS = {n: _icon_path(n) for n in ICON_NAMES}
 
 
@@ -185,6 +187,27 @@ def tile_lc(ctx, compact=False):
     )
 
 
+def tile_wb(ctx, compact=False):
+    W = C.WORK["wb"]
+    hid = ctx.id("tile-wb")
+    steps = "".join(
+        f'<li><span class="mini-board__n">{i}</span><span class="mini-board__t">{t}</span></li>'
+        for i, (t, _) in enumerate(C.WB["steps"], 1)
+    )
+    return (
+        f'<article class="tile tile--wb{" tile--compact" if compact else ""}" aria-labelledby="{hid}">'
+        '<div class="tile__text">'
+        f'<h3 id="{hid}"><a href="{ctx.url("wb")}">{W["title"]}</a></h3>'
+        f'<p class="tile__desc">{W["problem"]}</p>'
+        f'<p class="result"><span class="result__chip">{W["result"]}</span></p>'
+        f'<p class="tile__impact">{W["impact"]}</p>'
+        f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
+        "</div>"
+        f'<div class="tile__art"><ol class="mini-story" aria-label="{escape(U["storyboard"])}">{steps}</ol></div>'
+        "</article>"
+    )
+
+
 # ---------------------------------------------------------------------------
 # pages
 # ---------------------------------------------------------------------------
@@ -220,14 +243,14 @@ def home_main(ctx):
     statement = (
         f'<section class="statement wrap" aria-label="{escape(U["name"])}">'
         f'<p class="statement__lead reveal">{words(P["lead"])}</p>'
-        f'<div class="statement__body"><p>{P["body"]}</p><p>{P["context"]}</p></div>'
+        f'<div class="statement__body"><p>{P["body"]}</p></div>'
         "</section>"
     )
     wh = ctx.id("work-h")
     work = (
         f'<section class="work wrap" id="{ctx.id("work")}" aria-labelledby="{wh}">'
         f'<h2 class="h2" id="{wh}">{C.WORK["h2"]}</h2>'
-        f'<div class="work__grid">{tile_ml(ctx)}{tile_lc(ctx)}</div>'
+        f'<div class="work__grid">{tile_ml(ctx)}{tile_lc(ctx)}{tile_wb(ctx)}</div>'
         "</section>"
     )
     E = C.EXPERIENCE
@@ -257,7 +280,7 @@ def home_main(ctx):
     sh = ctx.id("strengths-h")
     cells = "".join(
         f'<li class="bento__cell bento__cell--{i + 1}"><p>{t}</p></li>'
-        for i, (ic, t) in enumerate(C.STRENGTHS["items"])
+        for i, t in enumerate(C.STRENGTHS["items"])
     )
     strengths = (
         f'<section class="strengths wrap" aria-labelledby="{sh}">'
@@ -288,8 +311,61 @@ def zoom_btn():
     )
 
 
+PLAY = '<svg class="play" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M24 18v28l22-14z"/></svg>'
+
+
+def sbs_src(ctx):
+    if ctx.mode == "spa":
+        return "data:image/jpeg;base64," + base64.b64encode(SBS_IMG.read_bytes()).decode()
+    return "/assets/sbs-evening-news.jpg"
+
+
 def figure(kind, ctx):
     M, L = C.ML, C.LC
+    if kind == "storyboard":
+        last = len(C.WB["steps"])
+        steps = "".join(
+            f'<li class="board__step{" board__step--end" if i == last else ""}"><span class="board__n">{i}</span>'
+            f'<p class="board__t">{t}</p><p class="board__d">{d}</p>'
+            + ("" if i == last else f'<span class="board__arrow" aria-hidden="true">{icon("arrow-right")}</span>')
+            + "</li>"
+            for i, (t, d) in enumerate(C.WB["steps"], 1)
+        )
+        return (
+            '<figure class="fig">'
+            f'<div class="panel fig__panel fig__panel--story"><ol class="board">{steps}</ol></div>'
+            f'<figcaption><span class="pill">{U["storyboard"]}</span>{U["storyboard_cap"]}</figcaption></figure>'
+        )
+    if kind == "video":
+        watch = (
+            f'<a class="fig__cta" href="{YT}" target="_blank" rel="noopener noreferrer">{U["watch"]}'
+            f'{icon("arrow-up-right")}<span class="sr-only"> {U["new_tab"]}</span></a>'
+        )
+        if ctx.mode == "spa":
+            player = (
+                f'<a class="video-card" href="{YT}" target="_blank" rel="noopener noreferrer">'
+                f'<span class="video-card__play">{PLAY}</span>'
+                f'<span class="video-card__t">{U["video_title"]}</span>'
+                f'<span class="video-card__s">YouTube{icon("arrow-up-right")}</span>'
+                f'<span class="sr-only"> {U["new_tab"]}</span></a>'
+            )
+        else:
+            player = (
+                f'<iframe src="https://www.youtube-nocookie.com/embed/{C.WB["video_id"]}?rel=0" title="{escape(U["video_title"])}" '
+                'loading="lazy" referrerpolicy="strict-origin-when-cross-origin" '
+                'allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            )
+        return (
+            '<figure class="fig">'
+            f'<div class="fig__panel fig__panel--video">{player}</div>'
+            f'<figcaption><span class="pill">{U["commercial"]}</span>{watch}</figcaption></figure>'
+        )
+    if kind == "sbs":
+        return (
+            '<figure class="fig">'
+            f'<div class="fig__panel fig__panel--photo"><img src="{sbs_src(ctx)}" width="1400" height="721" alt="{escape(U["sbs_alt"])}" loading="lazy" decoding="async"></div>'
+            f'<figcaption><span class="pill">{U["media"]}</span>{U["sbs_cap"]}</figcaption></figure>'
+        )
     if kind == "pair":
         return (
             f'<figure class="fig" data-title="{escape(U["concept"])}">'
@@ -340,7 +416,7 @@ def figure(kind, ctx):
             '<div class="panel fig__panel fig__panel--proof">'
             f'{zbd_host()}'
             f'<dl class="proof proof--links">{rows}</dl></div>'
-            f'<figcaption><span class="pill">{U["proof"]}</span>{U["quoted"]}</figcaption></figure>'
+            f'<figcaption><span class="pill">{U["proof"]}</span></figcaption></figure>'
         )
     rows = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in M["proof_rows"])
     return (
@@ -378,6 +454,16 @@ def article_main(ctx, A, next_label, next_tile):
                 flow.append(figure(val, ctx))
             elif kind == "quote":
                 flow.append(f'<p class="pull">{val}</p>')
+            elif kind == "h3":
+                flow.append(f"<h3>{val}</h3>")
+            elif kind == "bullets":
+                role = next(r for r in C.EXPERIENCE["roles"] if r["company"] == "WireBarley")
+                flow.append('<ul class="role__bullets">' + "".join(f"<li>{mark_figures(b, figs)}</li>" for b, figs in role["bullets"]) + "</ul>")
+            elif kind == "results":
+                flow.append('<ul class="results">' + "".join(
+                    f'<li class="results__item{" results__item--lead" if i == 0 else ""}"><span class="results__k">{k}</span>'
+                    f'<span class="results__v">{mark_figures(v, figs)}</span></li>'
+                    for i, (k, v, figs) in enumerate(val)) + "</ul>")
     facts = "".join(
         f'<li><span class="facts__k">{k}</span><span class="facts__v">{v}</span></li>'
         for k, v in A["facts"]
@@ -405,7 +491,11 @@ def ml_main(ctx):
 
 
 def lc_main(ctx):
-    return article_main(ctx, C.LC, U["previous"], tile_ml(ctx, True))
+    return article_main(ctx, C.LC, U["next"], tile_wb(ctx, True))
+
+
+def wb_main(ctx):
+    return article_main(ctx, C.WB, U["next"], tile_ml(ctx, True))
 
 
 def nf_main(ctx):
@@ -418,7 +508,7 @@ def nf_main(ctx):
     )
 
 
-MAINS = {"home": home_main, "ml": ml_main, "lc": lc_main, "nf": nf_main}
+MAINS = {"home": home_main, "ml": ml_main, "lc": lc_main, "wb": wb_main, "nf": nf_main}
 
 
 def body(ctx):
@@ -485,7 +575,7 @@ def head_static(ctx):
         f'<meta name="description" content="{escape(DESC[ctx.page])}">',
         '<meta name="color-scheme" content="dark">',
         '<meta name="theme-color" content="#08080C">',
-        f'<meta property="og:type" content="{"article" if ctx.page in ("ml", "lc") else "website"}">',
+        f'<meta property="og:type" content="{"article" if ctx.page in ("ml", "lc", "wb") else "website"}">',
         f'<meta property="og:title" content="{escape(TITLE[ctx.page])}">',
         f'<meta property="og:description" content="{escape(DESC[ctx.page])}">',
         '<meta property="og:locale" content="en_US">',
@@ -524,6 +614,7 @@ def build_static():
     for _, f, _ in FACES:
         shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
     (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
+    shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
     og = ROOT / "assets-src" / "og.png"
     if og.exists():
         shutil.copy(og, out / "assets" / "og.png")
@@ -531,7 +622,7 @@ def build_static():
     if SITE_URL:
         (out / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-            + "".join(f"<url><loc>{abs_url(PATH[p])}</loc></url>" for p in ("home", "ml", "lc")) + "</urlset>"
+            + "".join(f"<url><loc>{abs_url(PATH[p])}</loc></url>" for p in ("home", "ml", "lc", "wb")) + "</urlset>"
         )
     return out
 

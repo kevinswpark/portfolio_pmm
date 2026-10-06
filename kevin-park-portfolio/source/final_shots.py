@@ -3,7 +3,7 @@ from playwright.async_api import async_playwright
 B = "http://127.0.0.1:8765"
 S = [("desktop", "/", 1440, 900), ("user-1280", "/", 1280, 720), ("mobile", "/", 390, 844),
      ("desktop-article", "/work/money-layer/", 1440, 900), ("mobile-article", "/work/money-layer/", 390, 844),
-     ("desktop-lifecycle", "/work/money-lifecycle/", 1440, 900), ("mobile-lifecycle", "/work/money-lifecycle/", 390, 844), ("desktop-404", "/nope/", 1440, 900)]
+     ("desktop-lifecycle", "/work/money-lifecycle/", 1440, 900), ("mobile-lifecycle", "/work/money-lifecycle/", 390, 844), ("desktop-wirebarley", "/work/wirebarley/", 1440, 900), ("mobile-wirebarley", "/work/wirebarley/", 390, 844), ("desktop-404", "/nope/", 1440, 900)]
 async def main(names):
     async with async_playwright() as p:
         b = await p.chromium.launch()

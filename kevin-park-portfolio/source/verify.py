@@ -10,7 +10,7 @@ sys.path.insert(0, "src")
 import content as C  # noqa: E402
 
 BASE = "http://127.0.0.1:8765"
-PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/"]
+PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/"]
 results = []
 
 
@@ -26,18 +26,24 @@ def norm(s):
 
 # ---------- 1. copy is verbatim from its sources ----------
 SOURCES = ["notion-2026-09-27.txt", "notion-lifecycle-2026-09-27.txt", "resume-excerpt-2026-09-27.txt",
-           "zbdpay-2026-09-27.json", "zbdpay-lifecycle-2026-09-27.json"]
+           "zbdpay-2026-09-27.json", "zbdpay-lifecycle-2026-09-27.json", "wirebarley-case-study-2026-10-05.md",
+           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt"]
 SRC = norm(" ".join(Path(".impeccable/sources", f).read_text() for f in SOURCES))
 sourced = [C.HERO["sub"], C.HERO["h1_before"] + C.HERO["h1_em"] + C.HERO["h1_after"], C.HERO["cta_work"], C.HERO["cta_linkedin"],
-           C.PHILOSOPHY["lead"], C.PHILOSOPHY["body"], C.PHILOSOPHY["context"], C.WORK["h2"].lower(),
+           C.PHILOSOPHY["lead"], C.PHILOSOPHY["body"], C.WORK["h2"].lower(), C.STRENGTHS["h2"],
            C.WORK["ml"]["title"], C.WORK["ml"]["problem"], C.WORK["ml"]["impact"], C.WORK["ml"]["result"],
            C.WORK["lc"]["desc"], C.ML["deck"], C.EXPERIENCE["profile"], C.LINKEDIN_DISPLAY]
-sourced += [t for _, t in C.STRENGTHS["items"]] + C.EXPERIENCE["education"] + C.EXPERIENCE["skills"]
+sourced += list(C.STRENGTHS["items"]) + C.EXPERIENCE["education"] + C.EXPERIENCE["skills"]
+sourced += [C.META["home_desc"], C.META["ml_desc"], C.META["lc_desc"], C.WORK["lc"]["desc"], C.WORK["lc"]["impact"]]
 sourced += [C.WORK["lc"]["title"], C.WORK["lc"]["impact"], C.LC["h1"], C.LC["deck"], C.LC["follows"]] + C.WORK["lc"]["result"]
 sourced += C.LC["naming"]["tried"] + C.LC["naming"]["final"] + C.DIAGRAM["step"]
 for r in C.EXPERIENCE["roles"]:
     sourced += [r["title"], r["company"], r["place"], r["start"], r["end"]] + r["focus"] + [b for b, _ in r["bullets"]]
-for A in (C.ML, C.LC):
+W = C.WORK["wb"]
+sourced += [W["title"], W["problem"], W["result"], W["impact"], C.WB["h1"], C.WB["deck"], C.UI["watch"]] + [v for _, v in C.WB["facts"]]
+for t, d in C.WB["steps"]:
+    sourced += [t, d]
+for A in (C.ML, C.LC, C.WB):
     for k, v in A["tldr"]:
         sourced.append(f"{k}: {v}")
     for s in A["sections"]:
@@ -47,8 +53,8 @@ for A in (C.ML, C.LC):
                 sourced.append(val.replace("{ML_LINK}", "“The Money Layer for Games”"))
             if kind == "issues":
                 sourced += [f"{k}: {v}" for k, v in val]
-for _, v in C.ML["evidence"]:
-    sourced.append(v)
+            if kind == "results":
+                sourced += [f"{k}: {v}" for k, v, _ in val]
 for _, v in C.ML["proof_rows"]:
     sourced.append(v)
 for _, _, v in C.LC["proof_rows"]:
@@ -67,8 +73,8 @@ def undo_edits(text):
 missing = [s for s in sourced if norm(s).lower() not in src_low and undo_edits(s) not in src_low]
 edited = [s for s in sourced if norm(s).lower() not in src_low and undo_edits(s) in src_low]
 check(f"{len(sourced)} sourced strings are verbatim in Notion, resume, or zbdpay.com ({len(edited)} carry a logged edit)", not missing, missing[:4])
-bad_from = [e["from"] for e in C.EDITS if norm(e["from"]).lower() not in LC_SRC]
-check(f"all {len(C.EDITS)} logged edits trace to the Money Lifecycle Notion page", not bad_from, bad_from[:3])
+bad_from = [e["from"] for e in C.EDITS if norm(e["from"]).lower() not in src_low]
+check(f"all {len(C.EDITS)} logged edits trace to a saved source", not bad_from, bad_from[:3])
 all_copy = norm(" ".join(sourced)).lower()
 unused = [e["to"] for e in C.EDITS if norm(e["to"]).lower() not in all_copy]
 check("every logged edit is live in the copy", not unused, unused[:3])
@@ -81,8 +87,10 @@ leaked = [k for k, pat in PRIVATE.items() if re.search(pat, TEXT_HTML)]
 check("no ZBD pipeline or retention figures and no personal contact data", not leaked, leaked)
 hangul = [str(p) for p in Path("dist").rglob("*") if p.is_file() and p.suffix in (".html", ".css", ".js") and re.search(r"[가-힣]", p.read_text())]
 check("no Korean text anywhere in the build", not hangul, hangul)
-stale = [x for x in ("Checked ", "Set in type", "Specialization", "Concentration") if x in TEXT_HTML]
-check("no checked dates, no set-in-type captions, no specialization line", not stale, stale)
+meta_sync = [C.META["ml_desc"] == C.ML["deck"], C.META["lc_desc"] == C.LC["deck"] == C.WORK["lc"]["desc"], C.META["wb_desc"] == C.WB["deck"]]
+check("meta descriptions match article decks and shared cards", all(meta_sync), meta_sync)
+stale = [x for x in ("Checked ", "Set in type", "Specialization", "Concentration", " percent", "-plus", "YoY", "seniors", "Overall conversion", "credibility", "Proven track record", "My recurring strengths", "The later organizing model", "External proof") if x in TEXT_HTML]
+check("no retired copy, no spelled-out percent or -plus, one audience term", not stale, stale)
 for page in ("money-layer", "money-lifecycle"):
     html = Path(f"dist/site/work/{page}/index.html").read_text()
     host = re.search(r'<a class="proof__host" href="https://zbdpay.com/"', html)
@@ -188,10 +196,31 @@ async def main():
           status: !!document.querySelector('.status'),
           back: !!document.querySelector('.facts a[href="/work/money-layer/"]'),
           proof: [...document.querySelectorAll('.proof--links a')].map(a => a.href),
-          prev: !!document.querySelector('.next .tile--ml'),
+          prev: !!document.querySelector('.next .tile--wb'),
         })""")
         check("Lifecycle page has 5 sections, no in-progress label, links back to Money Layer", lc["rail"] == 5 and not lc["status"] and lc["back"] and lc["prev"], lc)
         check("Lifecycle proof links point at zbdpay.com", len(lc["proof"]) == 3 and all(u.startswith("https://zbdpay.com/") for u in lc["proof"]), lc["proof"])
+        await pg.goto(BASE + "/work/wirebarley/", wait_until="networkidle")
+        wb = await pg.evaluate("""() => ({
+          rail: document.querySelectorAll('.rail a[data-target]').length,
+          steps: document.querySelectorAll('.board__step').length,
+          arrows: document.querySelectorAll('.board__arrow').length,
+          iframe: (document.querySelector('.fig__panel--video iframe') || {}).src || '',
+          watch: [...document.querySelectorAll('a.fig__cta')].map(a => a.href),
+          img: (() => { const i = document.querySelector('.fig__panel--photo img'); return i ? [i.alt.length > 20, i.getAttribute('src')] : null })(),
+          lit: [...document.querySelectorAll('.results__item--lead mark.fig')].map(m => m.textContent),
+          next: !!document.querySelector('.next .tile--ml'),
+          stepRow: (() => { const r = [...document.querySelectorAll('.board__step')].map(e => Math.round(e.getBoundingClientRect().top)); return new Set(r).size })(),
+        })""")
+        check("WireBarley page: 5 sections, 4 storyboard cards with 3 arrows in one row on desktop", wb["rail"] == 5 and wb["steps"] == 4 and wb["arrows"] == 3 and wb["stepRow"] == 1, wb)
+        check("WireBarley video embeds the commercial and keeps the YouTube link", "youtube-nocookie.com/embed/KDBksoj_wu8" in wb["iframe"] and "https://www.youtube.com/watch?v=KDBksoj_wu8" in wb["watch"], [wb["iframe"], wb["watch"]])
+        check("WireBarley SBS image has alt text, figures lit, next tile is Money Layer", wb["img"] and wb["img"][0] and wb["lit"] == ["Roughly 25%", "nearly 50%"] and wb["next"], wb)
+        await ctx.close()
+        ctx = await b.new_context(viewport={"width": 390, "height": 844})
+        pg = await ctx.new_page()
+        await pg.goto(BASE + "/work/wirebarley/", wait_until="networkidle")
+        col = await pg.evaluate("new Set([...document.querySelectorAll('.board__step')].map(e => Math.round(e.getBoundingClientRect().left))).size")
+        check("WireBarley storyboard stacks top to bottom on mobile", col == 1, col)
         await ctx.close()
 
         # motion: ambient off under reduced motion, tilt responds to pointer

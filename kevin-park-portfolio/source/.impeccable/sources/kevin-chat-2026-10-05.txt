@@ -1,0 +1,10 @@
+== Kevin, chat message 2026-10-05 (copy requests) ==
+Can you edit the website to fix everything to %
+Utilize these data points as well in the case study as results:
+Scaled North America operations to $5M+ weekly volume and 300% YoY transaction growth across new corridors.
+Led bilingual campaigns driving $40M+ in holiday remittance volume and achieved number one market share among Korean Americans by 2023.
+Managed multi-channel budgets, producing 300% YoY revenue growth and 12% lower churn for three consecutive years.
+Built executive dashboards (Tableau, R) to guide product, retention, and expansion decisions.
+Create a consistent definition of either seniors or 50+
+Let's take out the overall conversion; since I don't have the data anymore. Just keep it as is and use the data points above.
+Do a full sweep of the website to remove any AI elements, based on the instructions attached
