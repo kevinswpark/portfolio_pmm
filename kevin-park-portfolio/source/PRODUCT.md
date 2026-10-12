@@ -30,10 +30,13 @@ Visitors arrive from LinkedIn, applications, and referrals, often skimming on a 
 
 ## Capabilities and Constraints
 
+- Copy (2026-10-11, saved in .impeccable/sources/kevin-chat-2026-10-11.txt): Kevin supplied the hero role line and supporting line, the introduction, the About section (replacing How I work), the Series C paragraph in the Money Layer case study, the ZBD bullets, and the closing headline "Let’s talk." About is used word for word, including "money person", the Tokyo line, "Fastest execution", and "Vibe coding things that vibe". Two nested single quotes became double quotes on the page (logged in src/content.py EDITS).
 - Copy: Kevin's copy audit (2026-10-05, saved in .impeccable/sources/copy-audit-2026-10-05.md) replaced the brief's hero supporting line, intro, strengths, experience summary, and several case study lines. Figures use % and +. Unconfirmed: the Finfare 3,000+ merchant figure (left off the site) and the scope of the WireBarley growth figures.
 - Routes: homepage, Money Layer case study, Money Lifecycle case study (added 2026-09-27 from the Notion page "The Money Lifecycle"), WireBarley case study at /work/wirebarley/ (added 2026-10-05 from Kevin's file "WireBarley-Tech-Adoption-Case-Study.md", copy verbatim), 404. No additional empty project pages.
 - Copy rule (user, 2026-09-27): brief and Notion copy is finalized and used word for word. Labels, buttons, and navigation are added only where the brief has none.
-- Resume use (user, 2026-09-27): Finfare and WireBarley outcomes appear verbatim; ZBD shows its role line and the positioning bullet only, without pipeline or retention figures.
+- Resume use (user, 2026-09-27): Finfare and WireBarley outcomes appear verbatim. ZBD shows its role line and three bullets (positioning and framework with the Series C contribution, website copy and naming, demos and videos), without pipeline, attribution, or retention figures.
+- Series C (user, 2026-10-11): the Money Layer line and the branding work supported ZBD's Series C fundraising, which closed in January 2026. Keep it a contribution to the wider effort: no amount, no investors, and no claim that Kevin led the raise, wrote the investor narrative, or secured the funding.
+- About portrait: none on file. The About opening renders text only until a real photo of Kevin is added through content.ABOUT["portrait"]. No stock, generated, or placeholder images.
 - The Evangelion AT Field reference stays in words only. Visuals are original diagrams.
 - Money Layer defines ZBD's role. Money Lifecycle (Money In, Money Through, Money Out) came later and organizes the products. Keep them distinct; the Lifecycle page links back to the Money Layer as the earlier story.
 - Lifecycle copy follows the Notion page with seven logged edits (src/content.py EDITS): framework name matched to the Money Layer case study, one repeated word, one repeated "journey", a judging opener replaced with a plain statement, the launch post named and dated, one abstract phrase made plain.
@@ -48,7 +51,7 @@ Visitors arrive from LinkedIn, applications, and referrals, often skimming on a 
 - Money Layer source copy (Notion, EN). Brief inventory impact line: "The phrase moved from an internal idea into ZBD's public brand and appears on its website."
 - zbdpay.com checked 2026-09-27: h1 "The Money Layer for Games.", title "ZBD - The Money Layer for Games", meta description, Money In / Money Through / Money Out stage copy (.impeccable/sources/zbdpay-2026-09-27.json).
 - Resume (uploaded 2026-09-27): roles at ZBD (May 2025 to present), Finfare (Feb 2024 to Jan 2025), WireBarley (June 2020 to Jan 2024); UBC Sauder Bachelor of Commerce; skills.
-- Absent and never to be fabricated: customer or sales response for Money Layer, commercial results tied to the line, testimonials, the internal framework artifact.
+- Absent and never to be fabricated: customer or sales response for Money Layer, commercial results tied to the line, testimonials, the internal framework artifact, a funding amount or investor list, and examples of the apps and AI projects the hero line mentions (no project pages exist for them yet).
 
 ## Product Principles
 

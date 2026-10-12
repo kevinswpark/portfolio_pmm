@@ -5,6 +5,7 @@ Sources, used word for word:
   NOTION  Notion "The Money Layer for Games (EN)" case study
   RESUME  Kevin_Park_Resume (uploaded 2026-09-27)
   ZBD     zbdpay.com, checked 2026-09-27 (quoted, not ours)
+  KEVIN   copy Kevin supplied in chat (.impeccable/sources/kevin-chat-*.txt)
 Strings under UI are navigation, labels, and buttons added where no source
 text exists. Keep them short and functional.
 """
@@ -16,6 +17,7 @@ UI = {
     "name": "Kevin Park",
     "skip": "Skip to content",
     "work": "Work",
+    "about": "About",                           # KEVIN 2026-10-11
     "experience": "Experience",
     "all_work": "All work",
     "on_this_page": "On this page",
@@ -61,10 +63,11 @@ META = {
 }
 
 HERO = {  # BRIEF
+    "role": "Senior Product Marketer · Fintech, Payments & Gaming",  # KEVIN 2026-10-11, shown above the headline
     "h1_before": "There’s a ",
     "h1_em": "story",
     "h1_after": " inside your complex product.",
-    "sub": "I develop positioning and messaging, then bring them into websites, sales decks, and product videos.",  # AUDIT H01
+    "sub": "I turn complex products into clear positioning and messaging, then build what helps people get it. From branding and campaigns to websites, videos, apps, and AI projects.",  # KEVIN 2026-10-11 (replaced AUDIT H01)
     "cta_work": "Explore the work",
     "cta_linkedin": "Connect on LinkedIn",
     "card_kicker": "Case study",
@@ -72,9 +75,9 @@ HERO = {  # BRIEF
     "card_brand": "ZBD",
 }
 
-PHILOSOPHY = {  # BRIEF section 3 and 7
-    "lead": "Product marketing connects what a company builds with a reason someone would care.",
-    "body": "I start by understanding how a product works and why a customer would use it. From there, I develop the positioning and the materials needed to explain it.",  # AUDIT H02
+PHILOSOPHY = {  # KEVIN 2026-10-11 (replaced BRIEF section 3 and AUDIT H02)
+    "lead": "I get into how a product works, why someone would use it, and what it takes to get them there.",
+    "body": "That work can become a brand, a campaign, a product demo, or something people can try for themselves.",
 }
 
 WORK = {
@@ -99,13 +102,35 @@ WORK = {
     },
 }
 
-STRENGTHS = {  # AUDIT H10
-    "h2": "How I work",
-    "items": [
-        "I use customer conversations and data to understand where people hesitate and what might help them take the next step.",
-        "I work through ideas with diagrams and rough drafts, then refine them with the people who will use the work.",
-        "I stay involved through the finished website, deck, or video so the positioning carries through to what customers actually see.",
+ABOUT = {  # KEVIN 2026-10-11, verbatim (straight quotes set as curly). Replaces the "How I work" section.
+    "h2": "About",
+    "lead": ["I help people understand new technology.", "The more complicated, the better."],
+    "intro": [
+        "Hello, I’m Kevin. I’m a product marketer, startup junkie, 0-to-1 builder, and often the person connecting the dots when things are broken, both in and outside of work.",
+        "I happened to start my career in fintech, and somehow, I’ve become a money person. How money works, what it means to people, and what gets in the way of making it work better in our lives. That’s where I’ve spent most of my time and curiosity.",
+        "I believe money should be easier to understand, more approachable, and accessible to everyone. Like many families, mine had its share of money worries, and sometimes those worries took the joy out of things that should’ve been simple. I’ve seen how much money shapes our everyday lives, and I want to make the world a little more money-friendly.",
+        "I find the greatest joy in making things easier for people. I’ll happily dig into the technical details of how money moves, why it moves, and who gets it. But at the end of the day, I always come back to the same question: “So what? Why should anyone care?”",
     ],
+    "beyond_h": "Beyond the work",
+    "beyond": [
+        "I’ve called South Korea, Canada, and the United States home at different points in my life. And lately, Tokyo has been making a pretty strong case for joining that list. I’m also picking up Japanese as my third language.",
+        "People who know me well would probably have very different answers about which cultural bucket I fit into. I’m Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I enjoy the blend, borrowing bits and pieces from different cultures and mixing them into my own melting pot of thoughts.",
+        "I take pride in simplifying problems at work and outside of it, and finding solutions that actually stick. I like being the person people come to when something doesn’t make sense or just isn’t working. And there’s something pretty great about knowing I’ve made someone’s day a little easier.",
+    ],
+    "expect_h": "What you can expect",
+    "expect": [  # three typographic lines; build.py sets each sentence as one unit
+        ["Hard work.", "Long thought processes.", "Fastest execution."],
+        ["Cool branding.", "Good conversations.", "Stellar ideas."],
+        ["Diligence.", "A human touch.", "Vibe coding things that vibe."],
+    ],
+    "contrast": {"Long thought processes.": "slow", "Fastest execution.": "fast"},  # set in contrasting type widths
+    # Portrait: None until a real photo of Kevin is added. To add one, put the file in assets-src/
+    # and set, for example:
+    #   "portrait": {"file": "kevin-park.jpg", "width": 1200, "height": 1500,
+    #                "alt": "Kevin Park, smiling, in front of ..."},
+    # width and height are the image's real pixel size. build.py copies the file to /assets/,
+    # inlines it in the Artifact build, and switches the opening to a two-column layout.
+    "portrait": None,
 }
 
 EXPERIENCE = {  # RESUME
@@ -120,8 +145,9 @@ EXPERIENCE = {  # RESUME
             "end": "Present",
             "focus": ["Gaming fintech infrastructure", "B2B product marketing", "payments and rewards platform"],
             "bullets": [
-                ("Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite.", []),  # AUDIT H07
+                ("Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.", []),  # KEVIN 2026-10-11 (replaced AUDIT H07), quote marks logged in EDITS
                 ("Led the website copy rewrite and product naming work, incorporating feedback from business development and industry events.", []),  # AUDIT H07
+                ("Created interactive demos and product videos to show how ZBD’s infrastructure works inside a game.", []),  # KEVIN 2026-10-11
             ],
         },
         {
@@ -156,7 +182,7 @@ EXPERIENCE = {  # RESUME
     "skills": ["Product Marketing", "Go-to-Market Strategy", "Product Positioning", "Messaging Frameworks", "ICP Segmentation", "Sales Enablement", "Competitive Intelligence", "Product Launch", "Fintech and Payments", "Cross-Functional Leadership", "Tableau", "Excel", "R", "Notion", "Bilingual (English / Korean)"],
 }
 
-CLOSING = {"cta": "Connect on LinkedIn"}  # BRIEF
+CLOSING = {"h2": "Let’s talk.", "cta": "Connect on LinkedIn"}  # h2 KEVIN 2026-10-11 (replaced the LinkedIn URL); cta BRIEF
 
 ML = {  # NOTION, verbatim; deck from BRIEF
     "h1": "Using a visual metaphor to explain ZBD’s role",
@@ -188,6 +214,7 @@ ML = {  # NOTION, verbatim; deck from BRIEF
             ("p", "I used that image to develop “The Money Layer for Games.” The phrase described ZBD’s role across its products."),  # AUDIT M05
             ("fig", "line"),
             ("p", "I shared the concept with leadership and the marketing team, then developed the ZBD Platform messaging framework around it."),  # AUDIT M05
+            ("p", "The work also supported ZBD’s Series C fundraising, which closed in January 2026. “The Money Layer for Games” and the broader branding work contributed to how the company presented itself as it raised its next round."),  # KEVIN 2026-10-11, quote marks logged in EDITS
             ("fig", "proof"),
         ]},
         {"id": "learned", "h2": "What I learned", "blocks": [
@@ -335,6 +362,18 @@ EDITS = [
         "why": "The audit sets year-over-year as the spelled-out default; the bullet above it already uses it. The claim itself is unchanged.",
         "from": "Managed multi-channel budgets, producing 300% YoY revenue growth and 12% lower churn for three consecutive years.",
         "to": "Managed multi-channel budgets, producing 300% year-over-year revenue growth and 12% lower churn for three consecutive years.",
+    },
+    {
+        "where": "Money Layer, The line and the framework, Series C paragraph",
+        "why": "Single quotes in Kevin's message were nested inside his own quotation. On the page the line takes the double quotes it has everywhere else. Wording unchanged.",
+        "from": "‘The Money Layer for Games’ and the broader branding work contributed to how the company presented itself as it raised its next round.",
+        "to": "“The Money Layer for Games” and the broader branding work contributed to how the company presented itself as it raised its next round.",
+    },
+    {
+        "where": "Homepage Experience, ZBD first bullet",
+        "why": "Same nested-quote fix as the Series C paragraph. Wording unchanged.",
+        "from": "Developed ‘The Money Layer for Games’ positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
+        "to": "Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
     },
 ]
 

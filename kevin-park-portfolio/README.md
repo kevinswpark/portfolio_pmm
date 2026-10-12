@@ -5,13 +5,14 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
 ## What's here
 
 - `site/` is the deployable static site. Upload the folder to any static host at the domain root (Netlify, Vercel, Cloudflare Pages, GitHub Pages user site).
-  - `/` home: hero, philosophy, selected work, experience, How I work, LinkedIn.
+  - `/` home: hero with role line, introduction, selected work, About, experience, and the "Let’s talk." LinkedIn card. The nav links Work, About, and Experience to homepage sections from every page.
   - `/work/money-layer/` the first case study.
   - `/work/money-lifecycle/` the second case study, on how ZBD's products work together.
   - `/work/wirebarley/` the WireBarley case study on first-transfer conversion among customers aged 50+.
   - `/404.html` for every missing path. The old `/en/` and `/ko/` routes from version 1 no longer exist.
 - `source/` rebuilds everything.
-  - `src/content.py` holds all copy. Every string is tagged with its source (BRIEF, NOTION, RESUME, ZBD, or UI for added labels and buttons).
+  - `src/content.py` holds all copy. Every string is tagged with its source (BRIEF, NOTION, RESUME, ZBD, KEVIN for copy supplied in chat, or UI for added labels and buttons).
+  - About portrait: `ABOUT["portrait"]` in `src/content.py` is `None`, so About renders text only. To add a photo, put it in `assets-src/` and set its file name, real pixel width and height, and alt text there, then rebuild.
   - `src/diagrams.py` draws the original diagrams. `src/site.css` and `src/site.js` hold styles and runtime.
   - `build.py` writes `dist/site/` and the single-file Artifact preview `dist/artifact/index.html`.
   - `og.py` renders the social preview card (needs the local server running).
@@ -31,7 +32,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
 ```
 python3 build.py
 python3 serve.py dist/site 8765 &
-python3 verify.py       # 96 static site checks, including verbatim copy against the sources
+python3 verify.py       # static site checks at 1440, 768, and 390px, including verbatim copy against the sources
 python3 verify_spa.py   # Artifact build checks
 ```
 

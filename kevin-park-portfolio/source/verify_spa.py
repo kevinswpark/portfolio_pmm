@@ -14,11 +14,15 @@ async def main():
         errs = []; pg.on("pageerror", lambda e: errs.append(str(e)))
         st = lambda: pg.evaluate("[[...document.querySelectorAll('[data-view]')].filter(v=>!v.hidden).map(v=>v.dataset.view), document.title]")
         await pg.goto(URL); s = await st(); ok("default is home", s[0] == ["home"], s)
-        for h, v in [("#money-layer", "money-layer"), ("#money-lifecycle", "money-lifecycle"), ("#money-layer.layer", "money-layer"), ("#money-lifecycle.use", "money-lifecycle"), ("#wirebarley", "wirebarley"), ("#wirebarley.results", "wirebarley"), ("#nope", "404"), ("#ko", "404")]:
+        for h, v in [("#money-layer", "money-layer"), ("#money-lifecycle", "money-lifecycle"), ("#money-layer.layer", "money-layer"), ("#money-lifecycle.use", "money-lifecycle"), ("#wirebarley", "wirebarley"), ("#wirebarley.results", "wirebarley"), ("#home.about", "home"), ("#nope", "404"), ("#ko", "404")]:
             await pg.goto(URL + h); await pg.wait_for_timeout(150); s = await st(); ok(f"route {h}", s[0] == [v], s)
         await pg.goto(URL + "#money-layer"); await pg.wait_for_timeout(100)
         await pg.click('[data-view="money-layer"] .nav__links a[href="#home.work"]'); await pg.wait_for_timeout(300)
         s = await st(); y = await pg.evaluate("scrollY"); ok("nav Work from article lands on work section", s[0] == ["home"] and y > 400, [s, y])
+        await pg.goto(URL + "#wirebarley"); await pg.wait_for_timeout(100)
+        await pg.click('[data-view="wirebarley"] .nav__links a[href="#home.about"]'); await pg.wait_for_timeout(300)
+        s = await st(); t = await pg.evaluate("document.getElementById('home--about-h').getBoundingClientRect().top")
+        ok("nav About from article lands on the About heading below the nav", s[0] == ["home"] and 72 < t < 200, [s, t])
         dup = await pg.evaluate("(() => { const s = {}; const d = []; document.querySelectorAll('[id]').forEach(e => { if (s[e.id]) d.push(e.id); s[e.id] = 1 }); return d })()")
         ok("unique ids across views", not dup, dup[:5])
         await pg.goto(URL + "#money-layer"); await pg.wait_for_timeout(150)

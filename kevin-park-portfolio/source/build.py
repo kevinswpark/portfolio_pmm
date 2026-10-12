@@ -125,6 +125,7 @@ def nav(ctx):
         f'<a class="nav__brand" href="{ctx.url("home")}">{mark_logo()}<span>{U["name"]}</span></a>'
         '<div class="nav__links">'
         f'<a href="{ctx.url("home", "work")}">{U["work"]}</a>'
+        f'<a href="{ctx.url("home", "about")}" data-nav="about">{U["about"]}</a>'
         f'<a href="{ctx.url("home", "experience")}" data-nav="experience">{U["experience"]}</a>'
         "</div>"
         f"{linkedin_btn('blue', compact=True)}"
@@ -146,7 +147,7 @@ def closing(ctx):
     return (
         f'<section class="closing wrap" aria-labelledby="{hid}"><div class="closing__card">'
         '<span class="closing__glow" aria-hidden="true"></span>'
-        f'<h2 class="closing__url" id="{hid}">{C.LINKEDIN_DISPLAY.replace("/", "/<wbr>")}</h2>'
+        f'<h2 class="closing__h" id="{hid}">{C.CLOSING["h2"]}</h2>'
         f"{linkedin_btn('white', C.CLOSING['cta'])}"
         "</div></section>"
     )
@@ -215,6 +216,62 @@ def words(text):
     return " ".join(f"<span>{escape(w, quote=False)}</span>" for w in text.split(" "))
 
 
+def hero_role(text):
+    """Role line above the headline. The middle dot is visual only; each half stays on one line."""
+    title, field = text.split(" · ", 1)
+    return (
+        f'<p class="hero__role"><span class="hero__role-part">{escape(title, quote=False)}'
+        '<span class="hero__role-sep" aria-hidden="true">·</span></span>'
+        '<span class="sr-only">, </span>'
+        f'<span class="hero__role-part">{escape(field, quote=False)}</span></p>'
+    )
+
+
+def about_portrait(ctx, P):
+    if not P:
+        return ""
+    src = portrait_src(ctx, P["file"])
+    return (
+        '<figure class="about__portrait">'
+        f'<img src="{src}" width="{P["width"]}" height="{P["height"]}" alt="{escape(P["alt"])}" loading="lazy" decoding="async">'
+        "</figure>"
+    )
+
+
+def about_section(ctx):
+    A = C.ABOUT
+    ah, bh, xh = ctx.id("about-h"), ctx.id("about-beyond-h"), ctx.id("about-expect-h")
+    portrait = about_portrait(ctx, A["portrait"])
+    lead = "".join(f'<span class="about__lead-line">{s}</span> ' for s in A["lead"]).strip()
+    intro = "".join(f"<p>{p}</p>" for p in A["intro"])
+    beyond = "".join(f"<p>{p}</p>" for p in A["beyond"])
+
+    def phrase(s):
+        style = A["contrast"].get(s)
+        cls = f"expect__phrase expect__phrase--{style}" if style else "expect__phrase"
+        return f'<span class="{cls}">{s}</span>'
+
+    lines = "".join("<li>" + " ".join(phrase(s) for s in line) + "</li>" for line in A["expect"])
+    return (
+        f'<section class="about wrap" id="{ctx.id("about")}" aria-labelledby="{ah}">'
+        '<div class="about__row about__row--open">'
+        f'<div class="about__side"><h2 class="h2 about__h" id="{ah}">{A["h2"]}</h2>{portrait}</div>'
+        '<div class="about__main">'
+        f'<p class="about__lead">{lead}</p>'
+        f'<div class="about__prose">{intro}</div>'
+        "</div></div>"
+        '<div class="about__row">'
+        f'<div class="about__side"><h3 class="about__sub" id="{bh}">{A["beyond_h"]}</h3></div>'
+        f'<div class="about__main"><div class="about__prose">{beyond}</div></div>'
+        "</div>"
+        '<div class="about__row">'
+        f'<div class="about__side"><h3 class="about__sub" id="{xh}">{A["expect_h"]}</h3></div>'
+        f'<div class="about__main about__main--expect"><ul class="expect" aria-labelledby="{xh}">{lines}</ul></div>'
+        "</div>"
+        "</section>"
+    )
+
+
 def home_main(ctx):
     H, P = C.HERO, C.PHILOSOPHY
     h1 = ctx.id("hero-h")
@@ -223,6 +280,7 @@ def home_main(ctx):
         '<div class="band" aria-hidden="true"></div>'
         '<div class="wrap hero__grid">'
         '<div class="hero__text">'
+        f'{hero_role(H["role"])}'
         f'<h1 id="{h1}" tabindex="-1">{H["h1_before"]}<span class="story">{H["h1_em"]}</span>{H["h1_after"]}</h1>'
         '<div class="hero__lower">'
         f'<p class="hero__sub">{H["sub"]}</p>'
@@ -277,17 +335,7 @@ def home_main(ctx):
         f'<div class="card card--wide"><h3 class="card__h">{U["skills"]}</h3><ul class="chips">' + "".join(f"<li>{s}</li>" for s in E["skills"]) + "</ul></div>"
         "</div></section>"
     )
-    sh = ctx.id("strengths-h")
-    cells = "".join(
-        f'<li class="bento__cell bento__cell--{i + 1}"><p>{t}</p></li>'
-        for i, t in enumerate(C.STRENGTHS["items"])
-    )
-    strengths = (
-        f'<section class="strengths wrap" aria-labelledby="{sh}">'
-        f'<h2 class="h2" id="{sh}">{C.STRENGTHS["h2"]}</h2>'
-        f'<ul class="bento">{cells}</ul></section>'
-    )
-    return f'<main id="{ctx.id("main")}" tabindex="-1">{hero}{statement}{work}{experience}{strengths}{closing(ctx)}</main>'
+    return f'<main id="{ctx.id("main")}" tabindex="-1">{hero}{statement}{work}{about_section(ctx)}{experience}{closing(ctx)}</main>'
 
 
 def zbd_cta():
@@ -318,6 +366,16 @@ def sbs_src(ctx):
     if ctx.mode == "spa":
         return "data:image/jpeg;base64," + base64.b64encode(SBS_IMG.read_bytes()).decode()
     return "/assets/sbs-evening-news.jpg"
+
+
+MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".avif": "image/avif"}
+
+
+def portrait_src(ctx, name):
+    f = ROOT / "assets-src" / name
+    if ctx.mode == "spa":
+        return f"data:{MIME[f.suffix.lower()]};base64," + base64.b64encode(f.read_bytes()).decode()
+    return "/assets/" + name
 
 
 def figure(kind, ctx):
@@ -615,6 +673,9 @@ def build_static():
         shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
     (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
     shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
+    if C.ABOUT["portrait"]:
+        name = C.ABOUT["portrait"]["file"]
+        shutil.copy(ROOT / "assets-src" / name, out / "assets" / name)
     og = ROOT / "assets-src" / "og.png"
     if og.exists():
         shutil.copy(og, out / "assets" / "og.png")

@@ -1,0 +1,40 @@
+== Kevin, chat message 2026-10-11 (homepage, About, Money Layer, and ZBD role copy). Supplied copy, verbatim as sent. ==
+
+Hero role label:
+Senior Product Marketer · Fintech, Payments & Gaming
+
+Hero supporting line:
+I turn complex products into clear positioning and messaging, then build what helps people get it. From branding and campaigns to websites, videos, apps, and AI projects.
+
+Introduction below the hero:
+I get into how a product works, why someone would use it, and what it takes to get them there.
+That work can become a brand, a campaign, a product demo, or something people can try for themselves.
+
+Navigation: About
+
+About opening
+I help people understand new technology. The more complicated, the better.
+Hello, I'm Kevin. I'm a product marketer, startup junkie, 0-to-1 builder, and often the person connecting the dots when things are broken, both in and outside of work.
+I happened to start my career in fintech, and somehow, I've become a money person. How money works, what it means to people, and what gets in the way of making it work better in our lives. That's where I've spent most of my time and curiosity.
+I believe money should be easier to understand, more approachable, and accessible to everyone. Like many families, mine had its share of money worries, and sometimes those worries took the joy out of things that should've been simple. I've seen how much money shapes our everyday lives, and I want to make the world a little more money-friendly.
+I find the greatest joy in making things easier for people. I'll happily dig into the technical details of how money moves, why it moves, and who gets it. But at the end of the day, I always come back to the same question: "So what? Why should anyone care?"
+Beyond the work
+I've called South Korea, Canada, and the United States home at different points in my life. And lately, Tokyo has been making a pretty strong case for joining that list. I'm also picking up Japanese as my third language.
+People who know me well would probably have very different answers about which cultural bucket I fit into. I'm Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I enjoy the blend, borrowing bits and pieces from different cultures and mixing them into my own melting pot of thoughts.
+I take pride in simplifying problems at work and outside of it, and finding solutions that actually stick. I like being the person people come to when something doesn't make sense or just isn't working. And there's something pretty great about knowing I've made someone's day a little easier.
+What you can expect
+Hard work. Long thought processes. Fastest execution.
+Cool branding. Good conversations. Stellar ideas.
+Diligence. A human touch. Vibe coding things that vibe.
+
+Money Layer case study, "The line and the framework", after the leadership and messaging framework paragraph:
+The work also supported ZBD’s Series C fundraising, which closed in January 2026. ‘The Money Layer for Games’ and the broader branding work contributed to how the company presented itself as it raised its next round.
+
+ZBD experience, first bullet (replaces the old one):
+Developed ‘The Money Layer for Games’ positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.
+
+ZBD experience, added bullet:
+Created interactive demos and product videos to show how ZBD’s infrastructure works inside a game.
+
+Closing card headline (replaces the LinkedIn URL):
+Let’s talk.

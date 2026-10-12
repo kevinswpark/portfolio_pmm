@@ -179,15 +179,12 @@ components:
     backgroundColor: "{colors.panel-ink}"
     rounded: "{rounded.panel}"
     padding: "clamp(14px, 2.4vw, 28px)"
-  bento-cell:
-    backgroundColor: "{colors.ink-1}"
-    textColor: "{colors.fg}"
-    rounded: "{rounded.card}"
-    padding: "clamp(22px, 2.6vw, 32px)"
-  bento-cell-lime:
-    backgroundColor: "{colors.lime}"
-    textColor: "{colors.lime-ink}"
-    rounded: "{rounded.card}"
+  about-row:
+    textColor: "{colors.prose}"
+    padding: "clamp(2.5rem, 5vw, 4rem) 0"
+  about-portrait:
+    rounded: "{rounded.panel}"
+    width: "340px"
   closing-card:
     textColor: "{colors.white}"
     rounded: "{rounded.closing}"
@@ -204,7 +201,7 @@ components:
 
 **Creative North Star: "The Card You Want to Pick Up"**
 
-The work is presented the way a modern money app presents a product: one vivid card, figures that glow, and a calm near-black ground that lets color do the selling. The vocabulary is fintech app hardware (card, chip, pill, glowing figure) with two borrowed signatures: a Stripe-style skewed gradient band and Coinbase-blue actions. It refuses the light editorial portfolio with thumbnails and an about blurb.
+The work is presented the way a modern money app presents a product: one vivid card, figures that glow, and a calm near-black ground that lets color do the selling. The vocabulary is fintech app hardware (card, chip, pill, glowing figure) with two borrowed signatures: a Stripe-style skewed gradient band and Coinbase-blue actions. It refuses the light editorial portfolio with thumbnails. The one quiet, editorial section is About, which comes after the work.
 
 Density is generous. Sections breathe on a large vertical rhythm, cards are big and rounded, and color arrives in a few saturated fields rather than scattered accents. Motion is slow and physical: a band that drifts, a card that tilts toward the pointer and settles back, a statement that brightens as it scrolls in.
 
@@ -227,10 +224,10 @@ A near-black ink ladder carries saturated fields of blue, gradient, and lime; ev
 
 ### Secondary
 - **The Brand Gradient** (`linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 38%, #FF3D8B 72%, #FFB84D 100%)`): blue to violet to pink to amber. Used where no text sits on it: the TL;DR border, the article reading-progress bar, and (as a flowing multi-stop variant) the skewed band.
-- **The Cool Gradient** (`linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 55%, #FF3D8B 100%)`): the same sweep without amber. Used on every gradient surface that carries text: the "story" pill in the hero headline, the closing card, the gradient bento cell, the "Final work" specimen panel, the gradient fact value, and the gradient hairline borders on the in-progress tile and the current role card.
+- **The Cool Gradient** (`linear-gradient(115deg, #2F6BFF 0%, #7B3FF2 55%, #FF3D8B 100%)`): the same sweep without amber. Used on every gradient surface that carries text: the "story" pill in the hero headline, the closing card, the "Final work" specimen panel, the gradient fact value, and the gradient hairline borders on the in-progress tile and the current role card.
 
 ### Tertiary
-- **Signal Lime** (`lime`): value in motion. Open flows and arrowheads in diagrams, the "go" legend dot, the proof status dot, and one How I work cell. On a dark ground it appears as the lit figure chip: **Lime Text** (`lime-text`) on lime at 12 percent. On a lime field, text is **Lime Ink** (`lime-ink`).
+- **Signal Lime** (`lime`): value in motion. Open flows and arrowheads in diagrams, the "go" legend dot, and the proof status dot. On a dark ground it appears as the lit figure chip: **Lime Text** (`lime-text`) on lime at 12 percent. On a lime field, text is **Lime Ink** (`lime-ink`).
 - **Amber** (`amber`): the status dot only, with a 16 percent amber halo.
 - **Signal Pink** (`pink`): blockage in diagrams (the wall, stop marks, "stop" dot).
 - **Diagram Cyan** (`cyan`) and **Soft Violet** (`violet-soft`): token and account shapes inside diagrams only.
@@ -238,7 +235,7 @@ A near-black ink ladder carries saturated fields of blue, gradient, and lime; ev
 
 ### Neutral
 - **Ink 0** (`ink-0`): page ground, html background, scrollbar track.
-- **Ink 1** (`ink-1`): raised cards, role cards, bento cells, issue cards, zoom dialog.
+- **Ink 1** (`ink-1`): raised cards, role cards, issue cards, zoom dialog.
 - **Ink 2** (`ink-2`): nested fills inside cards (fact values, chips, active rail link, round arrow button).
 - **Ink 3** (`ink-3`): hover lift on nested fills, scrollbar thumb.
 - **Panel Ink** (`panel-ink`): diagram panels, under an 18px dot grid at 7 percent white.
@@ -267,7 +264,9 @@ A near-black ink ladder carries saturated fields of blue, gradient, and lime; ev
 - **Headline** (700, `headline` clamp, 1.02, width 114): section headings on the homepage; 404 heading at width 112.
 - **Article heading** (700, 1.12, width 110): section heads inside the case study flow, max 36rem.
 - **Title** (700, `title` clamp, 1.12 to 1.15, width 106 to 108): tile headings and role titles.
-- **Strength line** (600, clamp(1.125rem, 1rem + .4vw, 1.375rem), 1.3, width 104): How I work cells.
+- **Role line** (600, 0.9375rem, 1.4, width 104): the hero role label above the headline, in secondary text, with a tertiary middle dot.
+- **About opening** (680, clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem), 1.12, width 108): the About opening statement, max 24ch, second sentence in secondary text.
+- **Expect line** (620, clamp(1.375rem, 3.75cqi, 2rem), 1.2, width 106): the three What you can expect lines, sized to their column so each stays on one line from 768px up. "Long thought processes." is set at weight 300, width 125, in secondary text; "Fastest execution." at weight 820, width 75, italic.
 - **Lead** (400, `lead` clamp, 1.45 to 1.5): hero sub, deck, profile, statement body, in secondary text color.
 - **Body** (400, 1.0625rem, 1.6) and **Prose** (400, 1.125rem, 1.72, 38rem measure).
 - **Small** (0.875rem) and **Label** (600, 0.8125rem): status lines, captions, pills, facts keys.
@@ -280,13 +279,13 @@ A near-black ink ladder carries saturated fields of blue, gradient, and lime; ev
 
 ## Layout
 
-A 1280px container with a fluid gutter (`gutter`) and a 12-column grid with a fluid gap (`gap`). Sections are separated by `section` spacing. Card stacks (roles, bento, extras) use a fixed 14px gap.
+A 1280px container with a fluid gutter (`gutter`) and a 12-column grid with a fluid gap (`gap`). Sections are separated by `section` spacing. Card stacks (roles, extras) use a fixed 14px gap.
 
-The hero spans the headline across all 12 columns, with the supporting text in columns 1 to 6 and the tilted card in columns 8 to 12. Below 900px the card moves under the text, centered at up to 400px. The selected work grid puts the finished tile in 7 columns and the in-progress tile in 5; both go full width below 1080px. The bento is a 6-column grid (two cells of 3 over three cells of 2), then 2 columns below 900px with the lime cell spanning, then 1 column below 640px.
+The hero sets the role line and then the headline across all 12 columns, with the supporting text in columns 1 to 7 at a 40ch measure and the tilted card in columns 8 to 12. Below 900px the card moves under the text, centered at up to 400px. The selected work grid puts the finished tile in 7 columns and the in-progress tile in 5; both go full width below 1080px. About is a two-track editorial grid (4 and 8 of 12 columns): headings and the optional portrait on the left, reading text on the right at a 50ch measure (about 63 characters a line at 1440px). Rows are split by hairlines. One column below 900px.
 
 The article is a two-column grid: a 15rem sticky section rail and a flow column capped at 54rem. Prose, issue lists, and the pull quote hold a 38rem measure; figures break out to the full 54rem flow width. The rail hides below 1080px. All three case studies use this article.
 
-The nav is a floating pill 12px below the safe area, 60px tall, max 1180px wide. Scroll padding accounts for it.
+The nav is a floating pill 12px below the safe area, 60px tall, max 1180px wide. Scroll padding accounts for it, so Work, About, and Experience land with their headings 24px below the nav.
 
 ## Elevation & Depth
 
@@ -305,7 +304,7 @@ Depth comes from the ink ladder and hairlines first. Shadows are soft, colored, 
 
 ## Shapes
 
-**The Shape Rule.** Controls are pills (999px): buttons, nav, nav links, pills, tags, chips, facts, the result chip. Cards are 28px: tiles, role cards, extras cards, bento cells, TL;DR, the gradient specimen panel. Panels are 20px: diagram panels and evidence cards. The closing card alone is 36px. Circular 44 to 48px buttons carry icon-only actions (zoom, close, tile arrow). Smaller radii are for small nested things: 24px hero card and dialog, 16px issue cards, 12px rail links, 7px figure chips.
+**The Shape Rule.** Controls are pills (999px): buttons, nav, nav links, pills, tags, chips, facts, the result chip. Cards are 28px: tiles, role cards, extras cards, TL;DR, the gradient specimen panel. Panels are 20px: diagram panels and evidence cards. The closing card alone is 36px. Circular 44 to 48px buttons carry icon-only actions (zoom, close, tile arrow). Smaller radii are for small nested things: 24px hero card and dialog, 16px issue cards, 12px rail links, 7px figure chips.
 
 **The Hard Band Rule.** The skewed band is the one shape with hard edges: a strip skewed -11deg with crisp diagonal top and bottom, a thin 10 percent white stripe near its left end, and a mask that fades it only toward the left edge. It never gets rounded corners or soft top and bottom edges.
 
@@ -320,10 +319,11 @@ Confident, round, and quiet on hover.
 - **Ghost:** 2 percent white fill, 14 percent border; hover to 7 percent fill and 24 percent border.
 - **White:** white with ink text, used on the gradient closing card; hover to `white-hover`.
 - **States:** 160ms color transitions; press scales to 0.97. Trailing icons nudge on hover (down 2px, out 2px diagonal, next 3px). Focus is a 2px pale-blue outline at 3px offset. Hover effects apply only on hover-capable fine pointers.
-- **Mobile:** below 620px the nav button collapses to a 44px round icon button with its text kept for screen readers.
+- **Mobile:** below 620px the nav button collapses to a 44px round icon button with its text kept for screen readers. Below 480px it is hidden so the name and three links fit; LinkedIn stays in the hero, the closing card, and the footer.
 
 ### Pills and status lines
 - **Pill:** 28px tall, label type, 7 percent white fill, 14 percent border. Used as figure caption labels and fact keys, never above a heading.
+- **Role line:** the one line of text above the hero headline is plain secondary text, not a pill, and keeps its two halves whole. Below 450px the halves stack and the middle dot hides.
 - **Status line:** in place of a pill above a heading, state is a plain line of small text in secondary color led by a 7px amber dot with a 4px halo ("Case study in progress"). It sits after the tile's description. No page uses it right now; it is kept for unfinished work.
 
 ### The lit figure chip
@@ -337,8 +337,12 @@ Resume figures are marked, not bolded: lime text on lime at 12 percent, weight 6
 - **Shared:** 28px radius, whole tile clickable through the heading link, focus ring on the tile, hover lifts 4px (300ms) and slides the arrow 4px.
 - **Compact:** on "Next case study" and "Previous case study" rows the tile spans full width in two columns, stacking below 900px.
 
-### Bento
-The How I work section: three statements as equal cells, no icons, no numbering, one column below 900px. Cells are ink 1, the cool gradient, and signal lime (lime ink text), in that order. Text is bottom-aligned at strength-line size, minimum height 190px.
+### About
+The quiet section, placed after Selected work and before Experience. It replaced How I work. No cards, icons, flags, meters, or reveal animation.
+- **Rows:** opening, Beyond the work, What you can expect. Each row is a heading on the left track and content on the right, split from the row above by an 8 percent hairline. Headings: "About" at headline size; the two subsections at article-heading weight, 1.25 to 1.5rem.
+- **Opening:** the About opening statement, then four paragraphs in prose type (1.125rem, 1.72, prose color) at a 50ch measure.
+- **Portrait slot:** set content.ABOUT["portrait"] (file in assets-src/, real width and height, alt text) and the photo appears under the About heading at up to 340px wide (320px stacked on phones), at its natural proportions with a 20px radius and hairline border. With no portrait the opening renders text only, with no frame.
+- **What you can expect:** three typographic lines in a list, one sentence per unit so lines wrap between sentences on phones. The slow and fast phrases carry the contrast through width, weight, and slant only.
 
 ### Role cards
 28px ink 1 cards with a 13rem date column and a main column; the current role gets a cool-gradient hairline. The company sits in a small pill beside the title. Bullets use an 8px cool-gradient square marker (3px radius). Skill and area tags are pills.
@@ -353,10 +357,10 @@ A 1.586 ratio card (payment-card proportions), up to 470px wide, 24px radius, re
 Behind the hero and the article header. A flowing multi-stop gradient (blue, violet, pink, amber, back to blue) drifting over 26s. The article header version is shorter, at the top, at 55 percent opacity.
 
 ### Closing card
-36px radius, cool gradient at 180 percent size shifting slowly over 16s, a blurred white glow bottom right, the LinkedIn URL in display type (weight 750, width 112), and a white button.
+36px radius, cool gradient at 180 percent size shifting slowly over 16s, a blurred white glow bottom right, the headline "Let’s talk." in display type (weight 750, width 112), and a white "Connect on LinkedIn" button. The LinkedIn URL appears small in the footer.
 
 ### Navigation
-Floating glass pill: logo and name (weight 650, width 108), text links in secondary color on 40px pill targets (hover to 6 percent white fill), and a compact blue button.
+Floating glass pill: logo and name (weight 650, width 108), text links (Work, About, Experience) in secondary color on 40px pill targets (hover to 6 percent white fill), and a compact blue button. Every link points at a homepage section, so they work the same from the case studies. Below 375px the logo mark hides and links tighten to 7px padding.
 
 ### Article
 - **Header:** crumb link with a back arrow that nudges left on hover, display title, deck in lead type, and a row of fact pills (key in tertiary label type, value in an ink 2 inner pill). The Lifecycle header ends with a "Follows" pill whose value is a blue-to-violet link back to the Money Layer case study.
@@ -396,7 +400,7 @@ Curves: `ease-out` cubic-bezier(0.23, 1, 0.32, 1) for nearly everything, `ease-i
 - **Don't** add a light theme or light-ground sections.
 - **Don't** put text on the full gradient with amber.
 - **Don't** place pills, kickers, or eyebrow labels above headings.
-- **Don't** add icons or numbers to bento cells.
+- **Don't** turn the About copy into cards, chips, skill meters, or icon lists, and don't reveal its paragraphs word by word.
 - **Don't** nest a dark panel inside the blue finished tile.
 - **Don't** put in-progress work on a blue field.
 - **Don't** round or soften the band's diagonal edges.
