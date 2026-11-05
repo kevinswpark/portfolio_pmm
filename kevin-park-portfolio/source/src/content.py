@@ -96,7 +96,7 @@ WORK = {
     },
     "wb": {  # WB case study file, verbatim
         "title": "Driving tech adoption (and how I changed customer behaviors)",
-        "problem": "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 25% of sign-ups in this group reached that point.",
+        "problem": "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 20% of sign-ups in this group reached that point.",
         "result": "Korean-language TV commercial",
         "impact": "In the period after the commercial aired, sign-up-to-first-transfer conversion in this group rose to nearly 50%.",
     },
@@ -159,7 +159,7 @@ EXPERIENCE = {  # RESUME
             "focus": ["Digital Banking & Investments", "GTM Strategy", "Consumer & Merchant Growth"],
             "bullets": [
                 ("Led go-to-market for digital banking and automated investing products, informed by 30+ customer interviews and six customer personas.", ["30+"]),  # AUDIT H08
-                ("Created the messaging framework and sales materials for Finfare Rewards.", []),  # AUDIT H08, conservative line until the 3,000+ definition is confirmed
+                ("Created the messaging framework and sales materials for Finfare Rewards, supporting a network of 3,000+ merchant partners.", ["3,000+"]),  # KEVIN 2026-11-05, 3,000+ confirmed
                 ("Led a 20-page website redesign with Product and UX. Engagement rose 36% and conversion rose 24%.", ["36%", "24%"]),  # AUDIT H08
             ],
         },
@@ -171,9 +171,9 @@ EXPERIENCE = {  # RESUME
             "end": "Jan 2024",
             "focus": ["Cross-Border Payments", "B2C Growth", "0 to 1"],
             "bullets": [
-                ("Scaled North American operations to $5M+ in weekly transaction volume, with 300% year-over-year transaction growth across new corridors.", ["$5M+", "300%"]),  # AUDIT H09
-                ("Led bilingual campaigns that drove $40M+ in holiday remittance volume. WireBarley reached the leading market position among Korean Americans by 2023.", ["$40M+"]),  # AUDIT H09
-                ("Managed multi-channel budgets, producing 300% year-over-year revenue growth and 12% lower churn for three consecutive years.", ["300%", "12%"]),  # CHAT, YoY spelled out (logged)
+                ("Scaled the Nepal corridor to $5M in peak weekly remittance volume, with 300% year-over-year transaction growth.", ["$5M", "300%"]),  # KEVIN 2026-11-05
+                ("Led bilingual campaigns that drove $40M in holiday remittance volume. WireBarley reached the leading market position among Korean Americans by 2023.", ["$40M"]),  # KEVIN 2026-11-05
+                ("Delivered 300% year-over-year US growth while operating within 40% of the previous year’s North American marketing budget.", ["300%", "40%"]),  # KEVIN 2026-11-05
                 ("Built executive dashboards (Tableau, R) to guide product, retention, and expansion decisions.", []),
             ],
         },
@@ -284,7 +284,7 @@ WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (
     "facts": [("Company", "WireBarley"), ("Role", "Product Marketing Manager, first US marketing hire")],
     "tldr_h": "TL;DR",
     "tldr": [
-        ("Challenge", "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 25% of sign-ups in this group reached that point."),
+        ("Challenge", "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 20% of sign-ups in this group reached that point."),
         ("Approach", "Use customer support call logs to understand where people needed reassurance, then show that support in a Korean-language TV commercial."),
         ("Result", "In the period after the commercial aired, sign-up-to-first-transfer conversion in this group rose to nearly 50%."),
     ],
@@ -292,7 +292,7 @@ WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (
         {"id": "audience", "h2": "The most profitable audience had the lowest conversion rate", "blocks": [
             ("p", "As WireBarley’s first US marketing hire, I worked on bringing its digital remittance service to Korean American customers and adjacent Asian American communities. The service let people send money abroad without visiting a bank."),
             ("p", "COVID lockdowns had accelerated the move toward contactless services, creating an opportunity for digital remittance. Earning people’s trust remained a challenge, especially when asking them to change how they handled money."),
-            ("p", "Internal data showed that customers aged 50+ were our most profitable audience, with average transfer amounts roughly $250 above the overall average. Yet many stopped early in identity verification, and only about 25% went on to make their first transfer. I wanted to understand what was holding them back."),
+            ("p", "Internal data showed that customers aged 50+ were our most profitable audience, with average transfer amounts roughly $250 above the overall average. Yet many stopped early in identity verification, and only about 20% went on to make their first transfer. I wanted to understand what was holding them back."),
         ]},
         {"id": "support", "h2": "Qualitative data revealed the need for a “hand-holding” experience", "blocks": [
             ("p", "Before developing the commercial’s storyboard, I reviewed customer support call logs in Zendesk. Customers often mentioned that their sons or daughters would normally help them with this kind of task."),
@@ -307,7 +307,7 @@ WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (
         ]},
         {"id": "results", "h2": "Results", "blocks": [
             ("results", [
-                ("First-transfer conversion among customers aged 50+", "Roughly 25% → nearly 50% after the commercial aired.", ["Roughly 25%", "nearly 50%"]),
+                ("First-transfer conversion among customers aged 50+", "About 20% → nearly 50% after the commercial aired.", ["About 20%", "nearly 50%"]),
                 ("Broader business milestone", "WireBarley led traditional Korean American banks in remittance volume to Korea during Chuseok, Korean Thanksgiving.", []),
                 ("Media coverage", "Featured on SBS America, representing the Korean American segment.", []),
             ]),
@@ -356,12 +356,6 @@ EDITS = [
         "why": "Kevin asked for one term for the audience; the page already says “customers aged 50+” everywhere else.",
         "from": "What seniors needed was reassurance",
         "to": "What customers aged 50+ needed was reassurance",
-    },
-    {
-        "where": "Homepage Experience and WireBarley results, budgets bullet",
-        "why": "The audit sets year-over-year as the spelled-out default; the bullet above it already uses it. The claim itself is unchanged.",
-        "from": "Managed multi-channel budgets, producing 300% YoY revenue growth and 12% lower churn for three consecutive years.",
-        "to": "Managed multi-channel budgets, producing 300% year-over-year revenue growth and 12% lower churn for three consecutive years.",
     },
     {
         "where": "Money Layer, The line and the framework, Series C paragraph",
