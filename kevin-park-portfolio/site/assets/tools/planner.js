@@ -506,17 +506,42 @@
     }
     input.removeAttribute("aria-invalid");
     btn.setAttribute("aria-busy", "true"); btn.disabled = true; status.textContent = COPY.email_busy;
-    var send = D.formspree ? fetch("https://formspree.io/f/" + encodeURIComponent(D.formspree), {
-      method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, tool: "Financial planner", _subject: "Financial planner PDF request" })
-    }).catch(function () { return null; }) : Promise.resolve(null);
-    send.then(function () { return makePdf(); }).then(function () {
+    var trap = gate.querySelector('[name="_gotcha"]');
+    if (trap && trap.value) { btn.removeAttribute("aria-busy"); btn.disabled = false; status.textContent = COPY.email_done; return; }  // a bot filled the hidden field
+    sendEmail(email).then(function (r) {
+      if (r.rejected) {  // Formspree says the address itself is bad: let the visitor fix it, no PDF yet
+        input.setAttribute("aria-invalid", "true"); status.textContent = r.message || COPY.email_error; input.focus();
+        return "stop";
+      }
+      return makePdf();
+    }).then(function (res) {
+      if (res === "stop") return;
       status.textContent = COPY.email_done; gate.querySelector("[data-again]").hidden = false;
       try { localStorage.setItem(KEY + "-email", "1"); } catch (err) { /* fine */ }
     }).catch(function (err) {
       status.textContent = "Something went wrong making the PDF. Try again in a moment."; if (window.console) console.warn(err);
     }).then(function () { btn.removeAttribute("aria-busy"); btn.disabled = false; });
   });
+
+  /* Formspree AJAX: JSON in, JSON out. Only the email, the tool name, and a subject line are sent.
+     A network error, rate limit, or server error still hands over the PDF (the visitor did their part);
+     only a 422 on the email field stops it, so a typo can be fixed. */
+  function sendEmail(email) {
+    if (!D.formspree) return Promise.resolve({ ok: true, skipped: true });
+    return fetch("https://formspree.io/f/" + encodeURIComponent(D.formspree), {
+      method: "POST",
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, tool: "Financial planner", _subject: "Financial planner PDF request" })
+    }).then(function (res) {
+      if (res.ok) return { ok: true };
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        var errs = (data && data.errors) || [];
+        var bad = errs.filter(function (x) { return x.field === "email"; })[0];
+        if (window.console) console.warn("Formspree", res.status, errs);
+        return bad ? { rejected: true, message: "That email address didn’t go through. Check it and try again." } : { ok: false };
+      });
+    }).catch(function (err) { if (window.console) console.warn("Formspree unreachable", err); return { ok: false }; });
+  }
 
   function loadScript(src) {
     return new Promise(function (res, rej) { var s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });

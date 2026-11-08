@@ -580,7 +580,7 @@ FP = {  # TOOL: the financial planner at /tools/financial-planner/
         ],
         "mix": {"Conservative": [35, 65], "Moderate": [55, 45], "Growth": [75, 25], "Aggressive": [90, 10]},
         "mix_range": {"Conservative": "30 to 40%", "Moderate": "50 to 60%", "Growth": "70 to 80%", "Aggressive": "90 to 100%"},
-        "formspree": "",   # Formspree form ID, for example "xyzabcd". Empty: the PDF still downloads and nothing is sent.
+        "formspree": "xrppvnyn",   # Formspree form ID (https://formspree.io/f/xrppvnyn). Empty: the PDF still downloads and nothing is sent.
         "site_url": "",    # filled from KP_SITE_URL at build time
     },
 }

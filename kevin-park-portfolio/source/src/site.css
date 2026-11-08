@@ -871,6 +871,7 @@ legend.fp-label + .fp-help { margin-top: -6px; margin-bottom: 10px; }
 .fp-gate__input:focus { outline: none; border-color: #fff; background: rgb(8 8 12 / .4); box-shadow: 0 0 0 3px rgb(255 255 255 / .25); }
 .fp-gate__input[aria-invalid="true"] { border-color: #fff; box-shadow: 0 0 0 3px rgb(8 8 12 / .35); }
 .fp-gate__btn[aria-busy="true"] { opacity: .8; cursor: progress; }
+.fp-gate__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .fp-gate__status { min-height: 1.5em; font-weight: 600; color: #fff; }
 .fp-gate__status:empty { display: none; }
 .fp-gate__note { display: flex; gap: 8px; align-items: flex-start; font-size: var(--t-small); line-height: 1.5; color: rgb(255 255 255 / .9); max-width: 46ch; }

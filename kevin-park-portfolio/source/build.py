@@ -762,14 +762,18 @@ def fp_step_invest(ctx, Q, F):
 
 def fp_step_plan(ctx, F):
     fid = ctx.id("fp-email")
+    # Without JavaScript the form still posts the email to Formspree instead of putting it in the page URL.
+    fs = F["data"]["formspree"]
+    action = f' action="https://formspree.io/f/{fs}" method="POST"' if fs else ' method="POST"'
     return (
         '<div class="fp-out" data-out="actions"></div>'
         '<div class="fp-out" data-out="numbers"></div>'
-        f'<form class="fp-gate" data-gate novalidate><span class="fp-gate__glow" aria-hidden="true"></span>'
+        f'<form class="fp-gate" data-gate novalidate{action}><span class="fp-gate__glow" aria-hidden="true"></span>'
         f'<h3 class="fp-gate__h">{F["email_h"]}</h3><p class="fp-gate__p">{F["email_lead"]}</p>'
         f'<div class="fp-gate__row"><label class="sr-only" for="{fid}">{F["email_label"]}</label>'
         f'<input class="fp-gate__input" id="{fid}" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="{F["email_label"]}">'
         f'<button class="btn btn--white fp-gate__btn" type="submit">{icon("download-simple")}<span class="btn__text">{F["email_cta"]}</span></button></div>'
+        '<p class="fp-gate__trap" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>'
         f'<p class="fp-gate__status" data-gate-status role="status"></p>'
         f'<p class="fp-gate__note">{icon("lock-simple")}<span>{F["email_privacy"]}</span></p>'
         f'<button class="fp-link fp-link--light" type="button" data-again hidden>{icon("download-simple")}<span>{F["email_again"]}</span></button>'
