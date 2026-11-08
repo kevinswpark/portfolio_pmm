@@ -10,7 +10,7 @@ sys.path.insert(0, "src")
 import content as C  # noqa: E402
 
 BASE = "http://127.0.0.1:8765"
-PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/"]
+PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/", "/tools/financial-planner/"]
 results = []
 
 
@@ -145,7 +145,7 @@ async def main():
                   lowContrast: (() => { const fg = getComputedStyle(document.body).color; return fg })(),
                   navFit: (() => {
                     const n = document.querySelector('.nav__inner'), nr = n.getBoundingClientRect();
-                    const items = [...n.querySelectorAll('.nav__brand, .nav__links a, .btn')].filter(e => e.offsetParent).map(e => e.getBoundingClientRect());
+                    const items = [...n.querySelectorAll('.nav__brand, .nav__links > a, .tools__btn, .nav__inner > .btn')].filter(e => e.offsetParent).map(e => e.getBoundingClientRect());
                     const inside = items.every(r => r.left >= nr.left && r.right <= nr.right);
                     const apart = items.every((r, i) => i === 0 || r.left >= items[i - 1].right);
                     return n.scrollWidth <= n.clientWidth && inside && apart;
