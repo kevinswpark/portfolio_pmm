@@ -96,7 +96,7 @@ WORK = {
     },
     "wb": {  # WB case study file, verbatim
         "title": "Driving tech adoption (and how I changed customer behaviors)",
-        "problem": "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 25% of sign-ups in this group reached that point.",
+        "problem": "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 20% of sign-ups in this group reached that point.",
         "result": "Korean-language TV commercial",
         "impact": "In the period after the commercial aired, sign-up-to-first-transfer conversion in this group rose to nearly 50%.",
     },
@@ -159,7 +159,7 @@ EXPERIENCE = {  # RESUME
             "focus": ["Digital Banking & Investments", "GTM Strategy", "Consumer & Merchant Growth"],
             "bullets": [
                 ("Led go-to-market for digital banking and automated investing products, informed by 30+ customer interviews and six customer personas.", ["30+"]),  # AUDIT H08
-                ("Created the messaging framework and sales materials for Finfare Rewards.", []),  # AUDIT H08, conservative line until the 3,000+ definition is confirmed
+                ("Created the messaging framework and sales materials for Finfare Rewards, supporting a network of 3,000+ merchant partners.", ["3,000+"]),  # KEVIN 2026-11-05, 3,000+ confirmed
                 ("Led a 20-page website redesign with Product and UX. Engagement rose 36% and conversion rose 24%.", ["36%", "24%"]),  # AUDIT H08
             ],
         },
@@ -171,9 +171,9 @@ EXPERIENCE = {  # RESUME
             "end": "Jan 2024",
             "focus": ["Cross-Border Payments", "B2C Growth", "0 to 1"],
             "bullets": [
-                ("Scaled North American operations to $5M+ in weekly transaction volume, with 300% year-over-year transaction growth across new corridors.", ["$5M+", "300%"]),  # AUDIT H09
-                ("Led bilingual campaigns that drove $40M+ in holiday remittance volume. WireBarley reached the leading market position among Korean Americans by 2023.", ["$40M+"]),  # AUDIT H09
-                ("Managed multi-channel budgets, producing 300% year-over-year revenue growth and 12% lower churn for three consecutive years.", ["300%", "12%"]),  # CHAT, YoY spelled out (logged)
+                ("Scaled the Nepal corridor to $5M in peak weekly remittance volume, with 300% year-over-year transaction growth.", ["$5M", "300%"]),  # KEVIN 2026-11-05
+                ("Led bilingual campaigns that drove $40M in holiday remittance volume. WireBarley reached the leading market position among Korean Americans by 2023.", ["$40M"]),  # KEVIN 2026-11-05
+                ("Delivered 300% year-over-year US growth while operating within 40% of the previous year’s North American marketing budget.", ["300%", "40%"]),  # KEVIN 2026-11-05
                 ("Built executive dashboards (Tableau, R) to guide product, retention, and expansion decisions.", []),
             ],
         },
@@ -284,7 +284,7 @@ WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (
     "facts": [("Company", "WireBarley"), ("Role", "Product Marketing Manager, first US marketing hire")],
     "tldr_h": "TL;DR",
     "tldr": [
-        ("Challenge", "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 25% of sign-ups in this group reached that point."),
+        ("Challenge", "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 20% of sign-ups in this group reached that point."),
         ("Approach", "Use customer support call logs to understand where people needed reassurance, then show that support in a Korean-language TV commercial."),
         ("Result", "In the period after the commercial aired, sign-up-to-first-transfer conversion in this group rose to nearly 50%."),
     ],
@@ -292,7 +292,7 @@ WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (
         {"id": "audience", "h2": "The most profitable audience had the lowest conversion rate", "blocks": [
             ("p", "As WireBarley’s first US marketing hire, I worked on bringing its digital remittance service to Korean American customers and adjacent Asian American communities. The service let people send money abroad without visiting a bank."),
             ("p", "COVID lockdowns had accelerated the move toward contactless services, creating an opportunity for digital remittance. Earning people’s trust remained a challenge, especially when asking them to change how they handled money."),
-            ("p", "Internal data showed that customers aged 50+ were our most profitable audience, with average transfer amounts roughly $250 above the overall average. Yet many stopped early in identity verification, and only about 25% went on to make their first transfer. I wanted to understand what was holding them back."),
+            ("p", "Internal data showed that customers aged 50+ were our most profitable audience, with average transfer amounts roughly $250 above the overall average. Yet many stopped early in identity verification, and only about 20% went on to make their first transfer. I wanted to understand what was holding them back."),
         ]},
         {"id": "support", "h2": "Qualitative data revealed the need for a “hand-holding” experience", "blocks": [
             ("p", "Before developing the commercial’s storyboard, I reviewed customer support call logs in Zendesk. Customers often mentioned that their sons or daughters would normally help them with this kind of task."),
@@ -307,7 +307,7 @@ WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (
         ]},
         {"id": "results", "h2": "Results", "blocks": [
             ("results", [
-                ("First-transfer conversion among customers aged 50+", "Roughly 25% → nearly 50% after the commercial aired.", ["Roughly 25%", "nearly 50%"]),
+                ("First-transfer conversion among customers aged 50+", "About 20% → nearly 50% after the commercial aired.", ["About 20%", "nearly 50%"]),
                 ("Broader business milestone", "WireBarley led traditional Korean American banks in remittance volume to Korea during Chuseok, Korean Thanksgiving.", []),
                 ("Media coverage", "Featured on SBS America, representing the Korean American segment.", []),
             ]),
@@ -358,12 +358,6 @@ EDITS = [
         "to": "What customers aged 50+ needed was reassurance",
     },
     {
-        "where": "Homepage Experience and WireBarley results, budgets bullet",
-        "why": "The audit sets year-over-year as the spelled-out default; the bullet above it already uses it. The claim itself is unchanged.",
-        "from": "Managed multi-channel budgets, producing 300% YoY revenue growth and 12% lower churn for three consecutive years.",
-        "to": "Managed multi-channel budgets, producing 300% year-over-year revenue growth and 12% lower churn for three consecutive years.",
-    },
-    {
         "where": "Money Layer, The line and the framework, Series C paragraph",
         "why": "Single quotes in Kevin's message were nested inside his own quotation. On the page the line takes the double quotes it has everywhere else. Wording unchanged.",
         "from": "‘The Money Layer for Games’ and the broader branding work contributed to how the company presented itself as it raised its next round.",
@@ -392,4 +386,201 @@ DIAGRAM = {  # UI labels inside original diagrams
     "line_cap": "A straight line ends at cash-out",
     "loop_cap": "A lifecycle shows how value can keep moving in the game",  # AUDIT L08
     "loop_alt": "Two versions of the model. First, Money In, Money Through, and Money Out on a straight line that stops after Money Out. Second, the same three stages on a loop, so value can return to the game.",
+}
+
+
+# ---------------------------------------------------------------------------
+# Tools (added 2026-11-08). Copy tagged TOOL is drafted for Kevin to review in his voice;
+# figures are sourced in FP["sources"]. Nav label "Tools" and the planner name come from Kevin's request.
+# ---------------------------------------------------------------------------
+TOOLS = {
+    "nav": "Tools",                                   # KEVIN 2026-11-08
+    "menu_label": "Tools menu",
+    "items": [
+        {"key": "fp", "title": "Financial planner",   # KEVIN 2026-11-08 ("a financial tool underneath")
+         "desc": "A starter money plan in about 10 minutes"},  # TOOL
+    ],
+}
+
+FP = {  # TOOL: the financial planner at /tools/financial-planner/
+    "title": "Financial planner | Kevin Park",
+    "meta": "A free starter financial plan for people who don’t think of themselves as money people. Build a budget, an emergency fund target, and a list of what to do next.",
+    "h1": "A starter financial plan for people who aren’t money people",
+    "deck": "Answer a few questions about your paycheck, your bills, and what you’re saving for. You’ll leave with a budget, an emergency fund target, and a short list of what to do next.",
+    "facts": [("Time", "About 10 minutes"), ("Cost", "Free"), ("Your answers", "Stay in this browser")],
+    "note": "I want money to feel less intimidating. This planner uses the rules of thumb most planners start with and shows the math behind each one. It’s for learning, so it never names a fund, a stock, or a brokerage.",
+    "rail_h": "Your plan",
+    "step_of": "Step {n} of {total}",
+    "back": "Back",
+    "next": "Next",
+    "start_over": "Start over",
+    "summary_h": "Your plan so far",
+    "summary_empty": "Your numbers show up here as you go.",
+    "steps": [
+        {"key": "pay", "nav": "Paycheck", "h": "Start with your paycheck",
+         "lead": "Everything in your plan is sized to the money that actually reaches your account."},
+        {"key": "bills", "nav": "Bills", "h": "List the bills you can’t skip",
+         "lead": "These are the costs you’d still pay if your income stopped tomorrow. Their total sets your emergency fund."},
+        {"key": "budget", "nav": "Budget", "h": "Split your paycheck three ways",
+         "lead": "The 50/30/20 rule puts half of take-home pay toward needs, 30% toward wants, and 20% toward savings. Where you live moves those numbers."},
+        {"key": "safety", "nav": "Safety net", "h": "Build your safety net",
+         "lead": "An emergency fund keeps one bad month from turning into credit card debt. Yours depends on how steady your income is."},
+        {"key": "goals", "nav": "Goals", "h": "Plan for the big stuff",
+         "lead": "Money you need within a few years should stay out of the stock market. Money you won’t touch for a long time can take more risk."},
+        {"key": "retire", "nav": "Retirement", "h": "Find the free money first",
+         "lead": "If your employer matches what you put into a retirement plan, that match is usually the best return you can get."},
+        {"key": "invest", "nav": "Investing", "h": "Decide how much to invest",
+         "lead": "A common target is 15% of your pay before taxes for retirement, counting your employer’s match."},
+        {"key": "plan", "nav": "Your plan", "h": "Here’s your plan",
+         "lead": "These are your next moves, in order. Do the first one this week."},
+    ],
+    "q": {
+        "take_home": ("How much lands in your bank account each month?",
+                      "Use take-home pay, after taxes and anything your employer takes out. Your paystub calls it net pay."),
+        "pay_type": ("How steady is your pay?", ""),
+        "pay_types": [("steady", "About the same every paycheck"), ("hourly", "Mostly steady, but hours change"), ("variable", "It changes a lot (tips, commission, freelance)")],
+        "gross": ("What do you earn in a year before taxes?",
+                  "Optional. It sets your tax bracket and your retirement account limits."),
+        "filing": ("How do you file taxes?", ""),
+        "filings": [("single", "Single"), ("joint", "Married, filing jointly")],
+        "zip": ("What’s your ZIP code?", "We use it to compare prices where you live with the US average."),
+        "tier": ("Cost of living", "Change this if it doesn’t match how expensive your area feels."),
+        "tiers": [("low", "Lower cost"), ("mid", "Medium cost"), ("high", "Higher cost")],
+        "bills": ("Monthly bills", "Enter $0 for anything that doesn’t apply. A three-month average works for bills that change."),
+        "bill_rows": [
+            ("rent", "Rent or mortgage", "Include HOA fees and renter’s insurance"),
+            ("utilities", "Utilities", "Electric, gas, water, trash"),
+            ("phone", "Phone and internet", ""),
+            ("car", "Car payment and insurance", ""),
+            ("transport", "Gas and transit", ""),
+            ("health", "Health insurance", "Only if it isn’t already taken out of your paycheck"),
+            ("groceries", "Groceries", "Food at home, not restaurants"),
+            ("childcare", "Childcare and support", ""),
+            ("debt_min", "Minimum debt payments", "Student loans, car loans, card minimums"),
+            ("other", "Other must-pays", "Medication, pet care, anything you can’t pause"),
+        ],
+        "card": ("Do you carry a credit card balance from month to month?", ""),
+        "card_balance": ("Balance", ""),
+        "card_apr": ("Interest rate (APR)", "It’s on your statement, usually around 20% or more"),
+        "split": ("Your split", "Drag to change it. Your three numbers always add up to 100%."),
+        "incomes": ("How many paychecks support your household?", ""),
+        "income_opts": [("1", "One"), ("2", "Two or more")],
+        "dependents": ("Does anyone depend on your income?", "Kids, a partner, or a parent you help support"),
+        "own": ("Do you own a home?", "Owners have more repair surprises"),
+        "risk_job": ("Is your job hard to replace quickly?", "Layoffs are common in your field, or you have a health condition"),
+        "yes_no": [("yes", "Yes"), ("no", "No")],
+        "saved": ("How much do you have saved for emergencies right now?", "Cash you could reach in a day or two. Not retirement accounts."),
+        "monthly_save": ("How much can you put toward it each month?", "We started with part of your savings budget. Adjust it to what feels real."),
+        "goal_add": ("What are you saving for?", "Add anything you’ll need a lump sum for. Skip this if nothing comes to mind."),
+        "goal_types": ["Wedding", "Home down payment", "Car", "School", "Baby", "Travel", "Starting a business", "Something else"],
+        "goal_amount": "Amount",
+        "goal_year": "Need it by",
+        "goal_saved": "Saved so far",
+        "goal_remove": "Remove",
+        "risk_h": "How do you feel about risk?",
+        "risk_lead": "Five quick questions about the money you won’t need for at least five years. There are no wrong answers.",
+        "risk": [
+            ("When will you need most of your long-term money?",
+             ["In under 5 years", "In 5 to 10 years", "In 10 to 20 years", "In 20 years or more"]),
+            ("If you lost your income, how long could you cover bills without selling investments?",
+             ["Under 3 months", "3 to 6 months", "6 to 12 months", "More than a year"]),
+            ("You invest $10,000. A month later it’s worth $7,000. What do you do?",
+             ["Sell everything", "Sell some", "Wait it out", "Buy more"]),
+            ("Which would you pick for one year?",
+             ["$10,300, guaranteed", "Anywhere from $9,500 to $11,000", "Anywhere from $9,000 to $12,000", "Anywhere from $8,000 to $14,000"]),
+            ("Have you invested before?",
+             ["Never", "A little", "For a few years", "Yes, through a market crash"]),
+        ],
+        "plan_offered": ("Does your job offer a retirement plan?", "A 401(k), 403(b), 457(b), TSP, or SIMPLE IRA all count."),
+        "plan_opts": [("yes", "Yes"), ("no", "No"), ("unsure", "Not sure")],
+        "match": ("How does your employer match?", "Check your benefits site or ask HR for the plan summary."),
+        "match_opts": [
+            ("none", "No match", 0, 0),
+            ("safe", "100% of the first 3%, then 50% of the next 2%", 5, 4),
+            ("half6", "50% of the first 6%", 6, 3),
+            ("full4", "100% of the first 4%", 4, 4),
+            ("full5", "100% of the first 5%", 5, 5),
+            ("full6", "100% of the first 6%", 6, 6),
+            ("unsure", "Not sure", 0, 0),
+        ],
+        "contrib": ("How much of each paycheck goes in now?", "Enter it as a share of your pay, like 3 for 3%."),
+        "vesting": ("When is the match fully yours?", "Your own contributions are always yours. The match can take time."),
+        "vest_opts": [("now", "Right away"), ("cliff", "All at once after a few years"), ("graded", "A little more each year"), ("unsure", "Not sure")],
+        "roth401k": ("Does the plan offer a Roth 401(k)?", ""),
+        "hsa": ("Are you on a high-deductible health plan with an HSA?", ""),
+        "learn_h": "Ways to invest",
+        "learn_lead": "Once you know how much, you pick how. These are the main options, from least effort to most.",
+    },
+    "learn": [
+        ("Target-date funds", "One fund holds a mix of stocks and bonds and gets more careful as its target year gets closer. It’s the default in many 401(k) plans.",
+         "Lowest effort. Check the yearly fee, called the expense ratio, since it varies a lot."),
+        ("Index funds and ETFs", "One fund holds hundreds or thousands of companies by tracking a market index, so no single company can sink you.",
+         "Low effort, wide spread, and yearly fees that are often under 0.10%."),
+        ("Robo-advisors", "An app asks about your goals, builds a portfolio of funds, and rebalances it for you.",
+         "Low effort outside a 401(k). Expect a fee of about 0.25% a year on top of the funds’ own fees."),
+        ("Individual stocks", "You buy shares of one company at a time. It’s a good way to learn and a risky way to save.",
+         "High effort and little spread unless you own many. Many people keep this to a small slice, under 10%."),
+    ],
+    "learn_more": [
+        ("Why fees matter", "A 1% yearly fee sounds small. On $500 a month for 30 years at a 6% return, you’d end up with about $80,000 less than with a 0.05% fee."),
+        ("Investing on autopilot", "Putting the same amount in every payday, through ups and downs, means you buy more when prices drop. It also takes the guessing out."),
+        ("Rebalancing", "Once a year, move money back to your target mix. If stocks had a great year, that means trimming them."),
+    ],
+    "hysa_h": "Where to keep it",
+    "hysa_lead": "Keep your emergency fund in a high-yield savings account. The best ones pay more than 10 times the national average, and the money is still there when you need it.",
+    "hysa_check": [
+        "Insured by the FDIC (banks) or NCUA (credit unions), up to $250,000",
+        "No monthly fee and no minimum balance to earn the rate",
+        "A rate that lasts, not a six-month promo",
+        "No direct deposit or monthly deposit requirement you can’t meet",
+        "Transfers to checking in one or two business days",
+    ],
+    "hysa_table_cap": "Rates change often. Check the bank’s site before you open an account.",
+    "hysa_cols": ["Account", "APY", "Minimum to earn it", "Fine print"],
+    "email_h": "Take your plan with you",
+    "email_lead": "Get everything above as a PDF you can print, save, or check off.",
+    "email_label": "Email address",
+    "email_cta": "Get my PDF",
+    "email_busy": "Making your PDF…",
+    "email_done": "Your PDF is downloading. If it doesn’t start, use the button below.",
+    "email_again": "Download again",
+    "email_error": "Enter an email address so I know where it came from.",
+    "email_privacy": "Only your email is sent, and only to me. Your numbers stay in this browser and go straight into the PDF.",
+    "disclaimer": "For learning only. This isn’t financial, tax, or legal advice, and I’m not a licensed advisor. The planner never recommends a specific fund, stock, or brokerage. Rules of thumb are a starting point, so check big decisions with a professional.",
+    "sources_h": "Where the numbers come from",
+    "sources": [
+        ("Cost of living", "BEA Regional Price Parities, 2024 data, released February 19, 2026", "https://www.bea.gov/data/prices-inflation/regional-price-parities-state-and-metro-area"),
+        ("ZIP codes to areas", "Census 2020 ZIP code to county file and OMB 2023 metro areas", "https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.2020.html"),
+        ("Retirement limits", "IRS 2026 limits", "https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500"),
+        ("Tax brackets", "IRS 2026 inflation adjustments", "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill"),
+        ("Savings rates", "NerdWallet, rates as of November 6, 2026", "https://www.nerdwallet.com/banking/best/high-yield-online-savings-accounts"),
+    ],
+    # numbers the planner computes with
+    "data": {
+        "year": 2026,
+        "limits": {"k401": 24500, "k401_50": 8000, "k401_60": 11250, "ira": 7500, "ira_50": 1100,
+                   "hsa_self": 4400, "hsa_family": 8750, "hsa_55": 1000},
+        "roth_phase": {"single": [153000, 168000], "joint": [242000, 252000]},
+        "std_deduction": {"single": 16100, "joint": 32200},
+        "bracket_24": {"single": 105700, "joint": 211400},   # taxable income where 24% starts
+        "tiers": {"high": 105, "low": 95},                  # RPP cutoffs, US = 100
+        "splits": {"high": [60, 20, 20], "mid": [50, 30, 20], "low": [45, 25, 30]},
+        "high_apr": 8,
+        "national_avg_savings": 0.38,
+        "hysa_asof": "November 6, 2026",
+        "hysa": [
+            ["Pibank Savings", "4.40%", "$0", "No monthly fee"],
+            ["Peak Bank", "4.27%", "$0", "$100 to open"],
+            ["EverBank Performance Savings", "4.20%", "$0", "No requirements listed"],
+            ["Happen Bank LevelUp Savings", "4.20%", "$0", "Needs $250 or more deposited each cycle, otherwise 3.00%"],
+            ["SoFi Checking and Savings", "Up to 4.40%", "$0", "3.30% base needs direct deposit or $5,000 in deposits every 31 days"],
+            ["Openbank High Yield Savings", "Up to 4.35%", "$500", "Six-month rate for new customers"],
+            ["Marcus by Goldman Sachs", "3.50%", "$0", "No monthly fee"],
+            ["Capital One 360 Performance Savings", "3.20%", "$0", "No monthly fee"],
+        ],
+        "mix": {"Conservative": [35, 65], "Moderate": [55, 45], "Growth": [75, 25], "Aggressive": [90, 10]},
+        "mix_range": {"Conservative": "30 to 40%", "Moderate": "50 to 60%", "Growth": "70 to 80%", "Aggressive": "90 to 100%"},
+        "formspree": "xrppvnyn",   # Formspree form ID (https://formspree.io/f/xrppvnyn). Empty: the PDF still downloads and nothing is sent.
+        "site_url": "",    # filled from KP_SITE_URL at build time
+    },
 }

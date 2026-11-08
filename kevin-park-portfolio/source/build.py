@@ -32,11 +32,11 @@ FONT_DIR = next(p for p in VENDOR.glob("fontsource-variable-mona-sans-*") if p.i
 LATIN = "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
 LATIN_EXT = "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
 
-PAGES = ("home", "ml", "lc", "wb", "nf")
-VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "wb": "wirebarley", "nf": "404"}
-PATH = {"home": "/", "ml": "/work/money-layer/", "lc": "/work/money-lifecycle/", "wb": "/work/wirebarley/", "nf": "/404.html"}
-TITLE = {"home": C.META["home_title"], "ml": C.META["ml_title"], "lc": C.META["lc_title"], "wb": C.META["wb_title"], "nf": C.META["nf_title"]}
-DESC = {"home": C.META["home_desc"], "ml": C.META["ml_desc"], "lc": C.META["lc_desc"], "wb": C.META["wb_desc"], "nf": C.META["home_desc"]}
+PAGES = ("home", "ml", "lc", "wb", "fp", "nf")
+VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "wb": "wirebarley", "fp": "financial-planner", "nf": "404"}
+PATH = {"home": "/", "ml": "/work/money-layer/", "lc": "/work/money-lifecycle/", "wb": "/work/wirebarley/", "fp": "/tools/financial-planner/", "nf": "/404.html"}
+TITLE = {"home": C.META["home_title"], "ml": C.META["ml_title"], "lc": C.META["lc_title"], "wb": C.META["wb_title"], "fp": C.FP["title"], "nf": C.META["nf_title"]}
+DESC = {"home": C.META["home_desc"], "ml": C.META["ml_desc"], "lc": C.META["lc_desc"], "wb": C.META["wb_desc"], "fp": C.FP["meta"], "nf": C.META["home_desc"]}
 SBS_IMG = ROOT / "assets-src" / "sbs-evening-news.jpg"
 YT = "https://www.youtube.com/watch?v=" + C.WB["video_id"]
 U = C.UI
@@ -51,7 +51,8 @@ def _icon_path(name):
 
 
 ICON_NAMES = ["arrow-down", "arrow-right", "arrow-left", "arrow-up-right", "linkedin-logo",
-              "magnifying-glass-plus", "x"]
+              "magnifying-glass-plus", "x", "check", "caret-down", "lock-simple", "download-simple", "plus",
+              "calculator", "arrow-counter-clockwise"]
 ICONS = {n: _icon_path(n) for n in ICON_NAMES}
 
 
@@ -117,6 +118,27 @@ def mark_logo():
     )
 
 
+def tools_menu(ctx):
+    T = C.TOOLS
+    mid = ctx.id("tools-menu")
+    cur = ' aria-current="page"'
+    items = "".join(
+        f'<li><a class="tools__item" href="{ctx.url(it["key"])}"{cur if ctx.page == it["key"] else ""}>'
+        f'<span class="tools__icon" aria-hidden="true">{icon("calculator")}</span>'
+        f'<span class="tools__text"><span class="tools__title">{it["title"]}</span>'
+        f'<span class="tools__desc">{it["desc"]}</span></span></a></li>'
+        for it in T["items"]
+    )
+    current = " is-current" if ctx.page in [it["key"] for it in T["items"]] else ""
+    return (
+        f'<div class="tools{current}" data-tools>'
+        f'<button class="tools__btn" type="button" aria-expanded="false" aria-controls="{mid}">'
+        f'{T["nav"]}{icon("caret-down", "tools__caret")}</button>'
+        f'<div class="tools__panel" id="{mid}" hidden><p class="sr-only">{T["menu_label"]}</p>'
+        f'<ul class="tools__list">{items}</ul></div></div>'
+    )
+
+
 def nav(ctx):
     skip = ctx.url(section="main") if ctx.mode == "spa" else "#" + ctx.id("main")
     return (
@@ -127,6 +149,7 @@ def nav(ctx):
         f'<a href="{ctx.url("home", "work")}">{U["work"]}</a>'
         f'<a href="{ctx.url("home", "about")}" data-nav="about">{U["about"]}</a>'
         f'<a href="{ctx.url("home", "experience")}" data-nav="experience">{U["experience"]}</a>'
+        f"{tools_menu(ctx)}"
         "</div>"
         f"{linkedin_btn('blue', compact=True)}"
         "</nav></header>"
@@ -566,7 +589,270 @@ def nf_main(ctx):
     )
 
 
-MAINS = {"home": home_main, "ml": ml_main, "lc": lc_main, "wb": wb_main, "nf": nf_main}
+# ---------------------------------------------------------------------------
+# tools: financial planner
+# ---------------------------------------------------------------------------
+def _help(text, hid):
+    return f'<p class="fp-help" id="{hid}">{text}</p>' if text else ""
+
+
+def fp_money(ctx, name, label, help_text="", optional=False, cls=""):
+    fid, hid = ctx.id(f"fp-{name}"), ctx.id(f"fp-{name}-help")
+    desc = f' aria-describedby="{hid}"' if help_text else ""
+    return (
+        f'<div class="fp-field {cls}">'
+        f'<label class="fp-label" for="{fid}">{label}</label>{_help(help_text, hid)}'
+        f'<div class="fp-money"><span class="fp-money__sign" aria-hidden="true">$</span>'
+        f'<input class="fp-input" id="{fid}" name="{name}" type="text" inputmode="decimal" autocomplete="off"{desc}'
+        f'{"" if optional else ""} data-money></div></div>'
+    )
+
+
+def fp_number(ctx, name, label, help_text="", suffix="", maxlength=None, mode="numeric", auto="off", cls=""):
+    fid, hid = ctx.id(f"fp-{name}"), ctx.id(f"fp-{name}-help")
+    desc = f' aria-describedby="{hid}"' if help_text else ""
+    ml = f' maxlength="{maxlength}"' if maxlength else ""
+    suf = f'<span class="fp-money__suffix" aria-hidden="true">{suffix}</span>' if suffix else ""
+    return (
+        f'<div class="fp-field {cls}">'
+        f'<label class="fp-label" for="{fid}">{label}</label>{_help(help_text, hid)}'
+        f'<div class="fp-money{" fp-money--suffix" if suffix else " fp-money--plain"}">'
+        f'<input class="fp-input" id="{fid}" name="{name}" type="text" inputmode="{mode}" autocomplete="{auto}"{ml}{desc}>{suf}</div></div>'
+    )
+
+
+def fp_choice(ctx, name, label, opts, help_text="", stack=False):
+    hid = ctx.id(f"fp-{name}-help")
+    desc = f' aria-describedby="{hid}"' if help_text else ""
+    chips = "".join(
+        f'<label class="fp-chip"><input type="radio" name="{name}" value="{v}"><span>{t}</span></label>'
+        for v, t in opts
+    )
+    return (
+        f'<fieldset class="fp-field"{desc}><legend class="fp-label">{label}</legend>{_help(help_text, hid)}'
+        f'<div class="fp-chips{" fp-chips--stack" if stack else ""}">{chips}</div></fieldset>'
+    )
+
+
+def fp_step_pay(ctx, Q):
+    return (
+        fp_money(ctx, "take_home", *Q["take_home"])
+        + fp_choice(ctx, "pay_type", Q["pay_type"][0], Q["pay_types"], stack=True)
+        + fp_money(ctx, "gross", *Q["gross"], optional=True)
+        + fp_choice(ctx, "filing", Q["filing"][0], Q["filings"])
+        + fp_number(ctx, "zip", Q["zip"][0], Q["zip"][1], maxlength=5, auto="postal-code", cls="fp-field--zip")
+        + '<div class="fp-out" data-out="area" aria-live="polite"></div>'
+        + fp_choice(ctx, "tier", Q["tier"][0], Q["tiers"], Q["tier"][1])
+    )
+
+
+def fp_step_bills(ctx, Q):
+    rows = "".join(
+        f'<div class="fp-bill"><label class="fp-bill__k" for="{ctx.id("fp-b-" + k)}">{t}'
+        + (f'<span class="fp-bill__hint">{h}</span>' if h else "")
+        + f'</label><div class="fp-money fp-money--sm"><span class="fp-money__sign" aria-hidden="true">$</span>'
+        f'<input class="fp-input" id="{ctx.id("fp-b-" + k)}" name="b_{k}" type="text" inputmode="decimal" autocomplete="off" data-money></div></div>'
+        for k, t, h in Q["bill_rows"]
+    )
+    card = (
+        fp_choice(ctx, "card", Q["card"][0], Q["yes_no"])
+        + '<div class="fp-pair" data-show="card=yes" hidden>'
+        + fp_money(ctx, "card_balance", Q["card_balance"][0])
+        + fp_number(ctx, "card_apr", Q["card_apr"][0], Q["card_apr"][1], suffix="%", mode="decimal")
+        + "</div>"
+    )
+    return (
+        f'<fieldset class="fp-field"><legend class="fp-label">{Q["bills"][0]}</legend>{_help(Q["bills"][1], ctx.id("fp-bills-help"))}'
+        f'<div class="fp-bills">{rows}</div></fieldset>'
+        '<div class="fp-out" data-out="bills" aria-live="polite"></div>'
+        + card
+    )
+
+
+def fp_step_budget(ctx, Q):
+    sliders = "".join(
+        f'<div class="fp-slider fp-slider--{k}"><label for="{ctx.id("fp-s-" + k)}"><span class="fp-slider__dot" aria-hidden="true"></span>{t}'
+        f'<output class="fp-slider__v" data-split="{k}"></output></label>'
+        f'<input type="range" id="{ctx.id("fp-s-" + k)}" name="s_{k}" min="0" max="100" step="1"></div>'
+        for k, t in (("needs", "Needs"), ("wants", "Wants"), ("save", "Savings and extra debt payments"))
+    )
+    return (
+        '<div class="fp-out" data-out="split" aria-live="polite"></div>'
+        f'<fieldset class="fp-field"><legend class="fp-label">{Q["split"][0]}</legend>{_help(Q["split"][1], ctx.id("fp-split-help"))}'
+        f'<div class="fp-sliders">{sliders}</div>'
+        f'<button class="fp-link" type="button" data-reset-split>{icon("arrow-counter-clockwise")}<span data-reset-label></span></button></fieldset>'
+        '<div class="fp-out" data-out="budget-check" aria-live="polite"></div>'
+    )
+
+
+def fp_step_safety(ctx, Q, F):
+    D = F["data"]
+    rows = "".join(
+        f'<tr><th scope="row">{r[0]}</th><td class="fp-apy">{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>' for r in D["hysa"]
+    )
+    cols = "".join(f'<th scope="col">{c}</th>' for c in F["hysa_cols"])
+    checks = "".join(f"<li>{icon('check')}<span>{c}</span></li>" for c in F["hysa_check"])
+    return (
+        fp_choice(ctx, "incomes", Q["incomes"][0], Q["income_opts"])
+        + fp_choice(ctx, "dependents", Q["dependents"][0], Q["yes_no"], Q["dependents"][1])
+        + fp_choice(ctx, "own", Q["own"][0], Q["yes_no"], Q["own"][1])
+        + fp_choice(ctx, "risk_job", Q["risk_job"][0], Q["yes_no"], Q["risk_job"][1])
+        + '<div class="fp-out" data-out="target" aria-live="polite"></div>'
+        + fp_money(ctx, "saved", *Q["saved"])
+        + fp_money(ctx, "monthly_save", *Q["monthly_save"])
+        + '<div class="fp-out" data-out="progress" aria-live="polite"></div>'
+        + f'<div class="fp-sub"><h3 class="fp-h3">{F["hysa_h"]}</h3><p class="fp-p">{F["hysa_lead"]}</p>'
+        f'<ul class="fp-checks">{checks}</ul>'
+        f'<div class="fp-table-wrap"><table class="fp-table"><caption>{F["hysa_table_cap"]} '
+        f'<a href="{F["sources"][4][2]}" target="_blank" rel="noopener noreferrer">{F["sources"][4][1]}<span class="sr-only"> {U["new_tab"]}</span></a></caption>'
+        f'<thead><tr>{cols}</tr></thead><tbody>{rows}</tbody></table></div></div>'
+    )
+
+
+def fp_step_goals(ctx, Q):
+    adds = "".join(
+        f'<button class="fp-add" type="button" data-add-goal="{escape(g)}">{icon("plus")}<span>{g}</span></button>' for g in Q["goal_types"]
+    )
+    risk = "".join(
+        f'<fieldset class="fp-field fp-q"><legend class="fp-label"><span class="fp-q__n">{i}</span>{q}</legend>'
+        '<div class="fp-chips fp-chips--stack">'
+        + "".join(f'<label class="fp-chip"><input type="radio" name="r{i}" value="{j}"><span>{a}</span></label>' for j, a in enumerate(opts, 1))
+        + "</div></fieldset>"
+        for i, (q, opts) in enumerate(Q["risk"], 1)
+    )
+    return (
+        f'<div class="fp-field"><p class="fp-label" id="{ctx.id("fp-goals-l")}">{Q["goal_add"][0]}</p>{_help(Q["goal_add"][1], ctx.id("fp-goals-help"))}'
+        f'<div class="fp-adds" role="group" aria-labelledby="{ctx.id("fp-goals-l")}">{adds}</div></div>'
+        '<ul class="fp-goals" data-goals></ul>'
+        '<div class="fp-out" data-out="goals" aria-live="polite"></div>'
+        f'<div class="fp-sub"><h3 class="fp-h3">{Q["risk_h"]}</h3><p class="fp-p">{Q["risk_lead"]}</p>{risk}</div>'
+        '<div class="fp-out" data-out="risk" aria-live="polite"></div>'
+    )
+
+
+def fp_step_retire(ctx, Q):
+    return (
+        fp_choice(ctx, "plan_offered", Q["plan_offered"][0], Q["plan_opts"], Q["plan_offered"][1])
+        + '<div data-show="plan_offered=yes" hidden>'
+        + fp_choice(ctx, "match", Q["match"][0], [(v, t) for v, t, _, _ in Q["match_opts"]], Q["match"][1], stack=True)
+        + fp_number(ctx, "contrib", Q["contrib"][0], Q["contrib"][1], suffix="%", mode="decimal")
+        + fp_choice(ctx, "vesting", Q["vesting"][0], Q["vest_opts"], Q["vesting"][1])
+        + fp_choice(ctx, "roth401k", Q["roth401k"][0], Q["plan_opts"])
+        + "</div>"
+        + fp_choice(ctx, "hsa", Q["hsa"][0], Q["plan_opts"])
+        + '<div class="fp-out" data-out="match" aria-live="polite"></div>'
+        + '<div class="fp-out" data-out="order" aria-live="polite"></div>'
+    )
+
+
+def fp_step_invest(ctx, Q, F):
+    learn = "".join(
+        f'<details class="fp-learn"><summary><span class="fp-learn__t">{t}</span>{icon("caret-down", "fp-learn__caret")}</summary>'
+        f'<div class="fp-learn__b"><p>{d}</p><p class="fp-learn__fit">{fit}</p></div></details>'
+        for t, d, fit in F["learn"]
+    )
+    more = "".join(f'<div class="fp-more__item"><h4>{t}</h4><p>{d}</p></div>' for t, d in F["learn_more"])
+    return (
+        '<div class="fp-out" data-out="invest" aria-live="polite"></div>'
+        '<div class="fp-out" data-out="mix" aria-live="polite"></div>'
+        f'<div class="fp-sub"><h3 class="fp-h3">{Q["learn_h"]}</h3><p class="fp-p">{Q["learn_lead"]}</p>'
+        f'<div class="fp-learns">{learn}</div><div class="fp-more">{more}</div></div>'
+    )
+
+
+def fp_step_plan(ctx, F):
+    fid = ctx.id("fp-email")
+    # Without JavaScript the form still posts the email to Formspree instead of putting it in the page URL.
+    fs = F["data"]["formspree"]
+    action = f' action="https://formspree.io/f/{fs}" method="POST"' if fs else ' method="POST"'
+    return (
+        '<div class="fp-out" data-out="actions"></div>'
+        '<div class="fp-out" data-out="numbers"></div>'
+        f'<form class="fp-gate" data-gate novalidate{action}><span class="fp-gate__glow" aria-hidden="true"></span>'
+        f'<h3 class="fp-gate__h">{F["email_h"]}</h3><p class="fp-gate__p">{F["email_lead"]}</p>'
+        f'<div class="fp-gate__row"><label class="sr-only" for="{fid}">{F["email_label"]}</label>'
+        f'<input class="fp-gate__input" id="{fid}" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="{F["email_label"]}">'
+        f'<button class="btn btn--white fp-gate__btn" type="submit">{icon("download-simple")}<span class="btn__text">{F["email_cta"]}</span></button></div>'
+        '<p class="fp-gate__trap" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>'
+        f'<p class="fp-gate__status" data-gate-status role="status"></p>'
+        f'<p class="fp-gate__note">{icon("lock-simple")}<span>{F["email_privacy"]}</span></p>'
+        f'<button class="fp-link fp-link--light" type="button" data-again hidden>{icon("download-simple")}<span>{F["email_again"]}</span></button>'
+        "</form>"
+    )
+
+
+def fp_main(ctx):
+    F, Q = C.FP, C.FP["q"]
+    hid = ctx.id("title")
+    steps_html = {
+        "pay": fp_step_pay(ctx, Q), "bills": fp_step_bills(ctx, Q), "budget": fp_step_budget(ctx, Q),
+        "safety": fp_step_safety(ctx, Q, F), "goals": fp_step_goals(ctx, Q), "retire": fp_step_retire(ctx, Q),
+        "invest": fp_step_invest(ctx, Q, F), "plan": fp_step_plan(ctx, F),
+    }
+    total = len(F["steps"])
+    rail = "".join(
+        f'<li><button class="fp-rail__btn" type="button" data-go="{s["key"]}"{"" if i == 0 else " disabled"}>'
+        f'<span class="fp-rail__n" aria-hidden="true"><span class="fp-rail__num">{i}</span>{icon("check", "fp-rail__check")}</span>'
+        f'<span class="fp-rail__t">{s["nav"]}</span></button></li>'
+        for i, s in enumerate(F["steps"], 1)
+    )
+    panels = []
+    for i, s in enumerate(F["steps"], 1):
+        sid = ctx.id(f"fp-step-{s['key']}")
+        last = i == total
+        nav_row = (
+            '<div class="fp-nav">'
+            + (f'<button class="btn btn--ghost" type="button" data-back>{icon("arrow-left", "icon--back")}<span class="btn__text">{F["back"]}</span></button>' if i > 1 else "")
+            + f'<span class="fp-nav__count">{F["step_of"].format(n=i, total=total)}</span>'
+            + ("" if last else f'<button class="btn btn--blue" type="button" data-next><span class="btn__text">{F["next"]}</span>{icon("arrow-right", "icon--next")}</button>')
+            + "</div>"
+        )
+        panels.append(
+            f'<section class="fp-step" id="{sid}" data-step="{s["key"]}" aria-labelledby="{sid}-h">'
+            f'<h2 class="fp-step__h" id="{sid}-h" tabindex="-1">{s["h"]}</h2>'
+            f'<p class="fp-step__lead">{s["lead"]}</p>'
+            f'<div class="fp-step__body">{steps_html[s["key"]]}</div>{nav_row}</section>'
+        )
+    facts = "".join(f'<li><span class="facts__k">{k}</span><span class="facts__v">{v}</span></li>' for k, v in F["facts"])
+    sources = "".join(
+        f'<li><span class="fp-src__k">{k}</span><a href="{u}" target="_blank" rel="noopener noreferrer">{t}<span class="sr-only"> {U["new_tab"]}</span></a></li>'
+        for k, t, u in F["sources"]
+    )
+    data = dict(F["data"])
+    data["site_url"] = abs_url(PATH["fp"]) if SITE_URL else ""
+    cfg = {"data": data, "steps": [s["key"] for s in F["steps"]], "copy": {
+        k: F[k] for k in ("email_busy", "email_done", "email_error", "summary_empty", "disclaimer", "title", "hysa_check", "learn")
+    }, "q": {"match_opts": Q["match_opts"], "risk": Q["risk"], "goal_types": Q["goal_types"], "bill_rows": Q["bill_rows"],
+             "goal_amount": Q["goal_amount"], "goal_year": Q["goal_year"], "goal_saved": Q["goal_saved"], "goal_remove": Q["goal_remove"]},
+        "sources": F["sources"], "pdf": {"lib": "/assets/tools/jspdf.umd.min.js", "regular": "/assets/tools/MonaSans-Regular.ttf", "bold": "/assets/tools/MonaSans-Bold.ttf"}}
+    cfg_json = json.dumps(cfg, ensure_ascii=False).replace("</", "<" + chr(92) + "/")
+    return (
+        f'<main id="{ctx.id("main")}" tabindex="-1" class="fp-page">'
+        '<header class="art-head"><div class="band band--article" aria-hidden="true"></div>'
+        '<div class="wrap art-head__in">'
+        f'<h1 id="{hid}" tabindex="-1">{F["h1"]}</h1>'
+        f'<p class="deck">{F["deck"]}</p>'
+        f'<ul class="facts">{facts}</ul>'
+        "</div></header>"
+        '<div class="wrap fp" data-fp>'
+        f'<nav class="fp-rail" aria-label="{F["rail_h"]}"><p class="rail__h">{F["rail_h"]}</p><ol>{rail}</ol>'
+        f'<button class="fp-link fp-rail__reset" type="button" data-reset>{icon("arrow-counter-clockwise")}<span>{F["start_over"]}</span></button></nav>'
+        f'<div class="fp-flow"><p class="fp-note">{F["note"]}</p>{"".join(panels)}</div>'
+        f'<aside class="fp-sum" aria-labelledby="{ctx.id("fp-sum-h")}"><div class="fp-sum__card">'
+        f'<h2 class="fp-sum__h" id="{ctx.id("fp-sum-h")}">{F["summary_h"]}</h2>'
+        f'<div data-summary><p class="fp-sum__empty">{F["summary_empty"]}</p></div></div></aside>'
+        "</div>"
+        '<section class="wrap fp-foot">'
+        f'<p class="fp-disclaimer">{F["disclaimer"]}</p>'
+        f'<h2 class="fp-foot__h">{F["sources_h"]}</h2><ul class="fp-src">{sources}</ul>'
+        "</section>"
+        f"{closing(ctx)}"
+        f'<script type="application/json" id="fp-config">{cfg_json}</script>'
+        "</main>"
+    )
+
+
+MAINS = {"home": home_main, "ml": ml_main, "lc": lc_main, "wb": wb_main, "fp": fp_main, "nf": nf_main}
 
 
 def body(ctx):
@@ -650,6 +936,8 @@ def head_static(ctx):
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
     if ctx.page == "home":
         parts.append(person_jsonld())
+    if ctx.page == "fp":
+        parts += ['<script src="/assets/tools/col-data.js" defer></script>', '<script src="/assets/tools/planner.js" defer></script>']
     return "".join(parts)
 
 
@@ -673,6 +961,13 @@ def build_static():
         shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
     (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
     shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
+    tools = out / "assets" / "tools"
+    tools.mkdir(parents=True, exist_ok=True)
+    shutil.copy(ROOT / "src" / "planner.js", tools / "planner.js")
+    shutil.copy(ROOT / "src" / "col-data.js", tools / "col-data.js")
+    shutil.copy(VENDOR / "jspdf-2.5.2" / "jspdf.umd.min.js", tools / "jspdf.umd.min.js")
+    for f in ("MonaSans-Regular.ttf", "MonaSans-Bold.ttf"):
+        shutil.copy(VENDOR / "tools" / f, tools / f)
     if C.ABOUT["portrait"]:
         name = C.ABOUT["portrait"]["file"]
         shutil.copy(ROOT / "assets-src" / name, out / "assets" / name)
@@ -683,7 +978,7 @@ def build_static():
     if SITE_URL:
         (out / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-            + "".join(f"<url><loc>{abs_url(PATH[p])}</loc></url>" for p in ("home", "ml", "lc", "wb")) + "</urlset>"
+            + "".join(f"<url><loc>{abs_url(PATH[p])}</loc></url>" for p in ("home", "ml", "lc", "wb", "fp")) + "</urlset>"
         )
     return out
 
@@ -691,6 +986,18 @@ def build_static():
 # ---------------------------------------------------------------------------
 # artifact (single file, hash routes)
 # ---------------------------------------------------------------------------
+def artifact_tools():
+    """The planner, its ZIP data, jsPDF, and the PDF fonts, inlined (the Artifact cannot load files)."""
+    b64 = lambda f: base64.b64encode((VENDOR / "tools" / f).read_bytes()).decode()
+    fonts = f'window.KP_PDF_FONTS={{regular:"{b64("MonaSans-Regular.ttf")}",bold:"{b64("MonaSans-Bold.ttf")}"}};'
+    return (
+        f"<script>{(ROOT / 'src' / 'col-data.js').read_text()}</script>\n"
+        f"<script>{fonts}</script>\n"
+        f"<script>{(VENDOR / 'jspdf-2.5.2' / 'jspdf.umd.min.js').read_text()}</script>\n"
+        f"<script>{(ROOT / 'src' / 'planner.js').read_text()}</script>\n"
+    )
+
+
 def build_artifact():
     out = DIST / "artifact"
     out.mkdir(parents=True, exist_ok=True)
@@ -710,6 +1017,7 @@ def build_artifact():
         + zoom_dialog()
         + '<script>document.documentElement.setAttribute("data-mode","spa");document.documentElement.setAttribute("lang","en");</script>'
         + f"<script>{js}</script>\n"
+        + artifact_tools()
     )
     (out / "index.html").write_text(html)
     return out

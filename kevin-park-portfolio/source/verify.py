@@ -10,7 +10,7 @@ sys.path.insert(0, "src")
 import content as C  # noqa: E402
 
 BASE = "http://127.0.0.1:8765"
-PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/"]
+PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/", "/tools/financial-planner/"]
 results = []
 
 
@@ -27,7 +27,7 @@ def norm(s):
 # ---------- 1. copy is verbatim from its sources ----------
 SOURCES = ["notion-2026-09-27.txt", "notion-lifecycle-2026-09-27.txt", "resume-excerpt-2026-09-27.txt",
            "zbdpay-2026-09-27.json", "zbdpay-lifecycle-2026-09-27.json", "wirebarley-case-study-2026-10-05.md",
-           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt", "kevin-chat-2026-10-11.txt"]
+           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt", "kevin-chat-2026-10-11.txt", "kevin-chat-2026-11-05.txt"]
 SRC = norm(" ".join(Path(".impeccable/sources", f).read_text() for f in SOURCES))
 AB = C.ABOUT
 sourced = [C.HERO["role"], C.HERO["sub"], C.HERO["h1_before"] + C.HERO["h1_em"] + C.HERO["h1_after"], C.HERO["cta_work"], C.HERO["cta_linkedin"],
@@ -145,7 +145,7 @@ async def main():
                   lowContrast: (() => { const fg = getComputedStyle(document.body).color; return fg })(),
                   navFit: (() => {
                     const n = document.querySelector('.nav__inner'), nr = n.getBoundingClientRect();
-                    const items = [...n.querySelectorAll('.nav__brand, .nav__links a, .btn')].filter(e => e.offsetParent).map(e => e.getBoundingClientRect());
+                    const items = [...n.querySelectorAll('.nav__brand, .nav__links > a, .tools__btn, .nav__inner > .btn')].filter(e => e.offsetParent).map(e => e.getBoundingClientRect());
                     const inside = items.every(r => r.left >= nr.left && r.right <= nr.right);
                     const apart = items.every((r, i) => i === 0 || r.left >= items[i - 1].right);
                     return n.scrollWidth <= n.clientWidth && inside && apart;
@@ -308,7 +308,7 @@ async def main():
         })""")
         check("WireBarley page: 5 sections, 4 storyboard cards with 3 arrows in one row on desktop", wb["rail"] == 5 and wb["steps"] == 4 and wb["arrows"] == 3 and wb["stepRow"] == 1, wb)
         check("WireBarley video embeds the commercial and keeps the YouTube link", "youtube-nocookie.com/embed/KDBksoj_wu8" in wb["iframe"] and "https://www.youtube.com/watch?v=KDBksoj_wu8" in wb["watch"], [wb["iframe"], wb["watch"]])
-        check("WireBarley SBS image has alt text, figures lit, next tile is Money Layer", wb["img"] and wb["img"][0] and wb["lit"] == ["Roughly 25%", "nearly 50%"] and wb["next"], wb)
+        check("WireBarley SBS image has alt text, figures lit, next tile is Money Layer", wb["img"] and wb["img"][0] and wb["lit"] == ["About 20%", "nearly 50%"] and wb["next"], wb)
         await ctx.close()
         ctx = await b.new_context(viewport={"width": 390, "height": 844})
         pg = await ctx.new_page()
