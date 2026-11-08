@@ -362,6 +362,19 @@ Behind the hero and the article header. A flowing multi-stop gradient (blue, vio
 ### Navigation
 Floating glass pill: logo and name (weight 650, width 108), text links (Work, About, Experience) in secondary color on 40px pill targets (hover to 6 percent white fill), and a compact blue button. Every link points at a homepage section, so they work the same from the case studies. Below 375px the logo mark hides and links tighten to 7px padding.
 
+### Tools menu
+The nav's "Tools" item is a disclosure button with a caret, not a link. Its panel is a 20px ink 1 card under the nav, scaling in from the trigger over 180ms (ease-out) and closing on Escape, outside click, or focus leaving. Each item is a 40px blue tile with a Phosphor icon, a title, and a one-line description. Below 480px the panel spans the screen under the nav and the logo mark steps aside so four links and the name fit.
+
+### Financial planner (Operate mode)
+- **Layout:** the article header (band, display title, deck, fact pills), then three columns from 1180px up: a 12.5rem step rail, the step card, and a sticky 19rem "Your plan so far" card with a cool-gradient hairline. Below 1180px the summary drops under the step; below 900px the rail becomes a sticky, horizontally scrolling row of pills under the nav.
+- **Steps:** one 28px ink 1 card at a time, swapped with a 240ms fade, 6px rise, and 2px blur (none under reduced motion). Focus moves to the step heading. Back (ghost), "Step n of 8", and Next (blue) sit on a hairline footer.
+- **Rail:** numbered discs; done steps turn Coinbase blue with a check (Blue Means Done), the current step gets a white ring on ink 2.
+- **Fields:** inputs are 52px pills on ink 2 with a $ or % affix; answers are pill chips (stacked 16px-radius rows for long options) and a chosen answer turns white with ink text. Help text is tertiary. Errors use a pink ring and a sentence that says how to fix it.
+- **Results:** 20px ink 0 panels inside the card, leading with a large figure. Lime marks money heading to savings (the savings bucket, monthly amounts toward the fund or goals, the APY column). Warning panels get an amber hairline, good news a lime one.
+- **Budget bar:** needs blue, wants violet, savings lime with lime ink text, split by 3px gaps; three sliders that always sum to 100.
+- **Plan:** numbered action cards, the first with a cool-gradient hairline and a white number disc; then a numbers grid; then the email gate, a cool-gradient card in the closing card's style with a white button.
+- **PDF:** printed on white, not the dark theme. A thin full-gradient strip on top, Mona Sans (static 400 and 700 cuts), blue for the first move and for done items, a footer disclaimer on every page.
+
 ### Article
 - **Header:** crumb link with a back arrow that nudges left on hover, display title, deck in lead type, and a row of fact pills (key in tertiary label type, value in an ink 2 inner pill). The Lifecycle header ends with a "Follows" pill whose value is a blue-to-violet link back to the Money Layer case study.
 - **Rail:** "On this page" label and links in tertiary text on 12px rounded rows; the current section gets ink 2 and primary text.

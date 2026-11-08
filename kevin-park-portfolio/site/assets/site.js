@@ -93,6 +93,26 @@
     Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
   }
 
+  /* ---------- nav: tools menu (disclosure) ---------- */
+  function initTools() {
+    var menus = document.querySelectorAll("[data-tools]");
+    menus.forEach(function (m) {
+      if (m.__on) return; m.__on = true;
+      var btn = m.querySelector(".tools__btn"), panel = m.querySelector(".tools__panel");
+      function set(open, focusBtn) {
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        panel.hidden = !open;
+        if (!open && focusBtn) btn.focus();
+      }
+      btn.addEventListener("click", function () { set(btn.getAttribute("aria-expanded") !== "true"); });
+      m.addEventListener("keydown", function (e) { if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") { e.preventDefault(); set(false, true); } });
+      m.addEventListener("focusout", function (e) { if (e.relatedTarget && !m.contains(e.relatedTarget)) set(false); });
+      document.addEventListener("click", function (e) { if (!m.contains(e.target)) set(false); });
+      panel.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
+    });
+  }
+  initTools();
+
   if (MODE !== "spa") { initTilt(document); initRail(document); return; }
 
   /* ---------- spa router (Artifact build) ---------- */
