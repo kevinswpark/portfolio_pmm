@@ -5,7 +5,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
 ## What's here
 
 - `site/` is the deployable static site. Upload the folder to any static host at the domain root (Netlify, Vercel, Cloudflare Pages, GitHub Pages user site).
-  - `/` home: hero with role line, introduction, selected work, About, experience, and the "Let’s talk." LinkedIn card. The nav links Work, About, and Experience to homepage sections from every page.
+  - `/` home: hero with role line, a four-figure proof strip, selected work, experience, a short About, and the "Let’s talk." LinkedIn card. The nav links Work, About, and Experience to homepage sections from every page.
   - `/work/money-layer/` the first case study.
   - `/work/money-lifecycle/` the second case study, on how ZBD's products work together.
   - `/work/wirebarley/` the WireBarley case study on first-transfer conversion among customers aged 50+.
@@ -45,7 +45,7 @@ python3 verify.py       # static site checks at 1440, 768, and 390px, including 
 python3 verify_spa.py   # Artifact build checks
 ```
 
-Requires Python 3.11 and Playwright with Chromium. Mona Sans is self-hosted from the npm Fontsource package in `vendor/`. Icons are Phosphor (regular), inlined as SVG.
+Requires Python 3.11 and Playwright with Chromium. Mona Sans is self-hosted from the npm Fontsource package in `vendor/`. Icons are Phosphor (regular), inlined as SVG. The nav's liquid glass uses liquid-glass-js (MIT, commit 78cb6cc, `vendor/liquid-glass-js-78cb6cc`, unmodified) and html2canvas 1.4.1 (MIT, `vendor/html2canvas-1.4.1`); the build copies them to `assets/vendor/` and `src/site.js` loads them lazily. The header gradient is `src/header-gradient.js`, our own WebGL port of ShaderGradient's default plane shaders (github.com/ruucm/shadergradient, MIT); it has no dependencies and is inlined into the Artifact build. The sun and moon icons were added from Phosphor core 2.1.1.
 
 ## Content rules the checks enforce
 

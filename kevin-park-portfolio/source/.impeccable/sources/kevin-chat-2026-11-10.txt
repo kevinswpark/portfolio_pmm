@@ -1,0 +1,33 @@
+== Kevin, 2026-11-10: homepage trim approved in chat ("Yes, apply them"). Copy below is what was approved. ==
+
+Hero subhead:
+I turn complex fintech and gaming products into positioning people repeat, then build the campaigns, sites, and demos that carry it.
+
+Proof strip (replaces the "I get into how a product works…" statement):
+Selected results
+20% → ~50%
+first-transfer conversion, customers aged 50+
++24%
+site conversion after a 20-page redesign
+$40M
+holiday remittance volume from bilingual campaigns
+300%
+year-over-year US growth on 40% of the prior budget
+
+Work tile titles (case study pages keep their own titles):
+Giving ZBD one line to explain itself
+Getting Korean Americans 50+ to their first transfer
+sign-up-to-first-transfer conversion after the commercial aired
+
+Experience focus lines (replace the three chips per role):
+B2B · Gaming payments infrastructure
+B2C · Digital banking and investing
+B2C · Cross-border payments, 0 to 1
+
+About, condensed:
+I started my career in fintech and became a money person: how money moves, what it means to people, and what gets in the way. Like many families, mine had its share of money worries, so I want money to be easier to understand for everyone.
+I’ll happily dig into how a payment rail works, then come back to the question that matters: “So what? Why should anyone care?”
+Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I’m picking up Japanese as my third language.
+
+Removed: the experience intro line, the "What you can expect" block, the ZBD Money Layer bullet, the Finfare Rewards bullet, the WireBarley Nepal and dashboards bullets. Skills trimmed to eight.
+Section order: hero, proof strip, Selected work, Experience, About, closing.
