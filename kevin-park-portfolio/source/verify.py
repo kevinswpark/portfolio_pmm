@@ -27,22 +27,23 @@ def norm(s):
 # ---------- 1. copy is verbatim from its sources ----------
 SOURCES = ["notion-2026-09-27.txt", "notion-lifecycle-2026-09-27.txt", "resume-excerpt-2026-09-27.txt",
            "zbdpay-2026-09-27.json", "zbdpay-lifecycle-2026-09-27.json", "wirebarley-case-study-2026-10-05.md",
-           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt", "kevin-chat-2026-10-11.txt", "kevin-chat-2026-11-05.txt"]
+           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt", "kevin-chat-2026-10-11.txt", "kevin-chat-2026-11-05.txt", "kevin-chat-2026-11-10.txt"]
 SRC = norm(" ".join(Path(".impeccable/sources", f).read_text() for f in SOURCES))
 AB = C.ABOUT
 sourced = [C.HERO["role"], C.HERO["sub"], C.HERO["h1_before"] + C.HERO["h1_em"] + C.HERO["h1_after"], C.HERO["cta_work"], C.HERO["cta_linkedin"],
-           C.PHILOSOPHY["lead"], C.PHILOSOPHY["body"], C.WORK["h2"].lower(), C.UI["about"], C.CLOSING["h2"],
+           C.PROOF["label"], C.WORK["h2"].lower(), C.UI["about"], C.CLOSING["h2"],
            C.WORK["ml"]["title"], C.WORK["ml"]["problem"], C.WORK["ml"]["impact"], C.WORK["ml"]["result"],
-           C.WORK["lc"]["desc"], C.ML["deck"], C.EXPERIENCE["profile"], C.LINKEDIN_DISPLAY]
-sourced += [AB["h2"], " ".join(AB["lead"]), AB["beyond_h"], AB["expect_h"]] + AB["intro"] + AB["beyond"] + [" ".join(line) for line in AB["expect"]]
+           C.WORK["lc"]["desc"], C.ML["deck"], C.LINKEDIN_DISPLAY]
+sourced += [x for stat in C.PROOF["stats"] for x in stat[:2]] + list(C.WORK["wb"]["stat"])
+sourced += [AB["h2"], " ".join(AB["lead"]), AB["beyond_h"]] + AB["intro"] + AB["beyond"]
 sourced += C.EXPERIENCE["education"] + C.EXPERIENCE["skills"]
 sourced += [C.META["home_desc"], C.META["ml_desc"], C.META["lc_desc"], C.WORK["lc"]["desc"], C.WORK["lc"]["impact"]]
 sourced += [C.WORK["lc"]["title"], C.WORK["lc"]["impact"], C.LC["h1"], C.LC["deck"], C.LC["follows"]] + C.WORK["lc"]["result"]
 sourced += C.LC["naming"]["tried"] + C.LC["naming"]["final"] + C.DIAGRAM["step"]
 for r in C.EXPERIENCE["roles"]:
-    sourced += [r["title"], r["company"], r["place"], r["start"], r["end"]] + r["focus"] + [b for b, _ in r["bullets"]]
+    sourced += [r["title"], r["company"], r["place"], r["start"], r["end"], r["focus"]] + [b for b, _ in r["bullets"]]
 W = C.WORK["wb"]
-sourced += [W["title"], W["problem"], W["result"], W["impact"], C.WB["h1"], C.WB["deck"], C.UI["watch"]] + [v for _, v in C.WB["facts"]]
+sourced += [W["title"], W["problem"], W["result"], C.WB["h1"], C.WB["deck"], C.UI["watch"]] + [v for _, v in C.WB["facts"]]
 for t, d in C.WB["steps"]:
     sourced += [t, d]
 for A in (C.ML, C.LC, C.WB):
@@ -95,9 +96,9 @@ stale = [x for x in ("Checked ", "Set in type", "Specialization", "Concentration
                      "How I work", "bento", "closing__url", "Product marketing connects what a company builds", "then bring them into websites, sales decks") if x in TEXT_HTML]
 check("no retired copy, no spelled-out percent or -plus, one audience term", not stale, stale)
 home_html = Path("dist/site/index.html").read_text()
-order = [home_html.find(s) for s in ('id="work"', 'id="about"', 'id="experience"', 'class="closing')]
-check("homepage order: Selected work, About, Experience, closing", -1 not in order and order == sorted(order), order)
-about_html = home_html.split('id="about"')[1].split('id="experience"')[0]
+order = [home_html.find(s) for s in ('class="stats', 'id="work"', 'id="experience"', 'id="about"', 'class="closing')]
+check("homepage order: proof strip, Selected work, Experience, About, closing", -1 not in order and order == sorted(order), order)
+about_html = home_html.split('id="about"')[1].split('class="closing')[0]
 banned = [x for x in ("—", "unlock", "bring ideas to life") if x in about_html]
 if not AB["portrait"]:
     banned += [x for x in ("<img", "about__portrait", "<figure") if x in about_html]
@@ -108,8 +109,9 @@ series = "The work also supported ZBD’s Series C fundraising, which closed in 
 check("Series C paragraph sits in The line and the framework, after the framework paragraph",
       series in line_sec and line_sec.find("messaging framework around it.") < line_sec.find(series) < line_sec.find("fig__panel--proof"))
 zbd = next(r for r in C.EXPERIENCE["roles"] if r["company"] == "ZBD")
-check("ZBD keeps the website bullet and adds the demos bullet, no figures", len(zbd["bullets"]) == 3 and "website copy rewrite" in zbd["bullets"][1][0]
-      and zbd["bullets"][2][0].startswith("Created interactive demos") and not any(f for _, f in zbd["bullets"]))
+check("ZBD keeps the website and demos bullets, no figures", len(zbd["bullets"]) == 2 and "website copy rewrite" in zbd["bullets"][0][0]
+      and zbd["bullets"][1][0].startswith("Created interactive demos") and not any(f for _, f in zbd["bullets"]))
+check("every role shows two bullets", all(len(r["bullets"]) == 2 for r in C.EXPERIENCE["roles"]), [len(r["bullets"]) for r in C.EXPERIENCE["roles"]])
 for page in ("money-layer", "money-lifecycle"):
     html = Path(f"dist/site/work/{page}/index.html").read_text()
     host = re.search(r'<a class="proof__host" href="https://zbdpay.com/"', html)
@@ -190,20 +192,15 @@ async def main():
               if (top === null || Math.abs(y - top) > 4) { if (line) out.push(line); line = m[0]; top = y } else line += ' ' + m[0] }
             out.push(line); return out };
           const full = [...document.querySelectorAll('.about__prose p')].flatMap(p => lines(p).slice(0, -1)).map(l => l.length);
-          const li = [...document.querySelectorAll('.expect li')];
-          const slow = document.querySelector('.expect__phrase--slow'), fast = document.querySelector('.expect__phrase--fast');
           const sub = document.querySelector('.hero__sub'), lh = parseFloat(getComputedStyle(sub).lineHeight);
           return {
             avg: Math.round(full.reduce((a, b) => a + b, 0) / full.length), proseFont: parseFloat(getComputedStyle(document.querySelector('.about__prose')).fontSize),
             lead: parseFloat(getComputedStyle(document.querySelector('.about__lead')).fontSize), hero: parseFloat(getComputedStyle(document.querySelector('.hero h1')).fontSize),
-            lines: li.length, cards: li.filter(e => getComputedStyle(e).backgroundColor !== 'rgba(0, 0, 0, 0)' || getComputedStyle(e).borderTopWidth !== '0px').length,
-            slow: slow && [slow.textContent, getComputedStyle(slow).fontStretch], fast: fast && [fast.textContent, getComputedStyle(fast).fontStretch, getComputedStyle(fast).fontStyle],
             imgs: [...document.querySelectorAll('.about img')].map(i => { const b = i.getBoundingClientRect(); return [!!i.getAttribute('width'), !!i.getAttribute('height'), i.alt.length > 10, Math.abs(b.width / b.height - i.naturalWidth / i.naturalHeight) < 0.02] }),
             anim: [...document.querySelectorAll('.about, .about *')].filter(e => getComputedStyle(e).animationName !== 'none').length,
             h3: [...document.querySelectorAll('.about h3')].map(h => h.textContent),
-            subFont: parseFloat(getComputedStyle(sub).fontSize), leadFont: parseFloat(getComputedStyle(document.querySelector('.statement__body')).fontSize),
+            subFont: parseFloat(getComputedStyle(sub).fontSize), leadFont: (() => { const d = document.createElement('div'); d.style.fontSize = 'var(--t-lead)'; document.body.append(d); const v = parseFloat(getComputedStyle(d).fontSize); d.remove(); return v })(),
             subLines: Math.round(sub.getBoundingClientRect().height / lh),
-            rows: li.map(e => new Set([...e.querySelectorAll('.expect__phrase')].map(s => Math.round(s.getBoundingClientRect().top))).size),
           } }"""
         for w, h in ((1440, 900), (768, 1024), (390, 844)):
             ctx = await b.new_context(viewport={"width": w, "height": h}, reduced_motion="reduce")
@@ -223,22 +220,16 @@ async def main():
                 check("About prose holds a 60 to 70 character measure @1440", 60 <= m["avg"] <= 70, m["avg"])
             check(f"About prose stays at reading size @{w}", m["proseFont"] >= 17, m["proseFont"])
             check(f"About opening is smaller than the hero headline @{w}", m["lead"] < m["hero"] * 0.7, [m["lead"], m["hero"]])
-            check(f"About subsections and three typographic lines, no cards @{w}", m["h3"] == [AB["beyond_h"], AB["expect_h"]] and m["lines"] == 3 and m["cards"] == 0, m)
-            check(f"Long thought processes and Fastest execution set in contrasting widths @{w}",
-                  m["slow"] and m["fast"] and m["slow"][0] == "Long thought processes." and m["fast"][0] == "Fastest execution." and m["slow"][1] != m["fast"][1] and m["fast"][2] == "italic", [m["slow"], m["fast"]])
-            if w >= 768:
-                check(f"each What you can expect line sits on one line @{w}", m["rows"] == [1, 1, 1], m["rows"])
+            check(f"About has one subsection, Beyond the work @{w}", m["h3"] == [AB["beyond_h"]], m["h3"])
             check(f"About portrait images keep their proportions and carry size and alt @{w}", all(all(x) for x in m["imgs"]), m["imgs"])
             check(f"nothing in About animates under reduced motion @{w}", m["anim"] == 0, m["anim"])
             check(f"hero supporting line keeps lead size and wraps in {7 if w < 600 else 5} lines or fewer @{w}", m["subFont"] == m["leadFont"] and m["subLines"] <= (7 if w < 600 else 5), [m["subFont"], m["leadFont"], m["subLines"]])
             await ctx.close()
 
-        # reduced motion: statement renders lit; keyboard focus on the About nav link is visible
+        # keyboard focus on the About nav link is visible
         ctx = await b.new_context(viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
         pg = await ctx.new_page()
         await pg.goto(BASE + "/", wait_until="networkidle")
-        lit = await pg.evaluate("[getComputedStyle(document.querySelector('.reveal span')).color, getComputedStyle(document.body).color, getComputedStyle(document.querySelector('.reveal span')).animationName]")
-        check("intro statement fully lit and static under reduced motion", lit[0] == lit[1] and lit[2] == "none", lit)
         for _ in range(4):
             await pg.keyboard.press("Tab")
         foc = await pg.evaluate("[document.activeElement.textContent, getComputedStyle(document.activeElement).outlineStyle, getComputedStyle(document.activeElement).outlineWidth]")

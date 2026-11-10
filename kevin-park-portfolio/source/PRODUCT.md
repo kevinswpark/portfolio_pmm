@@ -44,7 +44,7 @@ Visitors arrive from LinkedIn, applications, and referrals, often skimming on a 
 
 ## Brand Commitments
 
-- Visual direction (user, 2026-11-10): unslopped. Quiet ink chrome, Coinbase blue as the one accent, the hero as a matte payment card, and color kept for the case study diagrams. This retires the 2026-09-27 "dark neon cards" direction (four-hue gradients, glows, gradient tiles, pills). See DESIGN.md.
+- Visual direction (user, 2026-11-10): unslopped. Quiet ink chrome, Coinbase blue as the one accent, the hero as a matte payment card, and color kept for the case study diagrams. This retires the 2026-09-27 "dark neon cards" direction (four-hue gradients, glows, gradient tiles, pills). See DESIGN.md. Amended 2026-11-10 (user): amber #FFB547 as a contrast accent for place and emphasis, and liquid-glass-js on the nav. Amended again 2026-11-10 (user): a light/dark switch with an off-white (#FFFFFA) light theme, and a moving shader gradient (ported from ShaderGradient) on the main headers.
 - Voice: clear, specific, measured, concise. No em dashes, sentence case headers, US spelling, no "not X, but Y", no colon-summary intros, no hype adjectives, bold only for real warnings.
 
 ## Evidence on Hand

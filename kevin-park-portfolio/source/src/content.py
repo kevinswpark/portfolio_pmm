@@ -67,7 +67,7 @@ HERO = {  # BRIEF
     "h1_before": "There’s a ",
     "h1_em": "story",
     "h1_after": " inside your complex product.",
-    "sub": "I turn complex products into clear positioning and messaging, then build what helps people get it. From branding and campaigns to websites, videos, apps, and AI projects.",  # KEVIN 2026-10-11 (replaced AUDIT H01)
+    "sub": "I turn complex fintech and gaming products into positioning people repeat, then build the campaigns, sites, and demos that carry it.",  # KEVIN 2026-11-10 (homepage trim; replaced the 2026-10-11 line)
     "cta_work": "Explore the work",
     "cta_linkedin": "Connect on LinkedIn",
     "card_kicker": "Case study",
@@ -75,15 +75,20 @@ HERO = {  # BRIEF
     "card_brand": "ZBD",
 }
 
-PHILOSOPHY = {  # KEVIN 2026-10-11 (replaced BRIEF section 3 and AUDIT H02)
-    "lead": "I get into how a product works, why someone would use it, and what it takes to get them there.",
-    "body": "That work can become a brand, a campaign, a product demo, or something people can try for themselves.",
+PROOF = {  # KEVIN 2026-11-10: proof strip under the hero (replaced the PHILOSOPHY statement). Figures from the resume and case study.
+    "label": "Selected results",
+    "stats": [
+        ("20% → ~50%", "first-transfer conversion, customers aged 50+", "WireBarley"),
+        ("+24%", "site conversion after a 20-page redesign", "Finfare"),
+        ("$40M", "holiday remittance volume from bilingual campaigns", "WireBarley"),
+        ("300%", "year-over-year US growth on 40% of the prior budget", "WireBarley"),
+    ],
 }
 
 WORK = {
     "h2": "Selected work",  # BRIEF
     "ml": {
-        "title": "Using a visual metaphor to explain ZBD’s role",  # BRIEF
+        "title": "Giving ZBD one line to explain itself",  # KEVIN 2026-11-10 (outcome-led tile title; case study keeps its BRIEF title)
         "problem": "ZBD offered financial infrastructure for games, but we lacked a consistent way to explain its role. I developed “The Money Layer for Games” to give the company a shared description.",  # AUDIT H04
         "result": "The Money Layer for Games",
         "impact": "ZBD uses the line on its public website.",  # AUDIT H04, M06
@@ -95,35 +100,24 @@ WORK = {
         "impact": "Used in ZBD’s messaging framework, sales decks, and public website.",  # AUDIT H05
     },
     "wb": {  # WB case study file, verbatim
-        "title": "Driving tech adoption (and how I changed customer behaviors)",
+        "title": "Getting Korean Americans 50+ to their first transfer",  # KEVIN 2026-11-10 (outcome-led tile title; case study keeps its own)
         "problem": "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 20% of sign-ups in this group reached that point.",
         "result": "Korean-language TV commercial",
-        "impact": "In the period after the commercial aired, sign-up-to-first-transfer conversion in this group rose to nearly 50%.",
+        "stat": ("20% → ~50%", "sign-up-to-first-transfer conversion after the commercial aired"),  # KEVIN 2026-11-10, replaces the impact sentence; figures from the case study
     },
 }
 
-ABOUT = {  # KEVIN 2026-10-11, verbatim (straight quotes set as curly). Replaces the "How I work" section.
+ABOUT = {  # KEVIN 2026-11-10: condensed from the 2026-10-11 About (lead verbatim). "What you can expect" removed.
     "h2": "About",
     "lead": ["I help people understand new technology.", "The more complicated, the better."],
     "intro": [
-        "Hello, I’m Kevin. I’m a product marketer, startup junkie, 0-to-1 builder, and often the person connecting the dots when things are broken, both in and outside of work.",
-        "I happened to start my career in fintech, and somehow, I’ve become a money person. How money works, what it means to people, and what gets in the way of making it work better in our lives. That’s where I’ve spent most of my time and curiosity.",
-        "I believe money should be easier to understand, more approachable, and accessible to everyone. Like many families, mine had its share of money worries, and sometimes those worries took the joy out of things that should’ve been simple. I’ve seen how much money shapes our everyday lives, and I want to make the world a little more money-friendly.",
-        "I find the greatest joy in making things easier for people. I’ll happily dig into the technical details of how money moves, why it moves, and who gets it. But at the end of the day, I always come back to the same question: “So what? Why should anyone care?”",
+        "I started my career in fintech and became a money person: how money moves, what it means to people, and what gets in the way. Like many families, mine had its share of money worries, so I want money to be easier to understand for everyone.",
+        "I’ll happily dig into how a payment rail works, then come back to the question that matters: “So what? Why should anyone care?”",
     ],
     "beyond_h": "Beyond the work",
     "beyond": [
-        "I’ve called South Korea, Canada, and the United States home at different points in my life. And lately, Tokyo has been making a pretty strong case for joining that list. I’m also picking up Japanese as my third language.",
-        "People who know me well would probably have very different answers about which cultural bucket I fit into. I’m Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I enjoy the blend, borrowing bits and pieces from different cultures and mixing them into my own melting pot of thoughts.",
-        "I take pride in simplifying problems at work and outside of it, and finding solutions that actually stick. I like being the person people come to when something doesn’t make sense or just isn’t working. And there’s something pretty great about knowing I’ve made someone’s day a little easier.",
+        "Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I’m picking up Japanese as my third language.",
     ],
-    "expect_h": "What you can expect",
-    "expect": [  # three typographic lines; build.py sets each sentence as one unit
-        ["Hard work.", "Long thought processes.", "Fastest execution."],
-        ["Cool branding.", "Good conversations.", "Stellar ideas."],
-        ["Diligence.", "A human touch.", "Vibe coding things that vibe."],
-    ],
-    "contrast": {"Long thought processes.": "slow", "Fastest execution.": "fast"},  # set in contrasting type widths
     # Portrait: None until a real photo of Kevin is added. To add one, put the file in assets-src/
     # and set, for example:
     #   "portrait": {"file": "kevin-park.jpg", "width": 1200, "height": 1500,
@@ -135,7 +129,7 @@ ABOUT = {  # KEVIN 2026-10-11, verbatim (straight quotes set as curly). Replaces
 
 EXPERIENCE = {  # RESUME
     "h2": "Experience",
-    "profile": "I’ve worked on product marketing for gaming payments, digital banking, and cross-border remittances.",  # AUDIT H06
+    # 2026-11-10 trim: intro line removed, one focus line per role, two bullets per role, skills shortened.
     "roles": [
         {
             "title": "Senior Product Marketing Manager",
@@ -143,9 +137,8 @@ EXPERIENCE = {  # RESUME
             "place": "Remote",
             "start": "May 2025",
             "end": "Present",
-            "focus": ["Gaming fintech infrastructure", "B2B product marketing", "payments and rewards platform"],
+            "focus": "B2B · Gaming payments infrastructure",  # KEVIN 2026-11-10
             "bullets": [
-                ("Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.", []),  # KEVIN 2026-10-11 (replaced AUDIT H07), quote marks logged in EDITS
                 ("Led the website copy rewrite and product naming work, incorporating feedback from business development and industry events.", []),  # AUDIT H07
                 ("Created interactive demos and product videos to show how ZBD’s infrastructure works inside a game.", []),  # KEVIN 2026-10-11
             ],
@@ -156,10 +149,9 @@ EXPERIENCE = {  # RESUME
             "place": "Irvine, CA",
             "start": "Feb 2024",
             "end": "Jan 2025",
-            "focus": ["Digital Banking & Investments", "GTM Strategy", "Consumer & Merchant Growth"],
+            "focus": "B2C · Digital banking and investing",  # KEVIN 2026-11-10
             "bullets": [
                 ("Led go-to-market for digital banking and automated investing products, informed by 30+ customer interviews and six customer personas.", ["30+"]),  # AUDIT H08
-                ("Created the messaging framework and sales materials for Finfare Rewards, supporting a network of 3,000+ merchant partners.", ["3,000+"]),  # KEVIN 2026-11-05, 3,000+ confirmed
                 ("Led a 20-page website redesign with Product and UX. Engagement rose 36% and conversion rose 24%.", ["36%", "24%"]),  # AUDIT H08
             ],
         },
@@ -169,17 +161,15 @@ EXPERIENCE = {  # RESUME
             "place": "Los Angeles, CA",
             "start": "June 2020",
             "end": "Jan 2024",
-            "focus": ["Cross-Border Payments", "B2C Growth", "0 to 1"],
+            "focus": "B2C · Cross-border payments, 0 to 1",  # KEVIN 2026-11-10
             "bullets": [
-                ("Scaled the Nepal corridor to $5M in peak weekly remittance volume, with 300% year-over-year transaction growth.", ["$5M", "300%"]),  # KEVIN 2026-11-05
                 ("Led bilingual campaigns that drove $40M in holiday remittance volume. WireBarley reached the leading market position among Korean Americans by 2023.", ["$40M"]),  # KEVIN 2026-11-05
                 ("Delivered 300% year-over-year US growth while operating within 40% of the previous year’s North American marketing budget.", ["300%", "40%"]),  # KEVIN 2026-11-05
-                ("Built executive dashboards (Tableau, R) to guide product, retention, and expansion decisions.", []),
             ],
         },
     ],
     "education": ["Bachelor of Commerce, UBC Sauder School of Business, Vancouver, BC"],
-    "skills": ["Product Marketing", "Go-to-Market Strategy", "Product Positioning", "Messaging Frameworks", "ICP Segmentation", "Sales Enablement", "Competitive Intelligence", "Product Launch", "Fintech and Payments", "Cross-Functional Leadership", "Tableau", "Excel", "R", "Notion", "Bilingual (English / Korean)"],
+    "skills": ["Product Positioning", "Messaging Frameworks", "Go-to-Market Strategy", "Sales Enablement", "Competitive Intelligence", "Tableau", "R", "Bilingual (English / Korean)"],  # RESUME, trimmed 2026-11-10
 }
 
 CLOSING = {"h2": "Let’s talk.", "cta": "Connect on LinkedIn"}  # h2 KEVIN 2026-10-11 (replaced the LinkedIn URL); cta BRIEF
@@ -362,12 +352,6 @@ EDITS = [
         "why": "Single quotes in Kevin's message were nested inside his own quotation. On the page the line takes the double quotes it has everywhere else. Wording unchanged.",
         "from": "‘The Money Layer for Games’ and the broader branding work contributed to how the company presented itself as it raised its next round.",
         "to": "“The Money Layer for Games” and the broader branding work contributed to how the company presented itself as it raised its next round.",
-    },
-    {
-        "where": "Homepage Experience, ZBD first bullet",
-        "why": "Same nested-quote fix as the Series C paragraph. Wording unchanged.",
-        "from": "Developed ‘The Money Layer for Games’ positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
-        "to": "Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
     },
 ]
 

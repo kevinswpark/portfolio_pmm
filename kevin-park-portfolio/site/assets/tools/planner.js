@@ -238,7 +238,7 @@
         + '<span class="fp-bar__needs" style="flex-grow:' + m.split[0] + '">' + pct(m.split[0]) + "</span>"
         + '<span class="fp-bar__wants" style="flex-grow:' + m.split[1] + '">' + pct(m.split[1]) + "</span>"
         + '<span class="fp-bar__save" style="flex-grow:' + m.split[2] + '">' + pct(m.split[2]) + "</span></div>"
-        + '<dl class="fp-legend"><div style="--c:#6A7388"><dt>Needs</dt><dd>' + money(m.needsB) + '</dd></div><div style="--c:#454C5E"><dt>Wants</dt><dd>' + money(m.wantsB)
+        + '<dl class="fp-legend"><div style="--c:var(--chart-2)"><dt>Needs</dt><dd>' + money(m.needsB) + '</dd></div><div style="--c:var(--chart-3)"><dt>Wants</dt><dd>' + money(m.wantsB)
         + '</dd></div><div style="--c:var(--lime)"><dt>Savings</dt><dd class="fp-save">' + money(m.saveB) + "</dd></div></dl>"));
     } else out("split", result("<p>Add your take-home pay in step 1 to see your numbers.</p>"));
     var resetLbl = $("[data-reset-label]");

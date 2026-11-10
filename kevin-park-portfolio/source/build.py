@@ -52,7 +52,7 @@ def _icon_path(name):
 
 ICON_NAMES = ["arrow-down", "arrow-right", "arrow-left", "arrow-up-right", "linkedin-logo",
               "magnifying-glass-plus", "x", "check", "caret-down", "lock-simple", "download-simple", "plus",
-              "calculator", "arrow-counter-clockwise"]
+              "calculator", "arrow-counter-clockwise", "sun", "moon"]
 ICONS = {n: _icon_path(n) for n in ICON_NAMES}
 
 
@@ -139,6 +139,22 @@ def tools_menu(ctx):
     )
 
 
+def theme_button():
+    """Light/dark switch. The label names the mode it switches to; site.js keeps it current."""
+    return (
+        '<button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light mode" title="Switch to light mode">'
+        + icon("sun", "theme-btn__sun") + icon("moon", "theme-btn__moon") + "</button>"
+    )
+
+
+# Runs before first paint so a saved or system light theme never flashes dark.
+THEME_BOOT = (
+    "<script>(function(){var t;try{t=localStorage.getItem('kp-theme')}catch(e){}"
+    "if(t!=='light'&&t!=='dark')t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';"
+    "document.documentElement.setAttribute('data-theme',t);})();</script>"
+)
+
+
 def nav(ctx):
     skip = ctx.url(section="main") if ctx.mode == "spa" else "#" + ctx.id("main")
     return (
@@ -151,6 +167,7 @@ def nav(ctx):
         f'<a href="{ctx.url("home", "experience")}" data-nav="experience">{U["experience"]}</a>'
         f"{tools_menu(ctx)}"
         "</div>"
+        f"{theme_button()}"
         f"{linkedin_btn('blue', compact=True)}"
         "</nav></header>"
     )
@@ -223,7 +240,7 @@ def tile_wb(ctx, compact=False):
         f'<h3 id="{hid}"><a href="{ctx.url("wb")}">{W["title"]}</a></h3>'
         f'<p class="tile__desc">{W["problem"]}</p>'
         f'<p class="result"><span class="result__chip">{W["result"]}</span></p>'
-        f'<p class="tile__impact">{W["impact"]}</p>'
+        f'<p class="tile__stat"><span class="tile__stat-v">{W["stat"][0]}</span><span class="tile__stat-k">{W["stat"][1]}</span></p>'
         f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
         "</div>"
         f'<div class="tile__art"><ol class="mini-story" aria-label="{escape(U["storyboard"])}">{steps}</ol></div>'
@@ -234,10 +251,6 @@ def tile_wb(ctx, compact=False):
 # ---------------------------------------------------------------------------
 # pages
 # ---------------------------------------------------------------------------
-def words(text):
-    return " ".join(f"<span>{escape(w, quote=False)}</span>" for w in text.split(" "))
-
-
 def hero_role(text):
     """Role line above the headline. The middle dot is visual only; each half stays on one line."""
     title, field = text.split(" · ", 1)
@@ -262,18 +275,11 @@ def about_portrait(ctx, P):
 
 def about_section(ctx):
     A = C.ABOUT
-    ah, bh, xh = ctx.id("about-h"), ctx.id("about-beyond-h"), ctx.id("about-expect-h")
+    ah, bh = ctx.id("about-h"), ctx.id("about-beyond-h")
     portrait = about_portrait(ctx, A["portrait"])
     lead = "".join(f'<span class="about__lead-line">{s}</span> ' for s in A["lead"]).strip()
     intro = "".join(f"<p>{p}</p>" for p in A["intro"])
     beyond = "".join(f"<p>{p}</p>" for p in A["beyond"])
-
-    def phrase(s):
-        style = A["contrast"].get(s)
-        cls = f"expect__phrase expect__phrase--{style}" if style else "expect__phrase"
-        return f'<span class="{cls}">{s}</span>'
-
-    lines = "".join("<li>" + " ".join(phrase(s) for s in line) + "</li>" for line in A["expect"])
     return (
         f'<section class="about wrap" id="{ctx.id("about")}" aria-labelledby="{ah}">'
         '<div class="about__row about__row--open">'
@@ -286,19 +292,15 @@ def about_section(ctx):
         f'<div class="about__side"><h3 class="about__sub" id="{bh}">{A["beyond_h"]}</h3></div>'
         f'<div class="about__main"><div class="about__prose">{beyond}</div></div>'
         "</div>"
-        '<div class="about__row">'
-        f'<div class="about__side"><h3 class="about__sub" id="{xh}">{A["expect_h"]}</h3></div>'
-        f'<div class="about__main about__main--expect"><ul class="expect" aria-labelledby="{xh}">{lines}</ul></div>'
-        "</div>"
         "</section>"
     )
 
 
 def home_main(ctx):
-    H, P = C.HERO, C.PHILOSOPHY
+    H, P = C.HERO, C.PROOF
     h1 = ctx.id("hero-h")
     hero = (
-        f'<section class="hero" aria-labelledby="{h1}">'
+        f'<section class="hero" aria-labelledby="{h1}"><div class="sg" data-sg aria-hidden="true"></div>'
         '<div class="wrap hero__grid">'
         '<div class="hero__text">'
         f'{hero_role(H["role"])}'
@@ -310,18 +312,22 @@ def home_main(ctx):
         f"{linkedin_btn('ghost')}"
         "</div></div></div>"
         f'<a class="hero__card" href="{ctx.url("ml")}" aria-label="{escape(U["read"])}: {escape(C.WORK["ml"]["title"])}">'
-        '<span class="card3d"><span class="card3d__face">'
+        '<span class="card3d" data-tilt><span class="card3d__face">'
         f'<span class="card3d__top"><span class="card3d__brand">{H["card_brand"]}</span>{icon("arrow-up-right", "card3d__go")}</span>'
         f'<span class="card3d__art"><span class="card3d__chip"></span>{diagrams.lines_svg()}</span>'
         f'<span class="card3d__line">{H["card_line"]}</span>'
         f'<span class="card3d__bottom"><span class="card3d__kicker">{H["card_kicker"]}</span></span>'
+        '<span class="card3d__sheen" aria-hidden="true"></span>'
         "</span></span></a>"
         "</div></section>"
     )
-    statement = (
-        f'<section class="statement wrap" aria-label="{escape(U["name"])}">'
-        f'<p class="statement__lead reveal">{words(P["lead"])}</p>'
-        f'<div class="statement__body"><p>{P["body"]}</p></div>'
+    stats = "".join(
+        f'<div class="stats__item"><dt class="stats__v">{v}</dt><dd class="stats__k">{k}</dd><dd class="stats__co">{co}</dd></div>'
+        for v, k, co in P["stats"]
+    )
+    proof = (
+        f'<section class="stats wrap" aria-label="{escape(P["label"])}">'
+        f'<dl class="stats__grid">{stats}</dl>'
         "</section>"
     )
     wh = ctx.id("work-h")
@@ -340,7 +346,7 @@ def home_main(ctx):
             '<div class="role__main">'
             f'<h3 class="role__title">{r["title"]}<span class="role__at">{r["company"]}</span></h3>'
             f'<p class="role__place">{r["place"]}</p>'
-            '<ul class="tags">' + "".join(f"<li>{t}</li>" for t in r["focus"]) + "</ul>"
+            f'<p class="role__focus">{r["focus"]}</p>'
             '<ul class="role__bullets">' + "".join(f"<li>{mark_figures(b, figs)}</li>" for b, figs in r["bullets"]) + "</ul>"
             "</div></li>"
         )
@@ -348,14 +354,13 @@ def home_main(ctx):
     experience = (
         f'<section class="exp wrap" id="{ctx.id("experience")}" aria-labelledby="{eh}">'
         f'<h2 class="h2" id="{eh}">{E["h2"]}</h2>'
-        f'<p class="exp__profile">{E["profile"]}</p>'
         f'<ol class="roles">{"".join(roles)}</ol>'
-        '<div class="exp__extra">'
-        f'<div class="card"><h3 class="card__h">{U["education"]}</h3>' + "".join(f"<p>{x}</p>" for x in E["education"]) + "</div>"
-        f'<div class="card card--wide"><h3 class="card__h">{U["skills"]}</h3><ul class="chips">' + "".join(f"<li>{s}</li>" for s in E["skills"]) + "</ul></div>"
-        "</div></section>"
+        '<dl class="exp__extra">'
+        f'<div><dt>{U["education"]}</dt>' + "".join(f"<dd>{x}</dd>" for x in E["education"]) + "</div>"
+        f'<div><dt>{U["skills"]}</dt><dd>' + " · ".join(E["skills"]) + "</dd></div>"
+        "</dl></section>"
     )
-    return f'<main id="{ctx.id("main")}" tabindex="-1">{hero}{statement}{work}{about_section(ctx)}{experience}{closing(ctx)}</main>'
+    return f'<main id="{ctx.id("main")}" tabindex="-1">{hero}{proof}{work}{experience}{about_section(ctx)}{closing(ctx)}</main>'
 
 
 def zbd_cta():
@@ -554,7 +559,7 @@ def article_main(ctx, A, next_label, next_tile):
     nh = ctx.id("next-h")
     return (
         f'<main id="{ctx.id("main")}" tabindex="-1"><div class="progress" aria-hidden="true"></div>'
-        '<header class="art-head"><div class="wrap art-head__in">'
+        '<header class="art-head"><div class="sg" data-sg aria-hidden="true"></div><div class="wrap art-head__in">'
         f'<a class="crumb" href="{ctx.url("home", "work")}">{icon("arrow-left")}{U["all_work"]}</a>'
         f'<h1 id="{ctx.id("title")}" tabindex="-1">{A["h1"]}</h1>'
         f'<p class="deck">{A["deck"]}</p><ul class="facts">{facts}</ul></div></header>'
@@ -825,7 +830,7 @@ def fp_main(ctx):
     cfg_json = json.dumps(cfg, ensure_ascii=False).replace("</", "<" + chr(92) + "/")
     return (
         f'<main id="{ctx.id("main")}" tabindex="-1" class="fp-page">'
-        '<header class="art-head">'
+        '<header class="art-head"><div class="sg" data-sg aria-hidden="true"></div>'
         '<div class="wrap art-head__in">'
         f'<h1 id="{hid}" tabindex="-1">{F["h1"]}</h1>'
         f'<p class="deck">{F["deck"]}</p>'
@@ -914,8 +919,10 @@ def head_static(ctx):
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
         f"<title>{escape(TITLE[ctx.page])}</title>",
         f'<meta name="description" content="{escape(DESC[ctx.page])}">',
-        '<meta name="color-scheme" content="dark">',
-        '<meta name="theme-color" content="#0B0D14">',
+        '<meta name="color-scheme" content="dark light">',
+        '<meta name="theme-color" content="#0B0D14" media="(prefers-color-scheme: dark)">',
+        '<meta name="theme-color" content="#FFFFFA" media="(prefers-color-scheme: light)">',
+        THEME_BOOT,
         f'<meta property="og:type" content="{"article" if ctx.page in ("ml", "lc", "wb") else "website"}">',
         f'<meta property="og:title" content="{escape(TITLE[ctx.page])}">',
         f'<meta property="og:description" content="{escape(DESC[ctx.page])}">',
@@ -928,6 +935,7 @@ def head_static(ctx):
         '<link rel="stylesheet" href="/assets/fonts/fonts.css">',
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
+        '<script src="/assets/header-gradient.js" defer></script>',
     ]
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
@@ -953,11 +961,17 @@ def build_static():
         )
     shutil.copy(ROOT / "src" / "site.css", out / "assets" / "site.css")
     shutil.copy(ROOT / "src" / "site.js", out / "assets" / "site.js")
+    shutil.copy(ROOT / "src" / "header-gradient.js", out / "assets" / "header-gradient.js")
     (out / "assets" / "favicon.svg").write_text(diagrams.FAVICON)
     for _, f, _ in FACES:
         shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
     (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
     shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
+    # Liquid glass on the nav (static build only; site.js loads these lazily on capable desktops).
+    glass = out / "assets" / "vendor"
+    glass.mkdir(parents=True, exist_ok=True)
+    shutil.copy(VENDOR / "html2canvas-1.4.1" / "html2canvas.min.js", glass / "html2canvas.min.js")
+    shutil.copy(VENDOR / "liquid-glass-js-78cb6cc" / "container.js", glass / "liquid-glass-container.js")
     tools = out / "assets" / "tools"
     tools.mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / "src" / "planner.js", tools / "planner.js")
@@ -1007,6 +1021,7 @@ def build_artifact():
     js = (ROOT / "src" / "site.js").read_text()
     html = (
         "<title>Kevin Park Portfolio</title>\n"
+        + THEME_BOOT + "\n"
         f'<meta name="description" content="{escape(C.META["home_desc"])}">\n'
         f"<style>{font_css_inline()}\n{css}</style>\n"
         + diagrams.defs_svg()
@@ -1014,6 +1029,7 @@ def build_artifact():
         + zoom_dialog()
         + '<script>document.documentElement.setAttribute("data-mode","spa");document.documentElement.setAttribute("lang","en");</script>'
         + f"<script>{js}</script>\n"
+        + f"<script>{(ROOT / 'src' / 'header-gradient.js').read_text()}</script>\n"
         + artifact_tools()
     )
     (out / "index.html").write_text(html)
