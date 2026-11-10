@@ -35,7 +35,7 @@ sourced = [C.HERO["role"], C.HERO["sub"], C.HERO["h1_before"] + C.HERO["h1_em"] 
            C.WORK["ml"]["title"], C.WORK["ml"]["problem"], C.WORK["ml"]["impact"], C.WORK["ml"]["result"],
            C.WORK["lc"]["desc"], C.ML["deck"], C.LINKEDIN_DISPLAY]
 sourced += [x for stat in C.PROOF["stats"] for x in stat[:2]] + list(C.WORK["wb"]["stat"])
-sourced += [AB["h2"], " ".join(AB["lead"]), AB["beyond_h"]] + AB["intro"] + AB["beyond"]
+sourced += [AB["h2"], " ".join(AB["lead"]), AB["beyond_h"], AB["expect_h"]] + AB["intro"] + AB["beyond"] + [" ".join(line) for line in AB["expect"]]
 sourced += C.EXPERIENCE["education"] + C.EXPERIENCE["skills"]
 sourced += [C.META["home_desc"], C.META["ml_desc"], C.META["lc_desc"], C.WORK["lc"]["desc"], C.WORK["lc"]["impact"]]
 sourced += [C.WORK["lc"]["title"], C.WORK["lc"]["impact"], C.LC["h1"], C.LC["deck"], C.LC["follows"]] + C.WORK["lc"]["result"]
@@ -109,9 +109,9 @@ series = "The work also supported ZBD’s Series C fundraising, which closed in 
 check("Series C paragraph sits in The line and the framework, after the framework paragraph",
       series in line_sec and line_sec.find("messaging framework around it.") < line_sec.find(series) < line_sec.find("fig__panel--proof"))
 zbd = next(r for r in C.EXPERIENCE["roles"] if r["company"] == "ZBD")
-check("ZBD keeps the website and demos bullets, no figures", len(zbd["bullets"]) == 2 and "website copy rewrite" in zbd["bullets"][0][0]
-      and zbd["bullets"][1][0].startswith("Created interactive demos") and not any(f for _, f in zbd["bullets"]))
-check("every role shows two bullets", all(len(r["bullets"]) == 2 for r in C.EXPERIENCE["roles"]), [len(r["bullets"]) for r in C.EXPERIENCE["roles"]])
+check("ZBD leads with the Money Layer bullet, then the website and demos bullets, no figures", len(zbd["bullets"]) == 3 and "Money Layer for Games" in zbd["bullets"][0][0]
+      and "website copy rewrite" in zbd["bullets"][1][0] and zbd["bullets"][2][0].startswith("Created interactive demos") and not any(f for _, f in zbd["bullets"]))
+check("ZBD shows three bullets, the other roles two", [len(r["bullets"]) for r in C.EXPERIENCE["roles"]] == [3, 2, 2], [len(r["bullets"]) for r in C.EXPERIENCE["roles"]])
 for page in ("money-layer", "money-lifecycle"):
     html = Path(f"dist/site/work/{page}/index.html").read_text()
     host = re.search(r'<a class="proof__host" href="https://zbdpay.com/"', html)
@@ -123,7 +123,7 @@ async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch()
         for w, h in ((1440, 900), (768, 1024), (390, 844)):
-            ctx = await b.new_context(viewport={"width": w, "height": h}, reduced_motion="reduce", color_scheme="dark")
+            ctx = await b.new_context(viewport={"width": w, "height": h}, reduced_motion="reduce", color_scheme="light")
             pg = await ctx.new_page()
             errs = []
             pg.on("pageerror", lambda e: errs.append(str(e)))
@@ -220,7 +220,7 @@ async def main():
                 check("About prose holds a 60 to 70 character measure @1440", 60 <= m["avg"] <= 70, m["avg"])
             check(f"About prose stays at reading size @{w}", m["proseFont"] >= 17, m["proseFont"])
             check(f"About opening is smaller than the hero headline @{w}", m["lead"] < m["hero"] * 0.7, [m["lead"], m["hero"]])
-            check(f"About has one subsection, Beyond the work @{w}", m["h3"] == [AB["beyond_h"]], m["h3"])
+            check(f"About subsections: Beyond the work, What you can expect @{w}", m["h3"] == [AB["beyond_h"], AB["expect_h"]], m["h3"])
             check(f"About portrait images keep their proportions and carry size and alt @{w}", all(all(x) for x in m["imgs"]), m["imgs"])
             check(f"nothing in About animates under reduced motion @{w}", m["anim"] == 0, m["anim"])
             check(f"hero supporting line keeps lead size and wraps in {7 if w < 600 else 5} lines or fewer @{w}", m["subFont"] == m["leadFont"] and m["subLines"] <= (7 if w < 600 else 5), [m["subFont"], m["leadFont"], m["subLines"]])

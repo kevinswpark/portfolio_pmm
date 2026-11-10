@@ -2,12 +2,13 @@
 
    A dependency-free WebGL port of the default "plane" look from ShaderGradient
    (https://github.com/ruucm/shadergradient, MIT, packages/shadergradient/src/shaders/defaults/plane).
-   Kept from the source: the classic Perlin noise (cnoise), the displacement of a plane along its
-   normal by 0.75 * cnoise(0.43 * position * density + time) * strength, and the color rule
-   mix(mix(color1, color2, smoothstep(-3, 3, pos.x)), color3, pos.z).
-   Replaced: three.js and react-three-fiber, and three's physical lighting chunks, which become one
-   soft key light and a clearcoat-like highlight. Colors come from CSS (--sg-1, --sg-2, --sg-3) so
-   each theme owns its palette.
+   Kept from the source: the classic Perlin noise (cnoise), a plane displaced along its normal, and
+   the color rule mix(mix(color1, color2, smoothstep(-3, 3, pos.x)), color3, height).
+   Changed 2026-11-10 (Kevin: "wavy, natural, and fluid", no bulges): the surface is no longer raw
+   Perlin noise, which reads as lumps that swell in place. It is two long swells that travel across
+   the plane, their crests bent by a slow, very low-frequency noise so they never run straight, with
+   no glossy highlight. Three.js lighting becomes one soft key light.
+   Colors come from CSS (--sg-1, --sg-2, --sg-3) so each theme owns its palette.
 
    Each element with [data-sg] gets a canvas. It renders at reduced resolution, pauses offscreen
    and in background tabs, and draws a single still frame under reduced motion. */
@@ -47,9 +48,16 @@
     " float n001=dot(g001,vec3(Pf0.xy,Pf1.z)),n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z)),n011=dot(g011,vec3(Pf0.x,Pf1.yz)),n111=dot(g111,Pf1);",
     " vec3 f=fade(Pf0);vec4 nz=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),f.z);",
     " vec2 nyz=mix(nz.xy,nz.zw,f.y);return 2.2*mix(nyz.x,nyz.y,f.x);}",
-    "float disp(vec2 p){return 0.75*cnoise(0.43*vec3(p,0.0)*uDensity+uTime*uSpeed)*uStrength;}",
+    /* Two travelling swells (wavelengths about 6 and 7 units, crossing at an angle). The noise
+       only bends their phase, so the surface stays a set of long crests instead of separate mounds. */
+    "float disp(vec2 p){",
+    " float t=uTime*uSpeed;",
+    " float bend=cnoise(vec3(p*0.11*uDensity,t*0.3));",
+    " float a=sin(p.x*1.05+p.y*0.30-t+bend*2.6);",
+    " float b=sin(p.x*0.50-p.y*0.70+t*0.7+bend*1.6+1.9);",
+    " return (0.58*a+0.42*b)*uStrength;}",
     "void main(){",
-    " float e=0.08;",
+    " float e=0.12;",
     " float h=disp(aPos),hx=disp(aPos+vec2(e,0.0)),hy=disp(aPos+vec2(0.0,e));",
     " vNormal=normalize(vec3(-(hx-h)/e,-(hy-h)/e,1.0));",
     " vPos=vec3(aPos,h);",
@@ -61,13 +69,12 @@
     "uniform vec3 uC1, uC2, uC3; uniform float uLight;",
     "varying vec3 vPos; varying vec3 vNormal;",
     "void main(){",
-    " vec3 base=mix(mix(uC1,uC2,smoothstep(-3.0,3.0,vPos.x)),uC3,clamp(vPos.z,0.0,1.0));",
+    " vec3 base=mix(mix(uC1,uC2,smoothstep(-3.0,3.0,vPos.x)),uC3,smoothstep(-0.7,0.9,vPos.z)*0.9);",
     " vec3 n=normalize(vNormal);",
     " vec3 L=normalize(vec3(-0.35,0.55,0.75));",
-    " float diff=max(dot(n,L),0.0);",
-    " vec3 H=normalize(L+vec3(0.0,0.0,1.0));",
-    " float spec=pow(max(dot(n,H),0.0),36.0);",
-    " vec3 col=base*(0.62+0.48*diff)+vec3(spec)*0.22*uLight;",
+    /* wrapped diffuse: slopes shade gently, with no hard terminator and no specular hot spot */
+    " float diff=dot(n,L)*0.5+0.5;",
+    " vec3 col=base*(0.72+0.36*diff);",
     " gl_FragColor=vec4(col,1.0);}"
   ].join("\n");
 
@@ -128,8 +135,8 @@
     gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
     var U = {};
     ["uMVP", "uTime", "uSpeed", "uDensity", "uStrength", "uC1", "uC2", "uC3", "uLight"].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
-    /* ShaderGradient's defaults: density 1.3, strength 4, speed 0.4 (slowed here; it sits behind reading) */
-    gl.uniform1f(U.uDensity, 1.3); gl.uniform1f(U.uStrength, 3.2); gl.uniform1f(U.uSpeed, 0.12);
+    /* density scales the bend noise, strength is the swell height in plane units, speed is slow: it sits behind reading */
+    gl.uniform1f(U.uDensity, 1.0); gl.uniform1f(U.uStrength, 0.6); gl.uniform1f(U.uSpeed, 0.22);
     gl.enable(gl.DEPTH_TEST);
 
     host.appendChild(canvas);

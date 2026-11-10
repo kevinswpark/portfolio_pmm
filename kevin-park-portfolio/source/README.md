@@ -5,7 +5,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
 ## What's here
 
 - `site/` is the deployable static site. Upload the folder to any static host at the domain root (Netlify, Vercel, Cloudflare Pages, GitHub Pages user site).
-  - `/` home: hero with role line, a four-figure proof strip, selected work, experience, a short About, and the "Let’s talk." LinkedIn card. The nav links Work, About, and Experience to homepage sections from every page.
+  - `/` home: hero with role line, a four-figure proof strip, selected work, experience, About (with “What you can expect”), and the "Let’s talk." LinkedIn card. The nav links Work, About, and Experience to homepage sections from every page.
   - `/work/money-layer/` the first case study.
   - `/work/money-lifecycle/` the second case study, on how ZBD's products work together.
   - `/work/wirebarley/` the WireBarley case study on first-transfer conversion among customers aged 50+.
@@ -16,7 +16,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
   - About portrait: `ABOUT["portrait"]` in `src/content.py` is `None`, so About renders text only. To add a photo, put it in `assets-src/` and set its file name, real pixel width and height, and alt text there, then rebuild.
   - `src/diagrams.py` draws the original diagrams. `src/site.css` and `src/site.js` hold styles and runtime.
   - `build.py` writes `dist/site/` and the single-file Artifact preview `dist/artifact/index.html`.
-  - `og.py` renders the social preview card (needs the local server running).
+  - `og.py` renders the social preview card in the light theme (needs the local server running; uses Playwright, or headless Chrome when Playwright is not installed). The build adds a short hash of the card to its URL so link previews refetch it.
   - `serve.py`, `verify.py`, `verify_spa.py`, `final_shots.py`: local server, Playwright checks, and review screenshots.
   - `.impeccable/sources/` keeps dated copies of the source text the checks compare against. The resume excerpt has the contact line and ZBD figures removed.
   - `DESIGN.md` and `.impeccable/design.json` document the design system, derived from the shipped build.

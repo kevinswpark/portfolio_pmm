@@ -67,7 +67,7 @@ HERO = {  # BRIEF
     "h1_before": "There’s a ",
     "h1_em": "story",
     "h1_after": " inside your complex product.",
-    "sub": "I turn complex fintech and gaming products into positioning people repeat, then build the campaigns, sites, and demos that carry it.",  # KEVIN 2026-11-10 (homepage trim; replaced the 2026-10-11 line)
+    "sub": "I get into how a product works, why someone would use it, and what it takes to get them there. Then I build what helps people get it, from campaigns and websites to demos and AI projects.",  # KEVIN 2026-11-10 (second pass: his 2026-10-11 statement line restored, joined to the 2026-10-11 supporting line)
     "cta_work": "Explore the work",
     "cta_linkedin": "Connect on LinkedIn",
     "card_kicker": "Case study",
@@ -107,17 +107,28 @@ WORK = {
     },
 }
 
-ABOUT = {  # KEVIN 2026-11-10: condensed from the 2026-10-11 About (lead verbatim). "What you can expect" removed.
+ABOUT = {  # KEVIN 2026-11-10, second pass ("the trim stripped a lot of what would define myself"): the 2026-10-11 About restored in his words, lightly tightened. "What you can expect" is back, verbatim.
     "h2": "About",
     "lead": ["I help people understand new technology.", "The more complicated, the better."],
     "intro": [
-        "I started my career in fintech and became a money person: how money moves, what it means to people, and what gets in the way. Like many families, mine had its share of money worries, so I want money to be easier to understand for everyone.",
-        "I’ll happily dig into how a payment rail works, then come back to the question that matters: “So what? Why should anyone care?”",
+        "Hello, I’m Kevin. I’m a product marketer, startup junkie, 0-to-1 builder, and often the person connecting the dots when things are broken, both in and outside of work.",
+        "I happened to start my career in fintech, and somehow, I’ve become a money person. How money works, what it means to people, and what gets in the way of making it work better in our lives.",
+        "Like many families, mine had its share of money worries, and sometimes those worries took the joy out of things that should’ve been simple. I want to make the world a little more money-friendly.",
+        "I find the greatest joy in making things easier for people. I’ll happily dig into the technical details of how money moves, why it moves, and who gets it. But I always come back to the same question: “So what? Why should anyone care?”",
     ],
     "beyond_h": "Beyond the work",
     "beyond": [
-        "Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I’m picking up Japanese as my third language.",
+        "I’ve called South Korea, Canada, and the United States home at different points in my life. Lately, Tokyo has been making a pretty strong case for joining that list, and I’m picking up Japanese as my third language.",
+        "I’m Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I enjoy the blend, borrowing bits and pieces from different cultures and mixing them into my own melting pot of thoughts.",
+        "I like being the person people come to when something doesn’t make sense or just isn’t working. There’s something pretty great about knowing I’ve made someone’s day a little easier.",
     ],
+    "expect_h": "What you can expect",
+    "expect": [  # three typographic lines; build.py sets each sentence as one unit
+        ["Hard work.", "Long thought processes.", "Fastest execution."],
+        ["Cool branding.", "Good conversations.", "Stellar ideas."],
+        ["Diligence.", "A human touch.", "Vibe coding things that vibe."],
+    ],
+    "contrast": {"Long thought processes.": "slow", "Fastest execution.": "fast"},  # set in contrasting type widths
     # Portrait: None until a real photo of Kevin is added. To add one, put the file in assets-src/
     # and set, for example:
     #   "portrait": {"file": "kevin-park.jpg", "width": 1200, "height": 1500,
@@ -130,6 +141,7 @@ ABOUT = {  # KEVIN 2026-11-10: condensed from the 2026-10-11 About (lead verbati
 EXPERIENCE = {  # RESUME
     "h2": "Experience",
     # 2026-11-10 trim: intro line removed, one focus line per role, two bullets per role, skills shortened.
+    # Second pass the same day: the ZBD Money Layer bullet is back, so ZBD shows three.
     "roles": [
         {
             "title": "Senior Product Marketing Manager",
@@ -139,6 +151,7 @@ EXPERIENCE = {  # RESUME
             "end": "Present",
             "focus": "B2B · Gaming payments infrastructure",  # KEVIN 2026-11-10
             "bullets": [
+                ("Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.", []),  # KEVIN 2026-10-11, restored 2026-11-10; quote marks logged in EDITS
                 ("Led the website copy rewrite and product naming work, incorporating feedback from business development and industry events.", []),  # AUDIT H07
                 ("Created interactive demos and product videos to show how ZBD’s infrastructure works inside a game.", []),  # KEVIN 2026-10-11
             ],
@@ -354,6 +367,13 @@ EDITS = [
         "to": "“The Money Layer for Games” and the broader branding work contributed to how the company presented itself as it raised its next round.",
     },
 ]
+
+EDITS.append({
+    "where": "Homepage Experience, ZBD first bullet",
+    "why": "Same nested-quote fix as the Series C paragraph. Wording unchanged.",
+    "from": "Developed ‘The Money Layer for Games’ positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
+    "to": "Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
+})
 
 NF = {"h1": "Page not found", "home": "Go to the homepage"}  # UI
 

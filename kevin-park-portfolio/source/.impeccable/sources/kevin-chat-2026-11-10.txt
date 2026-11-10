@@ -31,3 +31,26 @@ Canadian by nationality, Korean by nuance, American by drive, and Japanese by ta
 
 Removed: the experience intro line, the "What you can expect" block, the ZBD Money Layer bullet, the Finfare Rewards bullet, the WireBarley Nepal and dashboards bullets. Skills trimmed to eight.
 Section order: hero, proof strip, Selected work, Experience, About, closing.
+
+== Kevin, 2026-11-10, second pass: "The new trim of the language stripped a lot of what would define myself. Revert back some details ... and make it a bit more personal." Also: light mode is the default, and the header gradient should be "wavy, natural, and fluid". Copy below replaces the trimmed hero subhead and About above. ==
+
+Hero subhead (his 2026-10-11 statement line, joined to the 2026-10-11 supporting line):
+I get into how a product works, why someone would use it, and what it takes to get them there. Then I build what helps people get it, from campaigns and websites to demos and AI projects.
+
+About (the 2026-10-11 About, lightly tightened):
+Hello, I’m Kevin. I’m a product marketer, startup junkie, 0-to-1 builder, and often the person connecting the dots when things are broken, both in and outside of work.
+I happened to start my career in fintech, and somehow, I’ve become a money person. How money works, what it means to people, and what gets in the way of making it work better in our lives.
+Like many families, mine had its share of money worries, and sometimes those worries took the joy out of things that should’ve been simple. I want to make the world a little more money-friendly.
+I find the greatest joy in making things easier for people. I’ll happily dig into the technical details of how money moves, why it moves, and who gets it. But I always come back to the same question: “So what? Why should anyone care?”
+
+Beyond the work:
+I’ve called South Korea, Canada, and the United States home at different points in my life. Lately, Tokyo has been making a pretty strong case for joining that list, and I’m picking up Japanese as my third language.
+I’m Canadian by nationality, Korean by nuance, American by drive, and Japanese by taste. I enjoy the blend, borrowing bits and pieces from different cultures and mixing them into my own melting pot of thoughts.
+I like being the person people come to when something doesn’t make sense or just isn’t working. There’s something pretty great about knowing I’ve made someone’s day a little easier.
+
+What you can expect (restored verbatim from 2026-10-11):
+Hard work. Long thought processes. Fastest execution.
+Cool branding. Good conversations. Stellar ideas.
+Diligence. A human touch. Vibe coding things that vibe.
+
+Restored: the ZBD Money Layer bullet in Experience (wording from 2026-10-11).

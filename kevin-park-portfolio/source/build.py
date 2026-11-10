@@ -8,6 +8,7 @@ Set KP_SITE_URL=https://your-domain before building to emit absolute
 canonical, Open Graph, and sitemap URLs.
 """
 
+import hashlib
 import base64
 import json
 import os
@@ -142,15 +143,15 @@ def tools_menu(ctx):
 def theme_button():
     """Light/dark switch. The label names the mode it switches to; site.js keeps it current."""
     return (
-        '<button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to light mode" title="Switch to light mode">'
+        '<button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">'
         + icon("sun", "theme-btn__sun") + icon("moon", "theme-btn__moon") + "</button>"
     )
 
 
-# Runs before first paint so a saved or system light theme never flashes dark.
+# Light is the default (Kevin, 2026-11-10). Runs before first paint so a saved dark choice never flashes light.
 THEME_BOOT = (
     "<script>(function(){var t;try{t=localStorage.getItem('kp-theme')}catch(e){}"
-    "if(t!=='light'&&t!=='dark')t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';"
+    "if(t!=='dark')t='light';"
     "document.documentElement.setAttribute('data-theme',t);})();</script>"
 )
 
@@ -275,11 +276,18 @@ def about_portrait(ctx, P):
 
 def about_section(ctx):
     A = C.ABOUT
-    ah, bh = ctx.id("about-h"), ctx.id("about-beyond-h")
+    ah, bh, xh = ctx.id("about-h"), ctx.id("about-beyond-h"), ctx.id("about-expect-h")
     portrait = about_portrait(ctx, A["portrait"])
     lead = "".join(f'<span class="about__lead-line">{s}</span> ' for s in A["lead"]).strip()
     intro = "".join(f"<p>{p}</p>" for p in A["intro"])
     beyond = "".join(f"<p>{p}</p>" for p in A["beyond"])
+
+    def phrase(s):
+        style = A["contrast"].get(s)
+        cls = f"expect__phrase expect__phrase--{style}" if style else "expect__phrase"
+        return f'<span class="{cls}">{s}</span>'
+
+    lines = "".join("<li>" + " ".join(phrase(s) for s in line) + "</li>" for line in A["expect"])
     return (
         f'<section class="about wrap" id="{ctx.id("about")}" aria-labelledby="{ah}">'
         '<div class="about__row about__row--open">'
@@ -291,6 +299,10 @@ def about_section(ctx):
         '<div class="about__row">'
         f'<div class="about__side"><h3 class="about__sub" id="{bh}">{A["beyond_h"]}</h3></div>'
         f'<div class="about__main"><div class="about__prose">{beyond}</div></div>'
+        "</div>"
+        '<div class="about__row">'
+        f'<div class="about__side"><h3 class="about__sub" id="{xh}">{A["expect_h"]}</h3></div>'
+        f'<div class="about__main about__main--expect"><ul class="expect" aria-labelledby="{xh}">{lines}</ul></div>'
         "</div>"
         "</section>"
     )
@@ -912,6 +924,15 @@ def font_css_inline():
 # ---------------------------------------------------------------------------
 # static site
 # ---------------------------------------------------------------------------
+def _og_version():
+    """A short hash of the social card, added to its URL so link previews refetch it when it changes."""
+    og = ROOT / "assets-src" / "og.png"
+    return "?v=" + hashlib.md5(og.read_bytes()).hexdigest()[:8] if og.exists() else ""
+
+
+OG_VERSION = _og_version()
+
+
 def head_static(ctx):
     p = PATH[ctx.page]
     parts = [
@@ -919,15 +940,14 @@ def head_static(ctx):
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
         f"<title>{escape(TITLE[ctx.page])}</title>",
         f'<meta name="description" content="{escape(DESC[ctx.page])}">',
-        '<meta name="color-scheme" content="dark light">',
-        '<meta name="theme-color" content="#0B0D14" media="(prefers-color-scheme: dark)">',
-        '<meta name="theme-color" content="#FFFFFA" media="(prefers-color-scheme: light)">',
+        '<meta name="color-scheme" content="light dark">',
+        '<meta name="theme-color" content="#FFFFFA">',
         THEME_BOOT,
         f'<meta property="og:type" content="{"article" if ctx.page in ("ml", "lc", "wb") else "website"}">',
         f'<meta property="og:title" content="{escape(TITLE[ctx.page])}">',
         f'<meta property="og:description" content="{escape(DESC[ctx.page])}">',
         '<meta property="og:locale" content="en_US">',
-        f'<meta property="og:image" content="{abs_url("/assets/og.png")}">',
+        f'<meta property="og:image" content="{abs_url("/assets/og.png")}{OG_VERSION}">',
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
         '<meta name="twitter:card" content="summary_large_image">',
         '<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">',
@@ -956,7 +976,7 @@ def build_static():
         dest = out / ("404.html" if page == "nf" else PATH[page].strip("/") + "/index.html" if page != "home" else "index.html")
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(
-            f'<!doctype html><html lang="en" data-mode="static"><head>{head_static(ctx)}</head>'
+            f'<!doctype html><html lang="en" data-mode="static" data-theme="light"><head>{head_static(ctx)}</head>'
             f"<body>{diagrams.defs_svg()}{body(ctx)}{zoom_dialog()}</body></html>"
         )
     shutil.copy(ROOT / "src" / "site.css", out / "assets" / "site.css")

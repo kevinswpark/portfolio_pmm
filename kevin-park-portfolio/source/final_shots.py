@@ -9,7 +9,7 @@ async def main(names):
         b = await p.chromium.launch()
         for n, path, w, h in S:
             if names and n not in names: continue
-            c = await b.new_context(viewport={"width": w, "height": h}, color_scheme="dark", reduced_motion="reduce")
+            c = await b.new_context(viewport={"width": w, "height": h}, color_scheme="light", reduced_motion="reduce")
             pg = await c.new_page(); errs = []
             pg.on("pageerror", lambda e: errs.append(str(e)))
             await pg.goto(B + path, wait_until="networkidle"); await pg.evaluate("document.fonts.ready"); await pg.wait_for_timeout(300)

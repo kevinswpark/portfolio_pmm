@@ -54,15 +54,17 @@
   }
 
   /* ---------- light and dark ----------
-     The boot script in <head> sets data-theme before paint (saved choice, else the system setting).
+     Light is the default. The boot script in <head> sets data-theme before paint (dark only when saved).
      The switch saves the choice and reveals the new theme in a circle growing from the button. */
   var THEME_KEY = "kp-theme";
-  var systemLight = window.matchMedia("(prefers-color-scheme: light)");
-  function theme() { return root.getAttribute("data-theme") === "light" ? "light" : "dark"; }
+  var THEME_COLOR = { light: "#FFFFFA", dark: "#0B0D14" };
+  function theme() { return root.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
   function syncThemeUI() {
     var next = theme() === "light" ? "dark" : "light";
     var label = "Switch to " + next + " mode";
     document.querySelectorAll("[data-theme-toggle]").forEach(function (b) { b.setAttribute("aria-label", label); b.setAttribute("title", label); });
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", THEME_COLOR[theme()]);
   }
   function applyTheme(t, save) {
     root.setAttribute("data-theme", t);
@@ -87,11 +89,6 @@
     var b = e.target.closest && e.target.closest("[data-theme-toggle]");
     if (b) switchTheme(b);
   });
-  var onSystem = function () {
-    var saved = null; try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
-    if (!saved) applyTheme(systemLight.matches ? "light" : "dark", false);
-  };
-  if (systemLight.addEventListener) systemLight.addEventListener("change", onSystem);
   syncThemeUI();
 
   /* ---------- liquid glass nav ----------
