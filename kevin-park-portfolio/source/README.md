@@ -16,6 +16,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
   - About portrait: `ABOUT["portrait"]` in `src/content.py` is `None`, so About renders text only. To add a photo, put it in `assets-src/` and set its file name, real pixel width and height, and alt text there, then rebuild.
   - `src/diagrams.py` draws the original diagrams. `src/site.css` and `src/site.js` hold styles and runtime.
   - `build.py` writes `dist/site/` and the single-file Artifact preview `dist/artifact/index.html`.
+  - ZBD platform video: `assets-src/zbd-money-layer.mp4` (720p, about 22 MB, re-encoded from Kevin's 1080p master, which is not in the repo) and its poster frame. `LC["video"]` in `src/content.py` names them; the Money Lifecycle case study plays it under "Used across messaging, decks, and the website".
   - `og.py` renders the social preview card in the light theme (needs the local server running; uses Playwright, or headless Chrome when Playwright is not installed). The build adds a short hash of the card to its URL so link previews refetch it.
   - `serve.py`, `verify.py`, `verify_spa.py`, `final_shots.py`: local server, Playwright checks, and review screenshots.
   - `.impeccable/sources/` keeps dated copies of the source text the checks compare against. The resume excerpt has the contact line and ZBD figures removed.

@@ -455,6 +455,30 @@ def figure(kind, ctx):
             f'<div class="fig__panel fig__panel--video">{player}</div>'
             f'<figcaption><span class="pill">{U["commercial"]}</span>{watch}</figcaption></figure>'
         )
+    if kind == "platform_video":
+        V = L["video"]
+        src = abs_url("/assets/" + V["file"]) if ctx.mode == "spa" else "/assets/" + V["file"]
+        if ctx.mode == "spa":  # the single-file Artifact cannot carry the video; link to the hosted file when a domain is set
+            if not SITE_URL:
+                return ""
+            player = (
+                f'<a class="video-card" href="{src}" target="_blank" rel="noopener noreferrer">'
+                f'<span class="video-card__play">{PLAY}</span>'
+                f'<span class="video-card__t">{U["platform_video_title"]}</span>'
+                f'<span class="video-card__s">{U["platform_video_open"]}{icon("arrow-up-right")}</span>'
+                f'<span class="sr-only"> {U["new_tab"]}</span></a>'
+            )
+        else:
+            player = (
+                f'<video controls playsinline preload="none" poster="/assets/{V["poster"]}" width="{V["width"]}" height="{V["height"]}" '
+                f'aria-label="{escape(U["platform_video_title"])}"><source src="{src}" type="video/mp4">'
+                f'<a href="{src}">{U["platform_video_open"]}</a></video>'
+            )
+        return (
+            '<figure class="fig">'
+            f'<div class="fig__panel fig__panel--video">{player}</div>'
+            f'<figcaption><span class="pill">{U["platform_video"]}</span>{U["platform_video_cap"]}</figcaption></figure>'
+        )
     if kind == "sbs":
         return (
             '<figure class="fig">'
@@ -987,6 +1011,8 @@ def build_static():
         shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
     (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
     shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
+    for f in (C.LC["video"]["file"], C.LC["video"]["poster"]):
+        shutil.copy(ROOT / "assets-src" / f, out / "assets" / f)
     # Liquid glass on the nav (static build only; site.js loads these lazily on capable desktops).
     glass = out / "assets" / "vendor"
     glass.mkdir(parents=True, exist_ok=True)

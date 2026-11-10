@@ -117,3 +117,9 @@ Unslopped on 2026-11-10. This replaces the "dark neon cards" direction from 2026
 - Don't use lime or pink in the chrome; they mean something inside figures. Don't spend amber on decoration: it marks place and emphasis.
 - Don't put liquid glass anywhere but the nav, or on content that changes after load.
 - Don't hard-code colors: every surface, line and text color comes from a theme token so both themes stay whole.
+
+## Changes 2026-11-10 (third pass)
+
+- **Nav glass keeps a veil.** The liquid glass canvas is opaque and shows whatever is behind the bar, so a veil in the page color sits above it (`--glass-veil`: 66 percent light, 50 percent dark) and the bar keeps its 88 percent background underneath. Nav text stays readable over the blue specimen panel, the payment card, and dark figures, and if the canvas fails the bar is still solid.
+- **Header gradient edges.** The plane is tilted 0.15 rad instead of 0.42 so no crest hides the trough behind it (that silhouette showed as a jagged edge on dark). The buffer renders at full resolution with antialiasing and one step of dither against banding.
+- **Proof strip** leads with ZBD (Series C) and no longer carries the Finfare figure. The WireBarley figure reads 20% → 50%.

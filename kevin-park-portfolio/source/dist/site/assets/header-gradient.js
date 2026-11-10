@@ -69,13 +69,15 @@
     "uniform vec3 uC1, uC2, uC3; uniform float uLight;",
     "varying vec3 vPos; varying vec3 vNormal;",
     "void main(){",
-    " vec3 base=mix(mix(uC1,uC2,smoothstep(-3.0,3.0,vPos.x)),uC3,smoothstep(-0.7,0.9,vPos.z)*0.9);",
+    " vec3 base=mix(mix(uC1,uC2,smoothstep(-3.0,3.0,vPos.x)),uC3,smoothstep(-0.6,0.65,vPos.z)*0.9);",
     " vec3 n=normalize(vNormal);",
     " vec3 L=normalize(vec3(-0.35,0.55,0.75));",
     /* wrapped diffuse: slopes shade gently, with no hard terminator and no specular hot spot */
     " float diff=dot(n,L)*0.5+0.5;",
     " vec3 col=base*(0.72+0.36*diff);",
-    " gl_FragColor=vec4(col,1.0);}"
+    /* one step of screen-space noise: breaks up 8-bit banding where the dark blues change slowly */
+    " float d=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453)-0.5;",
+    " gl_FragColor=vec4(col+d/255.0,1.0);}"
   ].join("\n");
 
   function hex(v) {
@@ -114,7 +116,7 @@
        read WebGL pixels; the snapshot shows the CSS fallback gradient behind it instead. */
     canvas.className = "sg__canvas glass-container";
     canvas.setAttribute("aria-hidden", "true");
-    var gl = canvas.getContext("webgl", { antialias: false, alpha: false, premultipliedAlpha: false, powerPreference: "low-power" });
+    var gl = canvas.getContext("webgl", { antialias: true, alpha: false, premultipliedAlpha: false, powerPreference: "low-power" });
     if (!gl) return;
     var vs = compile(gl, gl.VERTEX_SHADER, VS), fs = compile(gl, gl.FRAGMENT_SHADER, FS);
     if (!vs || !fs) return;
@@ -122,8 +124,8 @@
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
     gl.useProgram(prog);
 
-    /* a 22 x 22 plane, 128 x 128 quads, as an indexed triangle grid; large enough that its edges never show */
-    var N = 128, SIZE = 22, verts = new Float32Array((N + 1) * (N + 1) * 2), idx = new Uint16Array(N * N * 6), i = 0, j = 0;
+    /* a 22 x 22 plane, 200 x 200 quads, as an indexed triangle grid; large enough that its edges never show */
+    var N = 200, SIZE = 22, verts = new Float32Array((N + 1) * (N + 1) * 2), idx = new Uint16Array(N * N * 6), i = 0, j = 0;
     for (var y = 0; y <= N; y++) for (var x = 0; x <= N; x++) { verts[i++] = (x / N - 0.5) * SIZE; verts[i++] = (y / N - 0.5) * SIZE; }
     for (y = 0; y < N; y++) for (x = 0; x < N; x++) {
       var a = y * (N + 1) + x, b = a + 1, c = a + N + 1, d = c + 1;
@@ -136,12 +138,12 @@
     var U = {};
     ["uMVP", "uTime", "uSpeed", "uDensity", "uStrength", "uC1", "uC2", "uC3", "uLight"].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
     /* density scales the bend noise, strength is the swell height in plane units, speed is slow: it sits behind reading */
-    gl.uniform1f(U.uDensity, 1.0); gl.uniform1f(U.uStrength, 0.6); gl.uniform1f(U.uSpeed, 0.22);
+    gl.uniform1f(U.uDensity, 1.0); gl.uniform1f(U.uStrength, 0.5); gl.uniform1f(U.uSpeed, 0.22);
     gl.enable(gl.DEPTH_TEST);
 
     host.appendChild(canvas);
     var w = 0, h = 0, visible = true, raf = null, t0 = performance.now(), first = true;
-    var SCALE = 0.6; /* the gradient is soft, so a lower-resolution buffer upscaled by CSS reads the same */
+    var SCALE = 1; /* full resolution (capped at 2x): an upscaled buffer showed stair-stepped edges on the dark theme */
 
     function colors() {
       var cs = getComputedStyle(host);
@@ -157,9 +159,10 @@
       w = canvas.width = nw; h = canvas.height = nh;
       gl.viewport(0, 0, w, h);
       var asp = w / h;
-      /* camera 6 units back; the plane is tilted away and turned so the folds run diagonally */
+      /* camera 6 units back; the plane is turned so the swells run diagonally and tilted only slightly:
+         at a steeper tilt a crest hides the trough behind it, and that hard silhouette showed as a jagged edge */
       /* shifted so the amber side of the mix sits behind the hero card */
-      var view = trans(0, 0, -6), model = mul(mul(rotZ(-0.62), rotX(-0.42)), trans(-1.4, 0.4, 0));
+      var view = trans(0, 0, -6), model = mul(mul(rotZ(-0.62), rotX(-0.15)), trans(-1.4, 0.4, 0));
       var proj = persp(asp < 1 ? 1.15 : 0.82, asp, 0.1, 50);
       gl.uniformMatrix4fv(U.uMVP, false, mul(proj, mul(view, model)));
     }

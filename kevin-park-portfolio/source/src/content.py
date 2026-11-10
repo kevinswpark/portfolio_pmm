@@ -42,6 +42,10 @@ UI = {
     "watch": "Watch the commercial on YouTube",  # from Kevin's case study file
     "video_title": "WireBarley TV commercial",
     "media": "Media coverage",
+    "platform_video": "Platform video",  # UI
+    "platform_video_title": "ZBD platform video: The Money Layer for Games",  # UI
+    "platform_video_cap": "ZBD’s platform video, 2 min 16 s, with sound.",  # UI
+    "platform_video_open": "Watch the video",  # UI
     "sbs_cap": "Screenshot from SBS Evening News. The on-screen title reads “Kevin Park, WireBarley manager.”",
     "sbs_alt": "SBS Evening News segment with a lower-third title naming Kevin Park as a WireBarley manager, over close-up footage of US hundred-dollar bills.",
     "finished": "Finished case study",
@@ -78,8 +82,8 @@ HERO = {  # BRIEF
 PROOF = {  # KEVIN 2026-11-10: proof strip under the hero (replaced the PHILOSOPHY statement). Figures from the resume and case study.
     "label": "Selected results",
     "stats": [
-        ("20% → ~50%", "first-transfer conversion, customers aged 50+", "WireBarley"),
-        ("+24%", "site conversion after a 20-page redesign", "Finfare"),
+        ("Series C", "fundraise supported by “The Money Layer for Games” positioning", "ZBD"),  # KEVIN 2026-11-10 (third pass: ZBD in, Finfare +24% out); claim as worded in the Money Layer case study
+        ("20% → 50%", "first-transfer conversion, customers aged 50+", "WireBarley"),  # "~" removed at Kevin's request, 2026-11-10
         ("$40M", "holiday remittance volume from bilingual campaigns", "WireBarley"),
         ("300%", "year-over-year US growth on 40% of the prior budget", "WireBarley"),
     ],
@@ -103,7 +107,7 @@ WORK = {
         "title": "Getting Korean Americans 50+ to their first transfer",  # KEVIN 2026-11-10 (outcome-led tile title; case study keeps its own)
         "problem": "Help Korean American customers aged 50+ complete their first transfer with WireBarley. Only about 20% of sign-ups in this group reached that point.",
         "result": "Korean-language TV commercial",
-        "stat": ("20% → ~50%", "sign-up-to-first-transfer conversion after the commercial aired"),  # KEVIN 2026-11-10, replaces the impact sentence; figures from the case study
+        "stat": ("20% → 50%", "sign-up-to-first-transfer conversion after the commercial aired"),  # KEVIN 2026-11-10, replaces the impact sentence; figures from the case study
     },
 }
 
@@ -263,6 +267,7 @@ LC = {  # NOTION "The Money Lifecycle"; deck from BRIEF. Edited lines are listed
         {"id": "use", "h2": "Used across messaging, decks, and the website", "blocks": [  # AUDIT L02
             ("p", "I used the lifecycle in the ZBD Platform messaging framework and sales decks, and leadership began using the same language. We could explain the product suite without assigning each product to a single stage."),  # AUDIT L06
             ("p", "The same language appears on ZBD’s homepage, the Embedded Accounts page, and the August 2026 platform launch post. I also created the platform and product videos used across the site."),  # AUDIT L06
+            ("fig", "platform_video"),  # KEVIN 2026-11-10: ZBD_COMBO_V7.mp4, placed under the sentence that mentions the videos
             ("fig", "proof"),
         ]},
         {"id": "learned", "h2": "What I learned", "blocks": [
@@ -279,6 +284,8 @@ LC = {  # NOTION "The Money Lifecycle"; deck from BRIEF. Edited lines are listed
         ("Platform launch post, Aug 24, 2026", "https://zbdpay.com/blog/introducing-zbds-embedded-financial-infrastructure-for-games", "We’re introducing our embedded financial infrastructure for games, giving studios a single platform to power the full money lifecycle."),
     ],
     "fig_source": "Stage names as published on zbdpay.com.",
+    # Platform video supplied by Kevin 2026-11-10 (ZBD_COMBO_V7.mp4, 1080p, 2:16), re-encoded to 720p for the web.
+    "video": {"file": "zbd-money-layer.mp4", "poster": "zbd-money-layer-poster.jpg", "width": 1280, "height": 720},
 }
 
 WB = {  # WB: Kevin's case study file "WireBarley-Tech-Adoption-Case-Study.md" (2026-10-05), verbatim, no edits
