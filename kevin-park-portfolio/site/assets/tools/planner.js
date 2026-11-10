@@ -238,7 +238,7 @@
         + '<span class="fp-bar__needs" style="flex-grow:' + m.split[0] + '">' + pct(m.split[0]) + "</span>"
         + '<span class="fp-bar__wants" style="flex-grow:' + m.split[1] + '">' + pct(m.split[1]) + "</span>"
         + '<span class="fp-bar__save" style="flex-grow:' + m.split[2] + '">' + pct(m.split[2]) + "</span></div>"
-        + '<dl class="fp-legend"><div style="--c:#2F6BFF"><dt>Needs</dt><dd>' + money(m.needsB) + '</dd></div><div style="--c:#7B3FF2"><dt>Wants</dt><dd>' + money(m.wantsB)
+        + '<dl class="fp-legend"><div style="--c:#6A7388"><dt>Needs</dt><dd>' + money(m.needsB) + '</dd></div><div style="--c:#454C5E"><dt>Wants</dt><dd>' + money(m.wantsB)
         + '</dd></div><div style="--c:var(--lime)"><dt>Savings</dt><dd class="fp-save">' + money(m.saveB) + "</dd></div></dl>"));
     } else out("split", result("<p>Add your take-home pay in step 1 to see your numbers.</p>"));
     var resetLbl = $("[data-reset-label]");
@@ -567,7 +567,7 @@
       }
       var W = 612, H = 792, M = 56, CW = W - M * 2, y = 0;
       var INK = [8, 8, 12], GRAY = [92, 92, 112], LINE = [226, 226, 234], BLUE = [0, 82, 255];
-      var GRAD = [[47, 107, 255], [123, 63, 242], [255, 61, 139], [255, 184, 77]];
+      var GRAD = [[0, 82, 255], [0, 82, 255]];
       function col(c) { doc.setTextColor(c[0], c[1], c[2]); }
       function fill(c) { doc.setFillColor(c[0], c[1], c[2]); }
       function font(w, s) { doc.setFont(F, w); doc.setFontSize(s); }

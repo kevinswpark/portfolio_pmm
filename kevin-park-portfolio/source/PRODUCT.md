@@ -44,7 +44,7 @@ Visitors arrive from LinkedIn, applications, and referrals, often skimming on a 
 
 ## Brand Commitments
 
-- Visual direction (user, 2026-09-27): vibrant Revolut-style visuals with some Coinbase and Stripe elements, trendy, dark neon cards. The earlier navy and beige palette, Geist and Newsreader pairing, and glass-only rules from the brief are retired.
+- Visual direction (user, 2026-11-10): unslopped. Quiet ink chrome, Coinbase blue as the one accent, the hero as a matte payment card, and color kept for the case study diagrams. This retires the 2026-09-27 "dark neon cards" direction (four-hue gradients, glows, gradient tiles, pills). See DESIGN.md.
 - Voice: clear, specific, measured, concise. No em dashes, sentence case headers, US spelling, no "not X, but Y", no colon-summary intros, no hype adjectives, bold only for real warnings.
 
 ## Evidence on Hand

@@ -1,4 +1,4 @@
-"""Original diagrams drawn for the site (neon edition).
+"""Original diagrams drawn for the site.
 
 Colors come from CSS classes; gradients come from one shared <defs> block
 (defs_svg) placed once per document so ids never collide."""
@@ -12,20 +12,8 @@ def _f(v):
 
 
 def defs_svg():
-    return (
-        '<svg class="kp-defs" width="0" height="0" aria-hidden="true" focusable="false">'
-        "<defs>"
-        '<linearGradient id="kp-grad-h" x1="0" y1="0" x2="1" y2="0">'
-        '<stop offset="0" stop-color="#3D7BFF"/><stop offset=".45" stop-color="#8B5CF6"/>'
-        '<stop offset=".8" stop-color="#FF3D8B"/><stop offset="1" stop-color="#FFB84D"/></linearGradient>'
-        '<linearGradient id="kp-grad-v" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="#3D7BFF"/><stop offset=".5" stop-color="#8B5CF6"/>'
-        '<stop offset="1" stop-color="#FF3D8B"/></linearGradient>'
-        '<linearGradient id="kp-grad-line" gradientUnits="userSpaceOnUse" x1="70" y1="0" x2="470" y2="0">'
-        '<stop offset="0" stop-color="#3D7BFF"/><stop offset=".55" stop-color="#8B5CF6"/>'
-        '<stop offset="1" stop-color="#FF3D8B"/></linearGradient>'
-        "</defs></svg>"
-    )
+    # No shared gradients any more: diagrams draw in flat meaning colors from site.css.
+    return ""
 
 
 # ---------------------------------------------------------------------------
@@ -225,9 +213,7 @@ def loop_pair(labels):
 
 FAVICON = (
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
-    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D7BFF"/>'
-    '<stop offset=".55" stop-color="#8B5CF6"/><stop offset="1" stop-color="#FF3D8B"/></linearGradient></defs>'
-    '<rect width="64" height="64" rx="16" fill="url(#g)"/>'
+    '<rect width="64" height="64" rx="16" fill="#0052FF"/>'
     '<path d="M12 22C26 22 30 32 38 32M12 42C26 42 30 32 38 32" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3"/>'
     '<path d="M38 32H52" stroke="#fff" stroke-width="5" stroke-linecap="round"/>'
     "</svg>"

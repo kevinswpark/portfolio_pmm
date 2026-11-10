@@ -1,6 +1,6 @@
 # Kevin Park portfolio
 
-English-only product marketing portfolio built from the Notion brief "Kevin Park Website", the Notion case studies "The Money Layer for Games (EN)" and "The Money Lifecycle", Kevin's WireBarley case study file, and his resume. Version 2 uses the dark neon card direction.
+English-only product marketing portfolio built from the Notion brief "Kevin Park Website", the Notion case studies "The Money Layer for Games (EN)" and "The Money Lifecycle", Kevin's WireBarley case study file, and his resume. Version 2 uses the ink ledger direction (unslopped 2026-11-10; see source/DESIGN.md).
 
 ## What's here
 

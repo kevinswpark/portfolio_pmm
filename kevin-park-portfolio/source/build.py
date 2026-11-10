@@ -112,7 +112,7 @@ def linkedin_btn(variant, label=None, compact=False):
 def mark_logo():
     return (
         '<span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64">'
-        '<rect width="64" height="64" rx="16" fill="url(#kp-grad-v)"/>'
+        '<rect width="64" height="64" rx="16" fill="#0052FF"/>'
         '<path d="M12 22C26 22 30 32 38 32M12 42C26 42 30 32 38 32" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3.5"/>'
         '<path d="M38 32H52" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/></svg></span>'
     )
@@ -169,8 +169,7 @@ def closing(ctx):
     hid = ctx.id("closing")
     return (
         f'<section class="closing wrap" aria-labelledby="{hid}"><div class="closing__card">'
-        '<span class="closing__glow" aria-hidden="true"></span>'
-        f'<h2 class="closing__h" id="{hid}">{C.CLOSING["h2"]}</h2>'
+                f'<h2 class="closing__h" id="{hid}">{C.CLOSING["h2"]}</h2>'
         f"{linkedin_btn('white', C.CLOSING['cta'])}"
         "</div></section>"
     )
@@ -206,7 +205,7 @@ def tile_lc(ctx, compact=False):
         f'<p class="tile__impact">{W["impact"]}</p>'
         f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
         "</div>"
-        f'<div class="tile__art">{diagrams.lifecycle_svg(C.DIAGRAM["lc_alt"])}</div>'
+        f'<div class="tile__art panel">{diagrams.lifecycle_svg(C.DIAGRAM["lc_alt"])}</div>'
         "</article>"
     )
 
@@ -300,7 +299,6 @@ def home_main(ctx):
     h1 = ctx.id("hero-h")
     hero = (
         f'<section class="hero" aria-labelledby="{h1}">'
-        '<div class="band" aria-hidden="true"></div>'
         '<div class="wrap hero__grid">'
         '<div class="hero__text">'
         f'{hero_role(H["role"])}'
@@ -312,12 +310,11 @@ def home_main(ctx):
         f"{linkedin_btn('ghost')}"
         "</div></div></div>"
         f'<a class="hero__card" href="{ctx.url("ml")}" aria-label="{escape(U["read"])}: {escape(C.WORK["ml"]["title"])}">'
-        '<span class="card3d" data-tilt><span class="card3d__face">'
+        '<span class="card3d"><span class="card3d__face">'
         f'<span class="card3d__top"><span class="card3d__brand">{H["card_brand"]}</span>{icon("arrow-up-right", "card3d__go")}</span>'
-        f'<span class="card3d__art">{diagrams.lines_svg()}</span>'
+        f'<span class="card3d__art"><span class="card3d__chip"></span>{diagrams.lines_svg()}</span>'
         f'<span class="card3d__line">{H["card_line"]}</span>'
         f'<span class="card3d__bottom"><span class="card3d__kicker">{H["card_kicker"]}</span></span>'
-        '<span class="card3d__sheen"></span>'
         "</span></span></a>"
         "</div></section>"
     )
@@ -557,7 +554,7 @@ def article_main(ctx, A, next_label, next_tile):
     nh = ctx.id("next-h")
     return (
         f'<main id="{ctx.id("main")}" tabindex="-1"><div class="progress" aria-hidden="true"></div>'
-        '<header class="art-head"><div class="band band--article" aria-hidden="true"></div><div class="wrap art-head__in">'
+        '<header class="art-head"><div class="wrap art-head__in">'
         f'<a class="crumb" href="{ctx.url("home", "work")}">{icon("arrow-left")}{U["all_work"]}</a>'
         f'<h1 id="{ctx.id("title")}" tabindex="-1">{A["h1"]}</h1>'
         f'<p class="deck">{A["deck"]}</p><ul class="facts">{facts}</ul></div></header>'
@@ -768,7 +765,7 @@ def fp_step_plan(ctx, F):
     return (
         '<div class="fp-out" data-out="actions"></div>'
         '<div class="fp-out" data-out="numbers"></div>'
-        f'<form class="fp-gate" data-gate novalidate{action}><span class="fp-gate__glow" aria-hidden="true"></span>'
+        f'<form class="fp-gate" data-gate novalidate{action}>'
         f'<h3 class="fp-gate__h">{F["email_h"]}</h3><p class="fp-gate__p">{F["email_lead"]}</p>'
         f'<div class="fp-gate__row"><label class="sr-only" for="{fid}">{F["email_label"]}</label>'
         f'<input class="fp-gate__input" id="{fid}" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="{F["email_label"]}">'
@@ -828,7 +825,7 @@ def fp_main(ctx):
     cfg_json = json.dumps(cfg, ensure_ascii=False).replace("</", "<" + chr(92) + "/")
     return (
         f'<main id="{ctx.id("main")}" tabindex="-1" class="fp-page">'
-        '<header class="art-head"><div class="band band--article" aria-hidden="true"></div>'
+        '<header class="art-head">'
         '<div class="wrap art-head__in">'
         f'<h1 id="{hid}" tabindex="-1">{F["h1"]}</h1>'
         f'<p class="deck">{F["deck"]}</p>'
@@ -918,7 +915,7 @@ def head_static(ctx):
         f"<title>{escape(TITLE[ctx.page])}</title>",
         f'<meta name="description" content="{escape(DESC[ctx.page])}">',
         '<meta name="color-scheme" content="dark">',
-        '<meta name="theme-color" content="#08080C">',
+        '<meta name="theme-color" content="#0B0D14">',
         f'<meta property="og:type" content="{"article" if ctx.page in ("ml", "lc", "wb") else "website"}">',
         f'<meta property="og:title" content="{escape(TITLE[ctx.page])}">',
         f'<meta property="og:description" content="{escape(DESC[ctx.page])}">',
