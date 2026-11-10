@@ -110,6 +110,20 @@ def linkedin_btn(variant, label=None, compact=False):
     )
 
 
+def contact_url(ctx):
+    """The closing card on the current page: it holds the resume form and the note form."""
+    if ctx.page == "nf":  # the 404 page has no closing card
+        return ctx.url("home", "contact")
+    return ctx.url(section="contact") if ctx.mode == "spa" else "#contact"
+
+
+def resume_href(ctx):
+    name = C.CONTACT["resume_file"]
+    if ctx.mode == "spa":  # the Artifact cannot load files; build_artifact() inlines the PDF once as window.KP_RESUME
+        return ""
+    return "/assets/" + name
+
+
 def mark_logo():
     return (
         '<span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64">'
@@ -169,7 +183,7 @@ def nav(ctx):
         f"{tools_menu(ctx)}"
         "</div>"
         f"{theme_button()}"
-        f"{linkedin_btn('blue', compact=True)}"
+        f'<a class="btn btn--blue btn--compact" href="{contact_url(ctx)}"><span class="btn__text">{C.CONTACT["nav"]}</span></a>'
         "</nav></header>"
     )
 
@@ -183,12 +197,60 @@ def footer(ctx):
     )
 
 
+def _field(fid, name, label, kind="text", auto="", rows=0):
+    extra = f' autocomplete="{auto}"' if auto else ""
+    if rows:
+        control = f'<textarea class="cf__input cf__input--area" id="{fid}" name="{name}" rows="{rows}" required></textarea>'
+    else:
+        mode = ' inputmode="email"' if kind == "email" else ""
+        control = f'<input class="cf__input" id="{fid}" name="{name}" type="{kind}"{extra}{mode} required>'
+    return f'<div class="cf__field"><label class="cf__label" for="{fid}">{label}</label>{control}</div>'
+
+
 def closing(ctx):
+    """Let's talk: the resume behind an email field, and a note that lands in Kevin's inbox.
+    Both post to Formspree from site.js. Without JavaScript the forms post there directly."""
+    K = C.CONTACT
     hid = ctx.id("closing")
+    fs = K["formspree"]
+    action = f' action="https://formspree.io/f/{fs}" method="POST"' if fs else ' method="POST"'
+    trap = '<p class="cf__trap" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>'
+    msgs = lambda **kw: "".join(f' data-{k}="{escape(v)}"' for k, v in kw.items())
+    resume = (
+        f'<form class="cf" data-resume novalidate{action} data-formspree="{fs}" data-file="{resume_href(ctx)}" data-name="{K["resume_file"]}"'
+        + msgs(busy=K["resume_busy"], done=K["resume_done"], invalid=K["invalid_email"], rejected=K["rejected"], personal=K["personal"], blocked=" ".join(K["personal_domains"])) + ">"
+        f'<h3 class="cf__h">{K["resume_h"]}</h3><p class="cf__p">{K["resume_p"]}</p>'
+        '<input type="hidden" name="_subject" value="Resume request from the portfolio">'
+        + _field(ctx.id("resume-email"), "email", K["email"], "email", "email")
+        + trap
+        + f'<button class="btn btn--blue cf__btn" type="submit">{icon("download-simple")}<span class="btn__text">{K["resume_cta"]}</span></button>'
+        '<p class="cf__status" data-status role="status"></p>'
+        f'<a class="cf__again" data-again hidden href="{resume_href(ctx)}" download="{K["resume_file"]}">{icon("download-simple")}<span>{K["resume_again"]}</span></a>'
+        f'<p class="cf__note">{icon("lock-simple")}<span>{K["privacy"]}</span></p>'
+        "</form>"
+    )
+    note = (
+        f'<form class="cf" data-note novalidate{action} data-formspree="{fs}"'
+        + msgs(busy=K["note_busy"], done=K["note_done"], invalid=K["invalid_email"], incomplete=K["invalid_note"], rejected=K["rejected"], fail=K["note_fail"]) + ">"
+        f'<h3 class="cf__h">{K["note_h"]}</h3><p class="cf__p">{K["note_p"]}</p>'
+        '<input type="hidden" name="_subject" value="Note from the portfolio">'
+        '<div class="cf__pair">'
+        + _field(ctx.id("note-name"), "name", K["name"], "text", "name")
+        + _field(ctx.id("note-email"), "email", K["email_any"], "email", "email")
+        + "</div>"
+        + _field(ctx.id("note-message"), "message", K["message"], rows=4)
+        + trap
+        + f'<button class="btn btn--blue cf__btn" type="submit"><span class="btn__text">{K["note_cta"]}</span>{icon("arrow-right", "icon--next")}</button>'
+        '<p class="cf__status" data-status role="status"></p>'
+        "</form>"
+    )
     return (
-        f'<section class="closing wrap" aria-labelledby="{hid}"><div class="closing__card">'
-                f'<h2 class="closing__h" id="{hid}">{C.CLOSING["h2"]}</h2>'
-        f"{linkedin_btn('white', C.CLOSING['cta'])}"
+        f'<section class="closing wrap" id="{ctx.id("contact")}" aria-labelledby="{hid}"><div class="closing__card">'
+        f'<div class="closing__intro"><h2 class="closing__h" id="{hid}">{C.CLOSING["h2"]}</h2>'
+        f'<p class="closing__lead">{K["lead"]}</p></div>'
+        f'<div class="closing__forms">{resume}{note}</div>'
+        f'<p class="closing__alt">{K["alt"]} '
+        f'<a href="{C.LINKEDIN}" target="_blank" rel="noopener noreferrer">{C.CLOSING["cta"]}{icon("arrow-up-right")}<span class="sr-only"> {U["new_tab"]}</span></a></p>'
         "</div></section>"
     )
 
@@ -321,7 +383,7 @@ def home_main(ctx):
         f'<p class="hero__sub">{H["sub"]}</p>'
         '<div class="actions">'
         f'<a class="btn btn--blue" href="{ctx.url("home", "work")}"><span class="btn__text">{H["cta_work"]}</span>{icon("arrow-down", "icon--down")}</a>'
-        f"{linkedin_btn('ghost')}"
+        f'<a class="btn btn--ghost" href="{contact_url(ctx)}">{icon("download-simple")}<span class="btn__text">{C.CONTACT["hero"]}</span></a>'
         "</div></div></div>"
         f'<a class="hero__card" href="{ctx.url("ml")}" aria-label="{escape(U["read"])}: {escape(C.WORK["ml"]["title"])}">'
         '<span class="card3d" data-tilt><span class="card3d__face">'
@@ -1011,6 +1073,7 @@ def build_static():
         shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
     (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
     shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
+    shutil.copy(ROOT / "assets-src" / C.CONTACT["resume_file"], out / "assets" / C.CONTACT["resume_file"])
     for f in (C.LC["video"]["file"], C.LC["video"]["poster"]):
         shutil.copy(ROOT / "assets-src" / f, out / "assets" / f)
     # Liquid glass on the nav (static build only; site.js loads these lazily on capable desktops).
@@ -1031,7 +1094,7 @@ def build_static():
     og = ROOT / "assets-src" / "og.png"
     if og.exists():
         shutil.copy(og, out / "assets" / "og.png")
-    (out / "robots.txt").write_text("User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE_URL}/sitemap.xml\n" if SITE_URL else ""))
+    (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /assets/{C.CONTACT['resume_file']}\n" + (f"Sitemap: {SITE_URL}/sitemap.xml\n" if SITE_URL else ""))
     if SITE_URL:
         (out / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
@@ -1074,6 +1137,8 @@ def build_artifact():
         + '<div id="app">' + "".join(views) + "</div>"
         + zoom_dialog()
         + '<script>document.documentElement.setAttribute("data-mode","spa");document.documentElement.setAttribute("lang","en");</script>'
+        + '<script>window.KP_RESUME="data:application/pdf;base64,'
+        + base64.b64encode((ROOT / "assets-src" / C.CONTACT["resume_file"]).read_bytes()).decode() + '";</script>\n'
         + f"<script>{js}</script>\n"
         + f"<script>{(ROOT / 'src' / 'header-gradient.js').read_text()}</script>\n"
         + artifact_tools()

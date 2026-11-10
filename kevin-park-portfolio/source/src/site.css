@@ -198,10 +198,9 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
 @media (max-width: 620px) {
   .nav__links a { padding: 0 8px; font-size: .875rem; }
   .nav__brand span:not(.logo) { font-size: .9375rem; }
-  .nav .btn--compact .btn__text, .nav .btn--compact .icon--out { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .nav .btn--compact { padding: 0; width: 40px; min-height: 40px; justify-content: center; }
+  .nav .btn--compact { display: none; }
 }
-/* Three links plus the name leave no room for the LinkedIn pill on phones. It stays in the hero, the closing card, and the footer. */
+/* Three links plus the name leave no room for the contact button on phones. The hero button and the closing card carry it. */
 @media (max-width: 480px) {
   .nav { padding-inline: 12px; }
   .nav .btn--compact { display: none; }
@@ -539,13 +538,45 @@ mark.fig::before { content: ""; display: inline-block; width: 6px; height: 6px; 
 .expect__phrase--slow { font-weight: 400; font-stretch: 120%; color: var(--fg-2); }
 .expect__phrase--fast { font-weight: 500; font-stretch: 75%; }
 
-/* ---------- closing ---------- */
-.closing { padding-bottom: clamp(3rem, 6vw, 5rem); }
-.closing__card { position: relative; overflow: hidden; border-radius: var(--r-card); padding: clamp(40px, 7vw, 96px) clamp(24px, 6vw, 80px); display: grid; justify-items: start; gap: 32px; background: var(--amber); color: var(--ink-0); box-shadow: inset 0 1px 0 rgb(255 255 255 / .35); }
-.closing .btn--white { background: var(--ink-0); color: var(--fg); }
-@media (hover: hover) and (pointer: fine) { .closing .btn--white:hover { background: var(--ink-2); } }
-.closing .btn:focus-visible { outline-color: var(--ink-0); }
-.closing__h { font-size: var(--t-display); line-height: 1.04; letter-spacing: -.03em; font-weight: 500; font-stretch: 106%; color: var(--ink-0); }
+/* ---------- closing: resume and note ---------- */
+.closing { padding-bottom: clamp(3rem, 6vw, 5rem); scroll-margin-top: calc(var(--nav-top) + var(--nav-h) + 16px); }
+.closing__card { position: relative; overflow: hidden; border-radius: var(--r-card); padding: clamp(28px, 5vw, 64px) clamp(16px, 4.5vw, 64px); display: grid; gap: clamp(24px, 3vw, 40px); background: var(--amber); color: var(--amber-ink); box-shadow: inset 0 1px 0 rgb(255 255 255 / .35); }
+.closing__intro { display: grid; gap: 14px; }
+.closing__h { font-size: var(--t-display); line-height: 1.04; letter-spacing: -.03em; font-weight: 500; font-stretch: 106%; color: var(--amber-ink); }
+.closing__lead { max-width: 40ch; font-size: var(--t-lead); line-height: 1.4; font-weight: 500; color: var(--amber-ink); }
+.closing__forms { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: stretch; }
+.closing__alt { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; font-size: var(--t-small); font-weight: 500; color: var(--amber-ink); }
+.closing__alt a { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; color: inherit; text-underline-offset: .25em; }
+.closing__alt .icon { width: 1rem; height: 1rem; transition: transform 220ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .closing__alt a:hover .icon { transform: translate(2px, -2px); } }
+.closing__alt a:focus-visible { outline-color: var(--amber-ink); }
+
+.cf { position: relative; display: flex; flex-direction: column; gap: 14px; padding: clamp(20px, 2.6vw, 32px); border-radius: var(--r-in); background: var(--ink-0); color: var(--fg); box-shadow: 0 1px 0 rgb(42 26 0 / .12), 0 18px 36px -24px rgb(42 26 0 / .45); }
+.cf__h { font-size: 1.375rem; line-height: 1.15; letter-spacing: -.015em; font-weight: 500; font-stretch: 106%; }
+.cf__p { margin-top: -6px; color: var(--fg-2); line-height: 1.5; max-width: 42ch; }
+.cf__pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.cf__field { display: grid; gap: 6px; }
+.cf__label { font-size: var(--t-small); font-weight: 500; color: var(--fg-2); }
+.cf__input { width: 100%; height: 48px; padding: 0 14px; border-radius: var(--r-ctl); border: 1px solid var(--line-2); background: var(--ink-1); color: var(--fg); font: inherit; font-size: 1rem; transition: border-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out); }
+.cf__input--area { height: auto; min-height: 112px; padding: 12px 14px; line-height: 1.5; resize: vertical; }
+.cf__input:focus { outline: none; border-color: var(--blue-ink); box-shadow: 0 0 0 3px rgb(var(--blue-ink-rgb) / .2); }
+.cf__input[aria-invalid="true"] { border-color: var(--pink); box-shadow: 0 0 0 3px rgb(242 85 127 / .18); }
+.cf__btn { align-self: flex-start; margin-top: 2px; }
+.cf__btn[aria-busy="true"] { opacity: .8; cursor: progress; }
+.cf__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cf__status { font-weight: 500; line-height: 1.45; color: var(--fg); }
+.cf__status:empty { display: none; }
+.cf__status[data-tone="error"] { color: var(--error-text); }
+.cf__again { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; min-height: 32px; font-weight: 500; color: var(--blue-ink); text-underline-offset: .25em; }
+.cf__again[hidden] { display: none; }
+.cf__again .icon { width: 1.125rem; height: 1.125rem; }
+.cf__note { display: flex; gap: 8px; align-items: flex-start; margin-top: auto; padding-top: 6px; font-size: var(--t-small); line-height: 1.5; color: var(--fg-3); }
+.cf__note .icon { flex: none; width: 1rem; height: 1rem; margin-top: 2px; }
+@media (max-width: 860px) { .closing__forms { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) {
+  .cf__pair { grid-template-columns: minmax(0, 1fr); }
+  .cf__btn { align-self: stretch; justify-content: center; }
+}
 
 /* ---------- footer ---------- */
 .foot { padding-block: 1.5rem 3rem; }
