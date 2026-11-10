@@ -68,3 +68,11 @@ holiday remittance volume from bilingual campaigns
 year-over-year US growth on 40% of the prior budget
 
 WireBarley tile stat: 20% → 50%, sign-up-to-first-transfer conversion after the commercial aired
+
+== Kevin, 2026-11-10, fourth request: add a recruiter CTA. A one-page resume PDF behind an email field (Formspree), plus an inquiry box that emails him, so LinkedIn is no longer the only way to reach him. Form labels and messages are UI copy in CONTACT; the resume is condensed from "Kevin Park Master Resume (Extended)". ==
+
+Closing card copy, his wording:
+If you’re hiring for product marketing, I would love to learn more.
+Get my resume
+Enter your work email and let’s see if we’re a match.
+Your note is sent. Talk to you soon!

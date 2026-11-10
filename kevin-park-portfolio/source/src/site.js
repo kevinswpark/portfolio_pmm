@@ -204,6 +204,101 @@
   }
   initTools();
 
+  /* ---------- closing card: resume behind an email field, and a note to Kevin ----------
+     Both forms post JSON to Formspree. The resume request sends the email and the page it came from;
+     the note sends name, email, and message. The resume still downloads if Formspree is unreachable
+     (the visitor did their part). A note that fails says so, because it did not arrive. */
+  function initContact() {
+    var KEY = "kp-resume", EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    function field(form, name) { return form.querySelector('[name="' + name + '"]'); }
+    function say(form, key, tone) {
+      var el = form.querySelector("[data-status]");
+      el.textContent = key ? form.getAttribute("data-" + key) || "" : "";
+      if (tone) el.setAttribute("data-tone", tone); else el.removeAttribute("data-tone");
+    }
+    function busy(form, on) {
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = on;
+      if (on) btn.setAttribute("aria-busy", "true"); else btn.removeAttribute("aria-busy");
+    }
+    function post(form, payload) {
+      var id = form.getAttribute("data-formspree");
+      if (!id) return Promise.resolve({ ok: true });
+      return fetch("https://formspree.io/f/" + encodeURIComponent(id), {
+        method: "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (res.ok) return { ok: true };
+        return res.json().catch(function () { return {}; }).then(function (data) {
+          var errs = (data && data.errors) || [];
+          if (window.console) console.warn("Formspree", res.status, errs);
+          return { ok: false, rejected: errs.some(function (x) { return x.field === "email"; }) };
+        });
+      }).catch(function (err) { if (window.console) console.warn("Formspree unreachable", err); return { ok: false }; });
+    }
+    function download(form) {
+      var a = document.createElement("a");
+      a.href = fileOf(form); a.download = form.getAttribute("data-name");
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+    function checkEmail(form) {
+      var input = field(form, "email"), ok = EMAIL.test(input.value.trim());
+      if (ok) input.removeAttribute("aria-invalid"); else input.setAttribute("aria-invalid", "true");
+      return ok;
+    }
+    function fileOf(form) { return form.getAttribute("data-file") || window.KP_RESUME || ""; }  // the Artifact build inlines the PDF
+    function unlock() {
+      document.querySelectorAll("[data-resume] [data-again]").forEach(function (a) { a.href = fileOf(a.closest("form")); a.hidden = false; });
+    }
+    try { if (localStorage.getItem(KEY) === "1") unlock(); } catch (e) { /* fine */ }
+
+    /* Work addresses only for the resume: personal and throwaway mail domains are turned away before anything is sent.
+       This runs in the browser, so it filters honest visitors; it cannot prove the mailbox exists. */
+    function isPersonal(form) {
+      var domain = field(form, "email").value.trim().toLowerCase().split("@").pop();
+      return (form.getAttribute("data-blocked") || "").split(" ").some(function (d) {
+        return d && (domain === d || domain.slice(-d.length - 1) === "." + d);
+      });
+    }
+    function sendResume(form) {
+      if (!checkEmail(form)) { say(form, "invalid", "error"); field(form, "email").focus(); return; }
+      if (isPersonal(form)) { field(form, "email").setAttribute("aria-invalid", "true"); say(form, "personal", "error"); field(form, "email").focus(); return; }
+      if (field(form, "_gotcha").value) { say(form, "done"); return; }  // a bot filled the hidden field
+      busy(form, true); say(form, "busy");
+      post(form, { email: field(form, "email").value.trim(), request: "Resume", page: location.pathname + location.hash, _subject: field(form, "_subject").value })
+        .then(function (r) {
+          if (r.rejected) { field(form, "email").setAttribute("aria-invalid", "true"); say(form, "rejected", "error"); field(form, "email").focus(); return; }
+          download(form); say(form, "done"); unlock();
+          try { localStorage.setItem(KEY, "1"); } catch (e) { /* fine */ }
+        }).then(function () { busy(form, false); });
+    }
+    function sendNote(form) {
+      var name = field(form, "name"), msg = field(form, "message"), missing = null;
+      [msg, name].forEach(function (el) {
+        if (el.value.trim()) el.removeAttribute("aria-invalid"); else { el.setAttribute("aria-invalid", "true"); missing = el; }
+      });
+      var emailOk = checkEmail(form);
+      if (missing) { say(form, "incomplete", "error"); missing.focus(); return; }
+      if (!emailOk) { say(form, "invalid", "error"); field(form, "email").focus(); return; }
+      if (field(form, "_gotcha").value) { say(form, "done"); return; }
+      busy(form, true); say(form, "busy");
+      post(form, { name: name.value.trim(), email: field(form, "email").value.trim(), message: msg.value.trim(), page: location.pathname + location.hash, _subject: field(form, "_subject").value + ": " + name.value.trim() })
+        .then(function (r) {
+          if (r.ok) { form.reset(); say(form, "done"); }
+          else if (r.rejected) { field(form, "email").setAttribute("aria-invalid", "true"); say(form, "rejected", "error"); field(form, "email").focus(); }
+          else say(form, "fail", "error");
+        }).then(function () { busy(form, false); });
+    }
+    document.addEventListener("submit", function (e) {
+      var form = e.target;
+      if (!form.matches || !form.matches("[data-resume], [data-note]")) return;
+      e.preventDefault();
+      if (form.hasAttribute("data-resume")) sendResume(form); else sendNote(form);
+    });
+  }
+  initContact();
+
   if (MODE !== "spa") { initTilt(document); initRail(document); return; }
 
   /* ---------- spa router (Artifact build) ---------- */

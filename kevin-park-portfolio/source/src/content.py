@@ -191,6 +191,46 @@ EXPERIENCE = {  # RESUME
 
 CLOSING = {"h2": "Let’s talk.", "cta": "Connect on LinkedIn"}  # h2 KEVIN 2026-10-11 (replaced the LinkedIn URL); cta BRIEF
 
+# KEVIN 2026-11-10: recruiters get the resume and a way to write to him without going through LinkedIn.
+# Labels and messages are UI; lead, resume_p, and note_done are KEVIN 2026-11-10. His email address is on the PDF and never in the page HTML.
+CONTACT = {
+    "formspree": "xrppvnyn",                    # same Formspree form as the planner; subject lines tell the three apart. Empty: nothing is sent.
+    "resume_file": "Kevin-Park-Resume.pdf",     # written to assets-src/ by resume.py
+    "nav": "Get in touch",
+    "hero": "Get my resume",
+    "lead": "If you’re hiring for product marketing, I would love to learn more.",
+    "resume_h": "Get my resume",
+    "resume_p": "Enter your work email and let’s see if we’re a match.",
+    "resume_cta": "Download resume",
+    "resume_busy": "One moment…",
+    "resume_done": "The resume is downloading. If it doesn’t start, use the link below.",
+    "resume_again": "Download again",
+    "note_h": "Send me a note",
+    "note_p": "Tell me a little about the role and I’ll reply by email.",
+    "note_cta": "Send note",
+    "note_busy": "Sending…",
+    "note_done": "Your note is sent. Talk to you soon!",
+    "note_fail": "That didn’t send. Try again in a moment, or reach me on LinkedIn.",
+    "name": "Name",
+    "email": "Work email",
+    "email_any": "Email",                       # the note form takes any address
+    "personal": "Please use your work email for the resume. If you don’t have one, send me a note and I’ll email it to you.",
+    # The resume form turns these away (site.js checks the domain, and any subdomain of it). The note form does not.
+    "personal_domains": ["gmail.com", "googlemail.com", "yahoo.com", "ymail.com", "rocketmail.com", "yahoo.co.uk", "yahoo.ca", "yahoo.co.jp", "yahoo.co.kr",
+                         "outlook.com", "hotmail.com", "hotmail.co.uk", "live.com", "msn.com", "icloud.com", "me.com", "mac.com", "aol.com",
+                         "proton.me", "protonmail.com", "pm.me", "tutanota.com", "tuta.com", "fastmail.com", "hey.com", "zoho.com", "gmx.com", "gmx.net", "mail.com",
+                         "yandex.com", "yandex.ru", "mail.ru", "qq.com", "163.com", "126.com", "naver.com", "daum.net", "hanmail.net", "kakao.com", "nate.com",
+                         "comcast.net", "verizon.net", "att.net", "sbcglobal.net", "cox.net", "shaw.ca", "telus.net", "rogers.com",
+                         "mailinator.com", "guerrillamail.com", "10minutemail.com", "tempmail.com", "temp-mail.org", "yopmail.com", "sharklasers.com", "trashmail.com",
+                         "example.com", "test.com"],
+    "message": "Message",
+    "invalid_email": "Enter an email address so I know who to reply to.",
+    "invalid_note": "Add your name and a short message.",
+    "rejected": "That email address didn’t go through. Check it and try again.",
+    "privacy": "Your email comes to me and isn’t added to a mailing list.",
+    "alt": "Prefer LinkedIn?",
+}
+
 ML = {  # NOTION, verbatim; deck from BRIEF
     "h1": "Using a visual metaphor to explain ZBD’s role",
     "deck": "How I developed “The Money Layer for Games” to explain ZBD’s role between games and financial services.",  # AUDIT M01
