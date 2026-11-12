@@ -32,11 +32,6 @@ UI = {
     "view_zbd": "View on zbdpay.com",
     "proof": "Published on zbdpay.com",  # AUDIT M06
     "drawn": "Drawn for this site.",
-    "interactive": "Interactive",  # UI
-    "gate_alt": "A wall across a slab keeps five coins waiting. Where the wall opens, the coins slide through.",  # UI
-    "loop_alt": "Coins ride a round track through three basins and back to the first.",  # UI
-    "loop_cap": "Hover to slow the run. Each coin leaves one basin for the next, then comes back to the first.",  # UI
-    "gate_cap": "Move across the wall. Where it opens, the coins waiting in front of it pass through.",  # UI
     "next": "Next case study",
     "follows": "Follows",
     "first_try": "First try",
@@ -259,7 +254,6 @@ ML = {  # NOTION, verbatim; deck from BRIEF
         ]},
         {"id": "layer", "h2": "From a barrier to a layer", "blocks": [
             ("p", "Every draft that tried to carry both the problem and ZBD’s ambition picked up another clause. I stepped away from the copy and pictured an Eva pushing against an AT Field in <i>Evangelion</i>."),
-            ("fig", "gate"),  # Hairline figure, 2026-11-12 (Kevin picked "Gate"); sits above the labelled diagram
             ("fig", "pair"),
             ("p", "The AT Field was a layer that blocked passage between two spaces. Pushing harder would not get the Eva through, which made me think about the boundary itself. I pictured ZBD in a similar position between a game’s economy and the financial world, with infrastructure that could let value move across it."),
         ]},
@@ -307,7 +301,6 @@ LC = {  # NOTION "The Money Lifecycle"; deck from BRIEF. Edited lines are listed
         ]},
         {"id": "loop", "h2": "Money could stay in the game", "blocks": [  # AUDIT L02
             ("p", "Once I drew the flow, a straight line felt incomplete. Value could enter a game, become a reward or a balance, move between players, and be spent within the game again. Some journeys ended in cash-out; others continued inside the economy."),
-            ("fig", "loopfig"),  # Hairline figure, 2026-11-12; sits above the labelled lifecycle diagram
             ("fig", "loop"),
             ("p", "I drew the three phases as a lifecycle to show how players could keep using value inside a game. A reward could become a balance, then a purchase or a transfer to another player."),  # AUDIT L05
         ]},

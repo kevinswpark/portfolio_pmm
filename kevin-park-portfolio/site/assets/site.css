@@ -640,10 +640,6 @@ mark.fig::before { content: ""; display: inline-block; width: 6px; height: 6px; 
 .fig { margin-block: clamp(2rem, 4vw, 3rem); }
 .fig__panel { position: relative; }
 .fig figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; font-size: var(--t-small); color: var(--fg-2); }
-/* Hairline figures: the engine draws in its own four stroke weights; the page lends it the panel color and its blue. */
-.fig__panel--hl { padding: 0; overflow: hidden; }
-.hl__stage { --hairline-plate: var(--ink-0); --hairline-hi: var(--blue-ink); --hairline-stroke: 1.25; max-width: 640px; margin-inline: auto; cursor: crosshair; }
-.hl__read { position: absolute; top: 14px; right: 16px; z-index: 1; font-size: var(--t-label); font-weight: 500; font-variant-numeric: tabular-nums; color: var(--fg-2); pointer-events: none; }
 .fig__panel--grad { border-radius: var(--r-card); padding: clamp(32px, 6vw, 72px) clamp(24px, 5vw, 56px); background: var(--blue); }
 .specimen { font-size: clamp(2.25rem, 1rem + 4vw, 4rem); line-height: 1.02; letter-spacing: -.03em; font-weight: 500; font-stretch: 106%; color: #fff; max-width: 12ch; }
 .fig__panel--proof { padding: clamp(20px, 3vw, 32px); background-image: none; background: var(--ink-1); }

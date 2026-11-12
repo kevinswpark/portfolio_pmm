@@ -142,30 +142,6 @@
   }
   whenIdle(initGlass);
 
-  /* ---------- Hairline figures ----------
-     Each figure file ends by calling hairline({ name, means, range, tour, mount }). This is the page's side of that
-     call: it finds the figure's slot, makes the stage the way the Hairline bench does, mounts the figure at its
-     default strength, and plays its tour once when the figure first scrolls into view. */
-  window.hairline = function (figure) {
-    var HL = window.HL, host = document.querySelector('[data-figure="' + figure.name + '"]');
-    if (!HL || !host || host.__hl) return;
-    host.__hl = true;
-    var stage = host.querySelector(".hl__stage"), out = host.querySelector(".hl__read");
-    HL.inject(document);
-    stage.setAttribute("data-hairline", figure.name);
-    var svg = HL.mk("svg", { viewBox: "0 0 400 320", "aria-hidden": "true" }, stage);
-    var read = { get textContent() { return out.textContent; }, set textContent(v) { out.textContent = v == null ? "" : String(v); } };
-    figure.mount({ stage: stage, svg: svg, read: read }, figure.range[1]);
-    host.hidden = false;
-    if (!figure.tour || reduce.matches || !("IntersectionObserver" in window)) return;
-    var io = new IntersectionObserver(function (es) {
-      if (!es[0].isIntersecting) return;
-      io.disconnect();
-      var lap = HL.tour(stage, figure.tour, function (i) { if (i === figure.tour.length - 1) lap.stop(); });
-    }, { threshold: 0.6 });
-    io.observe(stage);
-  };
-
   /* ---------- zoom view for diagrams ---------- */
   var dlg = document.getElementById("zoom"), lastTrigger = null;
   if (dlg) {

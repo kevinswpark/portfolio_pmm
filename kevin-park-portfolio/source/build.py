@@ -502,10 +502,6 @@ def portrait_src(ctx, name):
     return "/assets/" + name
 
 
-HL_FIGURES = {"gate": "gate", "loopfig": "loop"}  # figure kind in content.py -> hairline/<name>.js
-HL_PAGE = {"ml": "gate", "lc": "loop"}              # the page each figure is on
-
-
 def figure(kind, ctx):
     M, L = C.ML, C.LC
     if kind == "storyboard":
@@ -575,16 +571,6 @@ def figure(kind, ctx):
             '<figure class="fig">'
             f'<div class="fig__panel fig__panel--photo"><img src="{sbs_src(ctx)}" width="1400" height="721" alt="{escape(U["sbs_alt"])}" loading="lazy" decoding="async"></div>'
             f'<figcaption><span class="pill">{U["media"]}</span>{U["sbs_cap"]}</figcaption></figure>'
-        )
-    if kind in HL_FIGURES:
-        # A Hairline figure (hairline/<name>.js on vendor/hairline/kernel.js). site.js mounts it and shows the figure;
-        # without JavaScript it stays hidden and the labelled diagram below carries the idea.
-        name = HL_FIGURES[kind]
-        return (
-            f'<figure class="fig fig--hl" data-figure="{name}" hidden>'
-            '<div class="panel fig__panel fig__panel--hl"><span class="hl__read" aria-hidden="true">rest</span>'
-            f'<div class="hl__stage" role="img" aria-label="{escape(U[name + "_alt"])}"></div></div>'
-            f'<figcaption><span class="pill">{U["interactive"]}</span>{U[name + "_cap"]}</figcaption></figure>'
         )
     if kind == "pair":
         return (
@@ -1131,10 +1117,6 @@ def head_static(ctx):
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
         '<script src="/assets/header-gradient.js" defer></script>',
-    ] + ([
-        '<script src="/assets/vendor/hairline-kernel.js" defer></script>',
-        f'<script type="module" src="/assets/figures/{HL_PAGE[ctx.page]}.js"></script>',
-    ] if ctx.page in HL_PAGE else []) + [
     ]
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
@@ -1174,11 +1156,6 @@ def build_static():
     glass.mkdir(parents=True, exist_ok=True)
     shutil.copy(VENDOR / "html2canvas-1.4.1" / "html2canvas.min.js", glass / "html2canvas.min.js")
     shutil.copy(VENDOR / "liquid-glass-js-78cb6cc" / "container.js", glass / "liquid-glass-container.js")
-    # Hairline figures: the engine, unmodified, and one file per figure.
-    shutil.copy(VENDOR / "hairline" / "kernel.js", glass / "hairline-kernel.js")
-    (out / "assets" / "figures").mkdir(parents=True, exist_ok=True)
-    for name in HL_PAGE.values():
-        shutil.copy(ROOT / "hairline" / f"{name}.js", out / "assets" / "figures" / f"{name}.js")
     tools = out / "assets" / "tools"
     tools.mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / "src" / "planner.js", tools / "planner.js")
@@ -1241,8 +1218,6 @@ def build_artifact():
         + base64.b64encode((ROOT / "assets-src" / C.CONTACT["resume_file"]).read_bytes()).decode() + '";</script>\n'
         + f"<script>{js}</script>\n"
         + f"<script>{(ROOT / 'src' / 'header-gradient.js').read_text()}</script>\n"
-        + f"<script>{(VENDOR / 'hairline' / 'kernel.js').read_text()}</script>\n"
-        + "".join(f"<script type=\"module\">{(ROOT / 'hairline' / (n + '.js')).read_text()}</script>\n" for n in HL_PAGE.values())
         + artifact_tools()
     )
     (out / "index.html").write_text(html)
