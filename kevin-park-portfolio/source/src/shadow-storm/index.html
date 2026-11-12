@@ -13,6 +13,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/mona-sans-latin-standard-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="preload" href="./assets/logo.webp" as="image" type="image/webp">
 <link rel="stylesheet" href="./ss.css">
 <script type="importmap">{"imports":{"three":"/assets/vendor/three/three.module.js"}}</script>
 <link rel="modulepreload" href="/assets/vendor/three/three.module.js">
@@ -24,13 +25,13 @@
 <div class="scrim" aria-hidden="true"></div>
 <div id="shell" class="shell">
   <aside class="side">
-    <p class="logo logo--side" aria-label="Shadow Storm"><span class="logo__a">Shadow</span><span class="logo__b">Storm</span></p>
+    <p class="logo logo--side"><img src="./assets/logo.webp" data-logo alt="Shadow Storm" width="920" height="634" decoding="async"></p>
     <nav aria-label="Game menu"><ul id="nav" class="nav"></ul></nav>
     <a class="side__back" href="/">Back to the portfolio</a>
   </aside>
   <div class="main">
     <header class="top">
-      <p class="logo logo--top" aria-hidden="true"><span class="logo__a">Shadow</span><span class="logo__b">Storm</span></p>
+      <p class="logo logo--top" aria-hidden="true"><img src="./assets/logo.webp" data-logo alt="" width="920" height="634" decoding="async"></p>
       <div id="hud" class="hud" aria-label="Balances"></div>
     </header>
     <main id="view" class="view" tabindex="-1"></main>

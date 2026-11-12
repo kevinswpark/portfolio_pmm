@@ -9,8 +9,8 @@
   --cut: 14px; --side: 236px;
   color-scheme: dark;
 }
-body[data-accent="storm"] { --accent: #2f8fe0; --accent-text: #7cc4ff; }
-body[data-accent="jade"] { --accent: #149c74; --accent-text: #4fe0b0; }
+body[data-accent="storm"] { --accent: #2f8fe0; --accent-text: #7cc4ff; --logo-tint: hue-rotate(204deg) saturate(1.1); }
+body[data-accent="jade"] { --accent: #149c74; --accent-text: #4fe0b0; --logo-tint: hue-rotate(163deg) saturate(.85) brightness(1.08); }
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body { margin: 0; background: var(--ink); color: var(--text); font: 450 15px/1.5 "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif; font-stretch: 100%; overflow: hidden; -webkit-font-smoothing: antialiased; }
@@ -26,7 +26,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
 .skip:focus { top: 12px; }
 :focus-visible { outline: 2px solid var(--storm); outline-offset: 2px; }
 [tabindex="-1"]:focus { outline: none; }
-.disp, .ptitle, .logo, .h2, .btn, .nav__btn, .card__name, .tab, .eyebrow, .kicker, .w__title, .stamp, .card__rar, .card__tag, .chip { font-stretch: 75%; font-style: italic; text-transform: uppercase; }
+.disp, .ptitle, .h2, .btn, .nav__btn, .card__name, .tab, .eyebrow, .kicker, .w__title, .stamp, .card__rar, .card__tag, .chip { font-stretch: 75%; font-style: italic; text-transform: uppercase; }
 
 /* stage and scrim */
 .heroart { position: fixed; inset: 0; overflow: hidden; background: var(--ink); }
@@ -56,13 +56,12 @@ body.is-shake .shell { transform: translate(2px, -2px); }
 a[href=""] { display: none; }
 
 /* logo */
-.logo { display: inline-grid; line-height: .82; font-weight: 900; letter-spacing: -.01em; }
-.logo__a { color: var(--paper); text-shadow: 3px 3px 0 var(--ink); }
-.logo__b { color: var(--accent); text-shadow: 3px 3px 0 var(--ink); padding-left: .42em; position: relative; }
-.logo__b::before { content: ""; position: absolute; left: 0; top: .12em; width: .3em; height: .62em; background: var(--paper); clip-path: polygon(62% 0, 0 56%, 42% 56%, 22% 100%, 100% 40%, 56% 40%); }
-.logo--side { font-size: 34px; padding: 0 8px; }
-.logo--top { display: none; font-size: 24px; margin-right: auto; }
-.logo--xl { font-size: clamp(64px, 9.5vw, 132px); }
+/* The logo is one image drawn in red. The other accents recolor it with a hue rotation, which leaves its white lettering alone. */
+.logo { display: block; line-height: 0; }
+.logo img { display: block; width: 100%; height: auto; filter: var(--logo-tint, none); }
+.logo--side { margin: -8px 0 -6px; }
+.logo--top { display: none; width: 96px; margin: -10px auto -10px -8px; }
+.logo--xl { width: min(clamp(260px, 38vw, 540px), 60vh); margin: 0 0 -8px -3%; }
 
 /* nav */
 .nav { display: grid; gap: 4px; }
@@ -351,7 +350,7 @@ button.card:hover:not(:disabled) .thumb { transform: scale(1.07) rotate(-3deg); 
   .nav { display: flex; gap: 2px; }
   .nav__btn { flex-direction: column; gap: 3px; min-width: 76px; min-height: 52px; padding: 6px 8px; font-size: 12px; letter-spacing: .04em; white-space: nowrap; clip-path: none; }
   .nav__btn:hover { transform: none; }
-  .logo--top { display: inline-grid; }
+  .logo--top { display: block; }
   .top { padding-top: 12px; }
   .pill { height: 36px; padding: 0 11px; gap: 6px; }
   .pill b { font-size: 13.5px; }
@@ -369,7 +368,7 @@ button.card:hover:not(:disabled) .thumb { transform: scale(1.07) rotate(-3deg); 
   .hud .pill:not(.pill--btn) .cur { width: 15px; height: 15px; }
 }
 @media (max-width: 420px) {
-  .logo--top { font-size: 19px; }
+  .logo--top { width: 80px; }
   .pill { padding: 0 8px; }
   .w__big { font-size: 44px; }
 }

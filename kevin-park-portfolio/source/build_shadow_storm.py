@@ -66,6 +66,9 @@ def single(out=OUT):
     inline = {"poster": "data:image/jpeg;base64," + b64("hero.jpg") if (assets / "hero.jpg").exists() else "", "video": ""}
     if (assets / "hero.mp4").exists():
         inline["video64"] = b64("hero.mp4")
+    if (assets / "logo.webp").exists():
+        inline["logo"] = "data:image/webp;base64," + b64("logo.webp")
+        html = html.replace(' src="./assets/logo.webp" data-logo', " data-logo")  # the script fills these in from SS_ASSETS
     inline["items"] = {f.stem: "data:image/webp;base64," + base64.b64encode(f.read_bytes()).decode() for f in sorted((assets / "items").glob("*.webp"))}
     html = html.replace(tag, "<script>window.SS_ASSETS=" + json.dumps(inline) + "</script>\n<script>" + js + "</script>")
     html = html.replace("<head>", "<head>\n" + NOTICE, 1)

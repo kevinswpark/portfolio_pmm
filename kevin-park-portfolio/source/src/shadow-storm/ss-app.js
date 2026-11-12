@@ -71,7 +71,7 @@ let T = {}; // item thumbnails
 let stage = null;
 let heroVideo = null;
 // Hero art and its looping animation. The packed single file passes them in; the dev page loads them from ./assets.
-const ASSETS = window.SS_ASSETS || { poster: './assets/hero.jpg', video: './assets/hero.mp4', items: Object.fromEntries(MODEL_IDS.map((id) => [id, `./assets/items/${id}.webp`])) };
+const ASSETS = window.SS_ASSETS || { poster: './assets/hero.jpg', video: './assets/hero.mp4', logo: './assets/logo.webp', items: Object.fromEntries(MODEL_IDS.map((id) => [id, `./assets/items/${id}.webp`])) };
 // Illustrated item art, keyed by model id. Without it the items are rendered from the 3D models instead.
 const ITEM_ART = ASSETS.items && Object.keys(ASSETS.items).length ? ASSETS.items : null;
 
@@ -120,7 +120,7 @@ const NAV = [['home', 'Home', 'home'], ['play', 'Train', 'play'], ['store', 'Sto
 const SCREENS = {
   home() {
     return `<section class="hero" aria-labelledby="ptitle">
-      <h1 class="logo logo--xl" id="ptitle" tabindex="-1"><span class="logo__a">Shadow</span><span class="logo__b">Storm</span></h1>
+      <h1 class="logo logo--xl" id="ptitle" tabindex="-1"><img src="${ASSETS.logo}" alt="Shadow Storm" width="920" height="634"></h1>
       <p class="kicker">${COPY.kicker}</p>
       <p class="hero__who">${PLAYER.name} <span>Level ${PLAYER.level}</span> <span>${PLAYER.clan} clan</span></p>
       <p class="hero__hint">${COPY.hint}</p>
@@ -790,6 +790,8 @@ function startHeroArt() {
   }
   return true;
 }
+// The single-file build carries the logo as data, so its <img> tags get their source here.
+document.querySelectorAll('img[data-logo]').forEach((el) => { if (!el.getAttribute('src')) el.src = ASSETS.logo; });
 if (!startHeroArt()) startStage();
 window.__ss = { stage, state: () => S };
 render();
