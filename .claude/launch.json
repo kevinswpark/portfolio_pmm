@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-I",
+        "/private/tmp/claude-501/-Users-kevinpark-Documents-GitHub-portfolio-pmm/c660b8d8-192d-47bc-82ec-0d0bb4233b73/scratchpad/tools/serve_dir.py",
+        "/private/tmp/claude-501/-Users-kevinpark-Documents-GitHub-portfolio-pmm/c660b8d8-192d-47bc-82ec-0d0bb4233b73/scratchpad/site",
+        "8770"
+      ],
+      "port": 8770
+    }
+  ]
+}

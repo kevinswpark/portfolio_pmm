@@ -368,11 +368,13 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
 .tile h3 a:focus-visible { outline: none; }
 .tile__desc { color: var(--fg-2); line-height: 1.6; max-width: 46ch; }
 .tile__text { display: grid; gap: 1rem; align-content: start; }
-.tile__go { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: .9375rem; margin-top: .25rem; transition: color 160ms var(--ease-out); }
+/* "Read the case study" is a filled blue button (2026-11-12, user: people were missing that tiles are links).
+   The whole tile is still the link; the button is its visible handle and answers the tile's hover. */
+.tile__go { justify-self: start; margin-top: .5rem; min-height: 44px; padding: 0 18px; font-size: .9375rem; }
 .tile__go .icon { transition: transform 240ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .tile:hover { border-color: var(--line-2); background: var(--tile-hover); }
-  .tile:hover .tile__go { color: var(--amber-text); }
+  .tile:hover .tile__go { background: var(--blue-hover); }
   .tile:hover .tile__go .icon { transform: translateX(4px); }
 }
 .tile--ml { grid-column: 1 / span 7; grid-template-rows: auto 1fr; }
@@ -541,6 +543,11 @@ mark.fig::before { content: ""; display: inline-block; width: 6px; height: 6px; 
 /* ---------- closing: resume and note ---------- */
 .closing { padding-bottom: clamp(3rem, 6vw, 5rem); scroll-margin-top: calc(var(--nav-top) + var(--nav-h) + 16px); }
 .closing__card { position: relative; overflow: hidden; border-radius: var(--r-card); padding: clamp(28px, 5vw, 64px) clamp(16px, 4.5vw, 64px); display: grid; gap: clamp(24px, 3vw, 40px); background: var(--amber); color: var(--amber-ink); box-shadow: inset 0 1px 0 rgb(255 255 255 / .35); }
+/* The card carries the header gradient in warm colors (2026-11-12, user: "some gradient effect"): amber into
+   orange with pale gold crests. No scrim: every color in the mix holds the ink text above 7:1. */
+.closing__card { isolation: isolate; --sg-1: #FFB547; --sg-2: #FF8F3F; --sg-3: #FFE39A; --sg-light: 1; }
+.closing__card .sg { border-radius: inherit; background: linear-gradient(120deg, var(--sg-1) 15%, var(--sg-3) 50%, var(--sg-2) 95%); }
+.closing__card .sg::after { content: none; }
 .closing__intro { display: grid; gap: 14px; }
 .closing__h { font-size: var(--t-display); line-height: 1.04; letter-spacing: -.03em; font-weight: 500; font-stretch: 106%; color: var(--amber-ink); }
 .closing__lead { max-width: 40ch; font-size: var(--t-lead); line-height: 1.4; font-weight: 500; color: var(--amber-ink); }
@@ -633,6 +640,10 @@ mark.fig::before { content: ""; display: inline-block; width: 6px; height: 6px; 
 .fig { margin-block: clamp(2rem, 4vw, 3rem); }
 .fig__panel { position: relative; }
 .fig figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; font-size: var(--t-small); color: var(--fg-2); }
+/* Hairline figures: the engine draws in its own four stroke weights; the page lends it the panel color and its blue. */
+.fig__panel--hl { padding: 0; overflow: hidden; }
+.hl__stage { --hairline-plate: var(--ink-0); --hairline-hi: var(--blue-ink); --hairline-stroke: 1.25; max-width: 640px; margin-inline: auto; cursor: crosshair; }
+.hl__read { position: absolute; top: 14px; right: 16px; z-index: 1; font-size: var(--t-label); font-weight: 500; font-variant-numeric: tabular-nums; color: var(--fg-2); pointer-events: none; }
 .fig__panel--grad { border-radius: var(--r-card); padding: clamp(32px, 6vw, 72px) clamp(24px, 5vw, 56px); background: var(--blue); }
 .specimen { font-size: clamp(2.25rem, 1rem + 4vw, 4rem); line-height: 1.02; letter-spacing: -.03em; font-weight: 500; font-stretch: 106%; color: #fff; max-width: 12ch; }
 .fig__panel--proof { padding: clamp(20px, 3vw, 32px); background-image: none; background: var(--ink-1); }
@@ -1099,3 +1110,17 @@ legend.fp-label + .fp-help { margin-top: -8px; margin-bottom: 12px; }
   .zoom[open] { animation: fade-in 120ms var(--ease-out); }
   @view-transition { navigation: none; }
 }
+
+/* ---------- demo intro page (Shadow Storm) ---------- */
+.dm-page .art-head h1 { max-width: 20ch; }
+/* The bar holds a fifth link from 760px up. Below that the demo sits in the Tools menu instead. */
+.tools__li--narrow { display: none; }
+@media (max-width: 759px) { .nav__links > .nav__demo { display: none; } .tools__li--narrow { display: block; } }
+.dm-page .flow > .fig:first-child { margin-top: 0; }
+.demo-card { position: relative; display: grid; place-items: center; width: 100%; height: 100%; background: #07080f; }
+.demo-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 420ms var(--ease-out); }
+.demo-card .video-card__play { position: relative; box-shadow: 0 0 0 8px rgb(7 8 15 / .28); }
+.demo-card:active .video-card__play { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .demo-card:hover img { transform: scale(1.03); } .demo-card:hover .video-card__play { background: var(--fg-hover); } }
+.dm-credit { max-width: 38rem; font-size: var(--t-small); color: var(--fg-2); }
+.dm-page .flow > .actions { margin-top: 2rem; }

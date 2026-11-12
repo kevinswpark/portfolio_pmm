@@ -385,7 +385,7 @@
         + '<button class="fp-x" type="button" data-remove-goal aria-label="' + esc(Q.goal_remove + " " + g.type) + '">' + ICON_X + "</button></li>";
     }).join("");
   }
-  var ICON_X = '<svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>';
+  var ICON_X = '<svg class="icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M200 56 56 200M200 200 56 56"/></svg>';
 
   /* ---------- steps ---------- */
   function idx(step) { return STEPS.indexOf(step); }

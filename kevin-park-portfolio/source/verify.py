@@ -10,7 +10,7 @@ sys.path.insert(0, "src")
 import content as C  # noqa: E402
 
 BASE = "http://127.0.0.1:8765"
-PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/", "/tools/financial-planner/"]
+PAGES = ["/", "/work/money-layer/", "/work/money-lifecycle/", "/work/wirebarley/", "/tools/financial-planner/", "/demo/shadow-storm/"]
 results = []
 
 

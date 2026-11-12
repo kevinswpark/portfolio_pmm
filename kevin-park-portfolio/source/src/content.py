@@ -32,6 +32,11 @@ UI = {
     "view_zbd": "View on zbdpay.com",
     "proof": "Published on zbdpay.com",  # AUDIT M06
     "drawn": "Drawn for this site.",
+    "interactive": "Interactive",  # UI
+    "gate_alt": "A wall across a slab keeps five coins waiting. Where the wall opens, the coins slide through.",  # UI
+    "loop_alt": "Coins ride a round track through three basins and back to the first.",  # UI
+    "loop_cap": "Hover to slow the run. Each coin leaves one basin for the next, then comes back to the first.",  # UI
+    "gate_cap": "Move across the wall. Where it opens, the coins waiting in front of it pass through.",  # UI
     "next": "Next case study",
     "follows": "Follows",
     "first_try": "First try",
@@ -254,6 +259,7 @@ ML = {  # NOTION, verbatim; deck from BRIEF
         ]},
         {"id": "layer", "h2": "From a barrier to a layer", "blocks": [
             ("p", "Every draft that tried to carry both the problem and ZBD’s ambition picked up another clause. I stepped away from the copy and pictured an Eva pushing against an AT Field in <i>Evangelion</i>."),
+            ("fig", "gate"),  # Hairline figure, 2026-11-12 (Kevin picked "Gate"); sits above the labelled diagram
             ("fig", "pair"),
             ("p", "The AT Field was a layer that blocked passage between two spaces. Pushing harder would not get the Eva through, which made me think about the boundary itself. I pictured ZBD in a similar position between a game’s economy and the financial world, with infrastructure that could let value move across it."),
         ]},
@@ -301,6 +307,7 @@ LC = {  # NOTION "The Money Lifecycle"; deck from BRIEF. Edited lines are listed
         ]},
         {"id": "loop", "h2": "Money could stay in the game", "blocks": [  # AUDIT L02
             ("p", "Once I drew the flow, a straight line felt incomplete. Value could enter a game, become a reward or a balance, move between players, and be spent within the game again. Some journeys ended in cash-out; others continued inside the economy."),
+            ("fig", "loopfig"),  # Hairline figure, 2026-11-12; sits above the labelled lifecycle diagram
             ("fig", "loop"),
             ("p", "I drew the three phases as a lifecycle to show how players could keep using value inside a game. A reward could become a balance, then a purchase or a transfer to another player."),  # AUDIT L05
         ]},
@@ -634,4 +641,29 @@ FP = {  # TOOL: the financial planner at /tools/financial-planner/
         "formspree": "xrppvnyn",   # Formspree form ID (https://formspree.io/f/xrppvnyn). Empty: the PDF still downloads and nothing is sent.
         "site_url": "",    # filled from KP_SITE_URL at build time
     },
+}
+
+
+DEMO = {  # The Shadow Storm demo: intro page at /demo/shadow-storm/, the playable build at /demo/shadow-storm/play/
+    "nav": "Demo",                                                              # KEVIN 2026-11-12
+    "menu_title": "Shadow Storm demo",                                          # UI: the entry in the Tools menu on narrow screens
+    "title": "Shadow Storm demo | Kevin Park",                                  # UI
+    "meta": "A playable demo of a game with a wallet built in: buy, sell, earn, and cash out without leaving the game. Fictional game, sample data.",  # KEVIN 2026-11-12 (approved draft)
+    "h1": "Showing how money moves inside a game (with a fake ninja game)",     # KEVIN 2026-11-12 (approved draft)
+    "deck": "A playable demo of a native wallet built for games.",              # KEVIN 2026-11-12, his wording
+    "intro": [                                                                  # KEVIN 2026-11-12: approved draft; the last line is his wording
+        "Shadow Storm is not a real game. I built it to show one idea: what it looks like when money moves inside a game instead of around it.",
+        "In many games, anything involving real money sends you somewhere else. You leave to pay, and most of the time there is no way to get paid at all. Here the wallet sits inside the game. You can buy gear, sell an item to another player, collect a referral bonus or a season prize, and cash out to a bank account, without leaving the screen you were playing on.",
+        "Everything in it is made up for illustrative purposes, with no real money involved.",
+    ],
+    "try_h": "What to try",                                                     # KEVIN 2026-11-12 (approved draft)
+    "try": [
+        "Play a training round and earn some Koban.",
+        "List an item on the marketplace and watch it sell.",
+        "Cash out to a bank account and follow the status.",
+    ],
+    "credit": "The art and animation were generated with AI; the concept, flows, and copy are mine.",  # KEVIN 2026-11-12 ("AI credit is good")
+    "play": "Play the demo",                                                    # UI
+    "pill": "Demo",                                                             # UI
+    "cap": "Shadow Storm, a fictional game. Sample data.",                      # UI
 }

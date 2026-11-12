@@ -1,0 +1,9 @@
+Kevin, in chat, 2026-11-12, on the Shadow Storm demo page.
+
+Approved as drafted: the nav label "Demo"; the page title "Showing how money moves inside a game (with a fake ninja game)"; the first two intro paragraphs; the "What to try" steps; the search and share description; the AI credit line ("AI credit is good").
+
+His wording for the subtitle: "A playable demo of a native wallet built for games."
+
+His wording for the last intro line: "Everything in it is made up for illustrative purposes, with no real money involved."
+
+Rule for this page and the demo: do not mention the employer, the trade show, or anything like them.

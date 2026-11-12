@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "historyId": "c85a7b88-1a0a-40ee-a703-371bd55d24d7",
+  "currentRevision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+  "pendingChanges": false,
+  "files": {
+    "AGENTS.md": {
+      "hash": "268ff46777938da818baa92a718571785e9acf2cef2d3ffbacbb93483dcba37a",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/26/268ff46777938da818baa92a718571785e9acf2cef2d3ffbacbb93483dcba37a"
+    },
+    "CLAUDE.md": {
+      "hash": "268ff46777938da818baa92a718571785e9acf2cef2d3ffbacbb93483dcba37a",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/26/268ff46777938da818baa92a718571785e9acf2cef2d3ffbacbb93483dcba37a"
+    },
+    "compositions/card.html": {
+      "hash": "e1d73a7fc9a46022bf10444f123feb08f5bca6c7e97cc0b77c37cc537caa4575",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/e1/e1d73a7fc9a46022bf10444f123feb08f5bca6c7e97cc0b77c37cc537caa4575"
+    },
+    "hyperframes.json": {
+      "hash": "35a6d4ea79ebe911f0d81705f7aace5d8ff0316b745b0311d56af50c9c237cb7",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/35/35a6d4ea79ebe911f0d81705f7aace5d8ff0316b745b0311d56af50c9c237cb7"
+    },
+    "index.html": {
+      "hash": "9329db24af3ca581a2341cae6a7e5a5b4f9739a527d725018d14bd49c16fe551",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/93/9329db24af3ca581a2341cae6a7e5a5b4f9739a527d725018d14bd49c16fe551"
+    },
+    "meta.json": {
+      "hash": "a47612e5ff222980515e4c5c5c15948fc2fe01caf003bd04f1119c1d71a77311",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/a4/a47612e5ff222980515e4c5c5c15948fc2fe01caf003bd04f1119c1d71a77311"
+    },
+    "package.json": {
+      "hash": "c62d50be6d90f0c22ad11e2e054fdd05832ed17d284544abfe1d64683e605fba",
+      "content": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/c6/c62d50be6d90f0c22ad11e2e054fdd05832ed17d284544abfe1d64683e605fba"
+    }
+  },
+  "revisions": {
+    "6e7d61b3-e647-4d43-9198-07b75019f3af": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794500450223,
+      "endedAt": 1794500450223,
+      "files": {
+        "compositions/card.html": {
+          "before": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/e2/e2f2b05df358d0e52df79e12ea9a502719a0d991bb38ae4051fdf4a14055f283",
+          "after": "/Users/kevinpark/.cache/hyperframes/history/c85a7b88-1a0a-40ee-a703-371bd55d24d7/blobs/e1/e1d73a7fc9a46022bf10444f123feb08f5bca6c7e97cc0b77c37cc537caa4575"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+      "id": "a374a70f-251c-422d-9daf-c5b8aa50e95b"
+    },
+    "revisions": {
+      "6e7d61b3-e647-4d43-9198-07b75019f3af": [
+        {
+          "id": "a374a70f-251c-422d-9daf-c5b8aa50e95b",
+          "scope": "project",
+          "report": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/checks/a374a70f-251c-422d-9daf-c5b8aa50e95b.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 45000,
+              "cache": true,
+              "contrast": true,
+              "craft": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto",
+              "includeUnmounted": false
+            }
+          },
+          "createdAt": 1794500452677,
+          "contentHash": "45896bcafe7d77d7bb66c31e968488ad0b418d7b17378e97d9f8dfdf90dd441d",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "b1252c5b-0465-4772-b3e7-0542987861e0",
+        "scope": "project",
+        "report": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/checks/b1252c5b-0465-4772-b3e7-0542987861e0.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 45000,
+            "cache": true,
+            "contrast": true,
+            "craft": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto",
+            "includeUnmounted": false
+          }
+        },
+        "createdAt": 1794500439140,
+        "contentHash": "1ea71f172e13785b9ffc1345d417aa37a11f87bf64b0b356a05ac1c56574fd89",
+        "revision": null,
+        "inputFingerprint": "34b068f13ba2675c9ccb327f8e1cbf66591119b203b38c39bf65b3b3dd2a62c8",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": {
+      "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+      "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-6"
+    },
+    "revisions": {
+      "6e7d61b3-e647-4d43-9198-07b75019f3af": [
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-0",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-00-at-0s.png",
+          "time": 0,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "921f21eb51b9628e5af6844f878388f39e0444538335bbc89e6dce76c335823a",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-1",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-01-at-0.5s.png",
+          "time": 0.5,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "921f21eb51b9628e5af6844f878388f39e0444538335bbc89e6dce76c335823a",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-2",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-02-at-1.15s.png",
+          "time": 1.15,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "61d06688fb6bec6aa38443ab4aea50c11c3dec78432e70a1d1e9a56f5a31bd36",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-3",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-03-at-2.5s.png",
+          "time": 2.5,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "575921bccbbb7db09c8d047dd48460f9fb6cd04bb6f76d7d918bf0ad73e93e2d",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-4",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-04-at-5s.png",
+          "time": 5,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "f089b9fa86392c28bf0ae4afd99298510618603eafa97a5ffcb01f748750ca24",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-5",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-05-at-7.9s.png",
+          "time": 7.9,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "f3588a74b727a31955d40f635736273f5b6ed50477205e68fa9886df71ec5917",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "scope": "full",
+          "id": "7a072c67-3528-4cd8-8acd-724208cbda5b-6",
+          "image": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/.hyperframes/artifacts/snapshots/7bee160d-02e1-44a3-a241-19712bde9776/frame-06-at-7.76s.png",
+          "time": 7.76,
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "zoomScale": 1,
+            "browserGpuMode": "auto",
+            "warnings": [],
+            "partial": false
+          },
+          "createdAt": 1794500458710,
+          "contentHash": "76cf0a778c5e89fbcd641d49dd35786f2428a0f58dca6cbb7829e133cbde9976",
+          "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af",
+          "inputFingerprint": "283fbf4b0dbbcb83d21d9cd0398bf690a86943d6982aed2fbb951fbe09179535",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "57e6f2eb-8f57-4e01-98f9-6128bae9d7a4",
+      "completedAt": 1794500493067,
+      "output": "/Users/kevinpark/Documents/GitHub/portfolio_pmm/hyperframes-test/renders/hyperframes-test_2026-11-12_08-21-08.mp4",
+      "status": "completed",
+      "revision": "6e7d61b3-e647-4d43-9198-07b75019f3af"
+    },
+    "retainedRevisions": [
+      "6e7d61b3-e647-4d43-9198-07b75019f3af"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

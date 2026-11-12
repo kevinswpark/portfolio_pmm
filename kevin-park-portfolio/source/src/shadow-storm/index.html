@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shadow Storm: game store demo with an embedded wallet</title>
+<meta name="description" content="A playable demo of a game store with an embedded wallet: buy gear, sell on a player market, earn, and cash out. Fictional game, original art, sample data.">
+<meta name="theme-color" content="#07080f">
+<link rel="canonical" href="__SITE_URL__/demo/shadow-storm/play/">
+<meta property="og:title" content="Shadow Storm: game store demo with an embedded wallet">
+<meta property="og:description" content="Buy gear, sell on a player market, earn, and cash out. Fictional game, original art, sample data.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/mona-sans-latin-standard-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="./ss.css">
+<script type="importmap">{"imports":{"three":"/assets/vendor/three/three.module.js"}}</script>
+<link rel="modulepreload" href="/assets/vendor/three/three.module.js">
+</head>
+<body data-screen="home" data-accent="verm">
+<a class="skip" href="#view">Skip to content</a>
+<div id="heroart" class="heroart" aria-hidden="true" hidden><img id="hero-poster" alt="" decoding="async"><video id="hero-video" muted loop playsinline preload="auto" tabindex="-1"></video></div>
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<div id="shell" class="shell">
+  <aside class="side">
+    <p class="logo logo--side" aria-label="Shadow Storm"><span class="logo__a">Shadow</span><span class="logo__b">Storm</span></p>
+    <nav aria-label="Game menu"><ul id="nav" class="nav"></ul></nav>
+    <a class="side__back" href="/">Back to the portfolio</a>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <p class="logo logo--top" aria-hidden="true"><span class="logo__a">Shadow</span><span class="logo__b">Storm</span></p>
+      <div id="hud" class="hud" aria-label="Balances"></div>
+    </header>
+    <main id="view" class="view" tabindex="-1"></main>
+    <footer class="foot"><span class="foot__on"><i></i>Wallet linked</span><span>Portfolio demo. Fictional game, sample data, no real money. <a href="/">Back to the portfolio</a></span></footer>
+  </div>
+</div>
+<div id="wallet" class="wallet" role="dialog" aria-modal="true" aria-labelledby="wallet-h" hidden>
+  <div class="wallet__scrim" data-act="wallet-close"></div>
+  <div class="wallet__sheet"><div id="wallet-body" class="wallet__body"></div></div>
+</div>
+<div id="modal" class="modal" hidden></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<noscript><p class="nojs">Shadow Storm is an interactive demo and needs JavaScript. <a href="/">Back to the portfolio</a></p></noscript>
+<script type="module" src="./ss-app.js"></script>
+</body>
+</html>

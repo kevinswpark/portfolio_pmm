@@ -1,0 +1,176 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: var(--ground);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+    }
+    #card-label {
+      position: absolute;
+      left: 192px;
+      top: 228px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 28px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    #card-label-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .card-line {
+      position: absolute;
+      left: 186px;
+      font-size: 196px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+    }
+    #card-line1 {
+      top: 300px;
+    }
+    #card-line2 {
+      top: 500px;
+      color: var(--accent);
+    }
+    #card-track {
+      position: absolute;
+      left: 192px;
+      top: 790px;
+      width: 1536px;
+      height: 40px;
+    }
+    #card-rule {
+      position: absolute;
+      left: 0;
+      top: 19px;
+      width: 1536px;
+      height: 2px;
+      background: var(--ink);
+      opacity: 0.22;
+      transform-origin: 0 50%;
+    }
+    #card-fill {
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 1536px;
+      height: 4px;
+      background: var(--ink);
+      transform-origin: 0 50%;
+    }
+    #card-head {
+      position: absolute;
+      left: -11px;
+      top: 9px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    #card-meta {
+      position: absolute;
+      left: 192px;
+      top: 852px;
+      width: 1536px;
+      display: flex;
+      justify-content: space-between;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 28px;
+    }
+    #card-specs {
+      display: flex;
+      gap: 44px;
+    }
+    #card-time {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+
+  <div id="root" data-composition-id="card" data-width="1920" data-height="1080">
+    <div id="card-label" class="clip" data-start="0" data-duration="8" data-track-index="1">
+      <span id="card-label-dot"></span>
+      <span id="card-label-text" data-var-text="label">Render test 001</span>
+    </div>
+
+    <div id="card-line1" class="clip card-line" data-start="0" data-duration="8" data-track-index="2">
+      <span id="card-line1-text" data-var-text="line1">HTML in.</span>
+    </div>
+    <div id="card-line2" class="clip card-line" data-start="1.0" data-duration="7" data-track-index="3">
+      <span id="card-line2-text" data-var-text="line2">Video out.</span>
+    </div>
+
+    <div id="card-track" class="clip" data-start="1.6" data-duration="6.4" data-track-index="4">
+      <div id="card-rule"></div>
+      <div id="card-fill"></div>
+      <div id="card-head"></div>
+    </div>
+
+    <div id="card-meta" class="clip" data-start="1.9" data-duration="6.1" data-track-index="5">
+      <div id="card-specs">
+        <span class="card-spec">1920 × 1080</span>
+        <span class="card-spec">30 fps</span>
+        <span class="card-spec">8 s</span>
+      </div>
+      <span id="card-time">00:00:00</span>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const FPS = 30;
+    const TOTAL = 8;
+
+    // Label and line 1 are on screen from frame 0; line 2 blurs in and stays still.
+    tl.fromTo(
+      "#card-line2-text",
+      { opacity: 0, filter: "blur(10px)" },
+      { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" },
+      1.0,
+    );
+
+    // The rule draws in, then the playhead and fill run at constant speed.
+    tl.fromTo("#card-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 1.6);
+    tl.fromTo("#card-head", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 1.7);
+    tl.fromTo("#card-head", { x: 0 }, { x: 1536, duration: 5.2, ease: "none" }, 2.1);
+    tl.fromTo("#card-fill", { scaleX: 0 }, { scaleX: 1, duration: 5.2, ease: "none" }, 2.1);
+
+    // Spec labels stagger in.
+    tl.fromTo(
+      ".card-spec",
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "expo.out", stagger: 0.07 },
+      1.9,
+    );
+    tl.fromTo("#card-time", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 2.0);
+
+    // Timecode is a pure function of timeline time.
+    const timeEl = document.querySelector("#card-time");
+    const pad = (n) => String(n).padStart(2, "0");
+    const clock = { t: 0 };
+    tl.fromTo(
+      clock,
+      { t: 0 },
+      {
+        t: TOTAL,
+        duration: TOTAL,
+        ease: "none",
+        onUpdate: () => {
+          const frame = Math.round(clock.t * FPS);
+          const s = Math.floor(frame / FPS);
+          timeEl.textContent = "00:" + pad(s) + ":" + pad(frame % FPS);
+        },
+      },
+      0,
+    );
+
+    window.__timelines["card"] = tl;
+  </script>
+</template>

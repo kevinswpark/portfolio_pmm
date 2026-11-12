@@ -23,6 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import content as C  # noqa: E402
 import diagrams  # noqa: E402
+sys.path.insert(0, str(ROOT))
+import build_shadow_storm as shadow_storm  # noqa: E402
 
 SITE_URL = os.environ.get("KP_SITE_URL", "").rstrip("/")
 DIST = ROOT / "dist"
@@ -33,33 +35,47 @@ FONT_DIR = next(p for p in VENDOR.glob("fontsource-variable-mona-sans-*") if p.i
 LATIN = "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
 LATIN_EXT = "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
 
-PAGES = ("home", "ml", "lc", "wb", "fp", "nf")
-VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "wb": "wirebarley", "fp": "financial-planner", "nf": "404"}
-PATH = {"home": "/", "ml": "/work/money-layer/", "lc": "/work/money-lifecycle/", "wb": "/work/wirebarley/", "fp": "/tools/financial-planner/", "nf": "/404.html"}
-TITLE = {"home": C.META["home_title"], "ml": C.META["ml_title"], "lc": C.META["lc_title"], "wb": C.META["wb_title"], "fp": C.FP["title"], "nf": C.META["nf_title"]}
-DESC = {"home": C.META["home_desc"], "ml": C.META["ml_desc"], "lc": C.META["lc_desc"], "wb": C.META["wb_desc"], "fp": C.FP["meta"], "nf": C.META["home_desc"]}
+PAGES = ("home", "ml", "lc", "wb", "fp", "dm", "nf")
+VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "wb": "wirebarley", "fp": "financial-planner", "dm": "demo", "nf": "404"}
+PATH = {"home": "/", "ml": "/work/money-layer/", "lc": "/work/money-lifecycle/", "wb": "/work/wirebarley/", "fp": "/tools/financial-planner/", "dm": "/demo/shadow-storm/", "nf": "/404.html"}
+DEMO_PLAY = "/demo/shadow-storm/play/"  # the playable build, written by build_shadow_storm.web()
+TITLE = {"home": C.META["home_title"], "ml": C.META["ml_title"], "lc": C.META["lc_title"], "wb": C.META["wb_title"], "fp": C.FP["title"], "dm": C.DEMO["title"], "nf": C.META["nf_title"]}
+DESC = {"home": C.META["home_desc"], "ml": C.META["ml_desc"], "lc": C.META["lc_desc"], "wb": C.META["wb_desc"], "fp": C.FP["meta"], "dm": C.DEMO["meta"], "nf": C.META["home_desc"]}
 SBS_IMG = ROOT / "assets-src" / "sbs-evening-news.jpg"
 YT = "https://www.youtube.com/watch?v=" + C.WB["video_id"]
 U = C.UI
 
 
 # ---------------------------------------------------------------------------
-# icons (Phosphor, regular)
+# icons: one hairline stroke (redrawn 2026-11-12 on Phosphor's 256 grid and proportions; the regular-weight
+# Phosphor files stay in vendor/ as the reference). Every icon is open strokes with round ends, no fills,
+# so the set reads as one line weight next to the diagrams. A zero-length segment draws a dot.
 # ---------------------------------------------------------------------------
-def _icon_path(name):
-    svg = (ICON_DIR / f"{name}.svg").read_text()
-    return re.search(r'<path d="([^"]+)"', svg).group(1)
-
-
-ICON_NAMES = ["arrow-down", "arrow-right", "arrow-left", "arrow-up-right", "linkedin-logo",
-              "magnifying-glass-plus", "x", "check", "caret-down", "lock-simple", "download-simple", "plus",
-              "calculator", "arrow-counter-clockwise", "sun", "moon"]
-ICONS = {n: _icon_path(n) for n in ICON_NAMES}
+ICONS = {
+    "arrow-right": "M40 128h176M144 56l72 72-72 72",
+    "play": "M88 56 200 128 88 200Z",
+    "arrow-left": "M216 128H40M112 56l-72 72 72 72",
+    "arrow-down": "M128 40v176M56 144l72 72 72-72",
+    "arrow-up-right": "M64 192 192 64M88 64h104v104",
+    "caret-down": "M208 96l-80 80-80-80",
+    "check": "M40 136l56 56L216 72",
+    "x": "M200 56 56 200M200 200 56 56",
+    "plus": "M40 128h176M128 40v176",
+    "download-simple": "M128 144V32M216 144v56a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8v-56M168 104l-40 40-40-40",
+    "lock-simple": "M48 88h160a8 8 0 0 1 8 8v112a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8V96a8 8 0 0 1 8-8ZM88 88V56a40 40 0 0 1 80 0v32",
+    "magnifying-glass-plus": "M192 112a80 80 0 1 1-160 0 80 80 0 0 1 160 0ZM168.57 168.57 224 224M80 112h64M112 80v64",
+    "moon": "M108.11 28.11A96.09 96.09 0 0 0 227.89 147.89 96 96 0 1 1 108.11 28.11Z",
+    "sun": "M184 128a56 56 0 1 1-112 0 56 56 0 0 1 112 0ZM128 36V16M62.95 62.95 48.81 48.81M36 128H16M62.95 193.05l-14.14 14.14M128 220v20M193.05 193.05l14.14 14.14M220 128h20M193.05 62.95l14.14-14.14",
+    "calculator": "M64 24h128a8 8 0 0 1 8 8v192a8 8 0 0 1-8 8H64a8 8 0 0 1-8-8V32a8 8 0 0 1 8-8ZM88 64h80v40H88ZM92 148h0M128 148h0M164 148h0M92 188h0M128 188h0M164 188h0",
+    "arrow-counter-clockwise": "M79.83 99.72h-48v-48M65.77 190.23a88 88 0 1 0 0-124.46L31.83 99.72",
+    "linkedin-logo": "M48 32h160a16 16 0 0 1 16 16v160a16 16 0 0 1-16 16H48a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16ZM120 112v64M88 112v64M120 140a28 28 0 0 1 56 0v36M88 80h0",
+}
 
 
 def icon(name, cls=""):
     return (
-        f'<svg class="icon {cls}" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">'
+        f'<svg class="icon {cls}" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
         f'<path d="{ICONS[name]}"/></svg>'
     )
 
@@ -144,6 +160,14 @@ def tools_menu(ctx):
         f'<span class="tools__desc">{it["desc"]}</span></span></a></li>'
         for it in T["items"]
     )
+    # Below 760px the bar has no room for a fifth link, so the demo moves into this menu (site.css swaps the two).
+    D = C.DEMO
+    items += (
+        f'<li class="tools__li--narrow"><a class="tools__item" href="{ctx.url("dm")}"{cur if ctx.page == "dm" else ""}>'
+        f'<span class="tools__icon" aria-hidden="true">{icon("play")}</span>'
+        f'<span class="tools__text"><span class="tools__title">{D["menu_title"]}</span>'
+        f'<span class="tools__desc">{D["deck"].rstrip(".")}</span></span></a></li>'
+    )
     current = " is-current" if ctx.page in [it["key"] for it in T["items"]] else ""
     return (
         f'<div class="tools{current}" data-tools>'
@@ -181,6 +205,7 @@ def nav(ctx):
         f'<a href="{ctx.url("home", "about")}" data-nav="about">{U["about"]}</a>'
         f'<a href="{ctx.url("home", "experience")}" data-nav="experience">{U["experience"]}</a>'
         f"{tools_menu(ctx)}"
+        f'<a class="nav__demo" href="{ctx.url("dm")}"{" aria-current=" + chr(34) + "page" + chr(34) if ctx.page == "dm" else ""}>{C.DEMO["nav"]}</a>'
         "</div>"
         f"{theme_button()}"
         f'<a class="btn btn--blue btn--compact" href="{contact_url(ctx)}"><span class="btn__text">{C.CONTACT["nav"]}</span></a>'
@@ -245,7 +270,7 @@ def closing(ctx):
         "</form>"
     )
     return (
-        f'<section class="closing wrap" id="{ctx.id("contact")}" aria-labelledby="{hid}"><div class="closing__card">'
+        f'<section class="closing wrap" id="{ctx.id("contact")}" aria-labelledby="{hid}"><div class="closing__card"><div class="sg sg--warm" data-sg aria-hidden="true"></div>'
         f'<div class="closing__intro"><h2 class="closing__h" id="{hid}">{C.CLOSING["h2"]}</h2>'
         f'<p class="closing__lead">{K["lead"]}</p></div>'
         f'<div class="closing__forms">{resume}{note}</div>'
@@ -265,7 +290,7 @@ def tile_ml(ctx, compact=False):
         f'<p class="tile__desc">{W["problem"]}</p>'
         f'<p class="result"><span class="result__chip">{W["result"]}</span></p>'
         f'<p class="tile__impact">{W["impact"]}</p>'
-        f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
+        f'<span class="tile__go btn btn--blue" aria-hidden="true">{U["read"]}{icon("arrow-right", "icon--next")}</span>'
         "</div>"
         f'<div class="tile__art panel">{diagrams.money_layer_pair(C.DIAGRAM)}</div>'
         "</article>"
@@ -283,7 +308,7 @@ def tile_lc(ctx, compact=False):
         f'<p class="tile__desc">{W["desc"]}</p>'
         f'<p class="result result--row">{chips}</p>'
         f'<p class="tile__impact">{W["impact"]}</p>'
-        f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
+        f'<span class="tile__go btn btn--blue" aria-hidden="true">{U["read"]}{icon("arrow-right", "icon--next")}</span>'
         "</div>"
         f'<div class="tile__art panel">{diagrams.lifecycle_svg(C.DIAGRAM["lc_alt"])}</div>'
         "</article>"
@@ -304,7 +329,7 @@ def tile_wb(ctx, compact=False):
         f'<p class="tile__desc">{W["problem"]}</p>'
         f'<p class="result"><span class="result__chip">{W["result"]}</span></p>'
         f'<p class="tile__stat"><span class="tile__stat-v">{W["stat"][0]}</span><span class="tile__stat-k">{W["stat"][1]}</span></p>'
-        f'<span class="tile__go" aria-hidden="true">{U["read"]}{icon("arrow-right")}</span>'
+        f'<span class="tile__go btn btn--blue" aria-hidden="true">{U["read"]}{icon("arrow-right", "icon--next")}</span>'
         "</div>"
         f'<div class="tile__art"><ol class="mini-story" aria-label="{escape(U["storyboard"])}">{steps}</ol></div>'
         "</article>"
@@ -477,6 +502,10 @@ def portrait_src(ctx, name):
     return "/assets/" + name
 
 
+HL_FIGURES = {"gate": "gate", "loopfig": "loop"}  # figure kind in content.py -> hairline/<name>.js
+HL_PAGE = {"ml": "gate", "lc": "loop"}              # the page each figure is on
+
+
 def figure(kind, ctx):
     M, L = C.ML, C.LC
     if kind == "storyboard":
@@ -546,6 +575,16 @@ def figure(kind, ctx):
             '<figure class="fig">'
             f'<div class="fig__panel fig__panel--photo"><img src="{sbs_src(ctx)}" width="1400" height="721" alt="{escape(U["sbs_alt"])}" loading="lazy" decoding="async"></div>'
             f'<figcaption><span class="pill">{U["media"]}</span>{U["sbs_cap"]}</figcaption></figure>'
+        )
+    if kind in HL_FIGURES:
+        # A Hairline figure (hairline/<name>.js on vendor/hairline/kernel.js). site.js mounts it and shows the figure;
+        # without JavaScript it stays hidden and the labelled diagram below carries the idea.
+        name = HL_FIGURES[kind]
+        return (
+            f'<figure class="fig fig--hl" data-figure="{name}" hidden>'
+            '<div class="panel fig__panel fig__panel--hl"><span class="hl__read" aria-hidden="true">rest</span>'
+            f'<div class="hl__stage" role="img" aria-label="{escape(U[name + "_alt"])}"></div></div>'
+            f'<figcaption><span class="pill">{U["interactive"]}</span>{U[name + "_cap"]}</figcaption></figure>'
         )
     if kind == "pair":
         return (
@@ -952,7 +991,57 @@ def fp_main(ctx):
     )
 
 
-MAINS = {"home": home_main, "ml": ml_main, "lc": lc_main, "wb": wb_main, "fp": fp_main, "nf": nf_main}
+# ---------------------------------------------------------------------------
+# demo: Shadow Storm intro page (the playable build lives at DEMO_PLAY)
+# ---------------------------------------------------------------------------
+def dm_main(ctx):
+    D = C.DEMO
+    spa = ctx.mode == "spa"
+    href = abs_url(DEMO_PLAY) if spa else DEMO_PLAY
+    ext = f' target="_blank" rel="noopener noreferrer"' if spa else ""
+    new_tab = f'<span class="sr-only"> {U["new_tab"]}</span>' if spa else ""
+    card = cta = ""
+    if not spa or SITE_URL:  # the single-file Artifact cannot carry the demo; link to the hosted one when a domain is set
+        if spa:
+            panel = (
+                f'<a class="video-card" href="{href}"{ext}><span class="video-card__play">{PLAY}</span>'
+                f'<span class="video-card__t">{D["play"]}</span>{new_tab}</a>'
+            )
+        else:
+            panel = (
+                f'<a class="demo-card" href="{href}">'
+                f'<img src="{DEMO_PLAY}assets/hero.jpg" width="1344" height="752" alt="" decoding="async">'
+                f'<span class="video-card__play">{PLAY}</span><span class="sr-only">{D["play"]}</span></a>'
+            )
+        card = (
+            f'<figure class="fig"><div class="fig__panel fig__panel--video">{panel}</div>'
+            f'<figcaption><span class="pill">{D["pill"]}</span>{D["cap"]}</figcaption></figure>'
+        )
+        cta = (
+            f'<div class="actions"><a class="btn btn--blue" href="{href}"{ext}><span class="btn__text">{D["play"]}</span>'
+            f'{icon("arrow-up-right" if spa else "arrow-right", "icon--next")}{new_tab}</a></div>'
+        )
+    th = ctx.id("try-h")
+    return (
+        f'<main id="{ctx.id("main")}" tabindex="-1" class="dm-page">'
+        '<header class="art-head"><div class="sg" data-sg aria-hidden="true"></div>'
+        '<div class="wrap art-head__in">'
+        f'<h1 id="{ctx.id("title")}" tabindex="-1">{D["h1"]}</h1>'
+        f'<p class="deck">{D["deck"]}</p>'
+        "</div></header>"
+        '<div class="art art--single wrap"><div class="flow">'
+        + card
+        + "".join(f'<p class="prose">{p}</p>' for p in D["intro"])
+        + f'<h2 id="{th}">{D["try_h"]}</h2>'
+        + '<ul class="role__bullets">' + "".join(f"<li>{t}</li>" for t in D["try"]) + "</ul>"
+        + cta
+        + f'<p class="dm-credit">{D["credit"]}</p>'
+        + "</div></div>"
+        + closing(ctx) + "</main>"
+    )
+
+
+MAINS = {"home": home_main, "ml": ml_main, "lc": lc_main, "wb": wb_main, "fp": fp_main, "dm": dm_main, "nf": nf_main}
 
 
 def body(ctx):
@@ -1042,6 +1131,10 @@ def head_static(ctx):
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
         '<script src="/assets/header-gradient.js" defer></script>',
+    ] + ([
+        '<script src="/assets/vendor/hairline-kernel.js" defer></script>',
+        f'<script type="module" src="/assets/figures/{HL_PAGE[ctx.page]}.js"></script>',
+    ] if ctx.page in HL_PAGE else []) + [
     ]
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
@@ -1081,6 +1174,11 @@ def build_static():
     glass.mkdir(parents=True, exist_ok=True)
     shutil.copy(VENDOR / "html2canvas-1.4.1" / "html2canvas.min.js", glass / "html2canvas.min.js")
     shutil.copy(VENDOR / "liquid-glass-js-78cb6cc" / "container.js", glass / "liquid-glass-container.js")
+    # Hairline figures: the engine, unmodified, and one file per figure.
+    shutil.copy(VENDOR / "hairline" / "kernel.js", glass / "hairline-kernel.js")
+    (out / "assets" / "figures").mkdir(parents=True, exist_ok=True)
+    for name in HL_PAGE.values():
+        shutil.copy(ROOT / "hairline" / f"{name}.js", out / "assets" / "figures" / f"{name}.js")
     tools = out / "assets" / "tools"
     tools.mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / "src" / "planner.js", tools / "planner.js")
@@ -1094,11 +1192,13 @@ def build_static():
     og = ROOT / "assets-src" / "og.png"
     if og.exists():
         shutil.copy(og, out / "assets" / "og.png")
+    # Shadow Storm: the playable demo (its own page, scripts, and art; needs Node for the bundle step)
+    shadow_storm.web(out / DEMO_PLAY.strip("/"), SITE_URL)
     (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /assets/{C.CONTACT['resume_file']}\n" + (f"Sitemap: {SITE_URL}/sitemap.xml\n" if SITE_URL else ""))
     if SITE_URL:
         (out / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-            + "".join(f"<url><loc>{abs_url(PATH[p])}</loc></url>" for p in ("home", "ml", "lc", "wb", "fp")) + "</urlset>"
+            + "".join(f"<url><loc>{abs_url(PATH[p])}</loc></url>" for p in ("home", "ml", "lc", "wb", "fp", "dm")) + f"<url><loc>{abs_url(DEMO_PLAY)}</loc></url></urlset>"
         )
     return out
 
@@ -1141,6 +1241,8 @@ def build_artifact():
         + base64.b64encode((ROOT / "assets-src" / C.CONTACT["resume_file"]).read_bytes()).decode() + '";</script>\n'
         + f"<script>{js}</script>\n"
         + f"<script>{(ROOT / 'src' / 'header-gradient.js').read_text()}</script>\n"
+        + f"<script>{(VENDOR / 'hairline' / 'kernel.js').read_text()}</script>\n"
+        + "".join(f"<script type=\"module\">{(ROOT / 'hairline' / (n + '.js')).read_text()}</script>\n" for n in HL_PAGE.values())
         + artifact_tools()
     )
     (out / "index.html").write_text(html)
