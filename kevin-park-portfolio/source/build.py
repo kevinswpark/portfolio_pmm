@@ -1118,6 +1118,11 @@ def head_static(ctx):
         '<script src="/assets/site.js" defer></script>',
         '<script src="/assets/header-gradient.js" defer></script>',
     ]
+    if SITE_URL:
+        # Vercel Web Analytics. Only in production builds (KP_SITE_URL set): the script exists only on Vercel,
+        # so a local build leaves it out and local visits never reach the dashboard.
+        parts += ['<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>',
+                  '<script defer src="/_vercel/insights/script.js"></script>']
     if SITE_URL and ctx.page != "nf":
         parts += [f'<link rel="canonical" href="{abs_url(p)}">', f'<meta property="og:url" content="{abs_url(p)}">']
     if ctx.page == "home":

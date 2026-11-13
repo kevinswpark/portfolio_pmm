@@ -93,6 +93,11 @@ def web(out_dir, site_url=""):
     assert tag in html
     html = html.replace(tag, '<script src="./app.js"></script>')
     html = html.replace("<head>", "<head>\n" + NOTICE, 1)
+    if site_url:  # Vercel Web Analytics, production builds only (same tags as build.py's head_static)
+        va = ('<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>\n'
+              '<script defer src="/_vercel/insights/script.js"></script>\n')
+        html = html.replace('<meta charset="utf-8">\n', '<meta charset="utf-8">\n' + va, 1)
+        assert "_vercel/insights" in html
     (out_dir / "index.html").write_text(html)
     (out_dir / "app.js").write_text(bundle())
     shutil.copy(SRC / "ss.css", out_dir / "ss.css")

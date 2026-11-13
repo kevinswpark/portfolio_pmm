@@ -52,6 +52,9 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
 1. Set your domain so canonical, Open Graph, and sitemap URLs become absolute:
    `KP_SITE_URL=https://kevinpark.xyz python3 build.py` (the bundled site/ was built this way)
 2. Rebuild the social card if copy changed: `python3 serve.py dist/site 8765 &` then `python3 og.py`.
+3. Copy `dist/site/` over `../site/`, which is the folder Vercel serves.
+
+Vercel Web Analytics is on in the Vercel project. The pages load it through `/_vercel/insights/script.js`, which `build.py` (and `build_shadow_storm.py` for the playable demo) adds only when `KP_SITE_URL` is set. A build without the domain leaves analytics out, so always build `site/` with the domain before committing it.
 
 ## Rebuild and check
 
