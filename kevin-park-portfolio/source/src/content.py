@@ -644,14 +644,15 @@ DEMO = {  # The Shadow Storm demo: intro page at /demo/shadow-storm/, the playab
     "meta": "A playable demo of a game with a wallet built in: buy, sell, earn, and cash out without leaving the game. Fictional game, sample data.",  # KEVIN 2026-11-12 (approved draft)
     "h1": "Showing how money moves inside a game (with a fake ninja game)",     # KEVIN 2026-11-12 (approved draft)
     "deck": "A playable demo of a native wallet built for games.",              # KEVIN 2026-11-12, his wording
-    "intro": [                                                                  # KEVIN 2026-11-12: approved draft; the last line is his wording
-        "Shadow Storm is not a real game. I built it to show one idea: what it looks like when money moves inside a game instead of around it.",
-        "In many games, anything involving real money sends you somewhere else. You leave to pay, and most of the time there is no way to get paid at all. Here the wallet sits inside the game. You can buy gear, sell an item to another player, collect a referral bonus or a season prize, and cash out to a bank account, without leaving the screen you were playing on.",
-        "Everything in it is made up for illustrative purposes, with no real money involved.",
+    "intro": [                                                                  # KEVIN 2026-11-14: his redraft, tightened
+        "Shadow Storm is not a real game. I built it to show how money can move natively inside a game.",
+        "In many games, anything involving real money sends you somewhere else. You leave the game to pay, or you sit in front of a pop-up.",
+        "In this demo, the wallet is built into the game. You can buy gear, sell an item to another player, collect referral bonuses, and cash out to a fake bank account.",
+        "Everything in it is made up for illustrative purposes, with no real money involved.",  # KEVIN 2026-11-12, his wording
     ],
-    "try_h": "What to try",                                                     # KEVIN 2026-11-12 (approved draft)
+    "try_h": "Try this",                                                        # KEVIN 2026-11-14
     "try": [
-        "Play a training round and earn some Koban.",
+        "Play a training round and earn some Koban (rewards with cash value).",
         "List an item on the marketplace and watch it sell.",
         "Cash out to a bank account and follow the status.",
     ],
