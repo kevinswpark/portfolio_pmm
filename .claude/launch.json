@@ -6,8 +6,8 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": [
         "-I",
-        "/private/tmp/claude-501/-Users-kevinpark-Documents-GitHub-portfolio-pmm/1a651e84-e659-424d-a23f-e1ed2e82e757/scratchpad/tools/serve_dir.py",
-        "/private/tmp/claude-501/-Users-kevinpark-Documents-GitHub-portfolio-pmm/1a651e84-e659-424d-a23f-e1ed2e82e757/scratchpad/site",
+        "/private/tmp/claude-501/-Users-kevinpark--claude-spares-spare-somqfk/f2adef14-c9ff-4760-9503-976731aa9dd3/scratchpad/tools/serve_dir.py",
+        "/private/tmp/claude-501/-Users-kevinpark--claude-spares-spare-somqfk/f2adef14-c9ff-4760-9503-976731aa9dd3/scratchpad/site",
         "8770"
       ],
       "port": 8770

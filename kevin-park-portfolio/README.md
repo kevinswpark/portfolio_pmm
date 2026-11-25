@@ -10,7 +10,7 @@ English-only product marketing portfolio built from the Notion brief "Kevin Park
   - `/work/money-lifecycle/` the second case study, on how ZBD's products work together.
   - `/work/wirebarley/` the WireBarley case study on first-transfer conversion among customers aged 50+.
   - `/tools/financial-planner/` the financial planner: eight steps from paycheck to plan, then an email-gated PDF of the action plan. The nav's Tools menu links to it from every page.
-  - `/demo/shadow-storm/` the Demo page: what the Shadow Storm demo is and a button to play it. The nav links to it as Demo from 760px up; below that it sits in the Tools menu.
+  - `/demo/shadow-storm/` the Demo page: what the Shadow Storm demo is and a button to play it. The nav links to it as Demo from 788px up; below that it sits in the Tools menu.
   - `/demo/shadow-storm/play/` the playable demo itself, a fictional game store with a wallet built in. It is a separate page with its own scripts and art.
   - `/404.html` for every missing path. The old `/en/` and `/ko/` routes from version 1 no longer exist.
 - `source/` rebuilds everything.

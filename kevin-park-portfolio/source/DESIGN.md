@@ -21,14 +21,14 @@ colors:
   amber: "#FFB547"
   amber-ink: "#2A1A00"
 typography:
-  hero: { fontFamily: "Mona Sans", fontSize: "clamp(2.5rem, 1rem + 4.4vw, 4.5rem)", fontWeight: 500, lineHeight: 1.04, letterSpacing: "-0.03em", fontStretch: "106%" }
-  display: { fontFamily: "Mona Sans", fontSize: "clamp(2.25rem, 1.2rem + 3vw, 3.75rem)", fontWeight: 500, letterSpacing: "-0.025em", fontStretch: "106%" }
-  headline: { fontFamily: "Mona Sans", fontSize: "clamp(2rem, 1.3rem + 2vw, 3rem)", fontWeight: 500, fontStretch: "106%" }
-  title: { fontFamily: "Mona Sans", fontSize: "clamp(1.375rem, 1.1rem + .8vw, 1.75rem)", fontWeight: 500 }
-  lead: { fontFamily: "Mona Sans", fontSize: "clamp(1.125rem, 1.05rem + .4vw, 1.3125rem)", fontWeight: 400, lineHeight: 1.45 }
-  body: { fontFamily: "Mona Sans", fontSize: "1.0625rem", fontWeight: 400, lineHeight: 1.6 }
-  prose: { fontFamily: "Mona Sans", fontSize: "1.125rem", fontWeight: 400, lineHeight: 1.72 }
-  label: { fontFamily: "Mona Sans", fontSize: "0.8125rem", fontWeight: 500 }
+  hero: { fontFamily: "Times New Normal", fontSize: "clamp(2.5rem, 1rem + 4.4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.04, letterSpacing: "-0.03em" }
+  display: { fontFamily: "Times New Normal", fontSize: "clamp(2.25rem, 1.2rem + 3vw, 3.75rem)", fontWeight: 400, letterSpacing: "-0.025em" }
+  headline: { fontFamily: "Times New Normal", fontSize: "clamp(2rem, 1.3rem + 2vw, 3rem)", fontWeight: 400 }
+  title: { fontFamily: "Times New Normal", fontSize: "clamp(1.375rem, 1.1rem + .8vw, 1.75rem)", fontWeight: 400 }
+  lead: { fontFamily: "Garet", fontSize: "clamp(1.125rem, 1.05rem + .4vw, 1.3125rem)", fontWeight: 400, lineHeight: 1.45 }
+  body: { fontFamily: "Garet", fontSize: "1.0625rem", fontWeight: 400, lineHeight: 1.6 }
+  prose: { fontFamily: "Garet", fontSize: "1.125rem", fontWeight: 400, lineHeight: 1.72 }
+  label: { fontFamily: "Garet", fontSize: "0.8125rem", fontWeight: 500 }
 rounded:
   tag: "6px"
   sm: "8px"
@@ -74,11 +74,11 @@ Unslopped on 2026-11-10. This replaces the "dark neon cards" direction from 2026
 - **Amber is where you are and what to notice** (added 2026-11-10, user: "use amber #FFB547 as a contrast to the page"). The word "story" in the hero, text selection and the caret, the reading progress bar, the current rail section and planner step, the dot on the current role, the tile link on hover, the pull-quote rule, and the closing card, which is a full amber field with ink text and an ink button (ink on amber holds 11:1). Amber also keeps its warning role in the planner, always with a text label.
 - **Meaning colors** live only inside diagrams, figures and the planner: lime for value moving and savings, pink for a stop or an error.
 - No hue gradients, gradient text, glows or colored shadows. The only gradients left are the payment card's light falloff, the chip's brushed gold, the 5 percent dot grid on diagram panels, and the slider fill.
-- **The header gradient** (added 2026-11-10, user: "apply the gradient on the main headers"). The hero and every article header (case studies and planner) carry a moving 3D gradient: `src/header-gradient.js`, a dependency-free WebGL port of ShaderGradient's default plane (github.com/ruucm/shadergradient, MIT). It keeps the source's displaced plane, Perlin noise and `mix(mix(c1, c2, smoothstep(-3, 3, x)), c3, height)` color rule. The surface was reshaped the same day (user: "wavy, natural, and fluid", no bulges): two long travelling swells whose crests are bent by slow low-frequency noise, lit by one soft wrapped key light with no glossy highlight. Colors are tokens: dark `--sg-1 #0A2A93` (deep blue), `--sg-2 #FFB547` (amber), `--sg-3 #4F86FF` (lit ridges); light `#8DB0FF`, `#FFC46A`, `#FFFFFA`. A scrim in the page color covers the text side and fades the bottom into the page, so the color lives behind the payment card. It renders at 60 percent resolution, pauses offscreen and in background tabs, draws one still frame under reduced motion, and falls back to a static CSS gradient without WebGL.
+- **The header gradient** (added 2026-11-10, reworked 2026-11-25 at the user's request: grainier, like a film-grain liquid gradient poster). The hero, every article header and the closing card carry `src/header-gradient.js`, a dependency-free WebGL shader. The noise runs per vertex on a 160 x 160 grid (per pixel it dropped the page to 4 fps); the ribbon edge and grain are cut per pixel. A slow Perlin field (cnoise, from ShaderGradient, github.com/ruucm/shadergradient, MIT) is warped by itself, squeezed along a diagonal and cut into ribbons: each ramps up softly and ends on a crisp edge. `--sg-1` is the ground and the ribbons run from `--sg-3` to `--sg-2` across the header. Still film grain sits on top, one cell per CSS pixel. Dark `#0A2A93`, `#FFB547`, `#4F86FF`; light `#8DB0FF`, `#FFC46A`, `#FFFFFA`. A scrim in the page color covers the text side and fades the bottom into the page. It pauses offscreen and in background tabs, draws one still frame under reduced motion, and falls back to a static CSS gradient (no grain) without WebGL.
 
 ## Type
 
-- Mona Sans throughout. Display text at weight 500 and width 106 percent, body at 400 and normal width. Weights are 400 and 500 only.
+- Headings (h1 to h3) are Times New Normal at its one regular weight, self-hosted from `vendor/times-new-normal` (chosen by the user 2026-11-25 over Mermaid; its licence terms are unconfirmed). Everything else is Garet Book (changed 2026-11-25 at the user's request; self-hosted from `vendor/garet`). Only the Book cut ships, so the 500 weights and 106 percent widths written for Mona Sans render as Book. The planner PDF and the resume still use Mona Sans.
 - Tracking is 0 below display sizes; display text goes to -0.02 to -0.03em.
 - No italic for emphasis.
 - The hero word "story" carries a blue underline, the one marked word on the site.
@@ -107,7 +107,7 @@ Unslopped on 2026-11-10. This replaces the "dark neon cards" direction from 2026
 - **The card answers the pointer.** On fine pointers it tilts up to 7 and 5 degrees toward the cursor on a small damped spring, with a neutral soft-light sheen following it, and settles back when the pointer leaves.
 - Kept: small icon nudges on hover, a 0.97 press scale, the amber color change on tile links.
 - **Value moves.** In the diagrams, the lime flows that cross the Money Layer and the Lifecycle loop march as dashes in the direction money travels (1.4s loop). They explain the diagram, so they loop; reduced motion stops them.
-- **The header gradient flows** slowly: two swells travel across the plane, one crest passing about every 30 seconds.
+- **The header gradient flows** slowly: the ribbons pour diagonally and take about a minute to change shape.
 - Removed for good: the drifting band, the closing card's gradient drift, tile lift on hover, the play button grow.
 - Reduced motion turns off transitions, smooth scroll and view transitions.
 
@@ -121,7 +121,7 @@ Unslopped on 2026-11-10. This replaces the "dark neon cards" direction from 2026
 ## Changes 2026-11-10 (third pass)
 
 - **Nav glass keeps a veil.** The liquid glass canvas is opaque and shows whatever is behind the bar, so a veil in the page color sits above it (`--glass-veil`: 66 percent light, 50 percent dark) and the bar keeps its 88 percent background underneath. Nav text stays readable over the blue specimen panel, the payment card, and dark figures, and if the canvas fails the bar is still solid.
-- **Header gradient edges.** The plane is tilted 0.15 rad instead of 0.42 so no crest hides the trough behind it (that silhouette showed as a jagged edge on dark). The buffer renders at full resolution with antialiasing and one step of dither against banding.
+- **Header gradient edges.** The buffer renders at device resolution (capped at 2x); ribbon edges are a smoothstep, so there is no geometry to alias.
 - **Proof strip** leads with ZBD (Series C) and no longer carries the Finfare figure. The WireBarley figure reads 20% → 50%.
 
 ## Changes 2026-11-12

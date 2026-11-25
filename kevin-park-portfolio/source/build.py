@@ -30,10 +30,8 @@ SITE_URL = os.environ.get("KP_SITE_URL", "").rstrip("/")
 DIST = ROOT / "dist"
 VENDOR = ROOT / "vendor"
 ICON_DIR = VENDOR / "package" / "assets" / "regular"
-FONT_DIR = next(p for p in VENDOR.glob("fontsource-variable-mona-sans-*") if p.is_dir()) / "package" / "files"
 
 LATIN = "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
-LATIN_EXT = "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF"
 
 PAGES = ("home", "ml", "lc", "wb", "fp", "dm", "nf")
 VIEW = {"home": "home", "ml": "money-layer", "lc": "money-lifecycle", "wb": "wirebarley", "fp": "financial-planner", "dm": "demo", "nf": "404"}
@@ -1057,29 +1055,28 @@ def person_jsonld():
 # ---------------------------------------------------------------------------
 # fonts
 # ---------------------------------------------------------------------------
+FMT = {"woff2": "woff2", "ttf": "truetype"}
+# family, axis descriptors, directory, style, file, unicode range
 FACES = [
-    ("normal", "mona-sans-latin-standard-normal.woff2", LATIN),
-    ("normal", "mona-sans-latin-ext-standard-normal.woff2", LATIN_EXT),
-    ("italic", "mona-sans-latin-standard-italic.woff2", LATIN),
+    # body and UI: Garet Book only, so weight 500 falls back to it and bold is synthesized
+    ('"Garet"', "font-weight:400", VENDOR / "garet", "normal", "Garet-Book.woff2", "U+0000-FFFF"),
+    # headings: one regular cut, shipped as the TTF it came as
+    ('"Times New Normal"', "font-weight:400", VENDOR / "times-new-normal", "normal", "TimesNewNormal-Regular.ttf", "U+0000-FFFF"),
 ]
 
 
-def font_css(src_for):
+def font_css(src_for, faces=FACES):
     return "\n".join(
-        f'@font-face{{font-family:"Mona Sans";font-style:{style};font-weight:200 900;font-stretch:75% 125%;'
-        f'font-display:swap;src:url({src_for(f)}) format("woff2");unicode-range:{rng}}}'
-        for style, f, rng in FACES
+        f'@font-face{{font-family:{family};font-style:{style};{axes};'
+        f'font-display:swap;src:url({src_for(d, f)}) format("{FMT[f.rsplit(".", 1)[1]]}");unicode-range:{rng}}}'
+        for family, axes, d, style, f, rng in faces
     )
 
 
 def font_css_inline():
-    def data(f):
-        return "data:font/woff2;base64," + base64.b64encode((FONT_DIR / f).read_bytes()).decode()
-    return "\n".join(
-        f'@font-face{{font-family:"Mona Sans";font-style:{style};font-weight:200 900;font-stretch:75% 125%;'
-        f'font-display:swap;src:url({data(f)}) format("woff2");unicode-range:{rng}}}'
-        for style, f, rng in FACES if "ext" not in f
-    )
+    def data(d, f):
+        return "data:font/" + f.rsplit(".", 1)[1] + ";base64," + base64.b64encode((d / f).read_bytes()).decode()
+    return font_css(data)
 
 
 # ---------------------------------------------------------------------------
@@ -1112,7 +1109,8 @@ def head_static(ctx):
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
         '<meta name="twitter:card" content="summary_large_image">',
         '<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">',
-        '<link rel="preload" href="/assets/fonts/mona-sans-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>',
+        '<link rel="preload" href="/assets/fonts/Garet-Book.woff2" as="font" type="font/woff2" crossorigin>',
+        '<link rel="preload" href="/assets/fonts/TimesNewNormal-Regular.ttf" as="font" type="font/ttf" crossorigin>',
         '<link rel="stylesheet" href="/assets/fonts/fonts.css">',
         '<link rel="stylesheet" href="/assets/site.css">',
         '<script src="/assets/site.js" defer></script>',
@@ -1149,9 +1147,9 @@ def build_static():
     shutil.copy(ROOT / "src" / "site.js", out / "assets" / "site.js")
     shutil.copy(ROOT / "src" / "header-gradient.js", out / "assets" / "header-gradient.js")
     (out / "assets" / "favicon.svg").write_text(diagrams.FAVICON)
-    for _, f, _ in FACES:
-        shutil.copy(FONT_DIR / f, out / "assets" / "fonts" / f)
-    (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda f: "./" + f))
+    for _, _, d, _, f, _ in FACES:
+        shutil.copy(d / f, out / "assets" / "fonts" / f)
+    (out / "assets" / "fonts" / "fonts.css").write_text(font_css(lambda d, f: "./" + f))
     shutil.copy(SBS_IMG, out / "assets" / "sbs-evening-news.jpg")
     shutil.copy(ROOT / "assets-src" / C.CONTACT["resume_file"], out / "assets" / C.CONTACT["resume_file"])
     for f in (C.LC["video"]["file"], C.LC["video"]["poster"]):
