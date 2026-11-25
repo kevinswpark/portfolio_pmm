@@ -25,10 +25,10 @@ typography:
   display: { fontFamily: "Times New Normal", fontSize: "clamp(2.25rem, 1.2rem + 3vw, 3.75rem)", fontWeight: 400, letterSpacing: "-0.025em" }
   headline: { fontFamily: "Times New Normal", fontSize: "clamp(2rem, 1.3rem + 2vw, 3rem)", fontWeight: 400 }
   title: { fontFamily: "Times New Normal", fontSize: "clamp(1.375rem, 1.1rem + .8vw, 1.75rem)", fontWeight: 400 }
-  lead: { fontFamily: "Garet", fontSize: "clamp(1.125rem, 1.05rem + .4vw, 1.3125rem)", fontWeight: 400, lineHeight: 1.45 }
-  body: { fontFamily: "Garet", fontSize: "1.0625rem", fontWeight: 400, lineHeight: 1.6 }
-  prose: { fontFamily: "Garet", fontSize: "1.125rem", fontWeight: 400, lineHeight: 1.72 }
-  label: { fontFamily: "Garet", fontSize: "0.8125rem", fontWeight: 500 }
+  lead: { fontFamily: "Albert Sans", fontSize: "clamp(1.125rem, 1.05rem + .4vw, 1.3125rem)", fontWeight: 400, lineHeight: 1.45 }
+  body: { fontFamily: "Albert Sans", fontSize: "1.0625rem", fontWeight: 400, lineHeight: 1.6 }
+  prose: { fontFamily: "Albert Sans", fontSize: "1.125rem", fontWeight: 400, lineHeight: 1.72 }
+  label: { fontFamily: "Albert Sans", fontSize: "0.8125rem", fontWeight: 500 }
 rounded:
   tag: "6px"
   sm: "8px"
@@ -78,7 +78,7 @@ Unslopped on 2026-11-10. This replaces the "dark neon cards" direction from 2026
 
 ## Type
 
-- Headings (h1 to h3) are Times New Normal at its one regular weight, self-hosted from `vendor/times-new-normal` (chosen by the user 2026-11-25 over Mermaid; its licence terms are unconfirmed). Everything else is Garet Book (changed 2026-11-25 at the user's request; self-hosted from `vendor/garet`). Only the Book cut ships, so the 500 weights and 106 percent widths written for Mona Sans render as Book. The planner PDF and the resume still use Mona Sans.
+- Headings (h1 to h3) are Times New Normal at its one regular weight, self-hosted from `vendor/times-new-normal` (chosen by the user 2026-11-25 over Mermaid; its licence terms are unconfirmed). Everything else is Albert Sans, variable weight, self-hosted from npm Fontsource (chosen by the user 2026-11-25 as the free stand-in for Aeonik, after trying Garet): UI and display text at 500, body at 400. The 106 percent widths written for Mona Sans have no effect. The planner PDF and the resume still use Mona Sans.
 - Tracking is 0 below display sizes; display text goes to -0.02 to -0.03em.
 - No italic for emphasis.
 - The hero word "story" carries a blue underline, the one marked word on the site.

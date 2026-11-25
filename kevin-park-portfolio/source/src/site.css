@@ -43,7 +43,7 @@
   --sg-1: #0A2A93; --sg-2: #FFB547; --sg-3: #4F86FF;
 
   /* type */
-  --sans: "Garet", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sans: "Albert Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* headings: Times New Normal, which has one regular cut */
   --serif: "Times New Normal", ui-serif, "Iowan Old Style", Georgia, serif;
   --t-hero: clamp(2.5rem, 1rem + 4.4vw, 4.5rem);
@@ -208,7 +208,7 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
 @media (max-width: 524px) {
   .nav { padding-inline: 12px; }
   .nav .btn--compact { display: none; }
-  /* Four links in Garet fill the bar here, so the logo mark stands in for the name (kept for screen readers). */
+  /* Four links fill the bar here, so the logo mark stands in for the name (kept for screen readers). */
   .nav__brand span:not(.logo) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .nav__links a { padding: 0 8px; }
   .theme-btn { width: 32px; margin-left: 0; }
@@ -276,7 +276,7 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
 .hero__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 0; align-items: start; }
 .hero__text { display: contents; }
 .hero__role {
-  grid-column: 1 / -1; grid-row: 1; margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);  /* sits under the headline, above the supporting line */
   display: flex; flex-wrap: wrap; column-gap: .5em; row-gap: 2px;
   font-size: .9375rem; line-height: 1.4; font-weight: 500; font-stretch: 100%; letter-spacing: 0; color: var(--fg-2);
 }
@@ -290,13 +290,12 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
   max-width: 18ch; padding-bottom: .04em;
 }
 .story { color: var(--amber-text); }
-.hero__sub { margin-top: 1.75rem; max-width: 40ch; font-size: var(--t-lead); line-height: 1.45; color: var(--fg-2); }
+.hero__sub { margin-top: .75rem; max-width: 40ch; font-size: var(--t-lead); line-height: 1.45; color: var(--fg-2); }
 .hero .actions { margin-top: 2.25rem; }
 /* The one authored moment: the hero assembles on load, the card lands last. */
 @media (prefers-reduced-motion: no-preference) {
-  .hero__role, .hero h1, .hero__lower { animation: hero-rise 560ms var(--ease-out) both; }
-  .hero h1 { animation-delay: 70ms; }
-  .hero__lower { animation-delay: 140ms; }
+  .hero h1, .hero__lower { animation: hero-rise 560ms var(--ease-out) both; }
+  .hero__lower { animation-delay: 70ms; }
   .hero__card { animation: card-land 820ms var(--ease-out) 220ms both; }
 }
 @keyframes hero-rise { from { opacity: 0; transform: translateY(12px); filter: blur(4px); } }
@@ -351,7 +350,7 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
 .stats__item + .stats__item { border-left: 1px solid var(--line); }
 .stats__item:first-child { padding-left: 0; }
 .stats__v { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem); line-height: 1.05; letter-spacing: -.02em; font-weight: 500; font-stretch: 106%; font-variant-numeric: tabular-nums; color: var(--fg); white-space: nowrap; }
-@media (max-width: 360px) { .stats__v { font-size: 1.25rem; } }  /* "20% → 50%" must fit a half-width column in Garet */
+@media (max-width: 360px) { .stats__v { font-size: 1.25rem; } }  /* "20% → 50%" must fit a half-width column */
 .stats__k { color: var(--fg-2); line-height: 1.5; max-width: 26ch; }
 .stats__co { color: var(--fg-3); font-size: var(--t-small); font-weight: 500; }
 

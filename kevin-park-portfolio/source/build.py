@@ -400,9 +400,9 @@ def home_main(ctx):
         f'<section class="hero" aria-labelledby="{h1}"><div class="sg" data-sg aria-hidden="true"></div>'
         '<div class="wrap hero__grid">'
         '<div class="hero__text">'
-        f'{hero_role(H["role"])}'
         f'<h1 id="{h1}" tabindex="-1">{H["h1_before"]}<span class="story">{H["h1_em"]}</span>{H["h1_after"]}</h1>'
         '<div class="hero__lower">'
+        f'{hero_role(H["role"])}'
         f'<p class="hero__sub">{H["sub"]}</p>'
         '<div class="actions">'
         f'<a class="btn btn--blue" href="{ctx.url("home", "work")}"><span class="btn__text">{H["cta_work"]}</span>{icon("arrow-down", "icon--down")}</a>'
@@ -1058,8 +1058,8 @@ def person_jsonld():
 FMT = {"woff2": "woff2", "ttf": "truetype"}
 # family, axis descriptors, directory, style, file, unicode range
 FACES = [
-    # body and UI: Garet Book only, so weight 500 falls back to it and bold is synthesized
-    ('"Garet"', "font-weight:400", VENDOR / "garet", "normal", "Garet-Book.woff2", "U+0000-FFFF"),
+    # body and UI: variable weight, latin subset
+    ('"Albert Sans"', "font-weight:100 900", next(VENDOR.glob("fontsource-variable-albert-sans-*")) / "package" / "files", "normal", "albert-sans-latin-wght-normal.woff2", LATIN),
     # headings: one regular cut, shipped as the TTF it came as
     ('"Times New Normal"', "font-weight:400", VENDOR / "times-new-normal", "normal", "TimesNewNormal-Regular.ttf", "U+0000-FFFF"),
 ]
@@ -1109,7 +1109,7 @@ def head_static(ctx):
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
         '<meta name="twitter:card" content="summary_large_image">',
         '<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">',
-        '<link rel="preload" href="/assets/fonts/Garet-Book.woff2" as="font" type="font/woff2" crossorigin>',
+        '<link rel="preload" href="/assets/fonts/albert-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>',
         '<link rel="preload" href="/assets/fonts/TimesNewNormal-Regular.ttf" as="font" type="font/ttf" crossorigin>',
         '<link rel="stylesheet" href="/assets/fonts/fonts.css">',
         '<link rel="stylesheet" href="/assets/site.css">',

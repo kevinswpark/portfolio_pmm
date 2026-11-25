@@ -171,7 +171,7 @@ async def main():
                 check(f"closing headline is Let's talk. {tag}", info["closing"] == C.CLOSING["h2"], info["closing"])
                 check(f"CTA no wrap {tag}", not info["ctaWrap"])
                 check(f"no language switch {tag}", not info["langSwitch"])
-                check(f"Garet loaded {tag}", "Garet" in info["fonts"], info["fonts"])
+                check(f"Albert Sans loaded {tag}", "Albert Sans" in info["fonts"], info["fonts"])
             check(f"no JS errors @{w}", not errs, errs[:3])
             await ctx.close()
 
