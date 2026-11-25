@@ -27,7 +27,7 @@ def norm(s):
 # ---------- 1. copy is verbatim from its sources ----------
 SOURCES = ["notion-2026-09-27.txt", "notion-lifecycle-2026-09-27.txt", "resume-excerpt-2026-09-27.txt",
            "zbdpay-2026-09-27.json", "zbdpay-lifecycle-2026-09-27.json", "wirebarley-case-study-2026-10-05.md",
-           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt", "kevin-chat-2026-10-11.txt", "kevin-chat-2026-11-05.txt", "kevin-chat-2026-11-10.txt"]
+           "copy-audit-2026-10-05.md", "kevin-chat-2026-10-05.txt", "kevin-chat-2026-10-11.txt", "kevin-chat-2026-11-05.txt", "kevin-chat-2026-11-10.txt", "kevin-chat-2026-11-24.txt"]
 SRC = norm(" ".join(Path(".impeccable/sources", f).read_text() for f in SOURCES))
 AB = C.ABOUT
 sourced = [C.HERO["role"], C.HERO["sub"], C.HERO["h1_before"] + C.HERO["h1_em"] + C.HERO["h1_after"], C.HERO["cta_work"], C.HERO["cta_linkedin"],

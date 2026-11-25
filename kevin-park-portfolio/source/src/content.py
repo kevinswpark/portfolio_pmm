@@ -68,9 +68,9 @@ META = {
 
 HERO = {  # BRIEF
     "role": "Senior Product Marketer · Fintech, Payments & Gaming",  # KEVIN 2026-10-11, shown above the headline
-    "h1_before": "There’s a ",
-    "h1_em": "story",
-    "h1_after": " inside your complex product.",
+    "h1_before": "I turn complex products into ",  # KEVIN 2026-11-24: new headline, chosen in chat
+    "h1_em": "stories",
+    "h1_after": " that change what people do.",
     "sub": "I get into how a product works, why someone would use it, and what it takes to get them there. Then I build what helps people get it, from campaigns and websites to demos and AI projects.",  # KEVIN 2026-11-10 (second pass: his 2026-10-11 statement line restored, joined to the 2026-10-11 supporting line)
     "cta_work": "Explore the work",
     "cta_linkedin": "Connect on LinkedIn",
