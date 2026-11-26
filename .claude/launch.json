@@ -11,6 +11,17 @@
         "8770"
       ],
       "port": 8770
+    },
+    {
+      "name": "hero-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-I",
+        "/private/tmp/claude-501/-Users-kevinpark-Documents-GitHub-portfolio-pmm/1a651e84-e659-424d-a23f-e1ed2e82e757/scratchpad/tools/serve_dir.py",
+        "/private/tmp/claude-501/-Users-kevinpark-Documents-GitHub-portfolio-pmm/1a651e84-e659-424d-a23f-e1ed2e82e757/scratchpad/site",
+        "8772"
+      ],
+      "port": 8772
     }
   ]
 }
