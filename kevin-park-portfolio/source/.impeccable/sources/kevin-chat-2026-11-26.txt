@@ -1,0 +1,23 @@
+Kevin, in chat, 2026-11-26, on the homepage hero.
+
+Headline, his wording (replaces "I turn complex products into stories that sell."):
+Simplifying money for people, in messages shaped by culture.
+
+Remove the role line above the headline.
+
+Supporting line, his draft:
+Hey, I am a senior product marketing manager who simplified a lot of money worries in three  fintech startups. My superpower is understanding the product and the customers to the native level, and developing a story that sell for the audience. I build what helps people understand it, from decks to demos.
+
+Supporting line as refined at his request (grammar only), pending his sign-off:
+Hey, I'm a senior product marketing manager who has simplified a lot of money worries at three fintech startups. My superpower is understanding a product and its customers at a native level, then developing a story that sells to that audience. I build what helps people understand it, from decks to demos.
+
+Supporting line shortened at his request the same day, pending his sign-off:
+Hey, I'm a senior product marketing manager who has simplified money worries at three fintech startups. I learn a product and its customers at a native level, then build what helps people understand it, from decks to demos.
+
+Headline, his change later the same day ("messages" to "stories"):
+Simplifying money for people, in stories shaped by culture.
+
+Final supporting line, approved by Kevin ("I like taken the worry out of money. Swap to this."):
+Hey, I'm a senior product marketing manager who has taken the worry out of money at three fintech startups. I learn a product and its customers at a native level, then build what helps people understand it, from decks to demos.
+
+Also: remove the "Get my resume" button from the hero and keep one call to action there.

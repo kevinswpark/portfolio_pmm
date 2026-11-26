@@ -22,7 +22,7 @@ A personal product marketing portfolio that shows how Kevin thinks, not a resume
 
 ## Positioning
 
-"I turn complex products into stories that sell." (headline changed 2026-11-25, replacing "I turn complex products into stories that change what people do.") Kevin finds the change a product makes for the people it serves and explains that value in a way people remember. Experience in fintech, payments, cross-border money movement, and gaming gives the point of view credibility.
+"Simplifying money for people, in stories shaped by culture." (headline changed 2026-11-26, replacing "I turn complex products into stories that sell."; the role line above the headline was removed the same day and the supporting line now carries the role.) Kevin finds the change a product makes for the people it serves and explains that value in a way people remember. Experience in fintech, payments, cross-border money movement, and gaming gives the point of view credibility.
 
 ## Operating Context
 

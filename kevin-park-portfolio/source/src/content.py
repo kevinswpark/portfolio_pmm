@@ -67,11 +67,10 @@ META = {
 }
 
 HERO = {  # BRIEF
-    "role": "Senior Product Marketer · Fintech, Payments & Gaming",  # KEVIN 2026-10-11, shown above the headline
-    "h1_before": "I turn complex products into ",  # KEVIN 2026-11-25: headline approved in chat
-    "h1_em": "stories",
-    "h1_after": " that sell.",
-    "sub": "I get into how a product works, why someone would use it, and what it takes to get them there. Then I build what helps people get it, from campaigns and websites to demos and AI projects.",  # KEVIN 2026-11-10 (second pass: his 2026-10-11 statement line restored, joined to the 2026-10-11 supporting line)
+    "h1_before": "Simplifying money for people, in stories shaped by ",  # KEVIN 2026-11-26: headline in his words
+    "h1_em": "culture",
+    "h1_after": ".",
+    "sub": "Hey, I’m a senior product marketing manager who has taken the worry out of money at three fintech startups. I learn a product and its customers at a native level, then build what helps people understand it, from decks to demos.",  # KEVIN 2026-11-26 draft, grammar tidied (see EDITS). Replaces the role line above the headline, removed at his request.
     "cta_work": "Explore the work",
     "cta_linkedin": "Connect on LinkedIn",
     "card_kicker": "Case study",
@@ -197,7 +196,6 @@ CONTACT = {
     "formspree": "xrppvnyn",                    # same Formspree form as the planner; subject lines tell the three apart. Empty: nothing is sent.
     "resume_file": "Kevin-Park-Resume.pdf",     # written to assets-src/ by resume.py
     "nav": "Get in touch",
-    "hero": "Get my resume",
     "lead": "If you’re hiring for product marketing, I would love to learn more.",
     "resume_h": "Get my resume",
     "resume_p": "Enter your work email and let’s see if we’re a match.",
@@ -420,6 +418,13 @@ EDITS.append({
     "why": "Same nested-quote fix as the Series C paragraph. Wording unchanged.",
     "from": "Developed ‘The Money Layer for Games’ positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
     "to": "Developed “The Money Layer for Games” positioning and the messaging framework for ZBD’s four-product suite, with branding work that also supported its Series C fundraising.",
+})
+
+EDITS.append({
+    "where": "Homepage hero supporting line",
+    "why": "Kevin asked for his 2026-11-26 draft to be refined, then shortened. Grammar tidied; “a lot of”, the superpower framing, and the story-that-sells clause cut for length. “Simplified money worries” became “taken the worry out of money”, his pick, so the headline’s verb is not repeated.",
+    "from": "Hey, I am a senior product marketing manager who simplified a lot of money worries in three  fintech startups. My superpower is understanding the product and the customers to the native level, and developing a story that sell for the audience. I build what helps people understand it, from decks to demos.",
+    "to": HERO["sub"],
 })
 
 NF = {"h1": "Page not found", "home": "Go to the homepage"}  # UI

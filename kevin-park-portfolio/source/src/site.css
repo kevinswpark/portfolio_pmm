@@ -275,14 +275,6 @@ html.is-theming::view-transition-old(root), html.is-theming::view-transition-new
 .hero { position: relative; isolation: isolate; padding-top: calc(var(--nav-top) + var(--nav-h) + clamp(2.5rem, 6vw, 5rem)); padding-bottom: clamp(5rem, 10vw, 8rem); overflow: clip; }
 .hero__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 0; align-items: start; }
 .hero__text { display: contents; }
-.hero__role {
-  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);  /* sits under the headline, above the supporting line */
-  display: flex; flex-wrap: wrap; column-gap: .5em; row-gap: 2px;
-  font-size: .9375rem; line-height: 1.4; font-weight: 500; font-stretch: 100%; letter-spacing: 0; color: var(--fg-2);
-}
-.hero__role-part { white-space: nowrap; }
-.hero__role-sep { margin-left: .5em; color: var(--fg-3); }
-@media (max-width: 450px) { .hero__role-sep { display: none; } }  /* the two halves stack here, so the dot would end a line */
 .hero h1 { grid-column: 1 / -1; grid-row: 2; }
 .hero__lower { grid-column: 1 / span 7; grid-row: 3; }
 .hero h1 {

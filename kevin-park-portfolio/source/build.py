@@ -337,17 +337,6 @@ def tile_wb(ctx, compact=False):
 # ---------------------------------------------------------------------------
 # pages
 # ---------------------------------------------------------------------------
-def hero_role(text):
-    """Role line above the headline. The middle dot is visual only; each half stays on one line."""
-    title, field = text.split(" · ", 1)
-    return (
-        f'<p class="hero__role"><span class="hero__role-part">{escape(title, quote=False)}'
-        '<span class="hero__role-sep" aria-hidden="true">·</span></span>'
-        '<span class="sr-only">, </span>'
-        f'<span class="hero__role-part">{escape(field, quote=False)}</span></p>'
-    )
-
-
 def about_portrait(ctx, P):
     if not P:
         return ""
@@ -402,11 +391,9 @@ def home_main(ctx):
         '<div class="hero__text">'
         f'<h1 id="{h1}" tabindex="-1">{H["h1_before"]}<span class="story">{H["h1_em"]}</span>{H["h1_after"]}</h1>'
         '<div class="hero__lower">'
-        f'{hero_role(H["role"])}'
         f'<p class="hero__sub">{H["sub"]}</p>'
         '<div class="actions">'
         f'<a class="btn btn--blue" href="{ctx.url("home", "work")}"><span class="btn__text">{H["cta_work"]}</span>{icon("arrow-down", "icon--down")}</a>'
-        f'<a class="btn btn--ghost" href="{contact_url(ctx)}">{icon("download-simple")}<span class="btn__text">{C.CONTACT["hero"]}</span></a>'
         "</div></div></div>"
         f'<a class="hero__card" href="{ctx.url("ml")}" aria-label="{escape(U["read"])}: {escape(C.WORK["ml"]["title"])}">'
         '<span class="card3d" data-tilt><span class="card3d__face">'
